@@ -1,0 +1,34 @@
+[
+    {
+        "destinationName": "Paratay",
+        "location": "RIO DE JANERO"
+    },
+    {
+        "destinationName": "Morretes",
+        "location": "Paraná"
+    },
+    {
+        "destinationName": "Olinda",
+        "location": "Pernambuco"
+    },
+    {
+        "destinationName": "Gramado",
+        "location": "Rio Grande do Sul"
+    },
+    {
+        "destinationName": "Estaing",
+        "location": "FRANCE"
+    },
+    {
+        "destinationName": "Vík í Mýrda",
+        "location": "ICELAND"
+    },
+    {
+        "destinationName": "Montego Bay",
+        "location": "JAMAICA"
+    },
+    {
+        "destinationName": "Hamnoy Village",
+        "location": "Norway"
+    }
+]

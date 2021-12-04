@@ -1,0 +1,26 @@
+[
+    {
+        "avatar": "chen",
+        "customerName": "Yifei Chen",
+        "location": "Seoul, South Korea",
+        "date": "April 2019",
+        "rating": 5,
+        "testimony": "What a great experience using Waypal! I booked all of my flights for my gap year through Waypal and never had any issues. When I had to cancel a flight because of an emergency, Waypal support helped me."
+    },
+    {
+        "avatar": "kaori",
+        "customerName": "Kamori Yamaguchi",
+        "location": "Honolulu, Hawaii",
+        "date": "February 2017",
+        "rating": 4,
+        "testimony": "My family and I visit Hawaii every year, and we usually book our flights using other services. Waypal was recommened to us by a long time friend, and I’m so glad we tried it out! The process was easy."
+    },
+    {
+        "avatar": "anthony",
+        "customerName": "Anthony Lewis",
+        "location": "Berlin, Germany",
+        "date": "April 2019",
+        "rating": 5,
+        "testimony": "When I was looking to book my flight to Berlin from LAX, Waypal had the best browsing experiece so I figured I’d give it a try. It was my first time using Waypal, but I’d definitely recommend it to a friend."
+    }
+]

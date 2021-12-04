@@ -1,0 +1,47 @@
+{
+  "name": "waypal",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@svgr/webpack": "^5.5.0",
+    "axios": "^0.21.4",
+    "body-scroll-lock": "^4.0.0-beta.0",
+    "date-fns": "^2.23.0",
+    "express": "^4.17.1",
+    "hamburger-react": "^2.4.1",
+    "moment": "^2.29.1",
+    "next": "11.1.2",
+    "nookies": "^2.5.2",
+    "nprogress": "^0.2.0",
+    "react": "17.0.2",
+    "react-beforeunload": "^2.5.2",
+    "react-datetime": "^3.1.1",
+    "react-dom": "17.0.2",
+    "react-google-login": "^5.2.2",
+    "react-hook-form": "^7.17.2",
+    "react-intl-tel-input": "^8.1.1",
+    "react-lottie": "^1.2.3",
+    "react-share": "^4.4.0",
+    "react-slick": "^0.28.1",
+    "react-toastify": "^8.0.3",
+    "react-user-avatar": "^1.10.0",
+    "socket.io": "^4.4.0",
+    "socket.io-client": "^4.4.0",
+    "ua-parser-js": "^1.0.2",
+    "use-places-autocomplete": "^1.10.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.3.4",
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.1.2",
+    "postcss": "^8.3.6",
+    "tailwindcss": "^2.2.15"
+  }
+}

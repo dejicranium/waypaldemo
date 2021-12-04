@@ -1,0 +1,31 @@
+import NProgress from "nprogress";
+import Router from "next/router";
+import Script from "next/script";
+
+
+import Layout from "../components/Layout";
+import { DataProvider } from "../components/hooks/useData";
+
+import "../styles/globals.css";
+import "nprogress/nprogress.css";
+import "react-intl-tel-input/dist/main.css";
+import "react-datetime/css/react-datetime.css";
+
+Router.events.on("routeChangeError", () => NProgress.done());
+Router.events.on("routeChangeStart", () => NProgress.start());
+Router.events.on("routeChangeComplete", () => NProgress.done());
+
+function MyApp({ Component, pageProps }) {
+  return (
+    <>
+      <Script src="https://checkout.flutterwave.com/v3.js" />
+      <DataProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </DataProvider>
+    </>
+  );
+}
+
+export default MyApp;

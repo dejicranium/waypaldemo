@@ -1,0 +1,36 @@
+@font-face {
+    font-family: "circular-std";
+    src: local("circular-std"),
+    url(../assets/fonts/circular-std/regular.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "circular-900";
+    src: local("circular-900"),
+    url(../assets/fonts/circular-std/black.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "circular-700";
+    src: local("circular-700"),
+    url(../assets/fonts/circular-std/bold.ttf) format("truetype");
+}
+
+
+@font-face {
+    font-family: "raleway-regular";
+    src: local("raleway-regular"),
+    url(../assets/fonts/raleway/Raleway-Regular.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "raleway-800";
+    src: local("raleway-800"),
+    url(../assets/fonts/raleway/Raleway-ExtraBold.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "smith-allison";
+    src: local("smith-allison"),
+    url(../assets/fonts/smith-allison/smith-allison.ttf) format("truetype");
+}

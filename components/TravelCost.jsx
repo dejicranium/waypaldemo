@@ -1,0 +1,109 @@
+import { useState } from "react";
+import Icon from "./common/Icon";
+import { formatAmount } from "../assets/js/utils";
+import { formatCurrency } from "../assets/js/utils";
+
+const TravelCost = ({ register, watch }) => {
+  const t =
+    watch("travel_amount") +
+    watch("accommodation_amount") +
+    watch("miscellaneous_amount");
+
+  const currency = watch("currency", "USD");
+
+  // const [currency, setCurrency] = useState("NGN");
+
+  const travelDetails = [
+    {
+      title: "travel",
+      name: "travel_amount",
+      helptext: "This covers flight to-and-fro",
+      icon: "travel",
+    },
+    {
+      title: "accommodation",
+      name: "accommodation_amount",
+      helptext: "The total cost of accommodation",
+      icon: "accommodation",
+    },
+    {
+      title: "miscellaneous",
+      name: "miscellaneous_amount",
+      helptext: "This covers feeding, transportation etc.",
+      icon: "misc",
+    },
+  ];
+
+  return (
+    <div>
+      <div className="travel-cost-header flex items-center justify-between mb-3">
+        <h1 className="text-black font-circular-bold">Travel cost</h1>
+        <select
+          id="currency"
+          // onChange={(e) => setCurrency(e.target.value)}
+          onChange={(e) => {
+            currency.onChange(e);
+          }}
+          name="currency"
+          className="currency-selector p-2 rounded cursor-pointer bg-orange text-white"
+          {...register("currency")}
+        >
+          <option value="NGN">&#x20A6; NGN</option>
+          <option value="USD">&#x24; USD</option>
+          <option value="GBP">&#163; GBP</option>
+        </select>
+      </div>
+      <div className="travel-cost-container border-2 rounded-2xl border-outline divide-y-2 divide-outline">
+        {travelDetails.map(({ title, name, helptext, icon }) => (
+          <div
+            className="flex justify-between items-center py-5 px-2"
+            key={title}
+          >
+            <div className="flex">
+              <Icon icon={icon} cname="pr-3 flex-none" />
+              <div className="travel-text">
+                <p className="capitalize">{title}</p>
+                <small>{helptext}</small>
+              </div>
+            </div>
+            <input
+              placeholder={formatCurrency(currency)}
+              defaultValue={0}
+              className="border px-3 py-1 w-20 outline-none"
+              {...register(name, {
+                required: true,
+                valueAsNumber: true,
+                min: 0,
+              })}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="total-fees mt-4">
+        <div className="subtotal flex justify-end">
+          <p className="pr-4">Subtotal</p>
+          <p className="">
+            {formatCurrency(currency)}
+            {formatAmount(t ? t : 0)}
+          </p>
+        </div>
+        <div className="taxes flex justify-end">
+          <p className="pr-4">Taxes and Fees</p>
+          <p className="">
+            {formatCurrency(currency)}
+            {formatAmount(t ? ((t / 100) * 7.5).toFixed(2) : 0)}
+          </p>
+        </div>
+        <div className="total flex justify-end font-circular-bold">
+          <p className="pr-4">Total</p>
+          <p>
+            {formatCurrency(currency)}
+            {formatAmount(t ? t + (t / 100) * 7.5 : 0)}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default TravelCost;

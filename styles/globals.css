@@ -1,0 +1,360 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind screens;
+@import 'text.css';
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "circular-std";
+    color: #4F4F4F;
+}
+
+small {
+    @apply text-xs text-gray-light;
+}
+
+/* .set_h {
+    max-height: calc(100vh - 432.8px);
+}
+
+@media screen and (min-width: 640px) {
+    .set_h {
+        max-height: 100%;
+    }
+} */
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+.currency-selector,
+option {
+    /* -webkit-appearance: none;
+    -moz-appearance: none; */
+    /* appearance: none; */
+    border: 0;
+    outline: none;
+}
+
+.toast {
+    animation: toast-in 0.3s ease-in-out;
+}
+
+@keyframes toast-in {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.hr-design {
+    width: 100%;
+    height: 2px;
+    display: inline-block;
+    color: #EBEBEC;
+}
+
+:root {
+    font-size: 16px;
+}
+
+.container {
+    @apply max-w-7xl mx-auto px-4;
+}
+
+.red-border {
+    border: 3px solid red;
+}
+
+.destination-card::-webkit-scrollbar,
+.more-destination-card::-webkit-scrollbar,
+.search-results::-webkit-scrollbar,
+.modal-content::-webkit-scrollbar {
+    display: none;
+}
+
+.destination-card,
+.more-destination-card,
+.search-results,
+.modal-content {
+    scrollbar-width: none;
+}
+
+.destination-card,
+.more-destination-card,
+.search-results,
+.modal-content {
+    -ms-overflow-style: none;
+}
+
+.bg-hero {
+    background-position: bottom center;
+}
+
+.divider {
+    border-radius: 20px;
+    background-color: #EDE6E6;
+}
+
+.footer-background {
+    background-image: url('../assets/img/footer-background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 32rem;
+}
+
+.top-destinations {
+    background-image: url('../assets/img/ellipse-left.png');
+    background-repeat: no-repeat;
+    background-position: bottom left;
+}
+
+.more-destination-text {
+    background-image: url('../assets/img/ellipse-right.png');
+    background-repeat: no-repeat;
+}
+
+/* Images */
+.img-container {
+    width: 100%;
+}
+
+.img-container>div {
+    position: unset !important;
+    border-radius: 8px;
+}
+
+.target-img {
+    object-fit: contain;
+    width: 100% !important;
+    position: relative !important;
+    height: unset !important;
+}
+
+/* Modal Styles */
+.modal-mask {
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: opacity 0.3s ease;
+}
+
+.modal-container {
+    background-color: #fff;
+    box-shadow: 0px 16px 40px rgba(147, 151, 153, 0.2);
+}
+
+@media screen and (min-width: 500px) {
+    .modal-container {
+        margin: 0 auto;
+    }
+}
+
+/* Destination Page */
+.itinerary-card-container {
+    border: 1px solid rgba(112, 27, 10, 0.12);
+    box-shadow: 0px 10px 16px rgba(100, 13, 38, 0.15);
+    background-color: #FFFCFC;
+}
+
+/* Dashboard */
+.dashboard-sidebar a:hover {
+    color: #F2856F;
+}
+
+/* Tab styles */
+.active-tab::after {
+    content: '';
+    height: 8px;
+    width: 8px;
+    background-color: #EA4524;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Input Element Styling */
+.input-element {
+    @apply py-2 px-3 text-black-content rounded outline-none;
+    border: 1px solid #ABAFB5;
+    transition: border 0.3s ease;
+}
+
+.input-element:focus {
+    border: 1px solid #F7CDBA;
+}
+
+.input-with-label {
+    box-shadow: 0px 3.87423px 9.68558px rgba(112, 27, 10, 0.12);
+}
+
+::placeholder {
+    color: #828282;
+}
+
+.leading-icon {
+    text-indent: 18px;
+}
+
+input {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.flight-search {
+    box-shadow: 0px 2px 2px rgba(28, 5, 77, 0.05),
+        0px 12px 8px rgba(0, 0, 0, 0.02);
+}
+
+/* Checkbox styling */
+.checkmark {
+    display: flex;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #4F4F4F;
+    border-radius: 2px;
+    position: relative;
+}
+
+.checkmark::after {
+    content: "";
+    opacity: 0;
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border-radius: 1px;
+    background-color: #EA4524;
+    padding: 2px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.4s;
+}
+
+.check:checked~.checkmark::after {
+    opacity: 1;
+    text-decoration: line-through;
+}
+
+/* Simple Card Trip */
+.trip-card-container {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* nProgress */
+#nprogress .bar {
+    background-color: #EA4524 !important;
+}
+
+.profile-menu-list li:hover,
+.options-list li:hover {
+    @apply bg-outline cursor-pointer;
+
+}
+
+/* Spinner */
+@keyframes ldio-zejy8tzpidp {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.ldio-zejy8tzpidp div {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border: 8px solid #ffffff;
+    border-top-color: transparent;
+    border-radius: 50%;
+}
+
+.ldio-zejy8tzpidp div {
+    animation: ldio-zejy8tzpidp 1s linear infinite;
+    top: 100px;
+    left: 100px;
+}
+
+.loadingio-spinner-rolling-pyu3k0ej55i {
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    overflow: hidden;
+    background: none;
+}
+
+.ldio-zejy8tzpidp {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: translateZ(0) scale(1);
+    backface-visibility: hidden;
+    transform-origin: 0 0;
+}
+
+.ldio-zejy8tzpidp div {
+    box-sizing: content-box;
+}
+
+@keyframes ldio-36ci75x0fkp {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.ldio-36ci75x0fkp div {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-width: 20px;
+    border-radius: 50%;
+    border-style: solid;
+    /* border-color: #097581; */
+    border-color: #ffffff;
+    border-top-color: transparent !important;
+}
+
+.ldio-36ci75x0fkp div {
+    animation: ldio-36ci75x0fkp 1s linear infinite;
+    top: 100px;
+    left: 100px;
+}
+
+.loadingio-spinner-rolling-9wecyn0eoed {
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    overflow: hidden;
+    background: none;
+}
+
+.ldio-36ci75x0fkp {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: translateZ(0) scale(1);
+    backface-visibility: hidden;
+    transform-origin: 0 0;
+}
+
+.ldio-36ci75x0fkp div {
+    box-sizing: content-box;
+}
