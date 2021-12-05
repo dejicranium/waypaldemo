@@ -1,14 +1,14 @@
-import Toast from "../../components/Toast";
-import JoinChat from "../../components/JoinChat";
-import PriceBreakdown from "../../components/PriceBreakdown";
-import RecommendedTrips from "../../components/RecommendedTrips";
-import Button from "../../components/common/Button";
-import Icon from "../../components/common/Icon";
+import Toast from "../../../components/Toast";
+import JoinChat from "../../../components/JoinChat";
+import PriceBreakdown from "../../../components/PriceBreakdown";
+import RecommendedTrips from "../../../components/RecommendedTrips";
+import Button from "../../../components/common/Button";
+import Icon from "../../../components/common/Icon";
 import { useState } from "react";
 
-import Footer from "../../components/common/Footer";
+import Footer from "../../../components/common/Footer";
 
-const TravelSuccess = () => {
+const TripSummary = () => {
   const [message, setMessage] = useState(null);
 
   return (
@@ -93,4 +93,4 @@ const TravelSuccess = () => {
   );
 };
 
-export default TravelSuccess;
+export default TripSummary;
