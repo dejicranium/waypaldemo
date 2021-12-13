@@ -39,6 +39,10 @@
     "use-places-autocomplete": "^1.10.0",
     "uuid": "^8.3.2"
   },
+  "engines": {
+    "node": "10.x.x",
+    "npm":  "6.x.x"
+  },
   "devDependencies": {
     "autoprefixer": "^10.3.4",
     "eslint": "7.32.0",
