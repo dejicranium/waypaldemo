@@ -56,12 +56,14 @@ const Profile = () => {
       facebook,
       instagram,
     });
-    if (updateProfile.status) {
+    if (updateProfile.data) {
+      // was successful
       setSuccess(updateProfile.message);
+      dispatch({ user: { ...updateProfile.data } });
+      
     } else {
       setError(updateProfile.message);
     }
-    dispatch({ user: { ...updateProfile.data } });
   };
 
   return (
@@ -131,6 +133,7 @@ const Profile = () => {
                     type="text"
                     placeholder="First name*"
                     className="mb-3"
+                    value={user.firstname}
                     innerref={register("firstname", {
                       required: {
                         value: true,
@@ -139,6 +142,9 @@ const Profile = () => {
                     })}
                     helptext={errors.firstname && errors.firstname.message}
                     helptextstyle={errors.firstname && "text-red-500"}
+                    onChange={(e) => {
+                      user.firstname = e.target.value;
+                    }}
                   />
                   <InputField
                     type="text"
@@ -153,11 +159,7 @@ const Profile = () => {
                     helptext={errors.lastname && errors.lastname.message}
                     helptextstyle={errors.lastname && "text-red-500"}
                   />
-                  <InputField
-                    type="text"
-                    placeholder="Suffix"
-                    className="mb-3"
-                  />
+                 
                   <div>
                     <Datetime
                       defaultValue={isoToDate(user.date_of_birth, true)}
@@ -173,6 +175,9 @@ const Profile = () => {
                           },
                         }),
                         className: "input-element w-full mb-3 md:mb-0",
+                      }}
+                      onChange={(e) => {
+                        
                       }}
                       timeFormat=""
                       initialValue={moment("", "YYYY")}

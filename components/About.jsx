@@ -40,7 +40,7 @@ const About = ({ trip }) => {
 
   return (
     <div className="about-trip lg:flex justify-between lg:space-x-8">
-      <section className="trip-details mt-8 w-full">
+      <section className="trip-details mt-8 w-6/12 ">
         <div className="about-trip-header md:flex md:items-center">
           <h1 className="font-circular-black text-black text-2xl md:pr-14">
             {trip.title}
@@ -59,7 +59,7 @@ const About = ({ trip }) => {
           </div>
         </div>
 
-        <div className="trip-info grid md:grid-cols-4 md:gap-8 grid-cols-2 mt-8">
+        <div className="trip-info grid md:grid-cols-4 md:gap-8 grid-cols-2 mt-8 w-full">
           <div className="profile flex items-center">
             <Icon icon="profile" cname="pr-3 flex-none" />
             <p className="xl:whitespace-nowrap">Felix Obinna</p>
@@ -78,36 +78,32 @@ const About = ({ trip }) => {
               {format(new Date(trip.start_date), "MMMM do, y")}
             </p>
           </div>
-          <div className="profile flex items-center justify-end">
-            <Icon icon="like" cname="pr-3 cursor-pointer" />
-            <Icon icon="share" cname="cursor-pointer" />
-          </div>
+          
         </div>
 
         <div className="trip-description mt-8">
-          <p className="max-w-full md:max-w-4xl">{trip.description}</p>
+        <h2 className="font-circular-bold">Description</h2>
+          <p className="max-w-full text-gray md:max-w-4xl">{trip.description}</p>
         </div>
-
+        
+        {/*
         <div className="buddies-checklist mt-10">
           <h2 className="font-circular-bold">Buddies Checklist</h2>
           <div className="buddies-list grid md:grid-cols-3 md:gap-8 grid-cols-2">
-            {trip.checklists.map((item, index) => (
+            {trip?.checklists?.map((item, index) => (
               <div className="flex items-center" key={index}>
                 <Icon icon="checkmark" cname="flex-none" />
                 <p className="pl-1 whitespace-nowrap">{item}</p>
               </div>
             ))}
           </div>
-        </div>
+            </div> */}
 
         <div className="meeting-point mt-10">
-          <h2 className="font-circular-bold ">Meeting point</h2>
-          <p className="">{trip.meeting_point}</p>
+          <h2 className="font-circular-bold">Meeting point</h2>
+          <p className="text-gray">{trip.meeting_point}</p>
         </div>
-      </section>
 
-      <section className="final-travel-info mt-10 xl:max-w-lg">
-        <TripPhoto images={trip.images} />
         <div className="travel-cost-breakdown mt-10">
           <TravelCostBreakdown
             currency={trip.currency}
@@ -117,7 +113,19 @@ const About = ({ trip }) => {
             total={total}
           />
         </div>
+
+        <div className="mt-10">
+            <Link href={`${slug}/join`}>
+              <a>
+                <Button
+                  btnStyle="bg-orange font-circular-bold text-white px-4 py-2 mt-3 md:mt-0 rounded"
+                  btnText="Request for funds"
+                />
+              </a>
+            </Link>
+          </div>
       </section>
+      
     </div>
   );
 };

@@ -8,13 +8,40 @@ import Testimonial from "../components/Testimonial";
 import ShowLuggage from "../components/common/ShowLuggage";
 import DestinationCard from "../components/DestinationCard";
 import InputWithLabel from "../components/common/InputWithLabel";
+import DateTimeWithLabel from "../components/common/DateTimeWIthLabel";
 import MoreDestinationCard from "../components/MoreDestinationCard";
 
+import { useRouter } from "next/router";
+import { useState } from "react";
 // data
+import moment from  "moment"
 let testimonial = require("../assets/data/testimonial.json");
 let destinations = require("../assets/data/destinations.json");
+import useData from "../components/hooks/useData";
 
 export default function Home() {
+  const { push } = useRouter();
+  const [destination, setDestination] = useState("");
+  const [travelDate, setTravelDate] = useState("");
+  const [buddies, setBuddies] = useState("");
+
+  const {
+    dispatch,
+    data: {
+      topSearchResults,
+    },
+  } = useData();
+
+  const searchTrips = async() => {
+    dispatch({topSearchResults: []})
+
+    let query = ''; 
+    if (destination) query +=  `?destination=${destination}&`;
+    if (travelDate) query +=  `?travel_date=${travelDate}&`;
+    if (buddies) query +=  `?no_of_travel_buddies=${buddies}&`;
+    push("/search" + query)
+    
+  }
   return (
     <>
       <Hero />
@@ -24,21 +51,36 @@ export default function Home() {
           placeholder="Where would you like to go?"
           type="text"
           label="Destination"
+          value={destination}
+          onChange={(e) => {setDestination(e.target.value)}}
         />
 
-        <InputWithLabel
-          placeholder="When would you like to go?"
-          type="text"
-          label="Travel Date"
+
+        <DateTimeWithLabel
+            placeholder="Travel Date"
+            closeOnSelect
+            timeFormat={false}
+            dateFormat="YYYY-MM-DD"
+            label="When would you like to go?"
+            inputProps={{
+              placeholder: "Travel date",
+              className: "input-element w-full mb-3 md:mb-0",
+            }}
+            onChange={(v) => {
+              setTravelDate(v.format("YYYY-MM-DD"));
+            }}
+            
         />
 
         <InputWithLabel
           placeholder="How many travel buddies?"
           type="text"
           label="Travel Buddies"
+          onChange={(e) => {setBuddies(e.target.value)}}
+          value={buddies}
         />
         <div className="search">
-          <button className="bg-orange w-full rounded text-white text-lg flex items-center justify-center py-4 font-black">
+          <button className="bg-orange w-full rounded text-white text-lg flex items-center justify-center py-4 font-black" onClick={searchTrips}>
             Find travel buddies
             <Icon icon="search" cname="pl-2" />
           </button>
@@ -167,6 +209,89 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+
+      <section className="travel-buddies max-w-6xl lg:max-w-6xl md:max-w-2xl mx-auto book-trip mt-14 md:mt-52">
+        <div className="flex md:justify-between items-center justify-center">
+          <div className="booktrip-steps">
+            
+            <div className="md:text-5xl text-32 md:max-w-lg max-w-xxs font-circular-bold text-black-bold relative">
+              <Icon icon="six" /> more reasons to plan with WayPal
+            </div>
+            <div className="step-outline pt-9">
+              <div className="step-1 flex mb-1">
+                <Icon icon="reasons" />
+                <div className="steps-text pl-5">
+                  <p className="text-gray-light max-w-xs">
+                  Everyone’s safety is guaranteed because everyone is biometrically verified.
+                  </p>
+                </div>
+              </div> 
+            </div>
+            <div className="step-outline pt-9">
+              <div className="step-1 flex mb-1">
+                <Icon icon="reasons" />
+                <div className="steps-text pl-5">
+                  <p className="text-gray-light max-w-xxs">
+                  Detailed Day-to-Day Itenary:  You know exactly what you are paying for and you get a chat system to talk your buddies and trip planner to clarify anything at anytime.                  </p>
+                </div>
+              </div> 
+            </div>
+            <div className="step-outline pt-9">
+              <div className="step-1 flex mb-1">
+                <Icon icon="reasons" />
+                <div className="steps-text pl-5">
+                  <p className="text-gray-light max-w-xxs">
+                  Everyone’s safety is guaranteed because everyone is biometrically verified.
+                  </p>
+                </div>
+              </div> 
+            </div>
+            <div className="step-outline pt-9">
+              <div className="step-1 flex mb-1">
+                <Icon icon="reasons" />
+                <div className="steps-text pl-5">
+                  <p className="text-gray-light max-w-xxs">
+                  Everyone’s safety is guaranteed because everyone is biometrically verified.
+                  </p>
+                </div>
+              </div> 
+            </div>
+            <div className="step-outline pt-9">
+              <div className="step-1 flex mb-1">
+                <Icon icon="reasons" />
+                <div className="steps-text pl-5">
+                  <p className="text-gray-light max-w-xxs">
+                  Everyone’s safety is guaranteed because everyone is biometrically verified.
+                  </p>
+                </div>
+              </div> 
+            </div>
+            <div className="step-outline pt-9">
+              <div className="step-1 flex mb-1">
+                <Icon icon="reasons" />
+                <div className="steps-text pl-5">
+                  <p className="text-gray-light max-w-xxs">
+                  Everyone’s safety is guaranteed because everyone is biometrically verified.
+                  </p>
+                </div>
+              </div> 
+            </div>
+
+              
+          </div>
+          <div className="trip-card -mt-56 -mr-28 hidden md:flex">
+            <Image
+              src="/reasons.png"
+              alt="reasons"
+              layout="intrinsic"
+              width={680}
+              height={699}
+            />
+          </div>
+        </div>
+      </section>
+
 
       <section className="testimonial pt-36">
         <div className="testimonial-header text-center">

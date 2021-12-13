@@ -1,18 +1,50 @@
 import Icon from "./common/Icon";
 import Button from "./common/Button";
 import Checkbox from "./Checkbox";
+import { postRequest,getRequest } from "../actions/connection";
+import qs from "qs";
+import { useState, useEffect } from "react";
+import { useSearchParams } from 'react-router-dom';
 
-import { useState } from "react";
-
-const SearchFilter = () => {
+const SearchFilter = (props) => {
   const [checked, setChecked] = useState(false);
+  const [loadingResults, setLoadingResults] = useState(false);
+
+  useEffect(() => {
+    // get query string
+
+    const querystring = window.location.href.split('?')[1];
+    if (querystring) {
+      setLoadingResults(true)
+      
+    }
+    
+    
+  });
 
   const handleCheckboxChange = (e) => {
     return setChecked(() => e.target.checked);
   };
 
+
+  const changeValue = (e) =>  {
+    this.setState({value: e.target.value});
+  }
   const [showPriceRange, setShowPriceRange] = useState(true);
   const [showBuddiesFilter, setShowBuddiesFilter] = useState(true);
+  const [min_price_filter, setMinPrice] = useState("");
+  const [max_price_filter, setMaxPrice] = useState("");
+
+
+  const getMaxPrice = () => {
+    return "$" + max_price_filter;
+  }
+
+  const getMinPrice = () => {
+    return "$" + min_price_filter;
+  }
+
+  
 
   const togglePriceRange = () => {
     return setShowPriceRange((prev) => !prev);
@@ -45,14 +77,18 @@ const SearchFilter = () => {
             <p className="text-xs font-bold">Min price</p>
             <input
               placeholder="$0"
+              value={min_price_filter}
               className="outline-none box-border text-black-content w-full pl-3"
+              onChange={(e) => setMinPrice(e.target.value)}
             />
           </div>
           <div className="max-price input-with-label bg-white rounded p-3 mt-4">
             <p className="text-xs font-bold">Max price</p>
             <input
               placeholder="$0"
+              value={max_price_filter}
               className="outline-none box-border text-black-content w-full pl-3"
+              onChange={(e) => setMaxPrice(e.target.value)}
             />
           </div>
           <div className="flex items-center justify-between max-w-xxs mt-8">
@@ -61,68 +97,9 @@ const SearchFilter = () => {
               btnText="Clear"
               btnStyle="text-orange font-bold"
             />
-            <Button btnType="fill" btnText="Apply filter" />
-          </div>
-        </div>
-      </div>
-
-      <div className="buddies-preferences border border-gray-light6 rounded py-5 px-4 mt-14">
-        <div className="price-range-header flex justify-between items-center">
-          <p>Buddies Preferences</p>
-          <div onClick={toggleBuddiesFilter}>
-            <Icon icon="down-caret" cname="cursor-pointer" />
-          </div>
-        </div>
-        <div
-          className={
-            showBuddiesFilter
-              ? `buddies-filter h-full overflow-hidden`
-              : `h-0 hidden`
-          }
-        >
-          <div className="flex justify-between md:flex-col xl:flex-row">
-            <div className="col-1 flex-none mt-4">
-              <Checkbox
-                checked={checked}
-                onChange={handleCheckboxChange}
-                checkfn="Likes to party"
-              />
-              <Checkbox
-                checked={checked}
-                onChange={handleCheckboxChange}
-                checkfn="Doesn't smoke"
-              />
-              <Checkbox
-                checked={checked}
-                onChange={handleCheckboxChange}
-                checkfn="Afrosentric"
-              />
-            </div>
-            <div className="col-2 flex-none xl:mt-4">
-              <Checkbox
-                checked={checked}
-                onChange={handleCheckboxChange}
-                checkfn="Married"
-              />
-              <Checkbox
-                checked={checked}
-                onChange={handleCheckboxChange}
-                checkfn="Not a racist"
-              />
-              <Checkbox
-                checked={checked}
-                onChange={handleCheckboxChange}
-                checkfn="Alcohol"
-              />
-            </div>
-          </div>
-          <div className="flex items-center justify-between max-w-xxs mt-8">
-            <Button
-              btnType="plain"
-              btnText="Clear"
-              btnStyle="text-orange font-bold"
-            />
-            <Button btnType="fill" btnText="Apply filter" />
+            <Button btnType="fill" onClick={() => {
+              getRequest("/search?")
+            }} btnText="Apply filter" />
           </div>
         </div>
       </div>

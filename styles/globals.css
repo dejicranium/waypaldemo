@@ -154,11 +154,13 @@ option {
 .modal-container {
     background-color: #fff;
     box-shadow: 0px 16px 40px rgba(147, 151, 153, 0.2);
+    overflow-y: scroll;
 }
 
 @media screen and (min-width: 500px) {
     .modal-container {
         margin: 0 auto;
+        overflow-y: scroll;
     }
 }
 
@@ -357,4 +359,24 @@ input {
 
 .ldio-36ci75x0fkp div {
     box-sizing: content-box;
+}
+
+.input-trailing-text {
+    position: absolute;
+    right: 1;
+    right: 10px;
+    margin-top: -32px;
+    color: rgba(234, 69, 36);
+    cursor: pointer;
+}
+
+.breakdown-text {
+    font-size: 15px !important;
+
+    display: flex;
+    align-items: center;
+
+    font-weight: 300;
+
+    color: #4F4F4F;
 }

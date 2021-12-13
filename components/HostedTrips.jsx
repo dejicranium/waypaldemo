@@ -9,7 +9,7 @@ const HostedTrips = ({ trips, error }) => {
         <p>An error ocurred</p>
       ) : (
         <>
-          {trips.items.length > 0 ? (
+          {trips?.items?.length > 0 ? (
             <div className="pt-5">
               <h1 className="text-2xl font-circular-bold">Hosted trips</h1>
               <div className="trip-cards max-w-3xl">
@@ -19,7 +19,7 @@ const HostedTrips = ({ trips, error }) => {
                     title={trip.title}
                     destination={trip.destination}
                     date={trip.start_date}
-                    image={trip.images[0]}
+                    image={trip.images && trip.images[0] ? trip.images[0]: ""}
                     buddies={trip.joined_buddies}
                     price={[
                       trip.travel_amount,

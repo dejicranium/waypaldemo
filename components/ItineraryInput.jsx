@@ -27,11 +27,11 @@ const ItineraryInput = ({
 
   const onChange = () => {
     getItinerary(index, {
-      date,
+      date: date,
       image: img,
-      note: noteRef.current.value,
-      location: placeRef.current.value,
-      description: descRef.current.value,
+      note: noteRef.current?.value,
+      location: placeRef.current?.value,
+      description: descRef.current?.value,
     });
   };
 
@@ -72,9 +72,12 @@ const ItineraryInput = ({
         className="itinerary-card__header flex border-b justify-between p-4"
         onClick={() => setActive(!active)}
       >
-        <h1 className="font-circular-bold">
-          {format(new Date(date), "EEEE, MMMM do, y")}
-        </h1>
+        {date && 
+        
+          <h1 className="font-circular-bold">
+            {format(new Date(date), "EEEE, MMMM do, y")}
+          </h1>
+        }
         {active ? (
           <Icon icon="caret-up" cname="cursor-pointer" />
         ) : (
@@ -88,15 +91,15 @@ const ItineraryInput = ({
             : "h-0 hidden"
         }
       >
-        <div className="location pb-4 pt-6 px-4">
+        <div >
           <InputField
             innerref={{
               ref: placeRef,
             }}
+            className="location pb-4 pt-6 px-4"
             onChange={onChange}
             defaultValue={initPlace}
             placeholder="Add a place"
-            leadingicon="location-input"
           />
         </div>
 

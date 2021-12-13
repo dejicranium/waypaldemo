@@ -7,7 +7,7 @@ const MobileSearch = ({ show, close }) => {
     <>
       {show ? (
         <div
-          className={`container h-screen overflow-y-hidden fixed z-20 top-4 left-0 bg-white`}
+          className={`container h-screen overflow-y-scroll fixed z-20 top-4 left-0 bg-white`}
         >
           <div className="filter-header flex items-center">
             <Icon

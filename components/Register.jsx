@@ -108,6 +108,7 @@ const Register = ({ setActive, close }) => {
             id="password"
             type="password"
             placeholder="Password*"
+            trailingtext="yes"
             innerref={register("password", {
               required: { value: true, message: "Please choose a password" },
               minLength: {

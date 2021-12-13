@@ -1,4 +1,5 @@
 export const init = {
+  topSearchResults: [],
   user: {
     id: 0,
     uuid: "",

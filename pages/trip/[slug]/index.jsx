@@ -9,10 +9,10 @@ import ShowLuggage from "../../../components/common/ShowLuggage";
 
 const TripPage = ({ trip, notFound }) => {
   const { push } = useRouter();
-
+  /*
   if (notFound) {
     push("/404");
-  }
+  }*/
 
   const tabs = [
     {
@@ -34,7 +34,7 @@ const TripPage = ({ trip, notFound }) => {
               className="w-full h-40 md:h-40v bg-cover bg-center bg-no-repeat relative"
               style={
                 {
-                  backgroundImage: `url(${trip.images[0]})`,
+                  backgroundImage: `url(${trip.images && trip.images[0]})`,
                 }
               }
             >
@@ -68,8 +68,10 @@ export default TripPage;
 
 export async function getServerSideProps(context) {
   const { slug } = context.query;
+  const ngrok_base = "http://3ed6-197-210-28-69.ngrok.io/api/v1"
 
-  const tripData = await getRequest(`/trip/by/slug/${slug}`);
+  const tripData =  await getRequest(`${ngrok_base}/trip/by/slug/${slug}`);
+  console.log(tripData)
 
   if (tripData.status) {
     return {

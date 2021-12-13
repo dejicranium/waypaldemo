@@ -249,7 +249,7 @@ const CreateTrip = () => {
                   placeholder="Press enter to add a checklist"
                   onKeyUp={addBuddyTag}
                   cname="max-w-sm"
-                  enterkeyHint="done"
+                  enterKeyHint="done"
                 />
                 <div className="buddies-checklist-list">
                   <BuddyTag tags={tags} removeBuddyTag={removeBuddyTag} />

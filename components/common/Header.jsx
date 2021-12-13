@@ -181,7 +181,7 @@ const Header = ({ open, setOpen }) => {
                       >
                         <ul className="py-4 px-2 profile-menu-list">
                           <li className="py-3 rounded px-10">
-                            <Link href="/dashboard/profile">Dashboard</Link>
+                            <Link href="/dashboard/profile">Profile</Link>
                           </li>
                           <li
                             className="py-3 rounded px-10 text-center"

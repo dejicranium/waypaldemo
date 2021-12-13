@@ -1,6 +1,7 @@
 import Icon from "./common/Icon";
 import { useState } from "react";
 import { format } from "date-fns";
+import InputField from "./InputField";
 
 const ItineraryCard = ({ date, image, description, note, location, id }) => {
   const [active, setActive] = useState(0);
@@ -21,6 +22,7 @@ const ItineraryCard = ({ date, image, description, note, location, id }) => {
           : "border border-gray-light3") + " my-8 rounded"
       }
     >
+
       <div className="itinerary-card__header flex justify-between p-4">
         <h1 className="font-circular-bold">
           {format(new Date(date), "EEEE, MMMM do, y")}

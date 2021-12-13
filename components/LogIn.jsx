@@ -5,6 +5,7 @@ import Toast from "./Toast";
 import Button from "./common/Button";
 import useData from "./hooks/useData";
 import InputField from "./InputField";
+import PasswordInputField from "./PasswordInputField";
 import { getRequest, postRequest } from "../actions/connection";
 
 const Login = ({ setActive, close }) => {
@@ -69,16 +70,18 @@ const Login = ({ setActive, close }) => {
             helptextstyle={errors.email && "text-red-500"}
           />
           <div className="password mb-3">
-            <InputField
+            <PasswordInputField
               id="password"
               type="password"
               placeholder="Password"
               innerref={register("password", {
                 required: { value: true, message: "Please enter a password" },
               })}
+              trailingtext="yes"
               helptext={errors.password && errors.password.message}
               helptextstyle={errors.password && "text-red-500"}
             />
+
           </div>
           <Button
             type="submit"

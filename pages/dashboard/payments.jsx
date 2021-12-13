@@ -45,7 +45,7 @@ const Payments = ({ payments }) => {
               </div>
             </div>
           ) : (
-            <h1>Nothing dey here o</h1>
+            <h1>Nothing</h1>
           )}
         </section>
       </div>

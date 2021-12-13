@@ -19,8 +19,10 @@ const RequestFund = () => {
 
           <div className="pt-6">
             <form>
-              <InputField type="text" placeholder="Receiving Bank" />
-              <InputField type="text" placeholder="Account number" />
+              <InputField type="text" className="mb-3" placeholder="Receiving Bank" />
+              <InputField type="text" placeholder="Account number"  
+                helptext={errors.lastname && errors.lastname.message}
+                    helptextstyle={errors.lastname && "text-red-500"}/>
               <InputField type="text" placeholder="Personalized note" />
 
               <div className="">

@@ -41,12 +41,16 @@ const CreateTripReview = () => {
   const submitTrip = async () => {
     setStep("Creating your awesome trip");
     setLoading(true);
-
+    
     const uploadTripImages = await Promise.all(
-      images.map((url) => fetch(url).then((r) => r.blob()))
+      images.map((url) => fetch(url).then((r) => r.blob()).catch(e => {
+        
+      }))
     );
 
-    const uploadedImages = await Promise.all(
+
+    let uploadedImages = [];
+    await Promise.all(
       uploadTripImages.map((e) => {
         const data = new FormData();
         data.append("file", e);
@@ -80,7 +84,7 @@ const CreateTripReview = () => {
 
           return axios
             .post("https://api.cloudinary.com/v1_1/waypal/image/upload", data)
-            .then((d) => d.data.url);
+            .then((d) => uploadedImages(d.data.url));
         }
         return;
       })
@@ -139,7 +143,7 @@ const CreateTripReview = () => {
             <h1 className="font-circular-black text-black text-3xl md:pr-14">
               {createTrip.title} - {createTrip.destination}
             </h1>
-
+          {/*
             <div className="trip-info grid md:grid-cols-4 md:gap-8 grid-cols-2 mt-8">
               <div className="profile flex items-center">
                 <Icon icon="profile" cname="pr-3 flex-none" />
@@ -162,7 +166,7 @@ const CreateTripReview = () => {
                     format(new Date(createTrip.start_date || ""), "MMMM do, y")}
                 </p>
               </div>
-            </div>
+                  </div>*/}
 
             <div className="trip-description mt-8">
               <p className="">{createTrip.description}</p>
