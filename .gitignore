@@ -37,3 +37,6 @@ yarn.lock
 package-lock.json
 
 .env
+
+# Local Netlify folder
+.netlify
