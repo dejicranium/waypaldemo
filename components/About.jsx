@@ -3,20 +3,26 @@ import { useRouter } from "next/router";
 
 import Icon from "./common/Icon";
 import TripPhoto from "./TripPhoto";
+import { useState } from 'react';
 import Button from "./common/Button";
 import useData from "./hooks/useData";
 import { getRequest } from "../actions/connection";
 import { formatCurrency, formatAmount } from "../assets/js/utils";
 import TravelCostBreakdown from "./TravelCostBreakdown";
-
+import Login from '../components/LogIn';
+import Modal from "./Modal";
+import Register from '../components/Register';
+import ForgotPassword from '../components/ForgotPassword';
 import { format } from "date-fns";
 
-const About = ({ trip }) => {
+const About = ({ trip, user_is_owner=false }) => {
   // const {
   //   dispatch,
   //   data: { currentTrip },
   // } = useData();
 
+  const [authMode, setAutMode]  = useState('login');
+  const [showModal, setShowModal]  = useState(false);
   const {
     query: { slug },
   } = useRouter();
@@ -39,7 +45,19 @@ const About = ({ trip }) => {
   const total = subTotal + (subTotal / 100) * 7.5;
 
   return (
-    <div className="about-trip lg:flex justify-between lg:space-x-8">
+    <>
+      <Modal showModal={showModal} close={() => setShowModal(false)}>
+        {authMode === 'login' && (
+          <Login setActive={authMode === 'login'} close={() => setShowModal(false)} />
+        )}
+        {authMode === 'register' && (
+          <Register setActive={authMode === 'register'} close={() => setShowModal(false)} />
+        )}
+        {authMode === 'forgot' && (
+          <ForgotPassword setActive={authMode === 'forgot'} close={() => setShowModal(false)} />
+        )}
+      </Modal>
+      <div className="about-trip lg:flex justify-between lg:space-x-8">
       <section className="trip-details mt-8 w-6/12 ">
         <div className="about-trip-header md:flex md:items-center">
           <h1 className="font-circular-black text-black text-2xl md:pr-14">
@@ -51,6 +69,9 @@ const About = ({ trip }) => {
             <Link href={`${slug}/join`}>
               <a>
                 <Button
+                  onClick={() => {
+                    //setAutMode("register")
+                  }}
                   btnStyle="bg-orange font-circular-bold text-white px-4 py-2 mt-3 md:mt-0 rounded"
                   btnText="Join this trip"
                 />
@@ -113,7 +134,7 @@ const About = ({ trip }) => {
             total={total}
           />
         </div>
-
+        {user_is_owner && user_is_owner === true &&
         <div className="mt-10">
             <Link href={`${slug}/join`}>
               <a>
@@ -124,9 +145,11 @@ const About = ({ trip }) => {
               </a>
             </Link>
           </div>
+        }
       </section>
       
     </div>
+    </>
   );
 };
 export default About;

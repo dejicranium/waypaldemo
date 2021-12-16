@@ -1,23 +1,39 @@
 import { useRouter } from "next/router";
-
+import { useEffect, useState } from "react";
 import Tabs from "../../../components/Tabs";
 import About from "../../../components/About";
 import Itinerary from "../../../components/Itinerary";
 import Footer from "../../../components/common/Footer";
 import { getRequest } from "../../../actions/connection";
 import ShowLuggage from "../../../components/common/ShowLuggage";
+import useData from '../../../components/hooks/useData';
+
 
 const TripPage = ({ trip, notFound }) => {
   const { push } = useRouter();
+  const [user_is_owner, setUserAsOwner] = useState(false);
   /*
   if (notFound) {
     push("/404");
   }*/
+  const {
+    data: {
+      user,
+      isLoggedIn = false,
+    },
+  } = useData();
+  
+  
+  useEffect(() => {
+    if (user.id === trip.user_id) {
+      user_is_owner = true;
+    }
+  }, []);
 
   const tabs = [
     {
       name: "ABOUT",
-      render: <About trip={trip} />,
+      render: <About user_is_owner={user_is_owner} trip={trip} />,
     },
     {
       name: "ITINERARY",
@@ -27,8 +43,10 @@ const TripPage = ({ trip, notFound }) => {
 
   return (
     <>
+    
       {!notFound && (
         <>
+
           <section className="destination-header">
             <div
               className="w-full h-40 md:h-40v bg-cover bg-center bg-no-repeat relative"
@@ -68,10 +86,9 @@ export default TripPage;
 
 export async function getServerSideProps(context) {
   const { slug } = context.query;
-  const ngrok_base = "http://3ed6-197-210-28-69.ngrok.io/api/v1"
+  const ngrok_base = "http://6c7c-197-210-8-123.ngrok.io/api/v1"
 
-  const tripData =  await getRequest(`${ngrok_base}/trip/by/slug/${slug}`);
-  console.log(tripData)
+  const tripData =  await getRequest(`${process.env.NEXT_PUBLIC_API_LOCATION}/trip/by/slug/${slug}`);
 
   if (tripData.status) {
     return {

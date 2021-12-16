@@ -68,37 +68,43 @@ const Trips = () => {
 export default Trips;
 
 export async function getServerSideProps({ req: { cookies } }) {
+  let pastTrips, upcomingTrips = [];
   const url_base  = process.env.NEXT_PUBLIC_API_LOCATION || "//localhost:8000/api/v1"
-  const hostedTrips =  await getRequest(`${url_base}/user/trips/`, cookies.token);
-  console.log(cookies.token)
+  const hostedTrips =  await getRequest(`${url_base}/user/trips/`, cookies.token)
+    .then(resp => {
+      console.log("resp is "  + resp)
+    })
+    .catch(err => {
+      console.log(err)
+    })
   const followedTrips = await getRequest(
     `${url_base}/user/trips/followed/`,
     cookies.token
   );
+  
   console.log(hostedTrips)
-  console.log(followedTrips)
 
-  if (true) {
-    const pastTrips = followedTrips.data?.items.filter((trip) => {
+  if (followedTrips && followedTrips.data) {
+    pastTrips = followedTrips?.data?.items.filter((trip) => {
       return isBefore(new Date(), new Date(trip.Trip.start_date));
     })|| []
+  }
 
-    const upcomingTrips = followedTrips.data?.items.filter((trip) => {
+  if (followedTrips && followedTrips.data) {
+    upcomingTrips = followedTrips?.data?.items.filter((trip) => {
       return isAfter(new Date(trip.Trip.start_date), new Date());
     }) || []
-
-    return {
-      props: {
-        hostedTrips: hostedTrips.data,
-        followedTrips: followedTrips.data,
-        pastTrips: pastTrips,
-        upcomingTrips: upcomingTrips,
-      },
-    };
   }
+
+
   return {
     props: {
-      error: true,
+      hostedTrips: hostedTrips ?  hostedTrips.data : [],
+      followedTrips: followedTrips ? followedTrips.data : [],
+      pastTrips: pastTrips ? pastTrips : [],
+      upcomingTrips: upcomingTrips ? upcomingTrips : [],
     },
   };
+  
+
 }

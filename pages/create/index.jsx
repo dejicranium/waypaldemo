@@ -1,5 +1,5 @@
 import moment from "moment";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Datetime from "react-datetime";
 import { useRouter } from "next/router";
 import IntlTelInput from "react-intl-tel-input";
@@ -18,7 +18,7 @@ import TextAreaField from "../../components/TextAreaField";
 const CreateTrip = () => {
   const {
     dispatch,
-    data: { createTrip },
+    data: { createTrip, user },
   } = useData();
   const { push } = useRouter();
   const {
@@ -33,6 +33,16 @@ const CreateTrip = () => {
     },
   });
 
+  useEffect(() => {
+    getUserVerificationStatus();
+  })
+
+
+  const getUserVerificationStatus = () => {
+    if (user.verified !== 'APPROVED') {
+      push("/dashboard/profile")
+    }
+  }
   const sD = watch("start_date");
 
   const [tags, setTags] = useState(createTrip?.checklists || []);

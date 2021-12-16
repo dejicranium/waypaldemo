@@ -9,15 +9,20 @@ import useData from "../../components/hooks/useData";
 import UploadImage from "../../components/UploadImage";
 import WaypalFooter from "../../components/WaypalFooter";
 import DashboardSidebar from "../../components/DashboardSidebar";
+import { createVeriffFrame, MESSAGES } from "@veriff/incontext-sdk";
 
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import UserAvatar from "react-user-avatar";
 import IntlTelInput from "react-intl-tel-input";
 import { Controller, useForm } from "react-hook-form";
-import { putRequest } from "../../actions/connection";
+import { putRequest, postRequest, getRequest } from "../../actions/connection";
 import Toast from "../../components/Toast";
+import dynamic from 'next/dynamic';
+
 
 const Profile = () => {
+  const [verification_url, setVerificationUrl] = useState(null);
+
   const {
     dispatch,
     data: { user },
@@ -34,10 +39,57 @@ const Profile = () => {
     },
   });
 
+
+   const createVeriffSession = async() => {
+    await postRequest('/veriff/sessions', {})
+      .then(resp => {
+        setVerificationUrl(resp.data.verification.url);
+        openVeriffModal(resp.data.verification.url);
+      })
+  }
+
+  const setWaypalVerificationStatus = async(status) => {
+    await putRequest('/user/verify', {
+      email: user.email,
+      status,
+    })
+    .then(resp => {
+      dispatch({user: resp.data})
+    })
+    .catch(err => {
+      alert("Could not set verification status")
+    })
+  }
+
+  const openVeriffModal = async (url) => {
+    createVeriffFrame({
+        url: url || verification_url,
+        onEvent: (msg) => {
+            switch(msg) {
+            case MESSAGES.CANCELED:
+              setWaypalVerificationStatus("ABANDONED")
+              break;
+            case MESSAGES.FINISHED:
+              setWaypalVerificationStatus("ATTEMPTED")
+              break;
+              }
+          },  
+
+    })
+  }
+
+
+  useEffect(() => {
+     createVeriffSession();
+  }, []);
+
+
+
   let profile_image = user.profile_image_url;
 
   const [profileImage, setProfileImage] = useState(profile_image);
   const [error, setError] = useState(null);
+  const [verificationDone, setVerificationStatus] = useState(user.verified === "APPROVED") ;
   const [success, setSuccess] = useState(null);
 
   const selectImage = async (e) => {
@@ -78,25 +130,47 @@ const Profile = () => {
           close={() => setSuccess(null)}
         />
       )}
-      <div className="container md:grid grid-cols-7 mt-14">
+        
+        <div className="container md:grid grid-cols-7 mt-14">
         <aside className="hidden md:block col-span-1">
           <DashboardSidebar />
         </aside>
 
+
+
         <section className="col-span-4 md:col-span-5 md:ml-40">
+          
           <div className="profile-header">
-            <h1 className="text-2xl font-circular-bold">
-              Passenger Information
-            </h1>
-            <p className="text-black-content text-lg hidden md:block">
-              Enter the required information for each traveler and be sure that
-              it exactly matches the government-issued ID presented at the
-              airport
-            </p>
+            {['PENDING', 'RESUBMISSION_REQUESTED', 'DECLINED', 'ABANDONED'].includes(user.verified) && 
+              <>
+                <h1 className="text-2xl font-circular-bold">
+                  Passenger Information
+                </h1>
+                <p className="text-black-content text-lg hidden md:block">
+                  Enter the required information for each traveler and be sure that
+                  it exactly matches the government-issued ID presented at the
+                  airport
+                </p>
+              </>
+            }
+
+            {
+              user.verified === "ATTEMPTED" && 
+              <>
+              <h1 className="text-2xl font-circular-bold">
+                  Awaiting Verification 
+                </h1>
+                <p className="text-black-content text-lg hidden md:block">
+                 Your verification process is still ongoing. This should take at most 2 business days from the submission time
+                </p>
+              </>
+            }
           </div>
           <div className="profile-info-form pt-6">
             <form>
               <div className="basic-info md:flex justify-between items-start">
+              {user.verified === "APPROVED" && 
+
                 <div className="profile-photo flex-none mb-11 md:mb-0 mr-3">
                   {profileImage || user.profile_image_url ? (
                     <>
@@ -119,20 +193,23 @@ const Profile = () => {
                       className="text-5xl"
                     />
                   )}
-                  <div
-                    className="upload-image flex items-center justify-center mt-3 cursor-pointer max-w-max md:max-w-full"
-                    // onChange={selectImage}
-                  >
-                    <UploadImage className="p-1" onChange={selectImage} />
-                    {/* <Icon icon="camera" cname="mr-3" />
-                    <span>Upload Image</span> */}
-                  </div>
+                    <div
+                      className="upload-image flex items-center justify-center mt-3 cursor-pointer max-w-max md:max-w-full"
+                      // onChange={selectImage}
+                    >
+                        <UploadImage className="p-1" onChange={selectImage} />
+                      
+                    
+                    </div>
+                  
                 </div>
+                }
                 <div className="md:grid gap-x-3 grid-cols-2 flex-grow">
                   <InputField
                     type="text"
                     placeholder="First name*"
                     className="mb-3"
+                    disabled
                     value={user.firstname}
                     innerref={register("firstname", {
                       required: {
@@ -147,6 +224,7 @@ const Profile = () => {
                     }}
                   />
                   <InputField
+                    disabled
                     type="text"
                     placeholder="Last name*"
                     className="mb-3"
@@ -159,7 +237,12 @@ const Profile = () => {
                     helptext={errors.lastname && errors.lastname.message}
                     helptextstyle={errors.lastname && "text-red-500"}
                   />
-                 
+
+                  <select class="input-element"  name="" id="" placeholder="Select Country">
+                    <option value="NG">Nigeria</option>
+                  </select>
+
+                 {/*
                   <div>
                     <Datetime
                       defaultValue={isoToDate(user.date_of_birth, true)}
@@ -187,199 +270,200 @@ const Profile = () => {
                         {errors.date_of_birth.message}
                       </small>
                     )}
-                  </div>
+                    </div> */}
                 </div>
               </div>
 
               {/* Contact info */}
-              <div className="contact-info pt-8">
-                <h2 className="font-circular-bold text-gray-light4">
-                  Contact information
-                </h2>
-                <div className="contact-col md:grid grid-cols-2 gap-x-3 pt-4">
-                  <InputField
-                    type="email"
-                    placeholder="Email address*"
-                    className="mb-3"
-                    innerref={register("email", {
-                      required: {
-                        value: true,
-                        message: "This field is required",
-                      },
-                    })}
-                    helptext={errors.email && errors.email.message}
-                    helptextstyle={errors.email && "text-red-500"}
-                  />
-                  <div className="phone">
-                    <Controller
-                      name="phone_number"
-                      control={control}
-                      rules={{
+              { verificationDone === "APPROVED" &&
+              <>
+                <div className="contact-info pt-8">
+                  <h2 className="font-circular-bold text-gray-light4">
+                    Contact information
+                  </h2>
+                  <div className="contact-col md:grid grid-cols-2 gap-x-3 pt-4">
+                    <InputField
+                      type="email"
+                      placeholder="Email address*"
+                      className="mb-3"
+                      innerref={register("email", {
                         required: {
                           value: true,
-                          message: "Please enter a phone number",
+                          message: "This field is required",
                         },
-                      }}
-                      render={({ field: { onChange } }) => (
-                        <IntlTelInput
-                          format
-                          defaultCountry="ng"
-                          placeholder="Phone number*"
-                          preferredCountries={["ng"]}
-                          inputClassName="input-element w-full"
-                          // defaultValue={user.phone_number}
-                          containerClassName="intl-tel-input w-full"
-                          onPhoneNumberChange={(_e, v, c) => onChange(v)}
-                        />
+                      })}
+                      disabled
+                      helptext={errors.email && errors.email.message}
+                      helptextstyle={errors.email && "text-red-500"}
+                    />
+                    <div className="phone">
+                      <Controller
+                        name="phone_number"
+                        control={control}
+                        rules={{
+                          required: {
+                            value: true,
+                            message: "Please enter a phone number",
+                          },
+                        }}
+                        render={({ field: { onChange } }) => (
+                          <IntlTelInput
+                            format
+                            defaultCountry="ng"
+                            placeholder="Phone number*"
+                            disabled
+                            preferredCountries={["ng"]}
+                            inputClassName="input-element w-full"
+                            // defaultValue={user.phone_number}
+                            containerClassName="intl-tel-input w-full"
+                            onPhoneNumberChange={(_e, v, c) => onChange(v)}
+                          />
+                        )}
+                      />
+                      {errors.phone_number && (
+                        <small className={`text-red-500 block`}>
+                          {errors.phone_number.message}
+                        </small>
                       )}
-                    />
-                    {errors.phone_number && (
-                      <small className={`text-red-500 block`}>
-                        {errors.phone_number.message}
-                      </small>
-                    )}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Profile info */}
-              <div className="profile-info pt-8">
-                <h2 className="font-circular-bold text-gray-light4">
-                  Profile information
-                </h2>
-                <div className="profile-info-col py-4">
-                  <InputField
-                    type="text"
-                    placeholder="Bio"
-                    innerref={register("bio")}
-                  />
-                  <div className="md:grid grid-cols-2 gap-x-3 mt-3">
+              
+                <div className="profile-info pt-8">
+                  <h2 className="font-circular-bold text-gray-light4">
+                    Profile information
+                  </h2>
+                  <div className="profile-info-col py-4">
                     <InputField
                       type="text"
-                      placeholder="Website*"
-                      className="mb-3"
-                      innerref={register("website")}
+                      placeholder="Bio"
+                      innerref={register("bio")}
                     />
-                    <InputField
-                      type="text"
-                      placeholder="Twitter handle"
-                      className="mb-3"
-                      innerref={register("twitter")}
-                    />
-                    <InputField
-                      type="text"
-                      placeholder="Facebook username"
-                      className="mb-3"
-                      innerref={register("facebook")}
-                    />
-                    <InputField
-                      type="text"
-                      placeholder="Instagram handle"
-                      innerref={register("instagram")}
-                    />
+                    <div className="md:grid grid-cols-2 gap-x-3 mt-3">
+                      <InputField
+                        type="text"
+                        placeholder="Website*"
+                        className="mb-3"
+                        innerref={register("website")}
+                      />
+                      <InputField
+                        type="text"
+                        placeholder="Twitter handle"
+                        className="mb-3"
+                        innerref={register("twitter")}
+                      />
+                      <InputField
+                        type="text"
+                        placeholder="Facebook username"
+                        className="mb-3"
+                        innerref={register("facebook")}
+                      />
+                      <InputField
+                        type="text"
+                        placeholder="Instagram handle"
+                        innerref={register("instagram")}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Emergency Contact information */}
-              <div className="emergency-contact pt-8">
-                <h2 className="font-circular-bold text-gray-light4">
-                  Emergency contact information
-                </h2>
-                <div className="emergency-contact-col md:grid grid-cols-2 gap-x-3 pt-4">
-                  <InputField
-                    type="text"
-                    placeholder="First name*"
-                    className="mb-3"
-                    innerref={register("emergency_first_name", {
-                      required: {
-                        value: true,
-                        message: "This field is required",
-                      },
-                    })}
-                    helptext={
-                      errors.emergency_first_name &&
-                      errors.emergency_first_name.message
-                    }
-                    helptextstyle={
-                      errors.emergency_first_name && "text-red-500"
-                    }
-                  />
-                  <InputField
-                    type="text"
-                    placeholder="Last name*"
-                    className="mb-3"
-                    innerref={register("emergency_last_name", {
-                      required: {
-                        value: true,
-                        message: "This field is required",
-                      },
-                    })}
-                    helptext={
-                      errors.emergency_last_name &&
-                      errors.emergency_last_name.message
-                    }
-                    helptextstyle={errors.emergency_last_name && "text-red-500"}
-                  />
-                  <InputField
-                    type="email"
-                    placeholder="Email address*"
-                    className="mb-3"
-                    innerref={register("emergency_email", {
-                      required: {
-                        value: true,
-                        message: "This field is required",
-                      },
-                    })}
-                    helptext={
-                      errors.emergency_email && errors.emergency_email.message
-                    }
-                    helptextstyle={errors.emergency_email && "text-red-500"}
-                  />
-                  <div className="emergency-phone-number">
-                    <Controller
-                      name="emergency_phone_number"
-                      control={control}
-                      rules={{
+                <div className="emergency-contact pt-8">
+                  <h2 className="font-circular-bold text-gray-light4">
+                    Emergency contact information
+                  </h2>
+                  <div className="emergency-contact-col md:grid grid-cols-2 gap-x-3 pt-4">
+                    <InputField
+                      type="text"
+                      placeholder="First name*"
+                      className="mb-3"
+                      innerref={register("emergency_first_name", {
                         required: {
                           value: true,
-                          message: "Please enter a phone number",
+                          message: "This field is required",
                         },
-                      }}
-                      render={({ field: { onChange } }) => (
-                        <IntlTelInput
-                          format
-                          defaultCountry="ng"
-                          placeholder="Phone number*"
-                          preferredCountries={["ng"]}
-                          inputClassName="input-element w-full"
-                          // defaultValue={user?.emergency_phone_number || null}
-                          containerClassName="intl-tel-input w-full"
-                          onPhoneNumberChange={(_e, v, c) => onChange(v)}
-                        />
-                      )}
+                      })}
+                      helptext={
+                        errors.emergency_first_name &&
+                        errors.emergency_first_name.message
+                      }
+                      helptextstyle={
+                        errors.emergency_first_name && "text-red-500"
+                      }
                     />
-                    {errors.emergency_phone_number && (
-                      <small className={`text-red-500 block`}>
-                        {errors.emergency_phone_number.message}
-                      </small>
-                    )}
+                    <InputField
+                      type="text"
+                      placeholder="Last name*"
+                      className="mb-3"
+                      innerref={register("emergency_last_name", {
+                        required: {
+                          value: true,
+                          message: "This field is required",
+                        },
+                      })}
+                      helptext={
+                        errors.emergency_last_name &&
+                        errors.emergency_last_name.message
+                      }
+                      helptextstyle={errors.emergency_last_name && "text-red-500"}
+                    />
+                    <InputField
+                      type="email"
+                      placeholder="Email address*"
+                      className="mb-3"
+                      innerref={register("emergency_email", {
+                        required: {
+                          value: true,
+                          message: "This field is required",
+                        },
+                      })}
+                      helptext={
+                        errors.emergency_email && errors.emergency_email.message
+                      }
+                      helptextstyle={errors.emergency_email && "text-red-500"}
+                    />
+                    <div className="emergency-phone-number">
+                      <Controller
+                        name="emergency_phone_number"
+                        control={control}
+                        rules={{
+                          required: {
+                            value: true,
+                            message: "Please enter a phone number",
+                          },
+                        }}
+                        render={({ field: { onChange } }) => (
+                          <IntlTelInput
+                            format
+                            defaultCountry="ng"
+                            placeholder="Phone number*"
+                            preferredCountries={["ng"]}
+                            inputClassName="input-element w-full"
+                            // defaultValue={user?.emergency_phone_number || null}
+                            containerClassName="intl-tel-input w-full"
+                            onPhoneNumberChange={(_e, v, c) => onChange(v)}
+                          />
+                        )}
+                      />
+                      {errors.emergency_phone_number && (
+                        <small className={`text-red-500 block`}>
+                          {errors.emergency_phone_number.message}
+                        </small>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
+                </>
+              }
             </form>
 
             <div className="mt-16 flex items-center">
               <Button
-                btnText="Cancel"
-                btnType="plain"
-                btnStyle="text-orange font-circular-bold pr-9"
-              />
-              <Button
-                btnText="Save"
+                btnText="Verify Me!"
                 btnType="fill"
-                type="submit"
-                onClick={handleSubmit(submit)}
+                onClick={() => {
+                  createVeriffSession()
+                }}
               />
             </div>
 

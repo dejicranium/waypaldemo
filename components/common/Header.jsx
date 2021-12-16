@@ -6,8 +6,8 @@ import Icon from "./Icon";
 import Head from "next/head";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
-import Login from "../LogIn";
-import Register from "../Register";
+import Login from "../../components/LogIn";
+import Register from "../../components/Register";
 import ForgotPassword from "../ForgotPassword";
 
 import { Divide as Hamburger } from "hamburger-react";

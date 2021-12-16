@@ -17,11 +17,11 @@ const Payments = ({ payments }) => {
           {payments.length > 0 ? (
             <div className="">
               <h1 className="text-2xl font-circular-bold">
-                {transactions.length}{" "}
-                {`${transactions.length === 1 ? " Payment" : "Payments"}`}
+                {payments.length}{" "}
+                {`${payments.length === 1 ? " Payment" : "Payments"}`}
               </h1>
               <div className="divide-y divide-gray-light3 divide">
-                {transactions.map((transaction, i) => (
+                {payments.map((transaction, i) => (
                   <div
                     className="transactions flex items-center justify-between py-6"
                     key={i}
@@ -45,7 +45,7 @@ const Payments = ({ payments }) => {
               </div>
             </div>
           ) : (
-            <h1>Nothing</h1>
+            <h1>No transactions available</h1>
           )}
         </section>
       </div>
@@ -56,8 +56,9 @@ const Payments = ({ payments }) => {
 
 export default Payments;
 
-export async function getServerSideProps() {
-  const payments = await getRequest(`/payment`);
+export async function getServerSideProps({ req: { cookies } }) {
+  const ngrok_base = "http://6c7c-197-210-8-123.ngrok.io/api/v1";
+  const payments = await getRequest(`${process.env.NEXT_PUBLIC_API_LOCATION}/payment`, cookies.token);
 
   if (payments.status) {
     return {
