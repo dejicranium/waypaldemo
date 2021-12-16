@@ -40,8 +40,8 @@ const InputField = (props) => {
       }
       
       {trailingicon && <Icon icon={trailingicon} cname="absolute top-2 right-2" />}
-      {trailingtext && show_password &&  <p onClick="showPassword" onClick={() => setShowPassword(false)} className="input-trailing-text">Hide</p>}
-      {trailingtext && !show_password &&  <p onClick="showPassword" onClick={() =>setShowPassword(true)} className="input-trailing-text">Show</p>}
+      {trailingtext && show_password &&  <p  onClick={() => setShowPassword(false)} className="input-trailing-text">Hide</p>}
+      {trailingtext && !show_password &&  <p onClick={() =>setShowPassword(true)} className="input-trailing-text">Show</p>}
       
       
       {leadingicon && (
