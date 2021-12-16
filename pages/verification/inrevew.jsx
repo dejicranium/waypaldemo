@@ -9,10 +9,10 @@ const VerificationSuccess = () => {
       </div>
       <div className="title mt-6">
         <h1 className="text-26 font-circular-black md:text-40">
-          Account in revie
+          Account in review
         </h1>
         <p className="pt-6 text-xl text-black-content">
-          Your Waypal identity is in review. We'll get back to your shortly!
+          Your Waypal identity is in review. We will get back to your shortly!
         </p>
       </div>
       <div className="mt-6">

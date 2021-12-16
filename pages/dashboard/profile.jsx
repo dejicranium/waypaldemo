@@ -238,7 +238,7 @@ const Profile = () => {
                     helptextstyle={errors.lastname && "text-red-500"}
                   />
 
-                  <select class="input-element"  name="" id="" placeholder="Select Country">
+                  <select className="input-element"  name="" id="" placeholder="Select Country">
                     <option value="NG">Nigeria</option>
                   </select>
 

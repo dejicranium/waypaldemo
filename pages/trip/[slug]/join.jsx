@@ -6,9 +6,9 @@ import moment from "moment";
 import Datetime from "react-datetime";
 import IntlTelInput from "react-intl-tel-input";
 import useData from "../../../components/hooks/useData";
-import Modal from '../../../components/Modal';
-import Register from '../../../components/Register';
-import Login from '../../../components/Login';
+import Modal from "../../../components/Modal";
+import Register from "../../../components/Register";
+import Login from "../../../components/Login";
 import { formatAmount } from "../../../assets/js/utils";
 import Button from "../../../components/common/Button";
 import Footer from "../../../components/common/Footer";
@@ -56,7 +56,7 @@ const JoinTrip = ({ trip, notFound }) => {
   });
 
 
-  const [authMode, setAuthMode]  = useState('login');
+  const [authMode, setAuthMode]  = useState("login");
   const [showModal, setShowModal]  = useState(false);
   const [userIsVeriifed, setUserIsVerified]  = useState(user?  user.verified: null);
   const [verification_url, setVerificationUrl] = useState(null);
@@ -76,7 +76,7 @@ const JoinTrip = ({ trip, notFound }) => {
   const fullName = `${user.firstname} ${user.lastname}`;
   
   const createVeriffSession = async() => {
-    await postRequest('/veriff/sessions', {})
+    await postRequest("/veriff/sessions", {})
       .then(resp => {
         setVerificationUrl(resp.data.verification.url);
         openVeriffModal(resp.data.verification.url);
@@ -84,7 +84,7 @@ const JoinTrip = ({ trip, notFound }) => {
   }
 
   const setWaypalVerificationStatus = async(status) => {
-    await putRequest('/user/verify', {
+    await putRequest("/user/verify", {
       email: user.email,
       status,
     })
@@ -159,15 +159,13 @@ const JoinTrip = ({ trip, notFound }) => {
       {!notFound && (
         <>
           <Modal  cancellable={false} showModal={showModal} close={() => setShowModal(false)}>
-            {authMode === 'login' && (
-              <Login setActive={authMode === 'login'} close={() => setShowModal(false)} />
+            {authMode === "login" && (
+              <Login setActive={authMode === "login"} close={() => setShowModal(false)} />
             )}
-            {authMode === 'register' && (
-              <Register setActive={authMode === 'register'} close={() => setShowModal(false)} />
+            {authMode === "register" && (
+              <Register setActive={authMode === "register"} close={() => setShowModal(false)} />
             )}
-            {authMode === 'forgot' && (
-              <ForgotPassword setActive={authMode === 'forgot'} close={() => setShowModal(false)} />
-            )}
+           
           </Modal>
           {
             isLoggedIn && user.verified !== "APPROVED" && user.verified !== "ATTEMPTED" && 
@@ -177,7 +175,7 @@ const JoinTrip = ({ trip, notFound }) => {
                   <div className="mt-8">
                     
                     <p className="pt-2 text-black-content md:max-w-2xl">
-                      You can't join a trip until you're verified
+                      You can"t join a trip until you"re verified
                     </p>
                     <div className="mt-16 flex items-center">
                       <Button
@@ -201,7 +199,7 @@ const JoinTrip = ({ trip, notFound }) => {
                   <div className="mt-8">
                     
                     <p className="pt-2 text-black-content md:max-w-2xl">
-                      We've received your verification details and we'll shoot you an email to join this trip when verified.
+                      We"ve received your verification details and we"ll shoot you an email to join this trip when verified.
                     </p>
                   </div>
                 </section>
