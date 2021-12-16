@@ -24,7 +24,6 @@ const errorHandler = (e) => {
     };
   }
   
-
   return {
     data: null,
     status: false,
