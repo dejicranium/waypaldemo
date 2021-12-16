@@ -8,7 +8,7 @@ import IntlTelInput from "react-intl-tel-input";
 import useData from "../../../components/hooks/useData";
 import Modal from "../../../components/Modal";
 import Register from "../../../components/Register";
-import Login from "../../../components/Login";
+import Login from "../../../components/LogIn";
 import { formatAmount } from "../../../assets/js/utils";
 import Button from "../../../components/common/Button";
 import Footer from "../../../components/common/Footer";
