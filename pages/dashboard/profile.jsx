@@ -64,13 +64,16 @@ const Profile = () => {
   const openVeriffModal = async (url) => {
     createVeriffFrame({
         url: url || verification_url,
-        onEvent: (msg) => {
+        onEvent: async ( msg) => {
             switch(msg) {
             case MESSAGES.CANCELED:
-              setWaypalVerificationStatus("ABANDONED")
+              //setWaypalVerificationStatus("ABANDONED")
               break;
             case MESSAGES.FINISHED:
               setWaypalVerificationStatus("ATTEMPTED")
+              await getRequest('/user/info').then(resp=> {
+                dispatch({user: resp.data})
+              })
               break;
               }
           },  
@@ -80,7 +83,9 @@ const Profile = () => {
 
 
   useEffect(() => {
-     createVeriffSession();
+    if (!['APPROVED', 'ATTEMPTED'].includes(user.verified)) {
+      createVeriffSession();
+    }
   }, []);
 
 
@@ -275,7 +280,7 @@ const Profile = () => {
               </div>
 
               {/* Contact info */}
-              { verificationDone === "APPROVED" &&
+              { verificationDone  &&
               <>
                 <div className="contact-info pt-8">
                   <h2 className="font-circular-bold text-gray-light4">

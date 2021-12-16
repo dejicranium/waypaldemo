@@ -69,7 +69,7 @@ export default Trips;
 
 export async function getServerSideProps({ req: { cookies } }) {
   let pastTrips, upcomingTrips = [];
-  const url_base  = process.env.NEXT_PUBLIC_API_LOCATION || "//localhost:8000/api/v1"
+  const url_base  = process.env.NEXT_PUBLIC_API_LOCATION || "//localhost:5000/api/v1"
   const hostedTrips =  await getRequest(`${url_base}/user/trips/`, cookies.token)
     .then(resp => {
       console.log("resp is "  + resp)
