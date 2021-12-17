@@ -126,7 +126,7 @@ const Search = () => {
 
         </section>
         {topSearchResults.length > 0 &&
-          <div className="flex justify-between hidden">
+          <div className="flex justify-between">
             <section className="other-results mt-10 w-full md:w-3/5 lg:w-70per">
               <h2 className="text-gray-light2 text-2xl font-circular-bold">
                 Top results
