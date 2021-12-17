@@ -89,7 +89,7 @@ export async function getServerSideProps(context) {
   const ngrok_base = "http://6c7c-197-210-8-123.ngrok.io/api/v1"
 
   const tripData =  await getRequest(`${process.env.NEXT_PUBLIC_API_LOCATION}/trip/by/slug/${slug}`);
-
+  console.log(tripData)
   if (tripData.status) {
     return {
       props: {

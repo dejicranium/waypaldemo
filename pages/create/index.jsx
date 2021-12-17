@@ -116,7 +116,7 @@ const CreateTrip = () => {
                       value: true,
                       message: "Please enter the number of buddies",
                     },
-                    valueAsNumber: true,
+                    //valueAsNumber: true,
                     min: {
                       value: 1,
                       message: "Buddies cannot be less than one",
