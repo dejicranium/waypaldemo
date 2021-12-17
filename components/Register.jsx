@@ -1,6 +1,7 @@
 import Checkbox from "./Checkbox";
 import Button from "./common/Button";
 import InputField from "./InputField";
+import PasswordInputField from "./PasswordInputField";
 import Toast from "./Toast";
 
 import { useState } from "react";
@@ -104,26 +105,29 @@ const Register = ({ setActive, close }) => {
             helptext={errors.email && errors.email.message}
             helptextstyle={errors.email && "text-red-500"}
           />
-          <InputField
-            id="password"
-            type="password"
-            placeholder="Password*"
-            trailingtext="yes"
-            innerref={register("password", {
-              required: { value: true, message: "Please choose a password" },
-              minLength: {
-                value: 6,
-                message: "Password should be at least 6 characters in length",
-              },
-              pattern: {
-                value: /^(?=.*[A-Za-z])(?=.*[0-9]).*$/,
-                message:
-                  "Password should contain at least 1 lowercase letter, 1 uppercase letter & 1 number",
-              },
-            })}
-            helptext={errors.password && errors.password.message}
-            helptextstyle={errors.password && "text-red-500"}
-          />
+
+          <PasswordInputField
+              id="password"
+              type="password"
+              placeholder="Password"
+              innerref={register("password", {
+                required: { value: true, message: "Please choose a password" },
+                minLength: {
+                  value: 6,
+                  message: "Password should be at least 6 characters in length",
+                },
+                pattern: {
+                  value: /^(?=.*[A-Za-z])(?=.*[0-9]).*$/,
+                  message:
+                    "Password should contain at least 1 lowercase letter, 1 uppercase letter & 1 number",
+                },
+              })}
+              trailingtext="yes"
+              helptext={errors.password && errors.password.message}
+              helptextstyle={errors.password && "text-red-500"}
+            />      
+          
+            
           <div className="flex items-center mt-4">
             <Checkbox
               checked={checkTerms}
@@ -152,7 +156,7 @@ const Register = ({ setActive, close }) => {
             disabled={!checkTerms}
           ></Button>
         </form>
-        <p>
+        <p className="text-black">
           Already have an account?{" "}
           <span
             className="text-orange cursor-pointer"

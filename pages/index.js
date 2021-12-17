@@ -10,9 +10,10 @@ import DestinationCard from "../components/DestinationCard";
 import InputWithLabel from "../components/common/InputWithLabel";
 import DateTimeWithLabel from "../components/common/DateTimeWIthLabel";
 import MoreDestinationCard from "../components/MoreDestinationCard";
+import {getRequest} from "../actions/connection";
 
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // data
 import moment from  "moment"
 let testimonial = require("../assets/data/testimonial.json");
@@ -24,6 +25,7 @@ export default function Home() {
   const [destination, setDestination] = useState("");
   const [travelDate, setTravelDate] = useState("");
   const [buddies, setBuddies] = useState("");
+  const [topDestinations, setTopDestinations] = useState([]);
 
   const {
     dispatch,
@@ -31,7 +33,17 @@ export default function Home() {
       topSearchResults,
     },
   } = useData();
+/*
+  useEffect(async () => {
+    await getRequest('/trip/top-destinations')
+      .then(resp=> {
+        setTopDestinations(resp)
+        alert(JSON.stringify(resp))
+      })
+      .catch(err=> {
 
+      })
+  }, [])*/
   const searchTrips = async() => {
     dispatch({topSearchResults: []})
 
@@ -57,13 +69,13 @@ export default function Home() {
 
 
         <DateTimeWithLabel
-            placeholder="Travel Date"
+            //placeholder="When would you like to go?"
             closeOnSelect
             timeFormat={false}
             dateFormat="YYYY-MM-DD"
             label="When would you like to go?"
             inputProps={{
-              placeholder: "Travel date",
+              placeholder: "Travel Date",
               className: "input-element w-full mb-3 md:mb-0",
             }}
             onChange={(v) => {
@@ -82,35 +94,10 @@ export default function Home() {
         <div className="search">
           <button className="bg-orange w-full rounded text-white text-lg flex items-center justify-center py-4 font-black" onClick={searchTrips}>
             Find travel buddies
-            <Icon icon="search" cname="pl-2" />
           </button>
         </div>
       </section>
 
-      <section className="top-destinations text-center pt-24">
-        <div className="top-destination-header">
-          <h2 className="font-smith text-orange-light md:text-200 text-64 relative z-10">
-            top
-          </h2>
-          <h2 className="text-black-light font-circular-black md:text-80 text-2xl relative md:bottom-12 md:right-3 bottom-10 right-1">
-            destinations
-          </h2>
-        </div>
-        <div className="divider w-5 h-2 md:w-10 md:h-4 mx-auto relative bottom-9"></div>
-        <div className="top-destination-text">
-          <p className="md:max-w-4xxl max-w-xxs mx-auto md:text-26">
-            It’s hard enough deciding to move, you don’t have to worry about
-            where to move to. These are some of the most popular and best
-            locations to move to based on a number of factors.
-          </p>
-        </div>
-        {/* Destination Card */}
-        <div className="destination-card flex justify-start lg:justify-center my-24 max-w-full w-full overflow-x-scroll">
-          {destinations.slice(0, 4).map((e, i) => (
-            <DestinationCard {...e} key={i} />
-          ))}
-        </div>
-      </section>
 
       {/* Travel Buddies */}
       <section className="travel-buddies max-w-6xl lg:max-w-6xl md:max-w-2xl mx-auto book-trip mt-14 md:mt-52">
@@ -185,7 +172,7 @@ export default function Home() {
       <section className="more-destinations text-center mt-16">
         <div className="more-destination-header">
           <h2 className="font-smith text-orange-light md:text-200 text-64 relative">
-            more
+            Top
           </h2>
           <h2 className="text-black-light font-circular-black md:text-80 text-2xl relative bottom-9">
             destinations
@@ -200,6 +187,7 @@ export default function Home() {
           </p>
         </div>
         {/* More destination Card */}
+        
         <div className="more-destination-card hidden lg:block my-24 max-w-7xl mx-auto">
           <MoreDestinationCard props={destinations} />
         </div>
@@ -207,7 +195,7 @@ export default function Home() {
           {destinations.slice(0, 4).map((e, i) => (
             <DestinationCard {...e} key={i} />
           ))}
-        </div>
+          </div> 
       </section>
 
 

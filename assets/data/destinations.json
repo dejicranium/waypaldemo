@@ -1,34 +1,51 @@
 [
     {
-        "destinationName": "Paratay",
-        "location": "RIO DE JANERO"
+      "name": "London",
+      "image": "https://cdn.pixabay.com/photo/2014/09/11/18/23/tower-bridge-441853_1280.jpg",
+      "location": "UK"
+
     },
     {
-        "destinationName": "Morretes",
-        "location": "Paraná"
+      "name": "New York",
+      "image": "https://cdn.pixabay.com/photo/2017/08/31/05/36/buildings-2699520_1280.jpg",
+      "location": "USA"
+
     },
     {
-        "destinationName": "Olinda",
-        "location": "Pernambuco"
+      "name": "Maldives",
+      "image": "https://cdn.pixabay.com/photo/2015/11/06/13/51/sea-1027983__340.jpg",
+      "location": "Maldives"
     },
     {
-        "destinationName": "Gramado",
-        "location": "Rio Grande do Sul"
+      "name": "Paris",
+      "location": "France",
+      "image": "https://cdn.pixabay.com/photo/2013/04/11/19/46/building-102840_1280.jpg"
     },
     {
-        "destinationName": "Estaing",
-        "location": "FRANCE"
+      "name": "San Fransisco",
+      "image": "https://cdn.pixabay.com/photo/2019/03/01/16/44/san-fransisco-4028175_1280.jpg",
+      "location": "USA"
     },
     {
-        "destinationName": "Vík í Mýrda",
-        "location": "ICELAND"
+      "name": "Barbados",
+      "image": "https://cdn.pixabay.com/photo/2013/02/21/19/07/barbados-84562_1280.jpg",
+      "location": "Barbados"
     },
     {
-        "destinationName": "Montego Bay",
-        "location": "JAMAICA"
+      "name": "Maui",
+      "image": "https://cdn.pixabay.com/photo/2017/09/08/20/03/maui-2729958_1280.jpg",
+      "location": "Hawaii, USA"
+    },
+    
+    {
+      "name": "Istanbul",
+      "image": "https://cdn.pixabay.com/photo/2020/01/22/18/23/istanbul-4785964_1280.jpg",
+      "location": "Turkey"
     },
     {
-        "destinationName": "Hamnoy Village",
-        "location": "Norway"
+      "name": "Machu Picchu",
+      "image": "https://cdn.pixabay.com/photo/2012/04/26/22/48/machu-picchu-43387_1280.jpg",
+      "location": "Peru"
     }
-]
+    
+  ]

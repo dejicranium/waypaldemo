@@ -51,7 +51,7 @@ const Hero = () => {
 
 
               <DateTimeWithLabel
-                  placeholder="Travel Date"
+                  placeholder="When would you like to go?"
                   closeOnSelect
                   timeFormat={false}
                   dateFormat="YYYY-MM-DD"
@@ -75,7 +75,6 @@ const Hero = () => {
               <div className="search">
                 <button className="bg-orange w-full rounded text-white text-lg flex items-center justify-center py-4 font-black" onClick={searchTrips}>
                   Find travel buddies
-                  <Icon icon="search" cname="pl-2"  />
                 </button>
               </div>
             </div>

@@ -1,9 +1,46 @@
 import Icon from "./Icon";
 import Link from "next/link";
 import Button from "./Button";
+import useData from '../../components/hooks/useData';
+import { useRouter } from "next/router";
+import Login from '../../components/LogIn'
+import Register from '../../components/Register';
+import Modal from '../../components/Modal';
+import ForgotPassword from '../../components/ForgotPassword';
+import {useState} from 'react';
 
 export default function ShowLuggage() {
-  return (
+  const { push } = useRouter();
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [active, setActive] = useState("login");
+
+
+  const {
+    dispatch,
+    data: {
+      user,
+      isLoggedIn,
+    },
+  } = useData();
+
+  return (<>
+  <Modal showModal={showAuthModal} close={setShowAuthModal}>
+      {active === "login" && (
+        <Login setActive={setActive} close={() => setShowAuthModal(false)} />
+      )}
+      {active === "register" && (
+        <Register
+          setActive={setActive}
+          close={() => setShowAuthModal(false)}
+        />
+      )}
+      {active === "forgot" && (
+        <ForgotPassword
+          setActive={setActive}
+          close={() => setShowAuthModal(false)}
+        />
+      )}
+    </Modal>
     <div className="plan-trip-upsell h-32 mx-10 px-4 rounded-10 bg-orange mb-12 hidden md:flex">
       <div className="luggage">
         <Icon
@@ -22,18 +59,24 @@ export default function ShowLuggage() {
 
         <div className="plan-trip-button flex items-center">
           <div className="plan-trip">
-            <Link href="/create">
               <a>
                 <Button
+                  onClick={() => {
+                    if (isLoggedIn) {
+                      push('/create')
+                      return 
+                    }
+                    setShowAuthModal(true)
+                  }}
                   btnText="Plan your trip"
                   btnStyle="bg-white text-orange px-6 py-2.5 rounded mr-4"
                 />
               </a>
-            </Link>
           </div>
           <p className="text-sm">Learn More</p>
         </div>
       </div>
     </div>
+    </>
   );
 }

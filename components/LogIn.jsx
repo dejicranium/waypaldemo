@@ -98,7 +98,7 @@ const Login = ({ setActive, close }) => {
           >
             Forgot Password?
           </span>
-          <p>
+          <p className="text-black">
             Don&apos;t have an account?{" "}
             <span
               className="text-orange cursor-pointer"
