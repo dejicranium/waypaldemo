@@ -17,15 +17,13 @@ import {init} from "../../store"
 
 
 const Search = () => {
-  const buddies = [
-    "Doesn't smoke",
-    "Likes to party",
-    "Afrosentric",
-    "Likes Nigerian music",
-  ];
-  
+ 
+ 
 
   const [loadingResults, setLoadingResults] = useState(false);
+  const [destination, setDestination] = useState("");
+  const [travelDate, setTravelDate] = useState("");
+  const [buddies, setBuddies] = useState("");
 
   const  {
     control,
@@ -50,11 +48,14 @@ const Search = () => {
     // get query string
     dispatch({topSearchResults: []})
 
-    const querystring = window.location.href.split('?')[1];
+    const querystring = new URLSearchParams(window.location.search);
     if (querystring) {
       setLoadingResults(true);
+      setDestination(querystring.get('destination'))
+      setTravelDate(querystring.get('travel_date'))
+      setBuddies(querystring.get('no_of_travel_buddies'))
+      
       await getRequest('/search?' + querystring).then(async response => {
-        alert(JSON.stringify(response.data.items))
         await dispatch({topSearchResults: response.data.items})
         setLoadingResults(false)
       }).catch(e=> {
@@ -76,7 +77,7 @@ const Search = () => {
       </div>
       <div className="container mt-7 md:mt-14">
         <section className="search-bar hidden md:block">
-          <SearchBar />
+          <SearchBar p_destination={destination} p_travel_date={travelDate} p_buddies={buddies} />
         </section>
 
       
@@ -95,7 +96,7 @@ const Search = () => {
         
         <section className="top-results mt-0 md:mt-14 flex items-center justify-between">
           {topSearchResults.length > 0 && 
-            <h2 className="text-gray-light2 text-2xl font-circular-bold">
+            <h2 className="hidden text-gray-light2 text-2xl font-circular-bold">
               Top <span className="text-orange">results</span>
             </h2>
           }
@@ -114,8 +115,9 @@ const Search = () => {
             <span className="text-gray-light2 pl-3">Filter</span>
           </div>
         </section>
+          
         
-        <section className="search-results flex space-x-8 overflow-x-scroll xl:overflow-x-visible mt-7">
+        <section className="hidden search-results flex space-x-8 overflow-x-scroll xl:overflow-x-visible mt-7">
           { topSearchResults.length > 0 &&
             topSearchResults.map((trip) => {
               return <SimpleTripCard key={trip.id} trip={trip} />
@@ -127,7 +129,7 @@ const Search = () => {
           <div className="flex justify-between hidden">
             <section className="other-results mt-10 w-full md:w-3/5 lg:w-70per">
               <h2 className="text-gray-light2 text-2xl font-circular-bold">
-                Other results
+                Top results
               </h2>
               {topSearchResults.length > 0 ? topSearchResults.map((trip) => {
 

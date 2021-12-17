@@ -8,10 +8,10 @@ import moment from "moment";
 import useData from "../components/hooks/useData";
 import { useForm, Controller } from "react-hook-form";
 
-const SearchBar = () => {
-  const [destination, setDestination] = useState("");
-  const [travelDate, setTravelDate] = useState("");
-  const [buddies, setBuddies] = useState("");
+const SearchBar = (props) => {
+  const [destination, setDestination] = useState(props.p_destination || "");
+  const [travelDate, setTravelDate] = useState(props.p_travel_date || "")
+  const [buddies, setBuddies] = useState(props.p_buddies|| "");
   const {
     dispatch,
   } = useData();

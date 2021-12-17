@@ -130,7 +130,7 @@ const Header = ({ open, setOpen }) => {
               <div className="flex items-center primary-nav text-black">
                 {/* Top Destinations */}
                 <div className="mr-6 text-base">
-                  <Link href="#top-destinations">Top destinations</Link>
+                  <Link href="/#top-destinations">Top destinations</Link>
                 </div>
                 {/* Explore */}
                 <div className="mr-6 text-base">
