@@ -74,8 +74,8 @@ export default function useData() {
       if (payload === 'clear') {
         clear();
         destroyCookie(null, 'token');
-
         persist(init);
+        
         dispatch(init);
         logout && push('/login');
       } else {

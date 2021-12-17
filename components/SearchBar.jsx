@@ -61,7 +61,7 @@ const SearchBar = () => {
       </div>
       <div className="search-button">
         <Button btnText="Search" onClick={async() => {
-          dispatch({topSearchResults: []})
+         // dispatch({topSearchResults: []})
           let query = ''; 
           if (destination) query +=  `?destination=${destination}&`
           if (travelDate) query +=  `?travel_date=${travelDate}&`

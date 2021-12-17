@@ -48,11 +48,14 @@ const Search = () => {
 
   useEffect(async() => {
     // get query string
+    dispatch({topSearchResults: []})
+
     const querystring = window.location.href.split('?')[1];
     if (querystring) {
-      setLoadingResults(true)
-      await getRequest('/search?' + querystring).then(response => {
-        dispatch({topSearchResults: response.data.items})
+      setLoadingResults(true);
+      await getRequest('/search?' + querystring).then(async response => {
+        alert(JSON.stringify(response.data.items))
+        await dispatch({topSearchResults: response.data.items})
         setLoadingResults(false)
       }).catch(e=> {
         console.log(e.message)
@@ -80,7 +83,7 @@ const Search = () => {
         <section className={loadingResults ? "mt-20 mb-14 max-w-3xl": "hidden"}>
           <Spinner size={1.7} color={"#EA4524"} />
         </section>
-        <section className={topSearchResults.length < 1 ? "no-results mt-20 mb-14 max-w-3xl" : "hidden"}>
+        <section className={!loadingResults && topSearchResults.length < 1 ? "no-results mt-20 mb-14 max-w-3xl" : "hidden"}>
           <h2 className="text-4xl">
             We couldn’t find a trip that fits your search criteria.
           </h2>
