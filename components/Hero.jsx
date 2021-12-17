@@ -55,9 +55,9 @@ const Hero = () => {
                   closeOnSelect
                   timeFormat={false}
                   dateFormat="YYYY-MM-DD"
-                  label="When would you like to go?"
+                  label="Travel?"
                   inputProps={{
-                    placeholder: "Travel date",
+                    placeholder: "When would you like to go?",
                     className: "input-element w-full mb-3 md:mb-0",
                   }}
                   onChange={(v) => {
