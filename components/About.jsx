@@ -16,10 +16,10 @@ import ForgotPassword from '../components/ForgotPassword';
 import { format } from "date-fns";
 
 const About = ({ trip, user_is_owner=false }) => {
-  // const {
-  //   dispatch,
-  //   data: { currentTrip },
-  // } = useData();
+   const {
+    dispatch,
+     data: { currentTrip, user },
+   } = useData();
 
   const [authMode, setAutMode]  = useState('login');
   const [showModal, setShowModal]  = useState(false);
@@ -68,13 +68,15 @@ const About = ({ trip, user_is_owner=false }) => {
           <div className="">
             <Link href={`${slug}/join`}>
               <a>
-                <Button
-                  onClick={() => {
-                    //setAutMode("register")
-                  }}
-                  btnStyle="bg-orange font-circular-bold text-white px-4 py-2 mt-3 md:mt-0 rounded"
-                  btnText="Join this trip"
-                />
+                {user.id !== trip.user_id && 
+                  <Button
+                    onClick={() => {
+                      //setAutMode("register")
+                    }}
+                    btnStyle="bg-orange font-circular-bold text-white px-4 py-2 mt-3 md:mt-0 rounded"
+                    btnText="Join this trip"
+                  />
+                }
               </a>
             </Link>
           </div>
@@ -134,7 +136,7 @@ const About = ({ trip, user_is_owner=false }) => {
             total={total}
           />
         </div>
-        {user_is_owner && user_is_owner === true &&
+        {user.id === trip.user_id &&
         <div className="mt-10">
             <Link href={`${slug}/join`}>
               <a>

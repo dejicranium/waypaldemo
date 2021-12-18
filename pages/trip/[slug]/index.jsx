@@ -25,9 +25,9 @@ const TripPage = ({ trip, notFound }) => {
   
   
   useEffect(() => {
-    if (user.id === trip.user_id) {
-      user_is_owner = true;
-    }
+    //if (user.id === trip.user_id) {
+      //user_is_owner = true;
+  
   }, []);
 
   const tabs = [
