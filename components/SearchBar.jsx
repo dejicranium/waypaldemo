@@ -1,6 +1,6 @@
 import Icon from "./common/Icon";
 import Button from "./common/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getRequest } from "../actions/connection";
 import Datetime from "react-datetime";
 import moment from "moment";
@@ -9,13 +9,16 @@ import useData from "../components/hooks/useData";
 import { useForm, Controller } from "react-hook-form";
 
 const SearchBar = (props) => {
-  const [destination, setDestination] = useState(props.p_destination || "");
-  const [travelDate, setTravelDate] = useState(props.p_travel_date || "")
-  const [buddies, setBuddies] = useState(props.p_buddies|| "");
+  const [destination, setDestination] = useState(new URLSearchParams(window.location.search) ? new URLSearchParams(window.location.search).get('destination') : "");
+  const [travelDate, setTravelDate] = useState(new URLSearchParams(window.location.search) ? new URLSearchParams(window.location.search).get('travel_date') : "")
+  const [buddies, setBuddies] = useState(new URLSearchParams(window.location.search) ? new URLSearchParams(window.location.search).get('buddies') : "");
   const {
     dispatch,
   } = useData();
  
+  useEffect(() => {
+    //alert(new URLSearchParams(window.location.search))
+  }, [])
   return (
     <div className="flex">
       <div className="flex flight-search bg-white rounded max-w-3xl border border-gray-light6 divide-x">
@@ -38,12 +41,12 @@ const SearchBar = (props) => {
               dateFormat="YYYY-MM-DD"
               inputProps={{
                 placeholder: "Travel date",
-                className: "input-element w-full mb-3 md:mb-0",
+                className: "outline-none box-border text-black-content w-full pl-3",
               }}
               onChange={(v) => {
                 setTravelDate(v.format("YYYY-MM-DD"));
               }}
-              initialValue={moment().format("YYYY-MM-DD")}
+              initialValue={travelDate ? moment(travelDate).format('YYYY-MM-DD'): ""}
               isValidDate={(current) => current.isAfter(moment())}
             />
         </div>
@@ -65,7 +68,7 @@ const SearchBar = (props) => {
           let query = ''; 
           if (destination) query +=  `?destination=${destination}&`
           if (travelDate) query +=  `?travel_date=${travelDate}&`
-          if (buddies) query +=  `?no_of_travel_buddies=${buddies}&`
+          if (buddies) query +=  `?buddies=${buddies}&`
           await getRequest('/search' + query).then(response => {
             dispatch({topSearchResults: response.data.items})
           }).catch(e=> {

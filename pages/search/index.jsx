@@ -50,11 +50,7 @@ const Search = () => {
 
     const querystring = new URLSearchParams(window.location.search);
     if (querystring) {
-      setLoadingResults(true);
-      setDestination(querystring.get('destination'))
-      setTravelDate(querystring.get('travel_date'))
-      setBuddies(querystring.get('no_of_travel_buddies'))
-      
+      setLoadingResults(true);  
       await getRequest('/search?' + querystring).then(async response => {
         await dispatch({topSearchResults: response.data.items})
         setLoadingResults(false)
@@ -127,17 +123,20 @@ const Search = () => {
         </section>
         {topSearchResults.length > 0 &&
           <div className="flex justify-between">
-            <section className="other-results mt-10 w-full md:w-3/5 lg:w-70per">
-              <h2 className="text-gray-light2 text-2xl font-circular-bold">
-                Top results
-              </h2>
-              {topSearchResults.length > 0 ? topSearchResults.map((trip) => {
-
-            
-                 <MoreResults
-                 trip={trip}
-                />
-              }) : <p>Nothin</p>}
+            <section className="other-results mt-10 w-full md:w-3/5 lg:w-70per flex flex-wrap">
+              <div className="flex flex-col w-full">
+                <h2 className="text-gray-light2 text-2xl font-circular-bold mb-10">
+                  Top results
+                  
+                </h2>
+                <div className="md:grid-cols-1 lg:grid-cols-2 gap-4 w-full grid">  
+                {topSearchResults.length > 0 ? topSearchResults.map((trip) => {
+                  
+                  return <SimpleTripCard key={trip.id} trip={trip} />
+                  
+                }) : <p>Nothin</p>}
+              </div>
+              </div>
             </section>
 
             <section className="filter mt-14 hidden md:block w-3/12 md:w-30per lg:w-3/12">

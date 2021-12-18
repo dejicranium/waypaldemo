@@ -49,8 +49,8 @@ export default function Home() {
 
     let query = ''; 
     if (destination) query +=  `?destination=${destination}&`;
-    if (travelDate) query +=  `?travel_date=${travelDate}&`;
-    if (buddies) query +=  `?no_of_travel_buddies=${buddies}&`;
+    if (travelDate) query +=  `travel_date=${travelDate}&`;
+    if (buddies) query +=  `buddies=${buddies}&`;
     push("/search" + query)
     
   }

@@ -5,11 +5,17 @@ import { postRequest,getRequest } from "../actions/connection";
 import qs from "qs";
 import { useState, useEffect } from "react";
 import { useSearchParams } from 'react-router-dom';
+import useData from "../components/hooks/useData";
 
 const SearchFilter = (props) => {
   const [checked, setChecked] = useState(false);
   const [loadingResults, setLoadingResults] = useState(false);
-
+  const {
+    dispatch,
+    data: {
+      topSearchResults,
+    },
+  } = useData();
   useEffect(() => {
     // get query string
 
@@ -53,6 +59,41 @@ const SearchFilter = (props) => {
   const toggleBuddiesFilter = () => {
     return setShowBuddiesFilter((prev) => !prev);
   };
+
+  const filter = () => {
+    let query = new URLSearchParams(window.location.search) || '';
+    if (query) {
+      if(min_price_filter) {
+        query += `&min_price=${min_price_filter}&`
+      }
+      if (max_price_filter && !min_price_filter) {
+        query += `&max_price=${max_price_filter}&`
+      }
+      else {
+        query += `max_price=${max_price_filter}&`
+
+      }
+    }
+    else {
+      if(min_price_filter) {
+        query += `min_price=${min_price_filter}&`
+      }
+      if (max_price_filter && !min_price_filter) {
+        query += `max_price=${max_price_filter}&`
+      }
+      else {
+        query += `max_price=${max_price_filter}&`
+      }
+    }
+
+    getRequest('/search?' + query )
+      .then(resp => {
+        dispatch({topSearchResults: resp.data.items})
+      })
+      .catch(err=> {
+
+      })
+  }
 
   return (
     <div className="mb-10">
@@ -98,7 +139,7 @@ const SearchFilter = (props) => {
               btnStyle="text-orange font-bold"
             />
             <Button btnType="fill" onClick={() => {
-              getRequest("/search?")
+              filter()
             }} btnText="Apply filter" />
           </div>
         </div>

@@ -13,7 +13,7 @@ const DateTimeWithLabel = ({ label, type, placeholder, onChange }) => {
             className="outline-none box-border text-black-content w-full"
             inputProps={{
               placeholder: placeholder,
-              className: "w-full md:mb-0",
+              className: "outline-none box-border text-black-content w-full",
             }}
             onChange={(v) => {
               onChange(v);

@@ -20,7 +20,7 @@ const Hero = () => {
       let query = ''; 
       if (destination) query +=  `?destination=${destination}&`;
       if (travelDate) query +=  `?travel_date=${travelDate}&`;
-      if (buddies) query +=  `?no_of_travel_buddies=${buddies}&`;
+      if (buddies) query +=  `?buddies=${buddies}&`;
 
       push("/search" + query)
       

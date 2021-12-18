@@ -45,8 +45,23 @@ const Payments = ({ payments }) => {
               </div>
             </div>
           ) : (
-            <h1>No transactions available</h1>
-          )}
+            <div className="pt-24 md:flex justify-between max-w-3xl">
+            <div>
+              <h1 className="text-2xl md:text-5xl font-circular-bold text-black-light">
+                No transactions...yet 
+              </h1>
+              <p className="md:text-2xl max-w-sm pt-4">
+                Waypal helps you find the best trips with the best buddies!
+              </p>
+              <div className="pt-7">
+               
+              </div>
+            </div>
+            <div className="hidden md:block">
+              <Icon icon="luggage-large" />
+            </div>
+          </div>       
+              )}
         </section>
       </div>
       <WaypalFooter />
