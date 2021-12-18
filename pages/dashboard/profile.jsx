@@ -92,6 +92,9 @@ const Profile = () => {
 
   let profile_image = user.profile_image_url;
 
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newPasswordConfirmation, setNewPasswordConfirmation] = useState("");
   const [profileImage, setProfileImage] = useState(profile_image);
   const [error, setError] = useState(null);
   const [verificationDone, setVerificationStatus] = useState(user.verified === "APPROVED") ;
@@ -104,14 +107,39 @@ const Profile = () => {
     }
   };
 
+  const changePassword = async () => {
+    const data = {
+      old_password: oldPassword,
+      new_password: newPassword
+    }
+
+    if (newPassword !== newPasswordConfirmation) {
+      setError("Passwords don't match")
+    }
+    const result = await postRequest('/user/password/change', data)
+    if (result.status) {
+      setSuccess(result.message);
+      
+    }
+    else {
+      setError(result.message)
+    }
+  }
+
   const submit = async (values) => {
-    let { bio, website, twitter, facebook, instagram } = values;
+    let { phone_number, bio, website, twitter, facebook, instagram, emergency_email, emergency_first_name, emergency_last_name, emergency_phone_number } = values;
     const updateProfile = await putRequest("/user/saveProfileInfo", {
       bio,
       website,
       twitter,
       facebook,
+      emergency_email,
+      emergency_first_name,
+      emergency_last_name,
+      emergency_phone_number,
       instagram,
+      phone_number,
+      profile_image_url: profileImage
     });
     if (updateProfile.data) {
       // was successful
@@ -316,10 +344,9 @@ const Profile = () => {
                             format
                             defaultCountry="ng"
                             placeholder="Phone number*"
-                            disabled
                             preferredCountries={["ng"]}
                             inputClassName="input-element w-full"
-                            // defaultValue={user.phone_number}
+                            defaultValue={user?.phone_number || ''}
                             containerClassName="intl-tel-input w-full"
                             onPhoneNumberChange={(_e, v, c) => onChange(v)}
                           />
@@ -444,7 +471,7 @@ const Profile = () => {
                             placeholder="Phone number*"
                             preferredCountries={["ng"]}
                             inputClassName="input-element w-full"
-                            // defaultValue={user?.emergency_phone_number || null}
+                            defaultValue={user?.emergency_phone_number || ""}
                             containerClassName="intl-tel-input w-full"
                             onPhoneNumberChange={(_e, v, c) => onChange(v)}
                           />
@@ -461,36 +488,58 @@ const Profile = () => {
                 </>
               }
             </form>
-
-            <div className="mt-16 flex items-center">
+            {user.verified !== 'APPROVED' &&
+              <div className="mt-16 flex items-center">
+                <Button
+                  btnText="Verify Me!"
+                  btnType="fill"
+                  onClick={() => {
+                    createVeriffSession()
+                  }}
+                />
+              </div>
+            }
+            {user.verified == 'APPROVED' &&
+              <div className="mt-16 flex items-center">
               <Button
-                btnText="Verify Me!"
+                btnText="Save"
                 btnType="fill"
-                onClick={() => {
-                  createVeriffSession()
-                }}
+                type="submit"
+                onClick={handleSubmit(submit)}
               />
-            </div>
-
+              </div>
+            }
             <div className="update-password mt-12">
               <h2 className="font-circular-bold text-gray-light4">
                 Update password
               </h2>
               <div className="pt-2 max-w-sm">
                 <InputField
-                  type="text"
+                  type="password"
                   placeholder="Old Password*"
                   className="mb-3"
+                  value={oldPassword}
+                  onChange={(e) => setOldPassword(e.target.value)}
                 />
                 <InputField
-                  type="text"
+                  value={newPassword}
+                  type="password"
                   placeholder="New Password*"
                   className="mb-3"
+                  onChange={(e) => setNewPassword(e.target.value)}
+                />
+                <InputField
+                  value={newPasswordConfirmation}
+                  type="password"
+                  placeholder="Confirm New Password*"
+                  className="mb-3"
+                  onChange={(e) => setNewPasswordConfirmation(e.target.value)}
                 />
               </div>
               <Button
                 btnText="Change password"
                 btnType="fill"
+                onClick={() => changePassword()}
                 btnStyle="font-circular-bold mt-3"
               />
             </div>
