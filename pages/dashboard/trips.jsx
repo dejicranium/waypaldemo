@@ -14,6 +14,7 @@ const Trips = () => {
   const [hostedTrips, setHostedTrips] = useState([])
   const [pastTrips, setPastTrips] = useState([])
   const [upcomingTrips, setUpcomingTrps] = useState([])
+  const [loading, setLoading] = useState(true)
   const [error, setErrir] = useState("")
 
   useEffect(async() => {
@@ -32,21 +33,22 @@ const Trips = () => {
     setHostedTrips(hosted);
     setPastTrips(past)
     setUpcomingTrps(upcoming)
+    setLoading(false)
 
 
   }, []);
   const tabs = [
   {
       name: "UPCOMING TRIPS",
-      render: <UpcomingTrips trips={upcomingTrips} error={error} />,
+      render: <UpcomingTrips loading={loading} trips={upcomingTrips} error={error} />,
     },
     {
       name: "PAST TRIPS",
-      render: <PastTrips trips={pastTrips} error={error} />,
+      render: <PastTrips trips={pastTrips} loading={loading} error={error} />,
     },
     {
       name: "HOSTED TRIPS",
-      render: <HostedTrips trips={hostedTrips} error={error} />,
+      render: <HostedTrips trips={hostedTrips} loading={loading} error={error} />,
     },
   ];
   return (
@@ -82,11 +84,10 @@ export async function getServerSideProps({ req: { cookies } }) {
     cookies.token
   );
   
-  console.log(hostedTrips)
 
   if (followedTrips && followedTrips.data) {
     pastTrips = followedTrips?.data?.items.filter((trip) => {
-      return isBefore(new Date(), new Date(trip.Trip.start_date));
+      return isBefore(new Date(trip.Trip.start_date), new Date());
     })|| []
   }
 

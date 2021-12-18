@@ -39,6 +39,7 @@ const DetailTripCard = ({
               className="pt-2/3 bg-no-repeat bg-cover rounded"
               style={{
                 backgroundImage: `url(${image || "/landscape.jpg"})`,
+                height: '100%'
               }}
             ></div>
           </div>
