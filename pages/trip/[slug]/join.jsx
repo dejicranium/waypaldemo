@@ -67,7 +67,7 @@ const JoinTrip = ({ trip, notFound }) => {
       setShowModal(true)
     } 
     else {
-      if (user.verified !== "APPROVED" && !notFound) {
+      if (user.verified !== "APPROVED" && isLoggedIn && !notFound) {
         await createVeriffSession();
       }
     }
@@ -102,7 +102,7 @@ const JoinTrip = ({ trip, notFound }) => {
         onEvent: (msg) => {
             switch(msg) {
             case MESSAGES.CANCELED:
-              setWaypalVerificationStatus("ABANDONED")
+              //setWaypalVerificationStatus("ABANDONED")
               break;
             case MESSAGES.FINISHED:
               setWaypalVerificationStatus("ATTEMPTED")
