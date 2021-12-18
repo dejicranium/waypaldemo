@@ -60,39 +60,23 @@ const SearchFilter = (props) => {
     return setShowBuddiesFilter((prev) => !prev);
   };
 
-  const filter = () => {
-    let query = new URLSearchParams(window.location.search) || '';
-    if (query) {
-      if(min_price_filter) {
-        query += `&min_price=${min_price_filter}&`
-      }
-      if (max_price_filter && !min_price_filter) {
-        query += `&max_price=${max_price_filter}&`
-      }
-      else {
-        query += `max_price=${max_price_filter}&`
+  const filter = async () => {
+    let params = new URLSearchParams(window.location.search) || '';
+    let query = {destination: params.get('destination'), travel_date: params.get('travel_date'), buddies: params.get('buddies'), max_price: max_price_filter, min_price: min_price_filter}; 
+    let query_string = "";
 
-      }
-    }
-    else {
-      if(min_price_filter) {
-        query += `min_price=${min_price_filter}&`
-      }
-      if (max_price_filter && !min_price_filter) {
-        query += `max_price=${max_price_filter}&`
-      }
-      else {
-        query += `max_price=${max_price_filter}&`
-      }
-    }
 
-    getRequest('/search?' + query )
-      .then(resp => {
-        dispatch({topSearchResults: resp.data.items})
-      })
-      .catch(err=> {
-
-      })
+    Object.keys(query).forEach((key, i)=> {
+      if (query[key]){
+        if (!query_string) query_string += `?${key}=${query[key]}&`
+        else query_string += `${key}=${query[key]}`
+      }
+    })
+    
+    await getRequest('/search' + query_string).then(response => {
+      dispatch({topSearchResults: response.data.items})
+    }).catch(e=> {
+    })
   }
 
   return (

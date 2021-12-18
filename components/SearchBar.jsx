@@ -65,11 +65,18 @@ const SearchBar = (props) => {
       <div className="search-button">
         <Button btnText="Search" onClick={async() => {
          // dispatch({topSearchResults: []})
-          let query = ''; 
-          if (destination) query +=  `?destination=${destination}&`
-          if (travelDate) query +=  `?travel_date=${travelDate}&`
-          if (buddies) query +=  `?buddies=${buddies}&`
-          await getRequest('/search' + query).then(response => {
+          let query = {destination, travel_date: travelDate, buddies}; 
+          let query_string = ""
+          
+
+          Object.keys(query).forEach((key, i)=> {
+            if (query[key]){
+              if (!query_string) query_string += `?${key}=${query[key]}&`
+              else query_string += `${key}=${query[key]}`
+            }
+          })
+          
+          await getRequest('/search' + query_string).then(response => {
             dispatch({topSearchResults: response.data.items})
           }).catch(e=> {
           })
