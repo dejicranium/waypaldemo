@@ -124,6 +124,9 @@ const SearchFilter = (props) => {
             />
             <Button btnType="fill" onClick={() => {
               filter()
+              if (props.mobile) {
+                document.getElementById('mobile-filter')[0].display = 'none';
+              }
             }} btnText="Apply filter" />
           </div>
         </div>

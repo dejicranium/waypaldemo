@@ -58,11 +58,11 @@ const About = ({ trip, user_is_owner=false }) => {
         )}
       </Modal>
       <div className="about-trip lg:flex justify-between lg:space-x-8">
-      <section className="trip-details mt-8 w-6/12 ">
+      <section className="trip-details mt-8 lg:w-6/12 sm:w-full ">
         <div className="about-trip-header md:flex md:items-center">
           <h1 className="font-circular-black text-black text-2xl md:pr-14">
             {trip.title}
-            <span className="">-</span> {formatCurrency(trip.currency)}
+            <span className=""> -</span> {formatCurrency(trip.currency)}
             {formatAmount(total)}
           </h1>
           <div className="">
@@ -95,7 +95,7 @@ const About = ({ trip, user_is_owner=false }) => {
               {`(${trip.joined_buddies} paid)`}
             </p>
           </div>
-          <div className="date flex items-center">
+          <div className="date sm:ml-0   lg:ml-10  flex items-center">
             <Icon icon="calendar" cname="pr-3 flex-none" />
             <p className="xl:whitespace-nowrap">
               {format(new Date(trip.start_date), "MMMM do, y")}
@@ -106,7 +106,7 @@ const About = ({ trip, user_is_owner=false }) => {
 
         <div className="trip-description mt-8">
         <h2 className="font-circular-bold">Description</h2>
-          <p className="max-w-full text-gray md:max-w-4xl">{trip.description}</p>
+          <p className="max-w-full md:max-w-4xl">{trip.description}</p>
         </div>
         
         {/*
@@ -124,7 +124,7 @@ const About = ({ trip, user_is_owner=false }) => {
 
         <div className="meeting-point mt-10">
           <h2 className="font-circular-bold">Meeting point</h2>
-          <p className="text-gray">{trip.meeting_point}</p>
+          <p className="">{trip.meeting_point}</p>
         </div>
 
         <div className="travel-cost-breakdown mt-10">

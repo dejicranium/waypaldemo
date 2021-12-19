@@ -12,7 +12,7 @@ const TripCard = (props) => {
       <div className={""}>
         <div
           className={"pt-5/8 bg-cover"}
-          style={{  backgroundImage: `url(${props.trip && props.trip.images && prop.trip.images[0] ||'/landscape.jpg' })` }}
+          style={{  backgroundImage: `url(${props.trip && props.trip.images && props.trip.images[0] ||'/landscape.jpg' })` }}
         ></div>
         <div className="trip-card-content p-4 flex justify-between items-start">
           <div className="location text-gray-light4">

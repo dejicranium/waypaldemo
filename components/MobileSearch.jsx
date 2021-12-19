@@ -47,7 +47,7 @@ const MobileSearch = ({ show, close }) => {
           </div>
 
           <div className="filter-application mt-8">
-            <SearchFilter />
+            <SearchFilter  mobile={true}/>
           </div>
         </div>
       ) : null}

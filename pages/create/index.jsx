@@ -14,11 +14,13 @@ import TravelCost from "../../components/TravelCost";
 import InputField from "../../components/InputField";
 import useData from "../../components/hooks/useData";
 import TextAreaField from "../../components/TextAreaField";
+import { postRequest } from "../../actions/connection";
+import Toast from '../../components/Toast';
 
 const CreateTrip = () => {
   const {
     dispatch,
-    data: { createTrip, user },
+    data: { createTrip, user, isLoggedIn },
   } = useData();
   const { push } = useRouter();
   const {
@@ -40,12 +42,19 @@ const CreateTrip = () => {
 
   const getUserVerificationStatus = () => {
     if (user.verified !== 'APPROVED') {
-      push("/dashboard/profile")
+      if (isLoggedIn) {
+
+        push("/dashboard/profile")
+      }
+
+      push('/')
     }
   }
   const sD = watch("start_date");
 
   const [tags, setTags] = useState(createTrip?.checklists || []);
+  const [title, setTitle] = useState("");
+  const [error, setError] = useState("");
 
   const addBuddyTag = (event) => {
     if (event.key === "Enter" && event.target.value !== "") {
@@ -71,13 +80,31 @@ const CreateTrip = () => {
     push("/");
   };
 
-  const submit = (data) => {
-    dispatch({ createTrip: { ...createTrip, ...data, checklists: tags } });
-    push("/create/itinerary");
+  const submit = async  (data) => {
+    await postRequest('/trip/verify-name', {
+      title: title
+    }).then(resp =>{
+      if (resp.status) {
+
+        dispatch({ createTrip: { ...createTrip, ...data, checklists: tags } });
+        push("/create/itinerary");
+      }
+      else {
+        setError(resp.message)     
+      }
+    })
+    .catch(err=> {
+      alert(err.message)
+      setError(err.message)
+      return
+    })
   };
 
   return (
     <>
+     {error && (
+        <Toast message={error} type="error" close={() => setError(null)} />
+      )}
       <div className="container lg:flex justify-between lg:space-x-10">
         <section className="create-trip container md:max-w-lg mt-8">
           <div className="create-trip-header">
@@ -108,9 +135,12 @@ const CreateTrip = () => {
                   helptextstyle={errors.destination && "text-red-500"}
                 />
                 <InputField
-                  type="number"
+                  type="text"
                   className="mb-3"
                   placeholder="Buddies"
+                  onChange={(e) => {
+                    e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+                  }}
                   innerref={register("buddies", {
                     required: {
                       value: true,
@@ -152,7 +182,7 @@ const CreateTrip = () => {
                           createTrip?.start_date,
                           "YYYY-MM-DD"
                         )}
-                        isValidDate={(current) => current.isAfter(moment())}
+                        isValidDate={(current) => current.isAfter(moment()) }
                       />
                     )}
                   />
@@ -188,7 +218,7 @@ const CreateTrip = () => {
                           createTrip?.end_date,
                           "YYYY-MM-DD"
                         )}
-                        isValidDate={(current) => current.isAfter(moment(sD))}
+                        isValidDate={(current) => current.isAfter(moment())}
                       />
                     )}
                   />
@@ -211,6 +241,9 @@ const CreateTrip = () => {
                       message: "Please enter a title for this trip",
                     },
                   })}
+                  onChange={(e) => {
+                    setTitle(e.target.value)
+                  }}
                   helptext={errors.title && errors.title.message}
                   helptextstyle={errors.title && "text-red-500"}
                 />

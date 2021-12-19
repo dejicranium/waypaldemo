@@ -59,7 +59,11 @@ const CreateTripReview = () => {
 
         return axios
           .post("https://api.cloudinary.com/v1_1/waypal/image/upload", data)
-          .then((d) => d.data.url);
+          .then((d) => d.data.url)
+          .catch(err=> {
+            setLoading(false)
+            setStep("")
+          })
       })
     );
     images.forEach((url) => {
@@ -69,22 +73,34 @@ const CreateTripReview = () => {
     setStep("Uploading trip images");
 
     const itenararyUpload = itineraries.map((e) => e.image);
-
-    const getItineraryBlobs = await Promise.all(
-      itenararyUpload.map((url) => fetch(url).then((r) => r.blob()))
-    );
+    let getItineraryBlobs = []
+    try {
+      getItineraryBlobs = await Promise.all(
+        itenararyUpload.map((url) => fetch(url).then((r) => r.blob()))
+      );
+    }
+    catch(e) {
+      console.log("Couldn't upload itinerary")
+    }
 
     const itineraryImages = await Promise.all(
       getItineraryBlobs.map((e) => {
         if (e.type !== "text/html") {
-          const data = new FormData();
-          data.append("file", e);
-          data.append("upload_preset", "waypal_app");
-          data.append("cloud_name", process.env.CLOUD_NAME);
+          if (e) {
 
-          return axios
-            .post("https://api.cloudinary.com/v1_1/waypal/image/upload", data)
-            .then((d) => uploadedImages(d.data.url));
+            const data = new FormData();
+            data.append("file", e);
+            data.append("upload_preset", "waypal_app");
+            data.append("cloud_name", process.env.CLOUD_NAME);
+  
+            return axios
+              .post("https://api.cloudinary.com/v1_1/waypal/image/upload", data)
+              .then((d) => uploadedImages.push(d.data.url))
+              .catch(err=> {
+                setLoading(false)
+                setStep("")
+              })
+          }
         }
         return;
       })

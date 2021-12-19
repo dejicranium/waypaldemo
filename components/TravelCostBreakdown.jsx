@@ -10,8 +10,8 @@ const TravelCostBreakdown = ({ currency, accommodation, misc, travel, total }) =
       <h2 className="font-circular-bold text-2xl">Travel Cost Breakdown</h2>
       <div className="cost-breakdown  flex, flex-col mt-5">
         <div className="travel border-r md:border-0 flex flex-row justify-between">
-          <p className="text-gray">Travel</p>
-          <p className="text text-gray">
+          <p className="">Travel</p>
+          <p className="text">
             <span className="text-sm relative ">{formatCurrency(currency)}</span>
             {travel}
           </p>
@@ -20,8 +20,8 @@ const TravelCostBreakdown = ({ currency, accommodation, misc, travel, total }) =
 
         <div className="cost-breakdown  flex, flex-col mt-1">
           <div className="travel border-r md:border-0 flex flex-row justify-between">
-            <p className=" text-gray ">Accommodation</p>
-            <p className="text text-gray">
+            <p className=" ">Accommodation</p>
+            <p className="text">
               <span className="text-sm relative ">{formatCurrency(currency)}</span>
               {accommodation}
             </p>
@@ -30,8 +30,8 @@ const TravelCostBreakdown = ({ currency, accommodation, misc, travel, total }) =
 
         <div className="cost-breakdown flex, flex-col mt-1">
           <div className="travel border-r md:border-0 flex flex-row justify-between">
-            <p className=" text-gray ">Miscellaneous</p>
-            <p className="text text-gray">
+            <p className="">Miscellaneous</p>
+            <p className="text">
               <span className="text-sm relative ">{formatCurrency(currency)}</span>
               {misc}
             </p>
@@ -39,8 +39,8 @@ const TravelCostBreakdown = ({ currency, accommodation, misc, travel, total }) =
         </div>
         <div className="cost-breakdown flex, flex-col mt-1">
           <div className="travel border-r md:border-0 flex flex-row justify-between">
-            <p className=" text-gray ">Subtotal</p>
-            <p className="text text-gray">
+            <p className="  ">Subtotal</p>
+            <p className="text">
               <span className="text-sm relative ">{formatCurrency(currency)}</span>
               {travel}
             </p>
@@ -49,8 +49,8 @@ const TravelCostBreakdown = ({ currency, accommodation, misc, travel, total }) =
 
         <div className="cost-breakdown flex, flex-col mt-1">
           <div className="travel border-r md:border-0 flex flex-row justify-between">
-            <p className="text-gray">Taxes and fees</p>
-            <p className="text-gray">
+            <p className="">Taxes and fees</p>
+            <p className="">
               <span className="text relative ">{formatCurrency(currency)}</span>
               {0}
             </p>
@@ -58,8 +58,8 @@ const TravelCostBreakdown = ({ currency, accommodation, misc, travel, total }) =
         </div>
         <div className="cost-breakdown flex, flex-col mt-3">
           <div className="travel flex flex-row justify-between pt-5 pb-5 border border-t border-l-0 border-r-0 ">
-            <p className="text-gray">Total and fees</p>
-            <p className="text-gray">
+            <p className="">Total and fees</p>
+            <p className="">
               <span className="text relative ">{formatCurrency(currency)}</span>
                {misc + travel + accommodation}
             </p>

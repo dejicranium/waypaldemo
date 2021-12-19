@@ -2,10 +2,13 @@ import Icon from "../../components/common/Icon";
 import { getRequest } from "../../actions/connection";
 import WaypalFooter from "../../components/WaypalFooter";
 import DashboardSidebar from "../../components/DashboardSidebar";
+import Button from "../../components/common/Button";
+import { useRouter } from "next/router";
 
 let transactions = require("../../assets/data/transactions.json");
 
 const Payments = ({ payments }) => {
+  const { push } = useRouter();
   return (
     <>
       <div className="container md:grid grid-cols-7 mt-14">
@@ -51,10 +54,17 @@ const Payments = ({ payments }) => {
                 No transactions...yet 
               </h1>
               <p className="md:text-2xl max-w-sm pt-4">
-                Waypal helps you find the best trips with the best buddies!
+                Get paid for trips you host on Paypal
               </p>
               <div className="pt-7">
-               
+                <Button
+                    key={2}
+                    onClick={() => {
+                      push("/create")
+                    }}
+                    btnText="Create a trip"
+                    btnStyle="mr-6 bg-orange text-white px-4 py-2 rounded"
+                  />
               </div>
             </div>
             <div className="hidden md:block">

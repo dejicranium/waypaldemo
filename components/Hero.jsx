@@ -30,6 +30,7 @@ const Hero = () => {
       <div className="">
         <div className="bg-hero bg-no-repeat bg-cover lg:h-100v md:h-60v h-60">
           <div className="relative container md:p-16 p-5 flex justify-between items-center">
+            
             <div className="hero-text">
               <h1 className="xl:text-hero md:text-8xl text-40 text-black font-circular-black">
                 Find your <br /> ideal travel
