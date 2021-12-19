@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Tabs from "../../../components/Tabs";
 import About from "../../../components/About";
 import Itinerary from "../../../components/Itinerary";
+import Buddies from "../../../components/Buddies";
 import Footer from "../../../components/common/Footer";
 import { getRequest } from "../../../actions/connection";
 import ShowLuggage from "../../../components/common/ShowLuggage";
@@ -38,6 +39,10 @@ const TripPage = ({ trip, notFound }) => {
     {
       name: "ITINERARY",
       render: <Itinerary trip={trip} />,
+    },
+    {
+      name: "BUDDIES",
+      render: <Buddies trip={trip} user={user} />,
     },
   ];
 

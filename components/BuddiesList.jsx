@@ -1,19 +1,43 @@
 import UserAvatar from "react-user-avatar";
 import { formatCurrency } from "../assets/js/utils";
+import { useEffect, useState } from "react";
+import { getRequest } from '../actions/connection';
 
 const BuddiesList = ({ trip }) => {
+  const [tripBuddies, setTripBuddies] = useState([]);
+  const [loading, setLoading] = useState([]);
+  useEffect(async () => {
+    await getRequest(`http://localhost:5000/api/v1/trip/${trip.id}/buddies`)
+      .then(resp=> {
+        if (resp.data) {
+          setLoading(false);
+          setTripBuddies(resp.data);
+        }
+      })
+      .catch(err=>{
+        setLoading(false);
+      })
+  }, []);
+
   return (
     <>
       <div className="flex items-center">
-        <UserAvatar
-          size="48"
-          name={`James Zagadat`}
-          color="#5CD6C0"
-          // src="/david.jpg"
-        />
-        <p className="pl-6">
-          James Zagadat - {formatCurrency(trip.currency)}3,150
-        </p>
+        {tripBuddies && tripBuddies.map((e, i) => {
+          return (
+          <>
+            <UserAvatar
+              size="48"
+              name={e.User.firstname + ' ' + e.User.lastname}
+              color="#5CD6C0"
+              src={e.User.profile_image_url || ''}
+            />
+            <p className="pl-6">
+            {e.User.firstname + ' ' + e.User.lastname} - {formatCurrency(trip.currency)} {e.User.Payments && e.User.Payments[0] && e.User.Payments[0].amount}
+            </p>
+          </>)
+        })
+        
+      }
       </div>
     </>
   );

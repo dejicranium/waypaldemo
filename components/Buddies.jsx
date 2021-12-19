@@ -2,12 +2,16 @@ import Icon from "./common/Icon";
 import RecommendedTrips from "./RecommendedTrips";
 import BuddiesList from "./BuddiesList";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import Button from "./common/Button";
 import { formatCurrency } from "../assets/js/utils";
+import { getRequest } from '../actions/connection';
 
 import TripDetailHeader from "./TripDetailHeader";
 
 const Buddies = ({ trip, user }) => {
+ 
+
   return (
     <div className="lg:flex space-x-8 justify-between">
       <section className="lg:max-w-xl xl:max-w-2xl">
@@ -43,7 +47,7 @@ const Buddies = ({ trip, user }) => {
       </section>
 
       <section className="recommended-trips hidden lg:block flex-none min-w-400">
-        <RecommendedTrips />
+        {/*<RecommendedTrips trip={trip} />*/}
       </section>
     </div>
   );
