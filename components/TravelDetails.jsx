@@ -34,7 +34,7 @@ const TravelDetails = ({ trip, user }) => {
                 for withdrawal
               </p>
               <div className="mt-4">
-                <Link href="/request-fund">
+                <Link href="/requestfund">
                   <a>
                     <Button btnType="fill" btnText="Request for funds" />
                   </a>

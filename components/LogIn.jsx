@@ -20,18 +20,17 @@ const Login = ({ setActive, close }) => {
 
   const submit = async (values) => {
     setLoading(true);
-    const user = await postRequest("/user/login", values);
+    const user = await postRequest("/user/login", values)
     if (user.status) {
       dispatch({ user: user.data, token: user.token, isLoggedIn: true });
       close();
-      // const userInfo = await getRequest("/user/info");
-      // if (userInfo.status) {
-      //   dispatch({ profile: { ...userInfo.data } });
-      // }
     }
-    setError(user.message);
-    setLoading(false);
-  };
+    else {
+      setError(user.message);
+      setLoading(false)
+    }
+    
+  }
 
   return (
     <>

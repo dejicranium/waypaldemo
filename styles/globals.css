@@ -380,3 +380,39 @@ input {
 
     color: #4F4F4F;
 }
+
+.requestfund-header {
+    font-size: 24px;
+    line-height: 156.73%;
+    color: #333333;
+    margin-bottom: 16px;
+
+    @media screen and (max-width: 640px) {
+       .requestfund-header {
+           margin-bottom: 8px !important;
+           font-size: 16px !important;
+       }
+    } 
+}
+.requestfund-amount {
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 81px;
+    margin-bottom: 15px;
+    color: #333333;
+}
+.requestfund-explanation {
+    font-size: 16px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    color: #6E7491;
+    margin-bottom: 24px;
+}
+.requestfund-fee {
+    font-size: 18px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    color: #6E7491;
+}

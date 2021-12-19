@@ -138,7 +138,7 @@ const About = ({ trip, user_is_owner=false }) => {
         </div>
         {user.id === trip.user_id &&
         <div className="mt-10">
-            <Link href={`${slug}/join`}>
+            <Link href={`${slug}/requestfund`}>
               <a>
                 <Button
                   btnStyle="bg-orange font-circular-bold text-white px-4 py-2 mt-3 md:mt-0 rounded"

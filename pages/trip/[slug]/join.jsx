@@ -105,7 +105,7 @@ const JoinTrip = ({ trip, notFound }) => {
               //setWaypalVerificationStatus("ABANDONED")
               break;
             case MESSAGES.FINISHED:
-              setWaypalVerificationStatus("ATTEMPTED")
+              //setWaypalVerificationStatus("ATTEMPTED")
               break;
               }
           },  

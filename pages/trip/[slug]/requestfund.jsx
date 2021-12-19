@@ -16,10 +16,10 @@ const RequestFund = () => {
   return (
     <>
       <div className="travel-success container lg:flex space-x-8 justify-between mt-14">
-        <section className="lg:max-w-xl xl:max-w-3xl">
+        <section className="lg:max-w-xl lg:w-5/12 sm:w-full xl:max-w-3xl">
           <div className="">
-            <p className="requestfund-header text-black">Request for fund</p>
-            <p className="requestfund-amount text-black">$41,792.00</p>
+            <p className="requestfund-header">Request for fund</p>
+            <p className="requestfund-amount">$41,792.00</p>
             <p className="requestfund-explanation text-black">Available balance for Rio trip</p>
 
             <InputField
@@ -47,11 +47,24 @@ const RequestFund = () => {
             //leadingicon="location-input"
           />
           </div>
-          
+          <p className="requestfund-fee text-black">Transaction fee: </p>
+
+          <div className="continue-to-itinerary mt-14 flex items-center container space-x-10 max-w-xs mx-auto">
+            <p
+              className="font-circular-bold text-orange cursor-pointer"
+            >
+              Cancel
+            </p>
+            <Button
+              type="button"
+              btnType="fill"
+              btnText="Request for fund"
+            />
+          </div>
         </section>
 
         <section className="recommended-trips hidden lg:block flex-none min-w-400">
-          {/*<RecommendedTrips />*/}
+          <Icon icon="money-bag" cname="pr-2"></Icon>
         </section>
       </div>
       <Footer />
