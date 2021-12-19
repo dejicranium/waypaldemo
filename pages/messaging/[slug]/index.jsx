@@ -148,7 +148,7 @@ export default Messaging;
 export async function getServerSideProps(context) {
   const { slug } = context.query;
 
-  const tripData = await getRequest(`${proces.env.NEXT_PUBLIC_API_LOCATION}/trip/by/slug/${slug}`);
+  const tripData = await getRequest(`${process.env.NEXT_PUBLIC_API_LOCATION}/trip/by/slug/${slug}`);
   
   if (tripData.status) {
     const tripMessages = await getRequest(`/trip/${tripData.data.id}/chats`);
