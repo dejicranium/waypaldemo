@@ -68,7 +68,7 @@ const Payments = ({ payments }) => {
               </div>
             </div>
             <div className="hidden md:block">
-              <Icon icon="luggage-large" />
+              <Icon icon="money-bag" />
             </div>
           </div>       
               )}
