@@ -20,6 +20,7 @@ const BuddiesList = ({ trip }) => {
   }, []);
 
   return (
+    
     <>
       <div className="flex items-center">
         {tripBuddies && tripBuddies.map((e, i) => {
