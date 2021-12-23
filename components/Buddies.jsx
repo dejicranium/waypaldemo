@@ -43,6 +43,7 @@ const Buddies = ({ trip, user }) => {
               <Button btnType="fill" btnText="Request for funds" />
             </a>
           </div>
+          
         </div>
       </section>
 
