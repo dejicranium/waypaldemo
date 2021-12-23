@@ -6,12 +6,12 @@
 <path d="M0 70.7534C0 60.0074 8.75114 51.2959 19.5462 51.2959C30.3413 51.2959 39.0926 60.0074 39.0926 70.7534C39.0926 81.4996 30.3415 90.211 19.5462 90.211C17.2805 90.211 15.1054 89.826 13.0818 89.1201L7.11886 92V85.7724C2.7715 82.2036 0 76.8008 0 70.7534H0Z" fill="url(#paint1_linear)"/>
 <defs>
 <linearGradient id="paint0_linear" x1="76.6364" y1="78.8828" x2="34.8591" y2="6.91796" gradientUnits="userSpaceOnUse">
-<stop stop-color="#AC3CFF"/>
-<stop offset="1" stop-color="#F478FF"/>
+<stop stopColor="#AC3CFF"/>
+<stop offset="1" stopColor="#F478FF"/>
 </linearGradient>
 <linearGradient id="paint1_linear" x1="31.5186" y1="90.1845" x2="10.9228" y2="54.7064" gradientUnits="userSpaceOnUse">
-<stop stop-color="#FFAF83"/>
-<stop offset="1" stop-color="#FFEAB5"/>
+<stop stopColor="#FFAF83"/>
+<stop offset="1" stopColor="#FFEAB5"/>
 </linearGradient>
 </defs>
 </svg>
