@@ -20,6 +20,7 @@ import Toast from "../../components/Toast";
 import dynamic from 'next/dynamic';
 
 
+
 const Profile = () => {
   const [verification_url, setVerificationUrl] = useState(null);
 

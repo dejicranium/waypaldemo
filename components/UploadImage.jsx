@@ -19,11 +19,14 @@ const UploadImage = ({ onChange, className }) => {
         type="file"
         id="upload"
         ref={uploadRef}
+        accept="image/png, image/jpeg"
         onChange={onChange}
       />
       <div
         className="upload-img flex justify-between items-center flex-col"
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
           uploadRef.current?.click();
         }}
       >
