@@ -422,3 +422,14 @@ input {
     position: absolute;
 }
 
+
+.home-special-container {
+    
+}
+@media screen and (max-width: 403px) {
+    .home-special-container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important ;
+        margin: auto !important;
+    }
+ } 

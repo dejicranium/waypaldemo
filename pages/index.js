@@ -102,7 +102,7 @@ export default function Home() {
       {/* Travel Buddies */}
       <section className="travel-buddies max-w-6xl lg:max-w-6xl md:max-w-2xl mx-auto book-trip mt-14 md:mt-52">
         <div className="flex md:justify-between items-center justify-center">
-          <div className="booktrip-steps">
+          <div className="booktrip-steps home-special-container">
             <div className="md:text-5xl text-32 md:max-w-lg max-w-xxs font-circular-bold text-black-bold relative">
               Find your travel buddies in{" "}
               <pre style={{ display: "inline-block" }}> </pre>{" "}
