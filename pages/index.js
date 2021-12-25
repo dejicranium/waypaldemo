@@ -199,7 +199,7 @@ export default function Home() {
       </section>
 
 
-      <section className="travel-buddies max-w-6xl lg:max-w-6xl md:max-w-2xl mx-auto book-trip mt-14 md:mt-52">
+      <section className="travel-buddies home-special-container max-w-6xl lg:max-w-6xl md:max-w-2xl mx-auto book-trip mt-14 md:mt-52">
         <div className="flex md:justify-between items-center justify-center">
           <div className="booktrip-steps">
             
