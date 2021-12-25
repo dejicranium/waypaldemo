@@ -69,13 +69,13 @@ export default function Home() {
 
 
         <DateTimeWithLabel
-            //placeholder="When would you like to go?"
+            placeholder="When would you like to go?"
             closeOnSelect
             timeFormat={false}
             dateFormat="YYYY-MM-DD"
-            label="When would you like to go?"
+            label="Travel Date"
             inputProps={{
-              placeholder: "Travel Date",
+              placeholder: "When would you like to go",
               className: "input-element w-full mb-3 md:mb-0",
             }}
             onChange={(v) => {

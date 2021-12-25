@@ -26,7 +26,9 @@ const Login = ({ setActive, close }) => {
       close();
     }
     else {
-      setError(user.message);
+      if (user && user.message) {
+        setError(user.message);
+      }
       setLoading(false)
     }
     
