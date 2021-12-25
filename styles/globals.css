@@ -416,3 +416,9 @@ input {
     align-items: center;
     color: #6E7491;
 }
+
+.airplane-track {
+    top: 35px !important;
+    position: absolute;
+}
+

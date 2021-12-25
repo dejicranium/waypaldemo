@@ -132,14 +132,14 @@ const Search = () => {
                 <div className="md:grid-cols-1 lg:grid-cols-2 gap-4 w-full grid">  
                 {topSearchResults.length > 0 ? topSearchResults.map((trip) => {
                   
-                  return <SimpleTripCard key={trip.id} trip={trip} />
+                  return <MoreResults key={trip.id} trip={trip} />
                   
                 }) : <p>Nothin</p>}
               </div>
               </div>
             </section>
 
-            <section className="filter mt-14 hidden md:block w-3/12 md:w-30per lg:w-3/12">
+            <section className="filter mt-10 hidden md:block w-3/12 md:w-30per lg:w-3/12">
               <SearchFilter />
             </section>
           </div>

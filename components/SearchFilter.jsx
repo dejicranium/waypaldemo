@@ -81,7 +81,7 @@ const SearchFilter = (props) => {
 
   return (
     <div className="mb-10">
-      <h3 className="text-lg md:text-2xl font-circular-bold text-gray-light2">
+      <h3 className="text-lg md:text-2xl font-circular-bold text-gray-light2 mb-10">
         Filter
       </h3>
       <div className="price-range border border-gray-light6 rounded py-5 px-4">
