@@ -271,7 +271,7 @@ const CreateTrip = () => {
                   type="text"
                   placeholder="Meeting point address"
                   // helptext="Where you want your travel buddies to meet"
-                  cname="max-w-sm"
+                  cname="max-w-sm destination-input"
                   innerref={register("meeting_point", {
                     required: {
                       value: true,

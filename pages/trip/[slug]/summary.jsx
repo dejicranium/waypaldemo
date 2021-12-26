@@ -33,7 +33,7 @@ const TripSummary = ({trip, similar}) => {
           </div>
           <div className="header mt-6">
             <h3 className="text-orange font-circular-bold text-2xl">
-              Bon Voyage, {user.firstname}!
+              Bon Voyage, {user && user.firstname}!
             </h3>
             <p className="text-gray-light4 text-lg">
               Thank you for booking your travel with Waypal! Below is a summary
