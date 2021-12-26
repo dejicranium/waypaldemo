@@ -125,7 +125,7 @@ const CreateTrip = () => {
                 <InputField
                   type="text"
                   placeholder="Destination"
-                  className="mb-3 destination-input"
+                  cname="mb-3 destination-input"
                   innerref={register("destination", {
                     required: {
                       value: true,
