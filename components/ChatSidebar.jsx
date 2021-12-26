@@ -31,7 +31,7 @@ const ChatSideBar = ({trip}) => {
         <div className="buddies-list flex flex-col pt-6">
           {trip.buddieslist && trip.buddieslist.map((item, index) => {
             return (
-              <div className="flex flex-row items-center">
+              <div className="flex flex-row items-center" key={index}>
                 <div className="chat-image-container">
                   {item.User && item.User.profile_image_url &&
                     <img src={item.User.profile_image_url} alt=""/>
