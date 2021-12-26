@@ -55,6 +55,7 @@ const CreateTrip = () => {
   const [tags, setTags] = useState(createTrip?.checklists || []);
   const [title, setTitle] = useState("");
   const [error, setError] = useState("");
+  const [startDate, setStartDate] = useState("");
 
   const addBuddyTag = (event) => {
     if (event.key === "Enter" && event.target.value !== "") {
@@ -163,7 +164,7 @@ const CreateTrip = () => {
                     rules={{
                       required: {
                         value: true,
-                        message: "This fied is required",
+                        message: "This field is required",
                       },
                     }}
                     render={({ field: { onChange } }) => (
@@ -177,6 +178,7 @@ const CreateTrip = () => {
                         }}
                         onChange={(v) => {
                           onChange(v.format("YYYY-MM-DD"));
+                          setStartDate(v)
                         }}
                         initialValue={moment(
                           createTrip?.start_date,
@@ -218,8 +220,8 @@ const CreateTrip = () => {
                           createTrip?.end_date,
                           "YYYY-MM-DD"
                         )}
-                        isValidDate={(current) => current.isAfter(moment())}
-                      />
+                        isValidDate={(current) => current.isAfter(startDate)}
+                      /> 
                     )}
                   />
                   {errors.end_date && (
@@ -248,7 +250,7 @@ const CreateTrip = () => {
                   helptextstyle={errors.title && "text-red-500"}
                 />
                 <TextAreaField
-                  placeholder="Enter a description of your Trip"
+                  placeholder="Enter a description of your trip"
                   className="mb-6"
                   innerref={register("description", {
                     required: {

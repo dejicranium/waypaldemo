@@ -64,6 +64,7 @@ export default function Home() {
           type="text"
           label="Destination"
           value={destination}
+          cname="destination-input"
           onChange={(e) => {setDestination(e.target.value)}}
         />
 

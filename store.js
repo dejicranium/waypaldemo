@@ -12,7 +12,7 @@ export const init = {
   isLoggedIn: false,
   createTrip: {
     title: "",
-    buddies: 0,
+    buddies: "",
     images: [],
     end_date: "",
     currency: "USD",
@@ -37,7 +37,7 @@ export const init = {
     title: "",
     slug: "",
     destination: "",
-    buddies: 0,
+    buddies: "",
     joined_buddies: 0,
     start_date: "",
     end_date: "",

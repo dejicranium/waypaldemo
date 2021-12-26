@@ -32,7 +32,7 @@ const TripDetail = ({ trip, notFound }) => {
     <>
       {!notFound && (
     <>
-      <section className="tab-section mt-8 container">
+      <section className="tab-section mt-10 container">
         <Tabs data={tabs} />
       </section>
       <WaypalFooter />

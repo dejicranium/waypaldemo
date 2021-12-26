@@ -49,6 +49,7 @@ const Hero = () => {
                 placeholder="Where would you like to go?"
                 type="text"
                 label="Destination"
+                cname="destination-input"
                 onChange={(e) => {setDestination(e.target.value)}}
               />
 

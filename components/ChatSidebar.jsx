@@ -27,9 +27,23 @@ const ChatSideBar = ({trip}) => {
             {`${trip.buddies === 1 ? " buddy" : " buddies"}`}{" "}
           </h2>
         </div>
-        <div className="buddies-list flex space-x-4 pt-6">
-          <p>avatar here</p>
-          <p>James Zagadat</p>
+        
+        <div className="buddies-list flex flex-col pt-6">
+          {trip.buddieslist && trip.buddieslist.map((item, index) => {
+            return (
+              <div className="flex flex-row items-center">
+                <div className="chat-image-container">
+                  {item.User && item.User.profile_image_url &&
+                    <img src={item.User.profile_image_url} alt=""/>
+                  }
+                  {!item.User || !item.User.profile_image_url && 
+                    <img className="chat-image-default" alt=""/>
+                  }
+                </div>
+                <p className="chat-image-container-label">{item.User.firstname + ' ' + item.User.lastname}</p>
+              </div>
+            )
+          })}
         </div>
       </section>
     </div>

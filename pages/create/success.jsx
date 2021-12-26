@@ -31,7 +31,7 @@ const CreateSuccess = () => {
           <ShareTrip trip={currentTrip} />
         </div>
         <div className="mt-6 flex items-center justify-between max-w-xxs mx-auto">
-          <Link href={`/trip/${currentTrip.slug}`}>
+          <Link href={`/trip/${currentTrip.slug}/summary`}>
           <a>
             <Button btnText="See trip details" btnType="fill"></Button>
           </a>

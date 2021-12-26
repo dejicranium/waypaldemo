@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Button from "./common/Button";
 import { formatCurrency } from "../assets/js/utils";
 import { getRequest } from '../actions/connection';
-
+import moment from "moment";
 import TripDetailHeader from "./TripDetailHeader";
 
 const Buddies = ({ trip, user }) => {
@@ -31,17 +31,20 @@ const Buddies = ({ trip, user }) => {
         <div className="pt-9">
           <BuddiesList trip={trip} />
         </div>
-
+        
         <div className="mt-14">
+          {/*
           <Button
             btnText="See all buddies"
             btnType="plain"
             btnStyle="text-orange font-circular-bold"
-          />
+          />*/}
           <div className="mt-4">
-            <a>
-              <Button btnType="fill" btnText="Request for funds" />
-            </a>
+            {trip.joined_buddies && trip.joined_buddies > 0 &&  moment().isAfter(moment(trip.end_date))  &&
+              <a>
+                <Button btnType="fill" btnText="Request for funds" />
+              </a>
+            }
           </div>
           
         </div>

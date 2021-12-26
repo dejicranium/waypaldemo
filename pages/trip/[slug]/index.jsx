@@ -36,10 +36,10 @@ const TripPage = ({ trip, notFound }) => {
       name: "ABOUT",
       render: <About user_is_owner={user_is_owner} trip={trip} />,
     },
-    {
+    /*{
       name: "ITINERARY",
       render: <Itinerary trip={trip} />,
-    },
+    },*/
     {
       name: "BUDDIES",
       render: <Buddies trip={trip} user={user} />,
@@ -74,8 +74,14 @@ const TripPage = ({ trip, notFound }) => {
             </div>
           </section>
 
-          <section className="tab-section mt-8 container">
-            <Tabs data={tabs} />
+          <section className="tab-section mt-10 container">
+            {trip.user_id === user.id && 
+              <Tabs data={tabs} />
+            }
+
+            { trip.user_id !== user.id && 
+              <About trip={trip}/>
+            }
           </section>
 
           <Footer>

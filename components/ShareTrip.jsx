@@ -10,7 +10,7 @@ import {
   TwitterShareButton,
 } from "react-share";
 
-const ShareTrip = ({ trip }) => {
+const ShareTrip = ({ trip, cname}) => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   const shareUrl = `${baseUrl}/trip/${trip.slug}`;
 
@@ -35,7 +35,7 @@ const ShareTrip = ({ trip }) => {
           close={() => setCopySuccess(false)}
         />
       )}
-      <div className="border-2 border-dashed border-gray-light3 rounded-md py-6 px-20 max-w-md mx-auto">
+      <div className={"border-2 border-dashed border-gray-light3 rounded-md py-6 px-20 max-w-md mx-auto " +cname}>
         <h4 className="text-black-content text-lg font-circular-bold">
           Share trip:
         </h4>

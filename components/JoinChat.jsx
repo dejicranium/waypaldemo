@@ -2,7 +2,7 @@ import Icon from "./common/Icon";
 import Button from "./common/Button";
 import Link from "next/link";
 
-const JoinChat = () => {
+const JoinChat = ({trip}) => {
   return (
     <div className="flex bg-orange-white py-8 px-4 rounded border border-gray-light6 max-w-2xl">
       <Icon icon="group-chat" cname="hidden md:block pr-8"></Icon>
@@ -12,7 +12,7 @@ const JoinChat = () => {
           be up-to-date on the progress of this trip.
         </p>
         <div className="mt-4">
-          <Link href="/messaging">
+          <Link href={'/messaging/' + trip.slug } >
             <a>
               <Button btnType="fill" btnText="Join group chat" />
             </a>

@@ -2,7 +2,7 @@ import axios from "axios";
 import { parseCookies } from "nookies";
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_LOCATION || "//:8000/api/v1",
+  baseURL: process.env.NEXT_PUBLIC_API_LOCATION || "//localhost:8000/api/v1",
 });
 
 export default function conn(tok = "") {

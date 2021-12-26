@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import Icon from "./common/Icon";
+import ShareTrip from "../components/ShareTrip"
 import TripPhoto from "./TripPhoto";
 import { useState } from 'react';
 import Button from "./common/Button";
@@ -14,6 +15,7 @@ import Modal from "./Modal";
 import Register from '../components/Register';
 import ForgotPassword from '../components/ForgotPassword';
 import { format } from "date-fns";
+import moment from "moment";
 
 const About = ({ trip, user_is_owner=false }) => {
    const {
@@ -104,6 +106,22 @@ const About = ({ trip, user_is_owner=false }) => {
           
         </div>
 
+
+        <div className="tripdetail-notification my-10">
+          <div className="tripdetail-notification-icon">
+            <Icon icon="money-bag"/>
+          </div>
+
+          <div className="flex flex-col">
+            <p>{trip.joined_buddies} of {trip.buddies} travel buddies joined</p>
+            <div className="relative h-4 tripdetail-buddies-track">
+                <div className="absolute h-full top-0 left-0 bg-green-100" style={{width: (trip.buddies / trip.joined_buddies) ? (trip.buddies / trip.joined_buddies) * 100 + '%': 0 + '%'}}></div>
+            </div>
+            <p className="tripdetail-buddies-info">This trip needs {trip.buddies - trip.joined_buddies} more buddies to join before you can request for withdrawal
+</p>
+          </div>
+        </div>
+
         <div className="trip-description mt-8">
         <h2 className="font-circular-bold">Description</h2>
           <p className="max-w-full md:max-w-4xl">{trip.description}</p>
@@ -136,7 +154,7 @@ const About = ({ trip, user_is_owner=false }) => {
             total={total}
           />
         </div>
-        {user.id === trip.user_id &&
+        {user.id === trip.user_id && user.joined_buddies > 0 && moment().isAfter(moment(trip.end_date)) &&
         <div className="mt-10">
             <Link href={`${slug}/requestfund`}>
               <a>
@@ -148,6 +166,11 @@ const About = ({ trip, user_is_owner=false }) => {
             </Link>
           </div>
         }
+      
+        <div className="my-10">
+          <ShareTrip trip={trip} />
+        </div>
+      
       </section>
       
     </div>

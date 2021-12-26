@@ -68,6 +68,7 @@ const CreateItinerary = () => {
     const itineraries = [];
 
     itineraryData.current.forEach((e, i) => {
+      //itineraries.push({ ...e, image: [i] });
       itineraries.push({ ...e, image: [i] });
     });
 
