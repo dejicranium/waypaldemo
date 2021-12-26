@@ -7,7 +7,7 @@ const BuddiesList = ({ trip }) => {
   const [tripBuddies, setTripBuddies] = useState([]);
   const [loading, setLoading] = useState([]);
   useEffect(async () => {
-    await getRequest(`http://localhost:5000/api/v1/trip/${trip.id}/buddies`)
+    await getRequest(`/trip/${trip.id}/buddies`)
       .then(resp=> {
         if (resp.data) {
           setLoading(false);

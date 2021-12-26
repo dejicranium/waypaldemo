@@ -11,7 +11,7 @@ import useData from '../../../components/hooks/useData';
 
 const TripPage = ({ trip, notFound }) => {
   const { push } = useRouter();
-  const [user_is_owner, setUserAsOwner] = useState(false);
+  const [user_is_buddy, setUserAsBuddy] = useState(false);
   /*
   if (notFound) {
     push("/404");
@@ -24,16 +24,24 @@ const TripPage = ({ trip, notFound }) => {
   } = useData();
   
   
-  useEffect(() => {
+  useEffect(async() => {
     //if (user.id === trip.user_id) {
       //user_is_owner = true;
+      let buddies  = await getRequest(`/trip/${trip.id}/buddies`);
+      buddies = buddies.data;
+
+      if (buddies && buddies.length > 0) {
+        const exists = buddies.find(b => b.user_id == user.id)
+        if (exists) setUserAsBuddy(true)
+      }
+       
   
   }, []);
 
   const tabs = [
     {
       name: "ABOUT",
-      render: <About trip={trip} />,
+      render: <About trip={trip} user_is_buddy={user_is_buddy} />,
     },
     /*{
       name: "ITINERARY",
@@ -79,7 +87,7 @@ const TripPage = ({ trip, notFound }) => {
             }
 
             { trip.user_id !== user.id && 
-              <About trip={trip}/>
+              <About trip={trip} user_is_buddy={user_is_buddy}/>
             }
           </section>
 
@@ -96,10 +104,8 @@ export default TripPage;
 
 export async function getServerSideProps(context) {
   const { slug } = context.query;
-  const ngrok_base = "http://6c7c-197-210-8-123.ngrok.io/api/v1"
 
   const tripData =  await getRequest(`${process.env.NEXT_PUBLIC_API_LOCATION}/trip/by/slug/${slug}`);
-  console.log(tripData)
   if (tripData.status) {
     return {
       props: {

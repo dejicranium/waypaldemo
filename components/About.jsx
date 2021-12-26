@@ -19,7 +19,7 @@ import moment from "moment";
 import { postRequest } from "../actions/connection";
 
 
-const About = ({ trip }) => {
+const About = ({ trip, user_is_buddy }) => {
    const {
     dispatch,
      data: { currentTrip, user },
@@ -70,7 +70,7 @@ const About = ({ trip }) => {
       },
       callback: async function (data) {
         const payment = await getRequest(
-          `/payment/verify/${data.transaction_id}`
+          `/payment/verify/${data.transaction_id}?trip_id=${trip.id}`
         );
         if (payment.status) {
           dispatch({ currentTrip: {...trip}})
@@ -111,7 +111,7 @@ const About = ({ trip }) => {
           </h1>
           <div className="">
            
-                {user.id !== trip.user_id && 
+                {user.id !== trip.user_id && !user_is_buddy &&
                   <Button
                     onClick={() => {
                       //setAutMode("register")
@@ -153,17 +153,15 @@ const About = ({ trip }) => {
             <Icon icon="money-bag"/>
           </div>
 
-          <div className="flex flex-col">
+          <div className="flex flex-col" style={{width: '80%'}}>
             <p>{trip.joined_buddies} of {trip.buddies} travel buddies joined</p>
             <div className="relative h-4 tripdetail-buddies-track">
-                <div className="absolute h-full top-0 left-0 bg-green-100" style={{width: (trip.buddies / trip.joined_buddies) ? (trip.buddies / trip.joined_buddies) * 100 + '%': 0 + '%'}}></div>
+                <div className="absolute h-full top-0 left-0 bg-green-100" style={{width: (trip.joined_buddies / trip.buddies) ? (trip.joined_buddies / trip.buddies) * 100 + '%': 0 + '%'}}></div>
             </div>
-            <p className="tripdetail-buddies-info">This trip needs {trip.buddies - trip.joined_buddies} more buddies to join before you can request for withdrawal
-</p>
           </div>
         </div>
 
-        <div className="trip-description mt-8">
+        <div className="trip-description mt-8" >
         <h2 className="font-circular-bold">Description</h2>
           <p className="max-w-full md:max-w-4xl">{trip.description}</p>
         </div>
