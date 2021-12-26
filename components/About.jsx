@@ -17,7 +17,7 @@ import ForgotPassword from '../components/ForgotPassword';
 import { format } from "date-fns";
 import moment from "moment";
 
-const About = ({ trip, user_is_owner=false }) => {
+const About = ({ trip }) => {
    const {
     dispatch,
      data: { currentTrip, user },
@@ -87,7 +87,7 @@ const About = ({ trip, user_is_owner=false }) => {
         <div className="trip-info grid md:grid-cols-4 md:gap-8 grid-cols-2 mt-8 w-full">
           <div className="profile flex items-center">
             <Icon icon="profile" cname="pr-3 flex-none" />
-            <p className="xl:whitespace-nowrap">{trip.user.firstname + ' ' + trip.user.lastname}</p>
+            <p className="xl:whitespace-nowrap">{trip.user && trip.user.firstname + ' ' + trip.user.lastname}</p>
           </div>
           <div className="buddies flex items-center">
             <Icon icon="buddies" cname="pr-3 flex-none" />
