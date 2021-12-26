@@ -46,6 +46,46 @@ const About = ({ trip }) => {
 
   const total = subTotal + (subTotal / 100) * 7.5;
 
+  const makePayment = async () => {
+    const totalAmount =
+      trip.travel_amount +
+      trip.miscellaneous_amount +
+      trip.accommodation_amount;
+    const tripRef = await postRequest("/payment/reference", {
+      trip_id: trip.id,
+      amount: totalAmount,
+    });
+    FlutterwaveCheckout({
+      public_key: process.env.NEXT_PUBLIC_FLW_PUBKEY,
+      amount: totalAmount,
+      tx_ref: tripRef.data.reference,
+      currency: trip.currency,
+      country: "NG",
+      customer: {
+        email: user.email,
+        phone_number: user.phone_number,
+        name: fullName,
+      },
+      callback: async function (data) {
+        const payment = await getRequest(
+          `/payment/verify/${data.transaction_id}`
+        );
+        if (payment.status) {
+          dispatch({ currentTrip: {...trip}})
+          push({
+            pathname: "successful",
+            query: { slug: trip.slug },
+          });
+        }
+      },
+      customizations: {
+        title: "Waypal",
+        description: "Pay for this trip",
+        logo: "https://cdn.filestackcontent.com/UkEsCousS42K1prOl7pZ",
+      },
+    });
+  };
+
   return (
     <>
       <Modal showModal={showModal} close={() => setShowModal(false)}>
@@ -68,19 +108,18 @@ const About = ({ trip }) => {
             {formatAmount(total)}
           </h1>
           <div className="">
-            <Link href={`${slug}/join`}>
-              <a>
+           
                 {user.id !== trip.user_id && 
                   <Button
                     onClick={() => {
                       //setAutMode("register")
+                      makePayment();
                     }}
                     btnStyle="bg-orange font-circular-bold text-white px-4 py-2 mt-3 md:mt-0 rounded"
                     btnText="Join this trip"
                   />
                 }
-              </a>
-            </Link>
+             
           </div>
         </div>
 

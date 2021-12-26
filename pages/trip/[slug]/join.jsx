@@ -125,7 +125,7 @@ const JoinTrip = ({ trip, notFound }) => {
     });
     FlutterwaveCheckout({
       public_key: process.env.NEXT_PUBLIC_FLW_PUBKEY,
-      amount: 100,
+      amount: totalAmount,
       tx_ref: tripRef.data.reference,
       currency: trip.currency,
       country: "NG",
