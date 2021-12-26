@@ -16,6 +16,8 @@ import Register from '../components/Register';
 import ForgotPassword from '../components/ForgotPassword';
 import { format } from "date-fns";
 import moment from "moment";
+import { postRequest } from "../actions/connection";
+
 
 const About = ({ trip }) => {
    const {
@@ -56,7 +58,7 @@ const About = ({ trip }) => {
       amount: totalAmount,
     });
     FlutterwaveCheckout({
-      public_key: process.env.NEXT_PUBLIC_FLW_PUBKEY,
+      public_key: process.env.NEXT_PUBLIC_FLW_PUBKEY || "FLWPUBK_TEST-e679c6bbfd1c677f398ecd55f013afd1-X",
       amount: totalAmount,
       tx_ref: tripRef.data.reference,
       currency: trip.currency,

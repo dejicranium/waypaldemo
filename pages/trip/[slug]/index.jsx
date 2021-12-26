@@ -9,7 +9,6 @@ import { getRequest } from "../../../actions/connection";
 import ShowLuggage from "../../../components/common/ShowLuggage";
 import useData from '../../../components/hooks/useData';
 
-
 const TripPage = ({ trip, notFound }) => {
   const { push } = useRouter();
   const [user_is_owner, setUserAsOwner] = useState(false);
@@ -34,7 +33,7 @@ const TripPage = ({ trip, notFound }) => {
   const tabs = [
     {
       name: "ABOUT",
-      render: <About user_is_owner={user_is_owner} trip={trip} />,
+      render: <About trip={trip} />,
     },
     /*{
       name: "ITINERARY",
