@@ -64,7 +64,7 @@ const About = ({ trip }) => {
       customer: {
         email: user.email,
         phone_number: user.phone_number,
-        name: fullName,
+        name: `${user.firstname} ${user.lastname}`,
       },
       callback: async function (data) {
         const payment = await getRequest(
