@@ -38,18 +38,7 @@ const TripPage = ({ trip, notFound }) => {
   
   }, []);
 
-  const general_tabs = [
-    {
-      name: "About",
-      render: <About trip={trip} user_is_buddy={user_is_buddy} />,
-    },
-    {
-      name: "ITINERARY",
-      render: <Itinerary trip={trip} user={user} />,
-    },
-   
-  ];
-  const user_buddy_tabs = [
+  const tabs = [
     {
       name: "ABOUT",
       render: <About trip={trip} user_is_buddy={user_is_buddy} />,
@@ -58,11 +47,9 @@ const TripPage = ({ trip, notFound }) => {
       name: "ITINERARY",
       render: <Itinerary trip={trip} user={user} />,
     },
-    {
-      name: "BUDDIES",
-      render: <Buddies trip={trip} user={user} />,
-    },
+   
   ];
+  
 
   return (
     <>
@@ -75,6 +62,7 @@ const TripPage = ({ trip, notFound }) => {
               className="w-full h-40 md:h-40v bg-cover bg-center bg-no-repeat relative"
               style={
                 {
+                  height: "500px !important",
                   backgroundImage: `url(${trip.images && trip.images[0]})`,
                 }
               }
@@ -93,18 +81,9 @@ const TripPage = ({ trip, notFound }) => {
           </section>
 
           <section className="tab-section mt-10 container">
-            {user && (trip.user_id === user.id || user_is_buddy) && 
              
-              <Tabs data={user_buddy_tabs} />
-            }
-
-            {user && trip.user_id !== user.id && !user_is_buddy &&
-                <Tabs data={general_tabs} />
-
-            }
-            {!user && 
-              <Tabs data={general_tabs} />
-            }
+              <Tabs data={tabs} />
+            
            </section> 
 
           <Footer>

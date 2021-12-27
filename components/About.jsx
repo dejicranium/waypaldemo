@@ -127,10 +127,10 @@ const About = ({ trip, user_is_buddy }) => {
           </div>
         </div>
 
-        <div className="trip-info grid md:grid-cols-4 md:gap-8 grid-cols-2 mt-8 w-full">
+        <div className="trip-info grid md:grid-cols-4 md:gap-8 grid-cols-2 mt-8">
           <div className="profile flex items-center">
             <Icon icon="profile" cname="pr-3 flex-none" />
-            <p className="xl:whitespace-nowrap">{trip.user && trip.user.firstname + ' ' + trip.user.lastname}</p>
+            <p className="xl:whitespace-nowrap">Felix Obinna</p>
           </div>
           <div className="buddies flex items-center">
             <Icon icon="buddies" cname="pr-3 flex-none" />
@@ -140,55 +140,42 @@ const About = ({ trip, user_is_buddy }) => {
               {`(${trip.joined_buddies} paid)`}
             </p>
           </div>
-          <div className="date sm:ml-0   lg:ml-10  flex items-center">
+          <div className="date flex items-center">
             <Icon icon="calendar" cname="pr-3 flex-none" />
             <p className="xl:whitespace-nowrap">
               {format(new Date(trip.start_date), "MMMM do, y")}
             </p>
           </div>
-          
+          <div className="profile flex items-center justify-end">
+            <Icon icon="like" cname="pr-3 cursor-pointer" />
+            <Icon icon="share" cname="cursor-pointer" />
+          </div>
         </div>
 
-
-        <div className="tripdetail-notification my-10">
-          <div className="tripdetail-notification-icon">
-            <Icon icon="money-bag"/>
-          </div>
-          
-          {trip.user_id === user.id || user_is_buddy && 
-            <div className="flex flex-col" style={{width: '80%'}}>
-            <p>{trip.joined_buddies} of {trip.buddies} travel buddies joined</p>
-            <div className="relative h-4 tripdetail-buddies-track">
-                <div className="absolute h-full top-0 left-0 bg-green-100" style={{width: (trip.joined_buddies / trip.buddies) ? (trip.joined_buddies / trip.buddies) * 100 + '%': 0 + '%'}}></div>
-            </div>
-          
-          </div>
-          }
-        </div>
-
-        <div className="trip-description mt-8" >
-        <h2 className="font-circular-bold">Description</h2>
+        <div className="trip-description mt-8">
           <p className="max-w-full md:max-w-4xl">{trip.description}</p>
         </div>
-        
-        {/*
+
         <div className="buddies-checklist mt-10">
           <h2 className="font-circular-bold">Buddies Checklist</h2>
           <div className="buddies-list grid md:grid-cols-3 md:gap-8 grid-cols-2">
-            {trip?.checklists?.map((item, index) => (
+            {trip.checklists && trip.checklists.map((item, index) => (
               <div className="flex items-center" key={index}>
                 <Icon icon="checkmark" cname="flex-none" />
                 <p className="pl-1 whitespace-nowrap">{item}</p>
               </div>
             ))}
           </div>
-            </div> */}
-
-        <div className="meeting-point mt-10">
-          <h2 className="font-circular-bold">Meeting point</h2>
-          <p className="">{trip.meeting_point}</p>
         </div>
 
+        <div className="meeting-point mt-10">
+          <h2 className="font-circular-bold ">Meeting point</h2>
+          <p className="">{trip.meeting_point}</p>
+        </div>
+      </section>
+
+      <section className="final-travel-info mt-10 xl:max-w-lg">
+        <TripPhoto images={trip.images} />
         <div className="travel-cost-breakdown mt-10">
           <TravelCostBreakdown
             currency={trip.currency}
@@ -198,25 +185,7 @@ const About = ({ trip, user_is_buddy }) => {
             total={total}
           />
         </div>
-        {user.id === trip.user_id && user.joined_buddies > 0 && moment().isAfter(moment(trip.end_date)) &&
-        <div className="mt-10">
-            <Link href={`${slug}/requestfund`}>
-              <a>
-                <Button
-                  btnStyle="bg-orange font-circular-bold text-white px-4 py-2 mt-3 md:mt-0 rounded"
-                  btnText="Request for funds"
-                />
-              </a>
-            </Link>
-          </div>
-        }
-      
-        <div className="my-10">
-          <ShareTrip trip={trip} />
-        </div>
-      
       </section>
-      
     </div>
     </>
   );

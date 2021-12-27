@@ -90,7 +90,7 @@ const DetailTripCard = ({
                     <Link href={`/messaging/${slug}`}>Group Chat</Link>
                   </li>
                   <li className="py-3 rounded px-10 text-center">
-                    <Link href={`/trip/${slug}`}>Trip Details</Link>
+                    <Link href={`/trip/${slug}/detail`}>Trip Details</Link>
                   </li>
                 </ul>
               </div>

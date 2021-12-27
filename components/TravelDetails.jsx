@@ -30,16 +30,16 @@ const TravelDetails = ({ trip, user }) => {
                 <div className="progress-bar bg-green-dark absolute w-0 h-4 rounded-10" style={{ width: `${ trip.joined_buddies / trip.buddies * 100}%` }}></div>
               </div>
               <p className="pt-2">
-                This trip needs {Math.floor(0.7 * trip.buddies)} more buddies to join before you can request
-                for withdrawal
+                You'll be able to request for withdrawal when the trip ends 
               </p>
+              {/*
               <div className="mt-4">
                 <Link href="/requestfund">
                   <a>
                     <Button btnType="fill" btnText="Request for funds" />
                   </a>
-                </Link>
-              </div>
+              </Link> 
+              </div>*/}
             </div>
           </div>
 
@@ -53,7 +53,7 @@ const TravelDetails = ({ trip, user }) => {
           <div className="buddies-checklist mt-10">
             <h2 className="font-circular-bold">Buddies Checklist</h2>
             <div className="buddies-list grid md:grid-cols-4 md:gap-4 grid-cols-2 pt-4">
-              {trip.checklists.map((item, index) => (
+              {trip.checklists && trip.checklists.map((item, index) => (
                 <div className="flex items-center" key={index}>
                   <Icon icon="checkmark" />
                   <p className=" pl-1">{item}</p>
@@ -72,12 +72,12 @@ const TravelDetails = ({ trip, user }) => {
           <div className="price-breakdown pt-10">
             <PriceBreakdown trip={trip} />
           </div>
-
+          {/*
           <div className="mt-8">
               <a>
                 <Button btnType="fill" btnText="Request for funds" />
               </a>
-          </div>
+          </div>*/}
         </div>
       </section>
 
