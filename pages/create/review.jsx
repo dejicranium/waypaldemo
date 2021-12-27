@@ -95,7 +95,7 @@ const CreateTripReview = () => {
   
             return axios
               .post("https://api.cloudinary.com/v1_1/waypal/image/upload", data)
-              .then((d) => uploadedImages.push(d.data.url))
+              .then((d) =>d.data.url)
               .catch(err=> {
                 setLoading(false)
                 setStep("")

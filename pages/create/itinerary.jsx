@@ -56,11 +56,11 @@ const CreateItinerary = () => {
     let isValid = true;
 
     itineraryData.current.forEach((data) => {
-      //if (data.location && data.description) return;
-     // isValid = false;
-      /*setRequired(
+      if (data.location && data.description) return;
+      isValid = false;
+      setRequired(
         "Please fill in location and description fields for all itineraries"
-      );*/
+      );
     });
 
     if (!isValid) return;
@@ -68,7 +68,6 @@ const CreateItinerary = () => {
     const itineraries = [];
 
     itineraryData.current.forEach((e, i) => {
-      //itineraries.push({ ...e, image: [i] });
       itineraries.push({ ...e, image: [i] });
     });
 
@@ -121,19 +120,16 @@ const CreateItinerary = () => {
       image: "",
       location: "",
       description: "",
-      date:""
     };
-    init.date = start_date;
     for (let i = 0; i <= tripDays; i += 1) {
       const initData = createTrip?.itineraries[i] || init;
-      
       itineraryData.current.push(initData);
 
       itenararyInputs.push(
         <ItineraryInput
           index={i}
-          key={initData.date}
-          date={initData.date}
+          key={date}
+          date={date}
           id={`it-${i}`}
           errors={errors}
           register={register}
@@ -145,7 +141,6 @@ const CreateItinerary = () => {
         />
       );
 
-      init.date = add(new Date(init.date), { days: 1 }).toISOString();
       date = add(new Date(date), { days: 1 }).toISOString();
     }
     setItems(itenararyInputs);
