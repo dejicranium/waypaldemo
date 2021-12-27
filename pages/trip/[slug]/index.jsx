@@ -38,15 +38,26 @@ const TripPage = ({ trip, notFound }) => {
   
   }, []);
 
-  const tabs = [
+  const general_tabs = [
+    {
+      name: "TRIP DETAILS",
+      render: <About trip={trip} user_is_buddy={user_is_buddy} />,
+    },
+    {
+      name: "ITINERARY",
+      render: <Itinerary trip={trip} user={user} />,
+    },
+   
+  ];
+  const user_buddy_tabs = [
     {
       name: "ABOUT",
       render: <About trip={trip} user_is_buddy={user_is_buddy} />,
     },
-    /*{
+    {
       name: "ITINERARY",
-      render: <Itinerary trip={trip} />,
-    },*/
+      render: <Itinerary trip={trip} user={user} />,
+    },
     {
       name: "BUDDIES",
       render: <Buddies trip={trip} user={user} />,
@@ -82,14 +93,24 @@ const TripPage = ({ trip, notFound }) => {
           </section>
 
           <section className="tab-section mt-10 container">
-            {trip.user_id === user.id && 
-              <Tabs data={tabs} />
+            {user && (trip.user_id === user.id || user_is_buddy) && 
+             
+              <Tabs data={user_buddy_tabs} />
             }
 
+            {user && trip.user_id !== user.id && 
+                <Tabs data={general_tabs} />
+
+            }
+            {!user && 
+                <Tabs data={general_tabs} />
+            }
+            
+{/*
             { trip.user_id !== user.id && 
               <About trip={trip} user_is_buddy={user_is_buddy}/>
-            }
-          </section>
+            } */}
+          </section> 
 
           <Footer>
             <ShowLuggage />

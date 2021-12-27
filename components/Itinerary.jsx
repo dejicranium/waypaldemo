@@ -24,7 +24,7 @@ const Itinerary = ({ trip }) => {
         <div className="trip-info grid md:grid-cols-4 md:gap-8 grid-cols-2 mt-8">
           <div className="profile flex items-center">
             <Icon icon="profile" cname="pr-3 flex-none" />
-            <p className="xl:whitespace-nowrap">Felix Obinna</p>
+            <p className="xl:whitespace-nowrap">{trip.user.firstname + ' ' + trip.user.lastname}</p>
           </div>
           <div className="buddies flex items-center">
             <Icon icon="buddies" cname="pr-3 flex-none" />
@@ -40,10 +40,11 @@ const Itinerary = ({ trip }) => {
               {format(new Date(trip.start_date), "MMMM do, y")}
             </p>
           </div>
+          {/*
           <div className="profile flex items-center justify-end">
             <Icon icon="like" cname="pr-3 cursor-pointer" />
             <Icon icon="share" cname="cursor-pointer" />
-          </div>
+          </div>*/}
         </div>
 
         <div className="itinerary-card">
