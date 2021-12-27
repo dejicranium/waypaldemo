@@ -18,11 +18,19 @@ const MoreResults = (prop) => {
       <div className="trip-card__details w-8/12">
         <h2 className="text-black-content font-circular-black text-base md:text-2xl flex justify-between">
           <span className="">{prop.trip.destination}</span> 
+          <span>${prop.trip.travel_amount + prop.trip.miscellaneous_amount + prop.trip.accommodation_amount }</span>
+
         </h2>
-        <span className="text-sm">{moment(prop.trip.start_date).format("dddd, MMMM DD, YYYY")}</span>
+        <div className="flex justify-between">
+          <span className="text-sm">{moment(prop.trip.start_date).format("dddd, MMMM DD, YYYY")}</span>
+          <span className="text-sm">{prop.trip.buddies} buddies</span>
+
+        </div>
         <div>
         </div>
       </div>
+      {/*
+      
       <div className="flex-col flex w-3/12">
         <h2 className="text-black-content font-circular-black text-base md:text-2xl flex justify-between">
           <span>${prop.trip.travel_amount + prop.trip.miscellaneous_amount + prop.trip.accommodation_amount }</span>
@@ -30,6 +38,7 @@ const MoreResults = (prop) => {
         <span className="text-sm">{prop.trip.buddies} buddies</span>
 
       </div>
+      */}
      
     </div>
   );

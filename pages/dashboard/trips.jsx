@@ -8,6 +8,7 @@ import WaypalFooter from "../../components/WaypalFooter";
 import UpcomingTrips from "../../components/UpcomingTrips";
 import DashboardSidebar from "../../components/DashboardSidebar";
 import { isoToDate } from "../../assets/js/utils";
+import moment from 'moment';
 
 const Trips = () => {
 
@@ -23,7 +24,7 @@ const Trips = () => {
     hosted = hosted.data;
     const followedTrips = await getRequest("/user/trips/followed") ;
     const past= followedTrips?.data?.items.filter((trip) => {
-      return isBefore(new Date(), new Date(trip.Trip.start_date));
+      return isBefore(new Date(trip.Trip.start_date), new Date() );
     })|| []
 
     const upcoming = followedTrips.data?.items.filter((trip) => {
@@ -87,7 +88,8 @@ export async function getServerSideProps({ req: { cookies } }) {
 
   if (followedTrips && followedTrips.data) {
     pastTrips = followedTrips?.data?.items.filter((trip) => {
-      return isBefore(new Date(trip.Trip.start_date), new Date());
+      return moment().isAfter(trip.Trip.start_date)
+      
     })|| []
   }
 

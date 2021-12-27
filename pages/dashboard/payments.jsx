@@ -54,7 +54,7 @@ const Payments = ({ payments }) => {
                 No transactions...yet 
               </h1>
               <p className="md:text-2xl max-w-sm pt-4">
-                Get paid for trips you host on Paypal
+                Get paid for trips you host on WayPal
               </p>
               <div className="pt-7">
                 <Button

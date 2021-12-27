@@ -16,9 +16,6 @@ const SearchBar = (props) => {
     dispatch,
   } = useData();
  
-  useEffect(() => {
-    //alert(new URLSearchParams(window.location.search))
-  }, [])
   return (
     <div className="flex">
       <div className="flex flight-search bg-white rounded max-w-3xl border border-gray-light6 divide-x">

@@ -258,24 +258,26 @@ const Header = ({ open, setOpen }) => {
 
                 {/* Top Destinations */}
                 <div className="my-2 text-base text-black font-circular-bold pb-4">
-                  <Link href="/search">
+                  <Link href="/#top-destinations">
                     <a onClick={openingLink}>Top destinations</a>
                   </Link>
                 </div>
                 {/* Explore */}
                 <div className="my-2 text-base text-black font-circular-bold pb-4">
-                  <Link href="/search">
+                  <Link href="/#top-destinations">
                     <a onClick={openingLink}>Explore</a>
                   </Link>
                 </div>
                 {/* Dashboard */}
+              
                 {isLoggedIn && (
                   <>
+                    {/*
                     <div className="my-2 text-base text-black font-circular-bold pb-4">
                       <Link href="/dashboard/profile">
                         <a onClick={openingLink}>Dashboard</a>
                       </Link>
-                    </div>
+                    </div> */}
 
                     {/* Dashboard links */}
                     <div className="dashboard-links border-t pt-6">

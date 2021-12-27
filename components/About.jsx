@@ -20,6 +20,8 @@ import { postRequest } from "../actions/connection";
 
 
 const About = ({ trip, user_is_buddy }) => {
+  const { push } = useRouter();
+
    const {
     dispatch,
      data: { currentTrip, user },
@@ -152,13 +154,16 @@ const About = ({ trip, user_is_buddy }) => {
           <div className="tripdetail-notification-icon">
             <Icon icon="money-bag"/>
           </div>
-
-          <div className="flex flex-col" style={{width: '80%'}}>
+          
+          {trip.user_id === user.id || user_is_buddy && 
+            <div className="flex flex-col" style={{width: '80%'}}>
             <p>{trip.joined_buddies} of {trip.buddies} travel buddies joined</p>
             <div className="relative h-4 tripdetail-buddies-track">
                 <div className="absolute h-full top-0 left-0 bg-green-100" style={{width: (trip.joined_buddies / trip.buddies) ? (trip.joined_buddies / trip.buddies) * 100 + '%': 0 + '%'}}></div>
             </div>
+          
           </div>
+          }
         </div>
 
         <div className="trip-description mt-8" >
