@@ -39,13 +39,6 @@ const Buddies = ({ trip, user }) => {
             btnType="plain"
             btnStyle="text-orange font-circular-bold"
           />*/}
-          <div className="mt-4">
-            {trip.joined_buddies && trip.joined_buddies > 0 &&  moment().isAfter(moment(trip.end_date))  &&
-              <a>
-                <Button btnType="fill" btnText="Request for funds" />
-              </a>
-            }
-          </div>
           
         </div>
       </section>
