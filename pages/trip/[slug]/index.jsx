@@ -102,9 +102,7 @@ const TripPage = ({ trip, notFound }) => {
                 <Tabs data={general_tabs} />
 
             }
-            {!user && 
-                <Tabs data={general_tabs} />
-            }
+            
             
 {/*
             { trip.user_id !== user.id && 
