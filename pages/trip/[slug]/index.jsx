@@ -98,17 +98,14 @@ const TripPage = ({ trip, notFound }) => {
               <Tabs data={user_buddy_tabs} />
             }
 
-            {user && trip.user_id !== user.id && 
+            {user && trip.user_id !== user.id && !user_is_buddy &&
                 <Tabs data={general_tabs} />
 
             }
-            
-            
-{/*
-            { trip.user_id !== user.id && 
-              <About trip={trip} user_is_buddy={user_is_buddy}/>
-            } */}
-          </section> 
+            {!user && 
+              <Tabs data={general_tabs} />
+            }
+           </section> 
 
           <Footer>
             <ShowLuggage />
