@@ -129,7 +129,7 @@ const Search = () => {
                   Top results
                   
                 </h2>
-                <div className="md:grid-cols-1 lg:grid-cols-2 gap-4 w-full grid">  
+                <div className="md:grid-cols-1 lg:grid-cols-1 gap-4 w-full grid">  
                 {topSearchResults.length > 0 ? topSearchResults.map((trip) => {
                   
                   return <MoreResults key={trip.id} trip={trip} />

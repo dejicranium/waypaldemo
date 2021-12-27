@@ -24,9 +24,19 @@ const MoreResults = (prop) => {
         <div className="flex justify-between">
           <span className="text-sm">{moment(prop.trip.start_date).format("dddd, MMMM DD, YYYY")}</span>
           <span className="text-sm">{prop.trip.buddies} buddies</span>
-
         </div>
         <div>
+        <div className="buddies-checklist mt-10">
+          <h2 className="font-circular-bold">Buddies Checklist</h2>
+          <div className="buddies-list grid md:grid-cols-3 md:gap-8 grid-cols-2">
+            {prop.trip.checklists && prop.trip.checklists.map((item, index) => (
+              <div className="flex items-center" key={index}>
+                <Icon icon="checkmark" cname="flex-none" />
+                <p className="pl-1 whitespace-nowrap">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
         </div>
       </div>
       {/*
