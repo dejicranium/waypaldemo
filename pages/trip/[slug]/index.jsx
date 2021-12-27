@@ -40,7 +40,7 @@ const TripPage = ({ trip, notFound }) => {
 
   const general_tabs = [
     {
-      name: "TRIP DETAILS",
+      name: "About",
       render: <About trip={trip} user_is_buddy={user_is_buddy} />,
     },
     {

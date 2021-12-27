@@ -220,7 +220,7 @@ const CreateTrip = () => {
                           createTrip?.end_date,
                           "YYYY-MM-DD"
                         )}
-                        isValidDate={(current) => current.isAfter(startDate)}
+                        isValidDate={(current) => current.isAfter(moment(startDate).subtract(1, 'days'))}
                       /> 
                     )}
                   />
