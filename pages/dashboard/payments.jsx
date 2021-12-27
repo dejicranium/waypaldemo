@@ -51,18 +51,18 @@ const Payments = ({ payments }) => {
             <div className="pt-24 md:flex justify-between max-w-3xl">
             <div>
               <h1 className="text-2xl md:text-5xl font-circular-bold text-black-light">
-                No transactions...yet 
+                No transactions...yet 👀
               </h1>
               <p className="md:text-2xl max-w-sm pt-4">
-                Get paid for trips you host on WayPal
+                Transactions for trips that you joined will show here.
               </p>
               <div className="pt-7">
                 <Button
                     key={2}
                     onClick={() => {
-                      push("/create")
+                      push("/search")
                     }}
-                    btnText="Create a trip"
+                    btnText="Explore trips"
                     btnStyle="mr-6 bg-orange text-white px-4 py-2 rounded"
                   />
               </div>
