@@ -4,6 +4,7 @@ import WaypalFooter from "../../components/WaypalFooter";
 import DashboardSidebar from "../../components/DashboardSidebar";
 import Button from "../../components/common/Button";
 import { useRouter } from "next/router";
+import moment from "moment";
 
 let transactions = require("../../assets/data/transactions.json");
 
@@ -36,12 +37,12 @@ const Payments = ({ payments }) => {
                           ${transaction.amount}
                         </p>
                         <p className="date text-xs text-gray-light">
-                          {transaction.date}
+                          {moment(transaction.createdAt).format("YYYY-MM-DD")}
                         </p>
                       </div>
                     </div>
                     <div className="location text-gray-light">
-                      <p>{transaction.location}</p>
+                      <p>{transaction.trip.title}</p>
                     </div>
                   </div>
                 ))}
