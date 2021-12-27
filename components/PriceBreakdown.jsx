@@ -51,10 +51,10 @@ const PriceBreakdown = ({ trip }) => {
           </div>
         </div>
         <div className="flex justify-between pt-3 border-b">
-          <p className="pb-3">Amount paid</p>
+          <p className="pb-3">Total Amount</p>
           <p className="pl-28 font-bold">
             {formatCurrency(trip.currency)}
-            {trip.total_paid_amount}
+            {parseFloat(trip.accommodation_amount) + parseFloat(trip.miscellaneous_amount) + parseFloat(trip.travel_amount) + parseFloat(taxes)}
           </p>
         </div>
       </div>
