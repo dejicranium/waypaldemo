@@ -1,6 +1,7 @@
 import { isBefore, isAfter } from "date-fns";
 import { useState, useEffect, useRef } from 'react';
 import Tabs from "../../components/Tabs";
+import Toast from "../../components/Toast";
 import PastTrips from "../../components/PastTrips";
 import { getRequest } from "../../actions/connection";
 import HostedTrips from "../../components/HostedTrips";
@@ -17,6 +18,7 @@ const Trips = () => {
   const [upcomingTrips, setUpcomingTrps] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setErrir] = useState("")
+  const [intent, setIntent] = useState(new URLSearchParams(window.location.search) ? new URLSearchParams(window.location.search).get("intent"): "")
 
   useEffect(async() => {
     let hosted= await getRequest(`/user/trips/`);

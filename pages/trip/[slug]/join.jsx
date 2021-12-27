@@ -115,17 +115,21 @@ const JoinTrip = ({ trip, notFound }) => {
 
 
   const makePayment = async () => {
+
     const totalAmount =
       trip.travel_amount +
       trip.miscellaneous_amount +
-      trip.accommodation_amount;
+      trip.accommodation_amount ;
+    
+      const taxes = ((totalAmount / 100) * 7.5).toFixed(2);
+
     const tripRef = await postRequest("/payment/reference", {
       trip_id: trip.id,
-      amount: totalAmount,
+      amount: totalAmount + taxes,
     });
     FlutterwaveCheckout({
       public_key: process.env.NEXT_PUBLIC_FLW_PUBKEY || "FLWPUBK_TEST-e679c6bbfd1c677f398ecd55f013afd1-X",
-      amount: totalAmount,
+      amount: totalAmount + taxes,
       tx_ref: tripRef.data.reference,
       currency: trip.currency,
       country: "NG",
@@ -140,10 +144,7 @@ const JoinTrip = ({ trip, notFound }) => {
         );
         if (payment.status) {
           dispatch({ currentTrip: {...trip}})
-          push({
-            pathname: "successful",
-            query: { slug: trip.slug },
-          });
+          push(`/dashboard/trips`);
         }
       },
       customizations: {

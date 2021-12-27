@@ -24,7 +24,7 @@ const PaymentSuccessful = () => {
           <ShareTrip trip={currentTrip} />
         </div>
         <div className="mt-6 flex items-center justify-between max-w-xxs mx-auto">
-          <Link href={`/trip/${currentTrip.slug}`}>
+          <Link href={`/dashboard/trips?intent=createdtrip`}>
             <a>
           <Button btnText="See trip details" btnType="fill" />
           </a>
