@@ -23,7 +23,7 @@ const MoreResults = (prop) => {
         </h2>
         <div className="flex justify-between">
           <span className=" text-gray">{moment(prop.trip.start_date).format("dddd, MMMM DD, YYYY")}</span>
-          <span className=" text-gray">{prop.trip.buddies} buddies</span>
+          <span className=" text-gray">{prop.trip.buddies - prop.trip.joined_buddies} buddies left</span>
         </div>
         <div>
         <div className="buddies-checklist mt-10">
