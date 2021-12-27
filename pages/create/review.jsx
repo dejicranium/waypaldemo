@@ -49,8 +49,7 @@ const CreateTripReview = () => {
     );
 
 
-    let uploadedImages = [];
-    await Promise.all(
+    let uploadedImages = await Promise.all(
       uploadTripImages.map((e) => {
         const data = new FormData();
         data.append("file", e);
@@ -86,7 +85,6 @@ const CreateTripReview = () => {
     const itineraryImages = await Promise.all(
       getItineraryBlobs.map((e) => {
         if (e.type !== "text/html") {
-          if (e) {
 
             const data = new FormData();
             data.append("file", e);
@@ -100,7 +98,7 @@ const CreateTripReview = () => {
                 setLoading(false)
                 setStep("")
               })
-          }
+          
         }
         return;
       })
