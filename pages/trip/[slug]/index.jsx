@@ -11,11 +11,8 @@ import useData from '../../../components/hooks/useData';
 
 const TripPage = ({ trip, notFound }) => {
   const { push } = useRouter();
-  const [user_is_buddy, setUserAsBuddy] = useState(false);
-  const [emergency_first_name, setEmergencyFirstName] = useState(false);
-  const [emergency_last_name, setEmergencyLastName] = useState(false);
-  const [emergency_email, setEmergencyEmail] = useState(false);
-  const [emergency_phone_number, setEmergencyPhoneNumber] = useState(false);
+  const [user_is_buddy, setUserAsBuddy] = useState(true);
+
   /*
   if (notFound) {
     push("/404");
@@ -37,6 +34,7 @@ const TripPage = ({ trip, notFound }) => {
       if (buddies && buddies.length > 0) {
         const exists = buddies.find(b => b.user_id == user.id)
         if (exists) setUserAsBuddy(true)
+        else setUserAsBuddy(false)
       }
        
   
@@ -45,7 +43,7 @@ const TripPage = ({ trip, notFound }) => {
   const tabs = [
     {
       name: "ABOUT",
-      render: <About trip={trip} user_is_buddy={user_is_buddy} />,
+      render: <About trip={trip}  />,
     },
     {
       name: "ITINERARY",

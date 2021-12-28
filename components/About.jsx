@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Icon from "./common/Icon";
 import ShareTrip from "../components/ShareTrip"
 import TripPhoto from "./TripPhoto";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from "./common/Button";
 import useData from "./hooks/useData";
 import { getRequest } from "../actions/connection";
@@ -19,7 +19,7 @@ import moment from "moment";
 import { postRequest } from "../actions/connection";
 
 
-const About = ({ trip, user_is_buddy }) => {
+const About = ({ trip,  }) => {
   const { push } = useRouter();
 
    const {
@@ -29,9 +29,33 @@ const About = ({ trip, user_is_buddy }) => {
 
   const [authMode, setAutMode]  = useState('login');
   const [showModal, setShowModal]  = useState(false);
+  const [user_is_buddy, setUserAsBuddy] = useState(false);
+  const [loading, setLoading] = useState(true);
+
   const {
     query: { slug },
   } = useRouter();
+
+    
+  useEffect(async() => {
+    //if (user.id === trip.user_id) {
+      //user_is_owner = true;
+      let buddies  = await getRequest(`/trip/${trip.id}/buddies`);
+      buddies = buddies.data;
+
+      if (buddies && buddies.length > 0) {
+        const exists = buddies.find(b => b.user_id === user.id)
+        if (exists) {
+          setUserAsBuddy(true)
+        }
+        else {
+          setUserAsBuddy(false)
+        }
+      }
+      setLoading(false)
+       
+  
+  }, []);
 
   const amount = [
     trip.travel_amount,
@@ -104,22 +128,23 @@ const About = ({ trip, user_is_buddy }) => {
             <span className=""> -</span> {formatCurrency(trip.currency)}
             {formatAmount(total)}
           </h1>
-          <div className="">
-           
-                  <Button
-                    onClick={() => {
-                      setAutMode("register")
-                      //makePayment();
-                      push(`/trip/${trip.slug}/join`)
-                    }}
-                    className="hidden"
-                    style={{display: trip.user_id !== user.id && !user_is_buddy ? 'block': 'hidden'}}
-                    btnStyle="bg-orange font-circular-bold text-white px-4 py-2 mt-3 md:mt-0 rounded"
-                    btnText="Join this trip"
-                  />
-                
-             
-          </div>
+          
+            <div className="">
+                    {trip.user_id !== user.id && !user_is_buddy && !loading &&
+                      <Button
+                        onClick={() => {
+                          setAutMode("register")
+                          //makePayment();
+                          push(`/trip/${trip.slug}/join`)
+                        }}
+                        btnStyle="bg-orange font-circular-bold text-white px-4 py-2 mt-3 md:mt-0 rounded"
+                        btnText="Join this trip"
+                      />
+                    }
+                  
+              
+            </div>
+          
         </div>
 
         <div className="trip-info grid md:grid-cols-4 md:gap-8 grid-cols-2 mt-8">

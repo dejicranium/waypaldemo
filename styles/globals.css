@@ -445,6 +445,11 @@ input {
     justify-content: space-between;
  }
 
+ .traveler-info {
+     width: 70%;
+     
+ }
+
  .tripdetail-notification-icon {
      width: 20%;
      padding-right: 20px;

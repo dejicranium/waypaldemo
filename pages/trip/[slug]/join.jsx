@@ -248,7 +248,7 @@ const JoinTrip = ({ trip, notFound }) => {
             isLoggedIn && user.verified !== "APPROVED" && user.verified !== "ATTEMPTED" && 
             <> 
               <div className="container lg:flex justify-between lg:space-x-10">
-                <section className="traveler-info lg:w-7/12 md:12/12">
+                <section className="traveler-info">
                   <div className="mt-8">
                     
                     <p className="pt-2 text-black-content md:max-w-2xl">
@@ -305,7 +305,7 @@ const JoinTrip = ({ trip, notFound }) => {
                       <div className="name-column md:grid grid-cols-2 gap-x-2">
                         <InputField
                           type="text"
-                          placeholder="First name*"
+                          placeholder="First name"
                           className="mb-3"
                           value={user.firstname}
                           disabled
@@ -320,7 +320,7 @@ const JoinTrip = ({ trip, notFound }) => {
                         />
                         <InputField
                           type="text"
-                          placeholder="Last name*"
+                          placeholder="Last name"
                           className="mb-3"
                           value={user.lastname}
                           disabled
@@ -383,7 +383,7 @@ const JoinTrip = ({ trip, notFound }) => {
                                 defaultCountry="ng"
                                 onChange={(e) => setPhoneNumber(e.target.value)}
 
-                                placeholder="Phone number*"
+                                placeholder="Phone number"
                                 preferredCountries={["ng"]}
                                 inputClassName="input-element w-full"
                                 value={user.phone_number}
@@ -467,7 +467,7 @@ const JoinTrip = ({ trip, notFound }) => {
                     <div className="emergency-contact-col md:grid grid-cols-2 gap-x-3 py-4">
                         <InputField
                           type="text"
-                          placeholder="First name*"
+                          placeholder="First name"
                           className="mb-3"
                           defaultValue={user.emergency_first_name}
                           innerref={register("emergency_first_name", {
@@ -487,7 +487,7 @@ const JoinTrip = ({ trip, notFound }) => {
                         />
                         <InputField
                           type="text"
-                          placeholder="Last name*"
+                          placeholder="Last name"
                           className="mb-3"
                           defaultValue={user.emergency_last_name}
                           innerref={register("emergency_last_name", {
@@ -506,7 +506,7 @@ const JoinTrip = ({ trip, notFound }) => {
                         />
                         <InputField
                           type="email"
-                          placeholder="Email address*"
+                          placeholder="Email address"
                           defaultValue={user.emergency_email}
                           className="mb-3"
                           innerref={register("emergency_email", {
@@ -537,7 +537,7 @@ const JoinTrip = ({ trip, notFound }) => {
                                 format
                                 defaultCountry="ng"
                                 defaultValue={user.emergency_phone_number}
-                                placeholder="Phone number*"
+                                placeholder="Phone number"
                                 preferredCountries={["ng"]}
                                 inputClassName="input-element w-full"
                                 onChange={(e) => setEmergencyPhoneNumber(e.target.value)}
