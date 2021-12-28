@@ -153,7 +153,7 @@ const JoinTrip = ({ trip, notFound }) => {
   }
 
   const validateProfilenput = () => {
-    if (!date_of_birth || !emergency_email || !emergency_first_name || !emergency_last_name || !emergency_phone_number || !phone_number || !date_of_birth || !gender) { 
+    if (!date_of_birth || !emergency_email || !emergency_first_name || !emergency_last_name || !emergency_phone_number || !phone_number || !gender) { 
       setError("Please fill all fields");
       return false;
     }
@@ -405,7 +405,12 @@ const JoinTrip = ({ trip, notFound }) => {
                           className="mb-3 input-element"
                           
                           onChange={(e) => {
-                              setGender(e.target.value);                        
+                              if (e.target.value) {
+                                setGender(e.target.value);                        
+                              }
+                              else {
+                                setGender(user.gender)
+                              }
                           }}
                           >
                           <option disabled>Gender</option>
@@ -419,7 +424,9 @@ const JoinTrip = ({ trip, notFound }) => {
                         
                           <Datetime
                             onChange={(v) => {
-                              setDateOfBirth(v.format("YYYY-MM-DD"));
+                              
+                                setDateOfBirth(v.format("YYYY-MM-DD"));
+                              
                             }}
                             required
                             closeOnSelect
