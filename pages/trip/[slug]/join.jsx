@@ -382,13 +382,12 @@ const JoinTrip = ({ trip, notFound }) => {
                                 format
                                 defaultCountry="ng"
                                 onChange={(e) => setPhoneNumber(e.target.value)}
-
                                 placeholder="Phone number"
                                 preferredCountries={["ng"]}
                                 inputClassName="input-element w-full"
                                 defaultValue={user.phone_number}
                                 containerClassName="intl-tel-input w-full"
-                                onPhoneNumberChange={(_e, v, c) => onChange(v)}
+                                onPhoneNumberChange={(_e, v, c) => {onChange(v); setPhoneNumber(v)}}
                               />
                             )}
                           />
@@ -551,7 +550,7 @@ const JoinTrip = ({ trip, notFound }) => {
 
                                 // defaultValue={user?.emergency_phone_number || null}
                                 containerClassName="intl-tel-input w-full"
-                                onPhoneNumberChange={(_e, v, c) => onChange(v)}
+                                onPhoneNumberChange={(_e, v, c) => {onChange(v); setEmergencyPhoneNumber(v)}}
                               />
                             )}
                           />
