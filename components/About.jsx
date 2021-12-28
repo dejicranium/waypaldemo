@@ -33,13 +33,6 @@ const About = ({ trip, user_is_buddy }) => {
     query: { slug },
   } = useRouter();
 
-  // const setCurrentTrip = async () => {
-  //   const trip = await getRequest(`/trip/by/slug/${slug}`);
-  //   if (trip.status) {
-  //     dispatch({ currentTrip: { ...trip.data } });
-  //   }
-  // };
-
   const amount = [
     trip.travel_amount,
     trip.accommodation_amount,
@@ -113,17 +106,18 @@ const About = ({ trip, user_is_buddy }) => {
           </h1>
           <div className="">
            
-                {user.id !== trip.user_id && !user_is_buddy &&
                   <Button
                     onClick={() => {
                       setAutMode("register")
                       //makePayment();
                       push(`/trip/${trip.slug}/join`)
                     }}
+                    className="hidden"
+                    style={{display: trip.user_id !== user.id && !user_is_buddy ? 'block': 'hidden'}}
                     btnStyle="bg-orange font-circular-bold text-white px-4 py-2 mt-3 md:mt-0 rounded"
                     btnText="Join this trip"
                   />
-                }
+                
              
           </div>
         </div>
