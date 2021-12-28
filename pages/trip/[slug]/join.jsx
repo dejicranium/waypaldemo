@@ -192,7 +192,7 @@ const JoinTrip = ({ trip, notFound }) => {
 
     const tripRef = await postRequest("/payment/reference", {
       trip_id: trip.id,
-      amount: totalAmount + taxes,
+      amount: parseFloat(totalAmount).toFixed(2) + parseFloat(taxes).toFixed(2),
     });
 
     if (!tripRef || !tripRef.data) {
@@ -202,7 +202,7 @@ const JoinTrip = ({ trip, notFound }) => {
 
     FlutterwaveCheckout({
       public_key: process.env.NEXT_PUBLIC_FLW_PUBKEY || "FLWPUBK_TEST-e679c6bbfd1c677f398ecd55f013afd1-X",
-      amount: totalAmount + taxes,
+      amount: parseFloat(totalAmount).toFixed(2) + parseFloat(taxes).toFixed(2),
       tx_ref: tripRef.data.reference,
       currency: trip.currency,
       country: "NG",
@@ -386,7 +386,7 @@ const JoinTrip = ({ trip, notFound }) => {
                                 placeholder="Phone number"
                                 preferredCountries={["ng"]}
                                 inputClassName="input-element w-full"
-                                value={user.phone_number}
+                                defaultValue={user.phone_number}
                                 containerClassName="intl-tel-input w-full"
                                 onPhoneNumberChange={(_e, v, c) => onChange(v)}
                               />
