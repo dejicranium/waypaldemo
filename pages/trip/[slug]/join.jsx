@@ -17,30 +17,14 @@ import PaymentBreakdown from "../../../components/PaymentBreakdown";
 import { postRequest, putRequest, getRequest } from "../../../actions/connection";
 import { createVeriffFrame, MESSAGES } from "@veriff/incontext-sdk";
 import Toast from '../../../components/Toast'
+import Spinner from '../../../components/Spinner'
 
 const JoinTrip = ({ trip, notFound }) => {
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
 
 
-  const submit = async (values) => {
 
-    let { phone_number, emergency_email, emergency_first_name, emergency_last_name, emergency_phone_number } = values;
-    const updateProfile = await putRequest("/user/saveProfileInfo", {
-      emergency_email,
-      emergency_first_name,
-      emergency_last_name,
-      emergency_phone_number,
-      phone_number,
-    });
-    if (updateProfile.data) {
-      // was successful
-      dispatch({ user: { ...updateProfile.data } });
-      
-    } else {
-      setError(updateProfile.message);
-    }
-  };
 
   const {
     push,
@@ -63,6 +47,35 @@ const JoinTrip = ({ trip, notFound }) => {
 
   const [gender, setGender] = useState(user.gender)
   const [date_of_birth, setDateOfBirth] = useState(user.date_of_birth)
+  const [loading, setLoading] = useState(false)
+
+  const  updateProfile = async (values) => {
+    let { phone_number, emergency_email, emergency_first_name, emergency_last_name, emergency_phone_number } = values;
+    
+/*
+    if (!date_of_birth) {
+      errors.date_of_birth = true;
+      errors.date_of_birth.message = "This field is required"
+      alert('no')
+      return;
+    }*/
+    const updateProfile = await putRequest("/user/saveProfileInfo", {
+      emergency_email,
+      emergency_first_name,
+      emergency_last_name,
+      emergency_phone_number,
+      phone_number,
+      date_of_birth,
+      gender,
+    });
+    if (updateProfile.data) {
+      // was successful
+      dispatch({ user: { ...updateProfile.data } });
+      
+    } else {
+      setError(updateProfile.message);
+    }
+  };
 
   const {
     register,
@@ -139,8 +152,18 @@ const JoinTrip = ({ trip, notFound }) => {
     })
   }
 
+  const validateProfilenput = () => {
+    if (!date_of_birth || !emergency_email || !emergency_first_name || !emergency_last_name || !emergency_phone_number || !phone_number || !date_of_birth || !gender) { 
+      setError("Please fill all fields");
+      return false;
+    }
+    return true;
+     
+  }
 
   const makePayment = async () => {
+    if (!validateProfilenput()) return;
+    setLoading(true)
     const updateProfile = await putRequest("/user/saveProfileInfo", {
       emergency_email,
       emergency_first_name,
@@ -152,9 +175,11 @@ const JoinTrip = ({ trip, notFound }) => {
     });
     if (updateProfile.data) {
       // was successful
+      setLoading(false)
       dispatch({ user: { ...updateProfile.data } });
       
     } else {
+      setLoading(false)
       setError(updateProfile.message);
     }
 
@@ -223,7 +248,7 @@ const JoinTrip = ({ trip, notFound }) => {
             isLoggedIn && user.verified !== "APPROVED" && user.verified !== "ATTEMPTED" && 
             <> 
               <div className="container lg:flex justify-between lg:space-x-10">
-                <section className="traveler-info">
+                <section className="traveler-info lg:w-7/12 md:12/12">
                   <div className="mt-8">
                     
                     <p className="pt-2 text-black-content md:max-w-2xl">
@@ -322,39 +347,8 @@ const JoinTrip = ({ trip, notFound }) => {
                           helptext={errors.suffix && errors.suffix.message}
                           helptextstyle={errors.suffix && "text-red-500"}
                         />
-                        {/*
-                        <div className="date-time">
-                          <Controller
-                            name="date_of_birth"
-                            control={control}
-                            rules={{
-                              required: {
-                                value: true,
-                                message: "This fied is required",
-                              },
-                            }}
-                            render={({ field: { onChange } }) => (
-                              <Datetime
-                                closeOnSelect
-                                timeFormat={false}
-                                dateFormat="YYYY-MM-DD"
-                                inputProps={{
-                                  placeholder: "Date of birth",
-                                  className: "input-element w-full",
-                                }}
-                                onChange={(v) => {
-                                  onChange(v.format("YYYY-MM-DD"));
-                                }}
-                                initialValue={date_of_birth || moment("", "YYYY")}
-                              />
-                            )}
-                          />
-                          {errors.date_of_birth && (
-                            <small className={`text-red-500 block`}>
-                              {errors.date_of_birth.message}
-                            </small>
-                          )}
-                          </div> */}
+                        
+          
                       </div>
                       <div className="personal-info md:grid grid-cols-2 gap-x-2 mt-3">
                         <InputField
@@ -408,21 +402,21 @@ const JoinTrip = ({ trip, notFound }) => {
 
                       <div className="personal-info md:grid grid-cols-2 gap-x-2 mt-3">
                         <select
-                          value={user.gender}
                           className="mb-3 input-element"
-                          required
+                          
                           onChange={(e) => {
                               setGender(e.target.value);                        
                           }}
                           >
-                          <option disabled selected>Gender</option>
+                          <option disabled>Gender</option>
                           <option value="male">Male</option>
                           <option value="female">Female</option>
                         </select>
+                        
 
                         <div className="personal-info">
                           {/* <InputField type="text" placeholder="Email address*" /> */}
-
+                        
                           <Datetime
                             onChange={(v) => {
                               setDateOfBirth(v.format("YYYY-MM-DD"));
@@ -438,10 +432,18 @@ const JoinTrip = ({ trip, notFound }) => {
                           
                             initialValue={user.date_of_birth ? moment(user.date_of_birth).format('YYYY-MM-DD'): ""}
                             isValidDate={(current) => current.isBefore(moment())}
-                            
-
+                            innerref={register('date_of_birth', {
+                              required: {
+                                value: false,
+                                message: "Please enter your date of birth"
+                              }
+                            })}
                             className="mb-3 input-element"
-                          />
+                          />{errors.date_of_birth && (
+                            <small className={`text-red-500 block`}>
+                              {errors.date_of_birth.message}
+                            </small>
+                          )} 
                           
                         </div>
                       </div>
@@ -461,97 +463,99 @@ const JoinTrip = ({ trip, notFound }) => {
                     Same as passenger information above
                   </span>
                 </div> */}
+                  <form>
                     <div className="emergency-contact-col md:grid grid-cols-2 gap-x-3 py-4">
-                      <InputField
-                        type="text"
-                        placeholder="First name*"
-                        className="mb-3"
-                        defaultValue={user.emergency_first_name}
-                        innerref={register("emergency_first_name", {
-                          required: {
-                            value: true,
-                            message: "This field is required",
-                          },
-                        })}
-                        onChange={(e) => setEmergencyFirstName(e.target.value)}
-                        helptext={
-                          errors.emergency_first_name &&
-                          errors.emergency_first_name.message
-                        }
-                        helptextstyle={
-                          errors.emergency_first_name && "text-red-500"
-                        }
-                      />
-                      <InputField
-                        type="text"
-                        placeholder="Last name*"
-                        className="mb-3"
-                        defaultValue={user.emergency_last_name}
-                        innerref={register("emergency_last_name", {
-                          required: {
-                            value: true,
-                            message: "This field is required",
-                          },
-                        })}
-                        onChange={(e) => setEmergencyLastName(e.target.value)}
-
-                        helptext={
-                          errors.emergency_last_name &&
-                          errors.emergency_last_name.message
-                        }
-                        helptextstyle={errors.emergency_last_name && "text-red-500"}
-                      />
-                      <InputField
-                        type="email"
-                        placeholder="Email address*"
-                        defaultValue={user.emergency_email}
-                        className="mb-3"
-                        innerref={register("emergency_email", {
-                          required: {
-                            value: true,
-                            message: "This field is required",
-                          },
-                        })}
-                        onChange={(e) => setEmergencyEmail(e.target.value)}
-
-                        helptext={
-                          errors.emergency_email && errors.emergency_email.message
-                        }
-                        helptextstyle={errors.emergency_email && "text-red-500"}
-                      />
-                      <div className="emergency-phone-number">
-                        <Controller
-                          name="emergency_phone_number"
-                          control={control}
-                          rules={{
+                        <InputField
+                          type="text"
+                          placeholder="First name*"
+                          className="mb-3"
+                          defaultValue={user.emergency_first_name}
+                          innerref={register("emergency_first_name", {
                             required: {
                               value: true,
-                              message: "Please enter a phone number",
+                              message: "This field is required",
                             },
-                          }}
-                          render={({ field: { onChange } }) => (
-                            <IntlTelInput
-                              format
-                              defaultCountry="ng"
-                              defaultValue={user.emergency_phone_number}
-                              placeholder="Phone number*"
-                              preferredCountries={["ng"]}
-                              inputClassName="input-element w-full"
-                              onChange={(e) => setEmergencyPhoneNumber(e.target.value)}
-
-                              // defaultValue={user?.emergency_phone_number || null}
-                              containerClassName="intl-tel-input w-full"
-                              onPhoneNumberChange={(_e, v, c) => onChange(v)}
-                            />
-                          )}
+                          })}
+                          onChange={(e) => setEmergencyFirstName(e.target.value)}
+                          helptext={
+                            errors.emergency_first_name &&
+                            errors.emergency_first_name.message
+                          }
+                          helptextstyle={
+                            errors.emergency_first_name && "text-red-500"
+                          }
                         />
-                        {errors.emergency_phone_number && (
-                          <small className={`text-red-500 block`}>
-                            {errors.emergency_phone_number.message}
-                          </small>
-                        )}
-                      </div>
+                        <InputField
+                          type="text"
+                          placeholder="Last name*"
+                          className="mb-3"
+                          defaultValue={user.emergency_last_name}
+                          innerref={register("emergency_last_name", {
+                            required: {
+                              value: true,
+                              message: "This field is required",
+                            },
+                          })}
+                          onChange={(e) => setEmergencyLastName(e.target.value)}
+
+                          helptext={
+                            errors.emergency_last_name &&
+                            errors.emergency_last_name.message
+                          }
+                          helptextstyle={errors.emergency_last_name && "text-red-500"}
+                        />
+                        <InputField
+                          type="email"
+                          placeholder="Email address*"
+                          defaultValue={user.emergency_email}
+                          className="mb-3"
+                          innerref={register("emergency_email", {
+                            required: {
+                              value: true,
+                              message: "This field is required",
+                            },
+                          })}
+                          onChange={(e) => setEmergencyEmail(e.target.value)}
+
+                          helptext={
+                            errors.emergency_email && errors.emergency_email.message
+                          }
+                          helptextstyle={errors.emergency_email && "text-red-500"}
+                        />
+                        <div className="emergency-phone-number">
+                          <Controller
+                            name="emergency_phone_number"
+                            control={control}
+                            rules={{
+                              required: {
+                                value: true,
+                                message: "Please enter a phone number",
+                              },
+                            }}
+                            render={({ field: { onChange } }) => (
+                              <IntlTelInput
+                                format
+                                defaultCountry="ng"
+                                defaultValue={user.emergency_phone_number}
+                                placeholder="Phone number*"
+                                preferredCountries={["ng"]}
+                                inputClassName="input-element w-full"
+                                onChange={(e) => setEmergencyPhoneNumber(e.target.value)}
+
+                                // defaultValue={user?.emergency_phone_number || null}
+                                containerClassName="intl-tel-input w-full"
+                                onPhoneNumberChange={(_e, v, c) => onChange(v)}
+                              />
+                            )}
+                          />
+                          {errors.emergency_phone_number && (
+                            <small className={`text-red-500 block`}>
+                              {errors.emergency_phone_number.message}
+                            </small>
+                          )}
+                        </div>
                     </div>
+                  </form>
                     {/* <div className="proceed-to-payment mt-14 items-center hidden lg:flex">
                   <p className="font-circular-bold text-orange pr-11">Cancel</p>
                   <Button btnText="Continue to payment" btnType="fill"></Button>
@@ -579,12 +583,18 @@ const JoinTrip = ({ trip, notFound }) => {
                 >
                   Cancel
                 </p>
-                <Button
-                  btnText="Continue to Payment"
-                  btnType="fill"
-                  type="submit"
-                  onClick={makePayment}
-                />
+                {!loading && 
+                  <Button
+                    btnText="Continue to Payment"
+                    btnType="fill"
+                    type="submit"
+                    onClick={makePayment}
+                  />
+                }
+                {loading && 
+                    <Spinner size={1.7} color={"#EA4524"} />
+
+                }
               </div>
             </>
           }
