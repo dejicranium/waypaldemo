@@ -5,7 +5,7 @@ import useData from '../components/hooks/useData';
 import { useState, useEffect } from "react";
 import { getRequest } from '../actions/connection';
 
-const MobileSearch = ({ show, close }) => {
+const MobileSearch = ({ show, close, setLoading }) => {
   const [destination, setDestination] = useState(new URLSearchParams(window.location.search) ? new URLSearchParams(window.location.search).get('destination') : "");
   const [travelDate, setTravelDate] = useState(new URLSearchParams(window.location.search) ? new URLSearchParams(window.location.search).get('travel_date') : "")
   const [buddies, setBuddies] = useState(new URLSearchParams(window.location.search) ? new URLSearchParams(window.location.search).get('buddies') : "");
@@ -60,10 +60,13 @@ const MobileSearch = ({ show, close }) => {
 
             <div className="search mt-4">
               <Button btnText="Search" btnType="fill" btnStyle="w-full" onClick={async()=> {
+                
+                setLoading(true);
+                close()
+
                 let query = {destination, travel_date: travelDate, buddies}; 
                 let query_string = ""
                 
-      
                 Object.keys(query).forEach((key, i)=> {
                   if (query[key]){
                     if (!query_string) query_string += `?${key}=${query[key]}&`
@@ -73,9 +76,10 @@ const MobileSearch = ({ show, close }) => {
                 
                 await getRequest('/search' + query_string).then(response => {
                   dispatch({topSearchResults: response.data.items})
+                  setLoading(false)
                 }).catch(e=> {
+                  setLoading(false);
                 })
-                close()
               }} />
             </div>
           </div>

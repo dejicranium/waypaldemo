@@ -64,6 +64,7 @@ const Search = () => {
     <>
       <div className="mobile-search md:hidden">
         <MobileSearch
+          setLoading={setLoadingResults}
           show={showMobileFilter}
           close={() => {
             setShowMobileFilter(false);
@@ -73,7 +74,7 @@ const Search = () => {
       </div>
       <div className="container mt-7 md:mt-14">
         <section className="search-bar hidden md:block">
-          <SearchBar p_destination={destination} p_travel_date={travelDate} p_buddies={buddies} />
+          <SearchBar setLoading={setLoadingResults} p_destination={destination} p_travel_date={travelDate} p_buddies={buddies} />
         </section>
 
       

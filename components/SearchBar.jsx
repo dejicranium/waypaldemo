@@ -62,6 +62,7 @@ const SearchBar = (props) => {
       <div className="search-button">
         <Button btnText="Search" onClick={async() => {
          // dispatch({topSearchResults: []})
+          props.setLoading(true)
           let query = {destination, travel_date: travelDate, buddies}; 
           let query_string = ""
           
@@ -75,7 +76,10 @@ const SearchBar = (props) => {
           
           await getRequest('/search' + query_string).then(response => {
             dispatch({topSearchResults: response.data.items})
+            props.setLoading(false)
+
           }).catch(e=> {
+            props.setLoading(false)
           })
 
         }} btnType="fill" />
