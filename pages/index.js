@@ -192,7 +192,7 @@ export default function Home() {
         <div id="top-destinations" className="more-destination-card hidden lg:block my-24 max-w-7xl mx-auto">
           <MoreDestinationCard props={destinations} />
         </div>
-        <div className="destination-card flex justify-start lg:hidden my-24 max-w-full w-full overflow-x-scroll">
+        <div id="more-destinations" className="destination-card flex justify-start lg:hidden my-24 max-w-full w-full overflow-x-scroll">
           {destinations.slice(0, 4).map((e, i) => (
             <DestinationCard {...e} key={i} />
           ))}

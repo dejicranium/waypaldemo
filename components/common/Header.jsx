@@ -258,14 +258,14 @@ const Header = ({ open, setOpen }) => {
 
                 {/* Top Destinations */}
                 <div className="my-2 text-base text-black font-circular-bold pb-4">
-                  <Link href="/#top-destinations">
-                    <a onClick="/#top-destinations">Top destinations</a>
+                  <Link href="/#more-destinations">
+                    <a onClick={(e) => setOpen(false)}>Top destinations</a>
                   </Link>
                 </div>
                 {/* Explore */}
                 <div className="my-2 text-base text-black font-circular-bold pb-4">
                   <Link href="/search">
-                    <a>Explore</a>
+                    <a onClick={(e) => setOpen(false)}>Explore</a>
                   </Link>
                 </div>
                 {/* Dashboard */}
