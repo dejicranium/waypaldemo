@@ -195,7 +195,6 @@ const JoinTrip = ({ trip, notFound }) => {
       amount: totalAmount,
     });
 
-    alert(totalAmount)
     if (!tripRef || !tripRef.data) {
       setError(tripRef.message)
       return;
