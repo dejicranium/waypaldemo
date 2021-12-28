@@ -183,9 +183,9 @@ const JoinTrip = ({ trip, notFound }) => {
       setError(updateProfile.message);
     }
     
-    let totalAmount = parseFloat(trip.travel_amount + trip.miscellaneous_amount + trip.accommodation_amount).toFixed(2) ;
+    let totalAmount = parseFloat(trip.travel_amount + trip.miscellaneous_amount + trip.accommodation_amount) ;
 
-    const taxes = parseFloat((totalAmount / 100) * 7.5).toFixed(2);
+    const taxes = parseFloat((totalAmount / 100) * 7.5);
 
     totalAmount = parseFloat(parseFloat(totalAmount) + parseFloat(taxes)).toFixed(2);
 
@@ -195,6 +195,7 @@ const JoinTrip = ({ trip, notFound }) => {
       amount: totalAmount,
     });
 
+    alert(totalAmount)
     if (!tripRef || !tripRef.data) {
       setError(tripRef.message)
       return;

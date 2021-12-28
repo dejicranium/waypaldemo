@@ -29,11 +29,22 @@ const PaymentBreakdown = ({
     },
   ];
 
+  const fixDivision = (num) => {
+    num = num.toString();
+    if (num.indexOf('.') > -1) {
+      const index_of_dot = num.indexOf('.');
+      const after_dot = num.substring(index_of_dot + 1, 4);
+      const significant = num.substring(0, index_of_dot);
+      return Number.parseFloat(significant +'.' +after_dot);
+    }
+
+    return Number.parseFloat(num).toPrecision(2)
+  }
+
   const subTotal = travelDetails.reduce((acc, obj) => acc + obj.amount, 0);
+  const taxes = fixDivision((subTotal / 100) * 7.5);
 
-  const taxes = ((subTotal / 100) * 7.5).toFixed(2);
-
-  const total = subTotal + (subTotal / 100) * 7.5;
+  const total = parseFloat(subTotal) + parseFloat(taxes);
 
   return (
     <div>

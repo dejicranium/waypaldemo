@@ -63,49 +63,20 @@ const About = ({ trip,  }) => {
     trip.miscellaneous_amount,
   ];
 
-  const subTotal = amount.reduce((acc, obj) => acc + obj, 0);
+  const fixDivision = (num) => {
+    num = num.toString();
+    if (num.indexOf('.') > -1) {
+      const index_of_dot = num.indexOf('.');
+      const after_dot = num.substring(index_of_dot + 1, 4);
+      const significant = num.substring(0, index_of_dot);
+      return Number.parseFloat(significant +'.' +after_dot);
+    }
 
-  const total = subTotal + (subTotal / 100) * 7.5;
+    return Number.parseFloat(num).toPrecision(2)
+  }
+  const subTotal = parseFloat(amount.reduce((acc, obj) => acc + obj, 0));
 
-  const makePayment = async () => {
-    const totalAmount =
-      trip.travel_amount +
-      trip.miscellaneous_amount +
-      trip.accommodation_amount;
-    const tripRef = await postRequest("/payment/reference", {
-      trip_id: trip.id,
-      amount: totalAmount,
-    });
-    FlutterwaveCheckout({
-      public_key: process.env.NEXT_PUBLIC_FLW_PUBKEY || "FLWPUBK_TEST-e679c6bbfd1c677f398ecd55f013afd1-X",
-      amount: totalAmount,
-      tx_ref: tripRef.data.reference,
-      currency: trip.currency,
-      country: "NG",
-      customer: {
-        email: user.email,
-        phone_number: user.phone_number,
-        name: `${user.firstname} ${user.lastname}`,
-      },
-      callback: async function (data) {
-        const payment = await getRequest(
-          `/payment/verify/${data.transaction_id}?trip_id=${trip.id}`
-        );
-        if (payment.status) {
-          dispatch({ currentTrip: {...trip}})
-          push({
-            pathname: "successful",
-            query: { slug: trip.slug },
-          });
-        }
-      },
-      customizations: {
-        title: "Waypal",
-        description: "Pay for this trip",
-        logo: "https://cdn.filestackcontent.com/UkEsCousS42K1prOl7pZ",
-      },
-    });
-  };
+  const total = parseFloat(subTotal) + fixDivision((subTotal / 100) * 7.5);
 
   return (
     <>
