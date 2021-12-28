@@ -24,7 +24,7 @@ const Payments = ({ payments }) => {
                 {payments.length}{" "}
                 {`${payments.length === 1 ? " Payment" : "Payments"}`}
               </h1>
-              <div className="divide-y divide-gray-light3 divide">
+              <div className="divide-y divide-gray-light3 divide max-w-md">
                 {payments.map((transaction, i) => (
                   <div
                     className="transactions flex items-center justify-between py-6"
