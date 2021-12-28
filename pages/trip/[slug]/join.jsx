@@ -184,11 +184,11 @@ const JoinTrip = ({ trip, notFound }) => {
     }
 
     const totalAmount =
-      trip.travel_amount +
-      trip.miscellaneous_amount +
-      trip.accommodation_amount ;
+      parseFloat(trip.travel_amount).toFixed(2) +
+      parseFloat(trip.miscellaneous_amount).toFixed(2) +
+      parseFloat(trip.accommodation_amount).toFixed(2) ;
     
-      const taxes = ((totalAmount / 100) * 7.5).toFixed(2);
+      const taxes = parseFloat((totalAmount / 100) * 7.5).toFixed(2);
 
     const tripRef = await postRequest("/payment/reference", {
       trip_id: trip.id,
