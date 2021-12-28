@@ -182,17 +182,17 @@ const JoinTrip = ({ trip, notFound }) => {
       setLoading(false)
       setError(updateProfile.message);
     }
-
-    const totalAmount =
-      parseFloat(trip.travel_amount).toFixed(2) +
-      parseFloat(trip.miscellaneous_amount).toFixed(2) +
-      parseFloat(trip.accommodation_amount).toFixed(2) ;
     
-      const taxes = parseFloat((totalAmount / 100) * 7.5).toFixed(2);
+    let totalAmount = parseFloat(trip.travel_amount + trip.miscellaneous_amount + trip.accommodation_amount).toFixed(2) ;
+
+    const taxes = parseFloat((totalAmount / 100) * 7.5).toFixed(2);
+
+    totalAmount = parseFloat(parseFloat(totalAmount) + parseFloat(taxes)).toFixed(2);
+
 
     const tripRef = await postRequest("/payment/reference", {
       trip_id: trip.id,
-      amount: parseFloat(totalAmount).toFixed(2) + parseFloat(taxes).toFixed(2),
+      amount: totalAmount,
     });
 
     if (!tripRef || !tripRef.data) {
@@ -202,7 +202,7 @@ const JoinTrip = ({ trip, notFound }) => {
 
     FlutterwaveCheckout({
       public_key: process.env.NEXT_PUBLIC_FLW_PUBKEY || "FLWPUBK_TEST-e679c6bbfd1c677f398ecd55f013afd1-X",
-      amount: parseFloat(totalAmount).toFixed(2) + parseFloat(taxes).toFixed(2),
+      amount: totalAmount,
       tx_ref: tripRef.data.reference,
       currency: trip.currency,
       country: "NG",
