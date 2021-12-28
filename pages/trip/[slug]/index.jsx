@@ -12,6 +12,10 @@ import useData from '../../../components/hooks/useData';
 const TripPage = ({ trip, notFound }) => {
   const { push } = useRouter();
   const [user_is_buddy, setUserAsBuddy] = useState(false);
+  const [emergency_first_name, setEmergencyFirstName] = useState(false);
+  const [emergency_last_name, setEmergencyLastName] = useState(false);
+  const [emergency_email, setEmergencyEmail] = useState(false);
+  const [emergency_phone_number, setEmergencyPhoneNumber] = useState(false);
   /*
   if (notFound) {
     push("/404");

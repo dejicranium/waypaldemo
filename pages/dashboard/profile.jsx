@@ -22,12 +22,15 @@ import dynamic from 'next/dynamic';
 
 
 const Profile = () => {
-  const [verification_url, setVerificationUrl] = useState(null);
 
   const {
     dispatch,
     data: { user },
   } = useData();
+
+  const [verification_url, setVerificationUrl] = useState(null);
+  const [gender, setGender] = useState(user.gender)
+  const [date_of_birth, setDateOfBirth] = useState(user.date_of_birth)
 
   const {
     register,
@@ -128,7 +131,8 @@ const Profile = () => {
   }
 
   const submit = async (values) => {
-    let { phone_number, bio, website, twitter, facebook, instagram, emergency_email, emergency_first_name, emergency_last_name, emergency_phone_number } = values;
+    let { phone_number, bio, website, twitter, facebook, instagram, emergency_email, 
+          emergency_first_name, emergency_last_name, emergency_phone_number, gender } = values;
     const updateProfile = await putRequest("/user/saveProfileInfo", {
       bio,
       website,
@@ -140,7 +144,9 @@ const Profile = () => {
       emergency_phone_number,
       instagram,
       phone_number,
-      profile_image_url: profileImage
+      profile_image_url: profileImage,
+      date_of_birth,
+      gender
     });
     if (updateProfile.data) {
       // was successful
@@ -374,9 +380,42 @@ const Profile = () => {
                       innerref={register("bio")}
                     />
                     <div className="md:grid grid-cols-2 gap-x-3 mt-3">
+
+                    <Datetime
+                      onChange={(v) => {
+                        setDateOfBirth(v.format("YYYY-MM-DD"));
+                      }}
+                      closeOnSelect
+                      timeFormat={false}
+                      dateFormat="YYYY-MM-DD"
+                      inputProps={{
+                        placeholder: "Date of Birth",
+                        className: "outline-none box-border text-black-content w-full pl-1",
+                      }}
+                     
+                      initialValue={user.date_of_birth ? moment(user.date_of_birth).format('YYYY-MM-DD'): ""}
+                      isValidDate={(current) => current.isBefore(moment())}
+                      
+
+                      className="mb-3 input-element"
+                    />
+                     
+                      <select
+                        innerref={register("gender")}
+                        value={user.gender}
+                        className="mb-3 input-element"
+                        onChange={(e) => {
+                            setGender(e.target.value);                        
+                        }}
+                        >
+                        <option disabled selected>Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                      </select>
+                     
                       <InputField
                         type="text"
-                        placeholder="Website*"
+                        placeholder="Website"
                         className="mb-3"
                         innerref={register("website")}
                       />

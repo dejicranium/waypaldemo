@@ -116,8 +116,9 @@ const About = ({ trip, user_is_buddy }) => {
                 {user.id !== trip.user_id && !user_is_buddy &&
                   <Button
                     onClick={() => {
-                      //setAutMode("register")
-                      makePayment();
+                      setAutMode("register")
+                      //makePayment();
+                      push(`/trip/${trip.slug}/join`)
                     }}
                     btnStyle="bg-orange font-circular-bold text-white px-4 py-2 mt-3 md:mt-0 rounded"
                     btnText="Join this trip"

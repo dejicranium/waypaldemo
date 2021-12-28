@@ -6,7 +6,7 @@ const TripDetailHeader = ({ trip, user }) => {
   return (
     <>
       <h1 className="font-circular-black text-black text-3xl md:pr-14">
-        {trip.destination} {formatCurrency(trip.currency)}{trip.travel_amount}
+        {trip.destination} {formatCurrency(trip.currency)}{trip.travel_amount + trip.miscellaneous_amount + trip.accommodation_amount}
       </h1>
       <div className="trip-info grid md:grid-cols-4 md:gap-8 grid-cols-2 mt-8">
         <div className="profile flex items-center">

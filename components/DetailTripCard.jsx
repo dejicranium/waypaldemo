@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useState, useRef } from "react";
-
+import {  formatCurrency } from '../assets/js/utils';
 import Icon from "./common/Icon";
 import { format } from "date-fns";
 import useClickOutside from "./hooks/useClickOutside";
@@ -15,6 +15,7 @@ const DetailTripCard = ({
   options,
   buddies,
   slug,
+  currency,
   requestfunds,
 }) => {
   let tripDate = format(new Date(isoToDate(date)), "EEEE, MMMM do, y");
@@ -48,7 +49,7 @@ const DetailTripCard = ({
             <div className="trip">
               <h2 className="text-black-content font-circular-black text-base md:text-2xl">
                 <span className="">{title}</span> -{" "}
-                <span>${formatAmount(total)}</span>
+                <span> {formatCurrency(currency)} {formatAmount(total)}</span>
               </h2>
               <p className="text-gray-light">
                 {buddies} {`${buddies === 1 ? " buddy" : " buddies"}`} joined

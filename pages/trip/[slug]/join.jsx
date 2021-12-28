@@ -16,8 +16,32 @@ import InputField from "../../../components/InputField";
 import PaymentBreakdown from "../../../components/PaymentBreakdown";
 import { postRequest, putRequest, getRequest } from "../../../actions/connection";
 import { createVeriffFrame, MESSAGES } from "@veriff/incontext-sdk";
+import Toast from '../../../components/Toast'
 
 const JoinTrip = ({ trip, notFound }) => {
+  const [success, setSuccess] = useState(null);
+  const [error, setError] = useState(null);
+
+
+  const submit = async (values) => {
+
+    let { phone_number, emergency_email, emergency_first_name, emergency_last_name, emergency_phone_number } = values;
+    const updateProfile = await putRequest("/user/saveProfileInfo", {
+      emergency_email,
+      emergency_first_name,
+      emergency_last_name,
+      emergency_phone_number,
+      phone_number,
+    });
+    if (updateProfile.data) {
+      // was successful
+      dispatch({ user: { ...updateProfile.data } });
+      
+    } else {
+      setError(updateProfile.message);
+    }
+  };
+
   const {
     push,
     query: { slug },
@@ -35,6 +59,11 @@ const JoinTrip = ({ trip, notFound }) => {
       currentTrip
     },
   } = useData();
+
+
+  const [gender, setGender] = useState(user.gender)
+  const [date_of_birth, setDateOfBirth] = useState(user.date_of_birth)
+
   const {
     register,
     handleSubmit,
@@ -42,16 +71,7 @@ const JoinTrip = ({ trip, notFound }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      ...user.firstname,
-      ...user.lastname,
-      ...user.email,
-      ...user.suffix,
-      ...user.date_of_birth,
-      ...user.phone_number,
-      ...user.emergency_first_name,
-      ...user.emergency_last_name,
-      ...user.emergency_email,
-      ...user.emergency_phone_number,
+      ...user
     },
   });
 
@@ -60,6 +80,12 @@ const JoinTrip = ({ trip, notFound }) => {
   const [showModal, setShowModal]  = useState(false);
   const [userIsVeriifed, setUserIsVerified]  = useState(user?  user.verified: null);
   const [verification_url, setVerificationUrl] = useState(null);
+
+  const [emergency_first_name, setEmergencyFirstName] = useState(user.emergency_first_name);
+  const [emergency_last_name, setEmergencyLastName] = useState(user.emergency_last_name);
+  const [emergency_email, setEmergencyEmail] = useState(user.emergency_email);
+  const [emergency_phone_number, setEmergencyPhoneNumber] = useState(user.emergency_phone_number);
+  const [phone_number, setPhoneNumber] = useState(user.phone_number);
 
 
   useEffect(async() => {
@@ -115,6 +141,22 @@ const JoinTrip = ({ trip, notFound }) => {
 
 
   const makePayment = async () => {
+    const updateProfile = await putRequest("/user/saveProfileInfo", {
+      emergency_email,
+      emergency_first_name,
+      emergency_last_name,
+      emergency_phone_number,
+      phone_number,
+      date_of_birth,
+      gender,
+    });
+    if (updateProfile.data) {
+      // was successful
+      dispatch({ user: { ...updateProfile.data } });
+      
+    } else {
+      setError(updateProfile.message);
+    }
 
     const totalAmount =
       trip.travel_amount +
@@ -127,6 +169,12 @@ const JoinTrip = ({ trip, notFound }) => {
       trip_id: trip.id,
       amount: totalAmount + taxes,
     });
+
+    if (!tripRef || !tripRef.data) {
+      setError(tripRef.message)
+      return;
+    }
+
     FlutterwaveCheckout({
       public_key: process.env.NEXT_PUBLIC_FLW_PUBKEY || "FLWPUBK_TEST-e679c6bbfd1c677f398ecd55f013afd1-X",
       amount: totalAmount + taxes,
@@ -159,6 +207,9 @@ const JoinTrip = ({ trip, notFound }) => {
     <>
       {!notFound && (
         <>
+          {error && 
+            <Toast message={error} type="error" close={() => setError(null)} />
+          }
           <Modal  cancellable={false} showModal={showModal} close={() => setShowModal(false)}>
             {authMode === "login" && (
               <Login setActive={authMode === "login"} close={() => setShowModal(false)} />
@@ -216,11 +267,12 @@ const JoinTrip = ({ trip, notFound }) => {
                     <h1 className="font-circular-bold text-2xl">
                       Traveler Information
                     </h1>
+                    {/*
                     <p className="pt-2 text-black-content md:max-w-2xl">
-                      Enter the required information for each traveler and be sure
+                      Enter the required information and be sure
                       that it exactly matches the government-issued ID presented at
                       the airport.
-                    </p>
+                    </p> */}
                   </div>
 
                   <div className="traveler-info-form mt-8 md:max-w-2xl">
@@ -234,7 +286,7 @@ const JoinTrip = ({ trip, notFound }) => {
                           disabled
                           innerref={register("firstname", {
                             required: {
-                              value: true,
+                              value: false,
                               message: "Please enter your first name",
                             },
                           })}
@@ -245,21 +297,22 @@ const JoinTrip = ({ trip, notFound }) => {
                           type="text"
                           placeholder="Last name*"
                           className="mb-3"
-                          disabled 
                           value={user.lastname}
+                          disabled
                           innerref={register("lastname", {
                             required: {
-                              value: true,
+                              value: false,
                               message: "Please enter your last name",
                             },
                           })}
                           helptext={errors.lastname && errors.lastname.message}
                           helptextstyle={errors.lastname && "text-red-500"}
                         />
+
                         <InputField
                           type="text"
                           placeholder="Suffix"
-                          className="mb-3"
+                          className="mb-3 hidden"
                           innerref={register("suffix", {
                             required: {
                               value: true,
@@ -308,11 +361,11 @@ const JoinTrip = ({ trip, notFound }) => {
                           type="email"
                           placeholder="Email address"
                           className="mb-3"
-                          value={user.email}
                           disabled
+                          value={user.email}
                           innerref={register("email", {
                             required: {
-                              value: true,
+                              value: false,
                               message: "Please enter your email",
                             },
                           })}
@@ -334,10 +387,12 @@ const JoinTrip = ({ trip, notFound }) => {
                               <IntlTelInput
                                 format
                                 defaultCountry="ng"
+                                onChange={(e) => setPhoneNumber(e.target.value)}
+
                                 placeholder="Phone number*"
                                 preferredCountries={["ng"]}
                                 inputClassName="input-element w-full"
-                                // defaultValue={user.phone_number}
+                                value={user.phone_number}
                                 containerClassName="intl-tel-input w-full"
                                 onPhoneNumberChange={(_e, v, c) => onChange(v)}
                               />
@@ -348,6 +403,46 @@ const JoinTrip = ({ trip, notFound }) => {
                               {errors.phone_number.message}
                             </small>
                           )}
+                        </div>
+                      </div>
+
+                      <div className="personal-info md:grid grid-cols-2 gap-x-2 mt-3">
+                        <select
+                          value={user.gender}
+                          className="mb-3 input-element"
+                          required
+                          onChange={(e) => {
+                              setGender(e.target.value);                        
+                          }}
+                          >
+                          <option disabled selected>Gender</option>
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                        </select>
+
+                        <div className="personal-info">
+                          {/* <InputField type="text" placeholder="Email address*" /> */}
+
+                          <Datetime
+                            onChange={(v) => {
+                              setDateOfBirth(v.format("YYYY-MM-DD"));
+                            }}
+                            required
+                            closeOnSelect
+                            timeFormat={false}
+                            dateFormat="YYYY-MM-DD"
+                            inputProps={{
+                              placeholder: "Date of Birth",
+                              className: "outline-none box-border text-black-content w-full pl-1",
+                            }}
+                          
+                            initialValue={user.date_of_birth ? moment(user.date_of_birth).format('YYYY-MM-DD'): ""}
+                            isValidDate={(current) => current.isBefore(moment())}
+                            
+
+                            className="mb-3 input-element"
+                          />
+                          
                         </div>
                       </div>
                     </form>
@@ -371,12 +466,14 @@ const JoinTrip = ({ trip, notFound }) => {
                         type="text"
                         placeholder="First name*"
                         className="mb-3"
+                        defaultValue={user.emergency_first_name}
                         innerref={register("emergency_first_name", {
                           required: {
                             value: true,
                             message: "This field is required",
                           },
                         })}
+                        onChange={(e) => setEmergencyFirstName(e.target.value)}
                         helptext={
                           errors.emergency_first_name &&
                           errors.emergency_first_name.message
@@ -389,12 +486,15 @@ const JoinTrip = ({ trip, notFound }) => {
                         type="text"
                         placeholder="Last name*"
                         className="mb-3"
+                        defaultValue={user.emergency_last_name}
                         innerref={register("emergency_last_name", {
                           required: {
                             value: true,
                             message: "This field is required",
                           },
                         })}
+                        onChange={(e) => setEmergencyLastName(e.target.value)}
+
                         helptext={
                           errors.emergency_last_name &&
                           errors.emergency_last_name.message
@@ -404,6 +504,7 @@ const JoinTrip = ({ trip, notFound }) => {
                       <InputField
                         type="email"
                         placeholder="Email address*"
+                        defaultValue={user.emergency_email}
                         className="mb-3"
                         innerref={register("emergency_email", {
                           required: {
@@ -411,6 +512,8 @@ const JoinTrip = ({ trip, notFound }) => {
                             message: "This field is required",
                           },
                         })}
+                        onChange={(e) => setEmergencyEmail(e.target.value)}
+
                         helptext={
                           errors.emergency_email && errors.emergency_email.message
                         }
@@ -430,9 +533,12 @@ const JoinTrip = ({ trip, notFound }) => {
                             <IntlTelInput
                               format
                               defaultCountry="ng"
+                              defaultValue={user.emergency_phone_number}
                               placeholder="Phone number*"
                               preferredCountries={["ng"]}
                               inputClassName="input-element w-full"
+                              onChange={(e) => setEmergencyPhoneNumber(e.target.value)}
+
                               // defaultValue={user?.emergency_phone_number || null}
                               containerClassName="intl-tel-input w-full"
                               onPhoneNumberChange={(_e, v, c) => onChange(v)}

@@ -37,6 +37,7 @@ const UpcomingTrips = ({ loading, trips, error }) => {
                     image={trip.Trip.images && trip.Trip.images[0]}
                     buddies={trip.Trip.joined_buddies}
                     slug={trip.Trip.slug}
+                    currency={trip.Trip.currency}
                     options
                   />
                 ))}
