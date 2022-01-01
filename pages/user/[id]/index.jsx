@@ -60,24 +60,25 @@ const UserProfile = ({user, trips, notFound}) => {
             </div>
           </div>
           <div className="socials py-9 border-b border-gray-light6 grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="reviews flex items-center">
+            <div className="reviews flex flex-col items-center">
               <Rating name="read-only" value={(user.rating / user.no_of_ratings) || 0 } readOnly />
-
-              <span className="text-gray-light pl-2">{parseFloat((user.rating / user.no_of_ratings) || 0).toFixed(1) } stars</span>
-              <span className="text-gray-light pl-2">{user.no_of_ratings} {user.no_of_ratings && user.no_of_ratings > 1 ? 'reviews' : 'review'}</span>
+              <div className="flex flex-row justify-between mt-2">
+                <span className="text-gray-light pl-2">{parseFloat((user.rating / user.no_of_ratings) || 0).toFixed(1) } stars</span>
+                <span className="text-gray-light pl-2">({user.no_of_ratings} {user.no_of_ratings && user.no_of_ratings > 1 ? 'reviews' : 'review'})</span>
+              </div>
             </div>
             {/*<div className="links flex items-center">
               <Icon icon="link"></Icon>
               <span className="text-gray-light pl-2">21 Reviews</span>
                   </div>*/}
-            {user.facebook && 
+              {user.facebook && 
               <div className="facebook flex items-center">
                 <Icon icon="facebook-icon" cname="flex-none"></Icon>
                 <span className="text-gray-light pl-2 overflow-ellipsis overflow-hidden">
-                  facebook.com/jagaban
+                  facebook.com/{user.facebook}
                 </span>
-              </div>
-            }
+              </div>}
+          
             {user.twitter && 
               <div className="twitter flex items-center">
                 <Icon icon="twitter-icon"></Icon>
