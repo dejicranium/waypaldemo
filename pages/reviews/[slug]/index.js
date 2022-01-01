@@ -84,11 +84,11 @@ const  ReviewTripAndCreator = ()  =>{
                         count={5}
                         size={24}
                         onChange={setTripRating}
+                        changeRating={null}
                         isHalf={true}
                         emptyIcon={<i className="far fa-star"></i>}
                         halfIcon={<i className="fa fa-star-half-alt"></i>}
                         fullIcon={<i className="fa fa-star"></i>}
-                        
                         activeColor="#ffd700"
                     />
                 </div>

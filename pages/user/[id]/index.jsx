@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react';
 import { getRequest } from '../../../actions/connection';
 import { useRouter } from "next/router";
 import UserAvatar from "react-user-avatar";
+import Rating from '@mui/material/Rating';
+
 
 const UserProfile = ({user, trips, notFound}) => {
   const { push } = useRouter();
@@ -59,13 +61,15 @@ const UserProfile = ({user, trips, notFound}) => {
           </div>
           <div className="socials py-9 border-b border-gray-light6 grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="reviews flex items-center">
-              <Icon icon="star"></Icon>
-              <span className="text-gray-light pl-2">21 Reviews</span>
+              <Rating name="read-only" value={(user.rating / user.no_of_ratings) || 0 } readOnly />
+
+              <span className="text-gray-light pl-2">{(user.rating / user.no_of_ratings) || 0 } stars</span>
+              <span className="text-gray-light pl-2">{user.no_of_ratings} {user.no_of_ratings && user.no_of_ratings > 1 ? 'reviews' : 'review'}</span>
             </div>
-            <div className="links flex items-center">
+            {/*<div className="links flex items-center">
               <Icon icon="link"></Icon>
               <span className="text-gray-light pl-2">21 Reviews</span>
-            </div>
+                  </div>*/}
             {user.facebook && 
               <div className="facebook flex items-center">
                 <Icon icon="facebook-icon" cname="flex-none"></Icon>
