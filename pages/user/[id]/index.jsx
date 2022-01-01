@@ -86,7 +86,7 @@ const UserProfile = ({user, trips, notFound}) => {
             {trips && trips.length > 0 && trips.map((trip, index) => {
               return (
 
-                <div className="trip-card">
+                <div className="trip-card" key={index}>
                   <DetailTripCard
                       key={trip.id}
                       title={trip.title}
