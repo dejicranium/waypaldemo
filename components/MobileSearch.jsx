@@ -4,6 +4,7 @@ import SearchFilter from "./SearchFilter";
 import useData from '../components/hooks/useData';
 import { useState, useEffect } from "react";
 import { getRequest } from '../actions/connection';
+import Autocomplete from "react-google-autocomplete";
 
 const MobileSearch = ({ show, close, setLoading }) => {
   const [destination, setDestination] = useState(new URLSearchParams(window.location.search) ? new URLSearchParams(window.location.search).get('destination') : "");
@@ -29,13 +30,21 @@ const MobileSearch = ({ show, close, setLoading }) => {
           <div className="search-input">
             <div className="destination input-with-label bg-white rounded flex items-center p-2 mt-4">
               <Icon icon="departure" />
-              <input
-                onChange={(e) => {
-                  setDestination(e.target.value)
+
+              <Autocomplete
+                apiKey="AIzaSyDLZ4NFeub25kppPsgPItK0RWKdZ-Ecy8c"
+                style={{ width: "100%" }}
+                onPlaceSelected={(place) => {
+                  let d = place.formatted_address;
+                  setDestination(d)
                 }}
+                onChange={(e) => setDestination(e.target.value)}
+                value={destination}
                 placeholder="Destination"
-                className="outline-none box-border text-black-content w-full pl-3 destination-input"
+                className="destination-input outline-none box-border text-black-content w-full pl-3"
               />
+        
+             
             </div>
             <div className="travel-date input-with-label bg-white rounded flex items-center p-2 mt-4">
               <Icon icon="calendar-date" />

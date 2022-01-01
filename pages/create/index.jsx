@@ -16,6 +16,7 @@ import useData from "../../components/hooks/useData";
 import TextAreaField from "../../components/TextAreaField";
 import { postRequest } from "../../actions/connection";
 import Toast from '../../components/Toast';
+import Autocomplete from "react-google-autocomplete";
 
 const CreateTrip = () => {
   const {
@@ -122,6 +123,8 @@ const CreateTrip = () => {
           <form>
             <div className="create-trip-form mb-10">
               <div className="trip-details mt-8 md:grid grid-cols-2 gap-x-4 mb-3">
+               
+                
                 <InputField
                   type="text"
                   placeholder="Destination"
@@ -132,6 +135,7 @@ const CreateTrip = () => {
                       message: "Please enter a destination",
                     },
                   })}
+                  isdestination_input={true}
                   helptext={errors.destination && errors.destination.message}
                   helptextstyle={errors.destination && "text-red-500"}
                 />
@@ -262,7 +266,15 @@ const CreateTrip = () => {
                   helptextstyle={errors.description && "text-red-500"}
                 />
               </div>
-
+              <div className="meeting-point border-t border-b border-light py-4">
+                <h2 className="text-black font-circular-bold pt-4 pb-2">
+                  Who can see/join this trip?
+                </h2>
+                <select className="input-element" defaultValue={true} innerref={register('is_public')}>
+                  <option value={true}>Everyone</option>
+                  <option value={false}>People with link</option>
+                </select>
+              </div> 
               <div className="meeting-point border-t border-b border-light py-4">
                 <h2 className="text-black font-circular-bold pt-4 pb-2">
                   Meeting point

@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 import DateTimeWithLabel from "../components/common/DateTimeWIthLabel";
 
 
+import React from 'react';
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
 const Hero = () => {
     const { push } = useRouter();
@@ -48,9 +50,10 @@ const Hero = () => {
               <InputWithLabel
                 placeholder="Where would you like to go?"
                 type="text"
+                isdestination_input={true}
                 label="Destination"
                 cname="destination-input"
-                onChange={(e) => {setDestination(e.target.value)}}
+                onChange={setDestination}
               />
 
 

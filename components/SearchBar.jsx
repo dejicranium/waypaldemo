@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { getRequest } from "../actions/connection";
 import Datetime from "react-datetime";
 import moment from "moment";
+import Autocomplete from "react-google-autocomplete";
 
 import useData from "../components/hooks/useData";
 import { useForm, Controller } from "react-hook-form";
@@ -21,14 +22,21 @@ const SearchBar = (props) => {
       <div className="flex flight-search bg-white rounded max-w-3xl border border-gray-light6 divide-x">
         <div className="destination flex items-center pl-3">
           <Icon icon="departure" cname="pt-1" />
-          <input
+
+          <Autocomplete
+            apiKey="AIzaSyDLZ4NFeub25kppPsgPItK0RWKdZ-Ecy8c"
+            style={{ width: "100%" }}
+            onPlaceSelected={(place) => {
+              let d = place.formatted_address;
+
+              setDestination(d)
+            }}
+            onChange={(e) => setDestination(e.target.value)}
             value={destination}
             placeholder="Destination"
-            onChange={(e) => {
-              setDestination(e.target.value)
-            }}
             className="destination-input outline-none box-border text-black-content w-full pl-3"
           />
+        
         </div>
         <div className="travel-date flex items-center pl-4">
           <Icon icon="calendar-date" cname="pt-1" />
