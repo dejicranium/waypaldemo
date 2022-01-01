@@ -87,7 +87,7 @@ const UserProfile = ({user, trips, notFound}) => {
             }
           </div>
           <div className="user-trips py-6">
-            <h3 className="text-2xl font-circular-bold">{user.firstname} Trips</h3>
+            <h3 className="text-2xl font-circular-bold">{user.firstname}'s Trips</h3>
             {trips && trips.length > 0 && trips.map((trip, index) => {
               return (
 
