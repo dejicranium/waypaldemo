@@ -17,7 +17,10 @@ const Messaging = ({ trip, messages, notFound }) => {
   } = useData();
 
   const { push } = useRouter();
+  if (trip.user.id !== user.id && trip.buddieslist.filter(b => b.user_d === user.id).length < 1) {
+    push("/404");
 
+  }
   if (notFound) {
     push("/404");
   }
@@ -149,7 +152,7 @@ export async function getServerSideProps(context) {
   const { slug } = context.query;
 
   const tripData = await getRequest(`${process.env.NEXT_PUBLIC_API_LOCATION}/trip/by/slug/${slug}`);
-  
+
   if (tripData.status) {
     const tripMessages = await getRequest(`/trip/${tripData.data.id}/chats`);
     return {

@@ -73,7 +73,7 @@ export default function useData() {
     dispatch: (payload, logout = false) => {
       if (payload === 'clear') {
         clear();
-        destroyCookie(null, 'token');
+        destroyCookie(null, 'token', { path:"/", });
         persist(init);
         
         dispatch(init);

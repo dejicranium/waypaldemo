@@ -14,6 +14,7 @@ export const init = {
     title: "",
     buddies: "",
     images: [],
+    is_public: true,
     end_date: "",
     currency: "USD",
     start_date: "",

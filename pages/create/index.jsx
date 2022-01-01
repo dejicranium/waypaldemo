@@ -56,6 +56,7 @@ const CreateTrip = () => {
   const [tags, setTags] = useState(createTrip?.checklists || []);
   const [title, setTitle] = useState("");
   const [error, setError] = useState("");
+  const [is_public, setPublic] = useState(true);
   const [startDate, setStartDate] = useState("");
 
   const addBuddyTag = (event) => {
@@ -88,7 +89,7 @@ const CreateTrip = () => {
     }).then(resp =>{
       if (resp.status) {
 
-        dispatch({ createTrip: { ...createTrip, ...data, checklists: tags } });
+        dispatch({ createTrip: { ...createTrip, ...data, is_public, checklists: tags } });
         push("/create/itinerary");
       }
       else {
@@ -128,14 +129,13 @@ const CreateTrip = () => {
                 <InputField
                   type="text"
                   placeholder="Destination"
-                  cname="mb-3 destination-input"
+                  cname="mb-3"
                   innerref={register("destination", {
                     required: {
                       value: true,
                       message: "Please enter a destination",
                     },
                   })}
-                  isdestination_input={true}
                   helptext={errors.destination && errors.destination.message}
                   helptextstyle={errors.destination && "text-red-500"}
                 />
@@ -270,9 +270,17 @@ const CreateTrip = () => {
                 <h2 className="text-black font-circular-bold pt-4 pb-2">
                   Who can see/join this trip?
                 </h2>
-                <select className="input-element" defaultValue={true} innerref={register('is_public')}>
-                  <option value={true}>Everyone</option>
-                  <option value={false}>People with link</option>
+                <select className="input-element" innerref={register('is_public')} onChange={(e) => {
+                  dispatch({createTrip: {...createTrip, is_public: e.target.value === 'true' ? true : false}})
+                  if (e.target.value === 'true') {
+                    setPublic(true)
+                  }
+                  else {
+                    setPublic(false)
+                  }
+                }}>
+                  <option value='true'>Everyone</option>
+                  <option value='false'>People with link</option>
                 </select>
               </div> 
               <div className="meeting-point border-t border-b border-light py-4">

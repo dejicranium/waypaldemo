@@ -9,7 +9,7 @@ import { getRequest } from "../../../actions/connection";
 import ShowLuggage from "../../../components/common/ShowLuggage";
 import useData from '../../../components/hooks/useData';
 
-const TripPage = ({ trip, notFound }) => {
+const TripPage = ({ trip, isPrivate, notFound }) => {
   const { push } = useRouter();
   const [user_is_buddy, setUserAsBuddy] = useState(true);
 
@@ -28,13 +28,19 @@ const TripPage = ({ trip, notFound }) => {
   useEffect(async() => {
     //if (user.id === trip.user_id) {
       //user_is_owner = true;
-      let buddies  = await getRequest(`/trip/${trip.id}/buddies`);
-      buddies = buddies.data;
+      if (notFound) {
+        push('/trip-private')
+      }
+      if (!notFound) {
 
-      if (buddies && buddies.length > 0) {
-        const exists = buddies.find(b => b.user_id == user.id)
-        if (exists) setUserAsBuddy(true)
-        else setUserAsBuddy(false)
+          let buddies  = await getRequest(`/trip/${trip.id}/buddies`);
+          buddies = buddies.data;
+    
+          if (buddies && buddies.length > 0) {
+            const exists = buddies.find(b => b.user_id == user.id)
+            if (exists) setUserAsBuddy(true)
+            else setUserAsBuddy(false)
+          }
       }
        
   
@@ -55,7 +61,9 @@ const TripPage = ({ trip, notFound }) => {
 
   return (
     <>
-    
+      {notFound && (
+        <p>This trip is either private or inexistent</p>
+      )}
       {!notFound && (
         <>
 
@@ -100,9 +108,13 @@ const TripPage = ({ trip, notFound }) => {
 export default TripPage;
 
 export async function getServerSideProps(context) {
-  const { slug } = context.query;
-
-  const tripData =  await getRequest(`${process.env.NEXT_PUBLIC_API_LOCATION}/trip/by/slug/${slug}`);
+  const { slug, pcd } = context.query;
+  let url = `${process.env.NEXT_PUBLIC_API_LOCATION}/trip/by/slug/${slug}`;
+  if (pcd) {
+    url += `?passcode=${pcd}`
+  }
+  console.log(context.req.cookies)
+  const tripData =  await getRequest(url, context.req.cookies.token);
   if (tripData.status) {
     return {
       props: {
@@ -110,6 +122,7 @@ export async function getServerSideProps(context) {
       },
     };
   }
+  
   return {
     props: {
       notFound: true,
