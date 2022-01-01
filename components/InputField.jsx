@@ -47,9 +47,10 @@ const InputField = (props) => {
           className={`input-element w-full ${cname} ${
             leadingicon ? "leading-icon" : ""
           }`}
+          {...innerref}
           onPlaceSelected={(place) => {
             let destination = place.formatted_address;
-            //onChange(destination);
+            props.onChange(destination);
           }}
           
         />

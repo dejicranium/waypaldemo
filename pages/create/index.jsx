@@ -55,6 +55,8 @@ const CreateTrip = () => {
 
   const [tags, setTags] = useState(createTrip?.checklists || []);
   const [title, setTitle] = useState("");
+  const [destination, setDestination] = useState(createTrip.destination)
+  const [meeting_point, setMeetingPlace] = useState(createTrip.meeting_point)
   const [error, setError] = useState("");
   const [is_public, setPublic] = useState(true);
   const [startDate, setStartDate] = useState("");
@@ -89,7 +91,7 @@ const CreateTrip = () => {
     }).then(resp =>{
       if (resp.status) {
 
-        dispatch({ createTrip: { ...createTrip, ...data, is_public, checklists: tags } });
+        dispatch({ createTrip: { ...createTrip, ...data, is_public, destination, meeting_point, checklists: tags } });
         push("/create/itinerary");
       }
       else {
@@ -130,12 +132,15 @@ const CreateTrip = () => {
                   type="text"
                   placeholder="Destination"
                   cname="mb-3"
+                  isdestination_input={true}
+                  onChange={setDestination}
+                  /*
                   innerref={register("destination", {
                     required: {
                       value: true,
                       message: "Please enter a destination",
                     },
-                  })}
+                  })}*/
                   helptext={errors.destination && errors.destination.message}
                   helptextstyle={errors.destination && "text-red-500"}
                 />
@@ -292,12 +297,8 @@ const CreateTrip = () => {
                   placeholder="Meeting point address"
                   // helptext="Where you want your travel buddies to meet"
                   cname="max-w-sm destination-input"
-                  innerref={register("meeting_point", {
-                    required: {
-                      value: true,
-                      message: "Please enter a meeting point",
-                    },
-                  })}
+                  onChange={setMeetingPlace}
+                  isdestination_input={true}
                   helptext={
                     errors.meeting_point && errors.meeting_point.message
                   }

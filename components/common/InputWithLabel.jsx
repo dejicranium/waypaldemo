@@ -23,7 +23,6 @@ const InputWithLabel = ({ isdestination_input, label, value, type, placeholder, 
           style={{ width: "100%" }}
           onPlaceSelected={(place) => {
             let destination = place.formatted_address;
-
             onChange(destination);
           }}
           
