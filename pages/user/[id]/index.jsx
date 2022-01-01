@@ -63,7 +63,7 @@ const UserProfile = ({user, trips, notFound}) => {
             <div className="reviews flex items-center">
               <Rating name="read-only" value={(user.rating / user.no_of_ratings) || 0 } readOnly />
 
-              <span className="text-gray-light pl-2">{(user.rating / user.no_of_ratings) || 0 } stars</span>
+              <span className="text-gray-light pl-2">{parseFloat((user.rating / user.no_of_ratings) || 0).toFixed(1) } stars</span>
               <span className="text-gray-light pl-2">{user.no_of_ratings} {user.no_of_ratings && user.no_of_ratings > 1 ? 'reviews' : 'review'}</span>
             </div>
             {/*<div className="links flex items-center">
