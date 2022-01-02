@@ -18,6 +18,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Script src="https://checkout.flutterwave.com/v3.js" />
+      <Script src="/crispchat-integration.js" type="text/javascript" />
       {/*
       <Script id='places-api' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLZ4NFeub25kppPsgPItK0RWKdZ-Ecy8c&libraries=places" type="text/javascript" />
       <Script src="/places-integration.js" type="text/javascript" />*/}
