@@ -12,7 +12,10 @@ import {
 
 const ShareTrip = ({ trip, cname}) => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-  const shareUrl = `${baseUrl}/trip/${trip.slug}`;
+  let shareUrl = `${baseUrl}/trip/${trip.slug}`;
+  if (!trip.is_public) {
+    shareUrl += `?pcd=${trip.passcode}`
+  }
 
   const [copySuccess, setCopySuccess] = useState(false);
 

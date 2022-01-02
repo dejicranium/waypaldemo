@@ -29,6 +29,7 @@ const About = ({ trip,  }) => {
 
   const [authMode, setAutMode]  = useState('login');
   const [showModal, setShowModal]  = useState(false);
+  const [shareModal, showShareModal]  = useState(false);
   const [user_is_buddy, setUserAsBuddy] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -79,6 +80,9 @@ const About = ({ trip,  }) => {
 
   return (
     <>
+      <Modal showModal={shareModal} close={() => showShareModal(false)}>
+        <ShareTrip trip={trip}/>
+      </Modal>
       <Modal showModal={showModal} close={() => setShowModal(false)}>
         {authMode === 'login' && (
           <Login setActive={authMode === 'login'} close={() => setShowModal(false)} />
@@ -145,8 +149,9 @@ const About = ({ trip,  }) => {
             </p>
           </div>
           <div className="profile flex items-center justify-end">
-            <Icon icon="like" cname="pr-3 cursor-pointer" />
-            <Icon icon="share" cname="cursor-pointer" />
+            <Icon icon="share" onClick={() => {
+              showShareModal(true);
+            }} cname="cursor-pointer" />
           </div>
         </div>
 
