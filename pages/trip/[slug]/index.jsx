@@ -42,7 +42,7 @@ const TripPage = ({ trip, isPrivate, notFound }) => {
             trip_id: trip.id,
             trip_title: trip.title,
             trip_destination: trip.destination,
-            trip_total_amount: parseFloat(trip.travel_amount) + parseFloat(trip.miscellaneous_amount) + parseFloat(trip.accommodation_amount);
+            trip_total_amount: parseFloat(trip.travel_amount) + parseFloat(trip.miscellaneous_amount) + parseFloat(trip.accommodation_amount)
           })
       }
        
