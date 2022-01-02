@@ -80,9 +80,6 @@ const About = ({ trip,  }) => {
 
   return (
     <>
-      <Modal showModal={shareModal} close={() => showShareModal(false)}>
-        <ShareTrip trip={trip}/>
-      </Modal>
       <Modal showModal={showModal} close={() => setShowModal(false)}>
         {authMode === 'login' && (
           <Login setActive={authMode === 'login'} close={() => setShowModal(false)} />
@@ -149,9 +146,7 @@ const About = ({ trip,  }) => {
             </p>
           </div>
           <div className="profile flex items-center justify-end">
-            <Icon icon="share" onClick={() => {
-              showShareModal(true);
-            }} cname="cursor-pointer" />
+            <Icon icon="share" cname="cursor-pointer" />
           </div>
         </div>
 
@@ -175,6 +170,8 @@ const About = ({ trip,  }) => {
           <h2 className="font-circular-bold ">Meeting point</h2>
           <p className="">{trip.meeting_point}</p>
         </div>
+
+        <ShareTrip trip={trip} />
       </section>
 
       <section className="final-travel-info mt-10 xl:max-w-lg">
