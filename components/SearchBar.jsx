@@ -31,7 +31,6 @@ const SearchBar = (props) => {
 
               setDestination(d)
             }}
-            onChange={(e) => setDestination(e.target.value)}
             value={destination}
             placeholder="Destination"
             className="destination-input outline-none box-border text-black-content w-full pl-3"

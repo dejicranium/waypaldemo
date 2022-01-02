@@ -7,6 +7,7 @@ import useData from "./hooks/useData";
 import InputField from "./InputField";
 import PasswordInputField from "./PasswordInputField";
 import { getRequest, postRequest } from "../actions/connection";
+import {Mixpanel} from '../assets/js/mixpanel';
 
 const Login = ({ setActive, close }) => {
   const {
@@ -20,13 +21,22 @@ const Login = ({ setActive, close }) => {
 
   const submit = async (values) => {
     setLoading(true);
+    Mixpanel.track("login-clicked");
     const user = await postRequest("/user/login", values)
     if (user.status) {
+      Mixpanel.identify(user.data.id);
+      Mixpanel.track("login-successful");
+      Mixpanel.people.set({$firstname: user.data.firstname, $lastname: user.data.lastname, $id: user.data.id});
+      
       dispatch({ user: user.data, token: user.token, isLoggedIn: true });
       close();
     }
     else {
       if (user && user.message) {
+        Mixpanel.track("login-failed", {
+          email: values.email,
+          message: user.message
+        })
         setError(user.message);
       }
       setLoading(false)
@@ -95,7 +105,9 @@ const Login = ({ setActive, close }) => {
         <div className="">
           <span
             className="text-orange-light cursor-pointer"
-            onClick={() => setActive("forgot")}
+            onClick={() => {
+              Mixpanel.track('password-forgotten-clicked');
+              setActive("forgot")}}
           >
             Forgot Password?
           </span>

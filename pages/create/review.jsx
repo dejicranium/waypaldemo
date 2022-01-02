@@ -14,6 +14,7 @@ import useData from "../../components/hooks/useData";
 import { postRequest } from "../../actions/connection";
 import ItineraryCard from "../../components/ItineraryCard";
 import PaymentBreakdown from "../../components/PaymentBreakdown";
+import { Mixpanel } from '../../assets/js/mixpanel';
 
 const CreateTripReview = () => {
   const {
@@ -78,7 +79,14 @@ const CreateTripReview = () => {
         itenararyUpload.map((url) => fetch(url).then((r) => r.blob()))
       );
     }
-    catch(e) {
+    catch(e) {          
+      if (typeof user !== 'undefined') {
+        Mixpanel.identify(user.id);
+        Mixpanel.track('trip-created-failed',{
+          message: "Couldn't upload itinerary"
+         
+        })
+      }
       console.log("Couldn't upload itinerary")
     }
 
@@ -129,6 +137,12 @@ const CreateTripReview = () => {
       push("/create/success");
       setLoading(false);
     } else {
+      if (typeof user !== 'undefined') {
+        Mixpanel.identify(user.id);
+        Mixpanel.track('trip-created-failed',{
+          message: saveData.message       
+        })
+      }
       setError(saveData.message);
       setLoading(false);
     }

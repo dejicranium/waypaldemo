@@ -9,7 +9,7 @@ import { useState, useEffect, useRef } from "react";
 import Login from "../../components/LogIn";
 import Register from "../../components/Register";
 import ForgotPassword from "../ForgotPassword";
-
+import {Mixpanel} from '../../assets/js/mixpanel';
 import { Divide as Hamburger } from "hamburger-react";
 import {
   disableBodyScroll,
@@ -23,7 +23,7 @@ import useClickOutside from "../hooks/useClickOutside";
 const Header = ({ open, setOpen }) => {
   const {
     data: {
-      user: { firstname, lastname },
+      user: { firstname, lastname, id },
       isLoggedIn = false,
     },
   } = useData();
@@ -130,11 +130,15 @@ const Header = ({ open, setOpen }) => {
               <div className="flex items-center primary-nav text-black">
                 {/* Top Destinations */}
                 <div className="mr-6 text-base">
-                  <Link href="/#top-destinations">Top destinations</Link>
+                  <Link onClick={() => {
+                    Mixpanel.track("top-destinations-clicked")
+                  }} href="/#top-destinations">Top destinations</Link>
                 </div>
                 {/* Explore */}
                 <div className="mr-6 text-base">
-                  <Link href="/search">Explore</Link>
+                  <Link onClick={() => {
+                    Mixpanel.track("explore-clicked");
+                  }} href="/search">Explore</Link>
                 </div>
 
                 {/* Login */}
@@ -152,7 +156,11 @@ const Header = ({ open, setOpen }) => {
                 {/* Create Trip */}
                 <Button
                   key={2}
-                  onClick={createTrip}
+                  onClick={() => {
+                    if (typeof user !== 'undefined') Mixpanel.identify(user.id);
+                    Mixpanel.track("attempt-create-trip-clicked")
+                    createTrip()
+                  }}
                   btnText="Create a trip"
                   btnStyle="mr-6 bg-orange text-white px-4 py-2 rounded"
                 />
@@ -224,7 +232,11 @@ const Header = ({ open, setOpen }) => {
 
                 <div className="flex items-center">
                   <Button
-                    onClick={createTrip}
+                    onClick={() => {
+                      if (typeof user !== 'undefined') Mixpanel.identify(user.id);
+                      Mixpanel.track("attempt-create-trip-clicked")
+                      createTrip()
+                    }}
                     btnText="Create a trip"
                     btnStyle="mr-6 bg-orange text-white px-4 py-2 rounded"
                   />
@@ -259,13 +271,18 @@ const Header = ({ open, setOpen }) => {
                 {/* Top Destinations */}
                 <div className="my-2 text-base text-black font-circular-bold pb-4">
                   <Link href="/#more-destinations">
-                    <a onClick={(e) => setOpen(false)}>Top destinations</a>
+                    <a onClick={(e) => {
+                      Mixpanel.track("top-destinations-clicked")
+                      setOpen(false)
+                    }}>Top destinations</a>
                   </Link>
                 </div>
                 {/* Explore */}
                 <div className="my-2 text-base text-black font-circular-bold pb-4">
                   <Link href="/search">
-                    <a onClick={(e) => setOpen(false)}>Explore</a>
+                    <a onClick={(e) => {
+                      Mixpanel.track('explore-clicked');
+                      setOpen(false)}}>Explore</a>
                   </Link>
                 </div>
                 {/* Dashboard */}
@@ -312,7 +329,11 @@ const Header = ({ open, setOpen }) => {
                 )}
                 {/* Create Trip */}
                 <Button
-                  onClick={createTrip}
+                  onClick={() => {
+                    if (typeof user !== 'undefined') Mixpanel.identify(user.id);
+                    Mixpanel.track("attempt-create-trip-clicked")
+                    createTrip()
+                  }}
                   btnText="Create a trip"
                   btnStyle="my-2 bg-orange text-white px-4 py-2 rounded"
                 />

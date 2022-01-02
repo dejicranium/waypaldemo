@@ -6,7 +6,7 @@ import Datetime from "react-datetime";
 import moment from "moment";
 import { useRouter } from "next/router";
 import DateTimeWithLabel from "../components/common/DateTimeWIthLabel";
-
+import {Mixpanel} from "../assets/js/mixpanel";
 
 import React from 'react';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
@@ -19,6 +19,11 @@ const Hero = () => {
     const [buddies, setBuddies] = useState("");
 
     const searchTrips = async() => {
+      Mixpanel.track("find-travel-buddies-clicked", {
+        destination: destination,
+        travel_date: travelDate,
+        buddies: buddies,
+      });
       let query = ''; 
       if (destination) query +=  `?destination=${destination}&`;
       if (travelDate) query +=  `?travel_date=${travelDate}&`;

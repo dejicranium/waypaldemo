@@ -5,6 +5,7 @@ import InputField from "./InputField";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { postRequest } from "../actions/connection";
+import { Mixpanel } from '../assets/js/mixpanel';
 
 const ForgotPassword = ({ setActive }) => {
   const {
@@ -21,9 +22,11 @@ const ForgotPassword = ({ setActive }) => {
     setLoading(true);
     const user = await postRequest("/user/sendForgotten", values);
     if (user.status) {
+      Mixpanel.track("password-forgotten-successful");
       setMessage(user.message);
       reset();
     } else {
+      Mixpanel.track("password-forgotten-failed");
       setError(user.message);
     }
     setLoading(false);

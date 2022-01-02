@@ -1,11 +1,13 @@
 
 import { useRouter } from "next/router";
+import { Mixpanel } from '../assets/js/mixpanel';
 
 const DestinationCard = ({ name, location, image
 }) => {
   const { push } = useRouter();
 
   function goToDestination(name){ 
+    Mixpanel.track('destination-image-clicked', {destination: name});
     push('/search?destination=' + name)
   }
   return (

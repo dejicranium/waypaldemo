@@ -17,7 +17,8 @@ import PaymentBreakdown from "../../../components/PaymentBreakdown";
 import { postRequest, putRequest, getRequest } from "../../../actions/connection";
 import { createVeriffFrame, MESSAGES } from "@veriff/incontext-sdk";
 import Toast from '../../../components/Toast'
-import Spinner from '../../../components/Spinner'
+import Spinner from '../../../components/Spinner';
+import { Mixpanel } from '../../../assets/js/mixpanel';
 
 const JoinTrip = ({ trip, notFound }) => {
   const [success, setSuccess] = useState(null);
@@ -216,8 +217,26 @@ const JoinTrip = ({ trip, notFound }) => {
           `/payment/verify/${data.transaction_id}`
         );
         if (payment.status) {
+          if (typeof user !== 'undefined') {
+            Mixpanel.identify(user.id);
+            Mixpanel.track('trip-joined-successfully',{
+              trip_id: trip.id,
+              trip_title: trip.title,
+              trip_destination: trip.destination,
+              trip_total_amount: parseFloat(trip.travel_amount) + parseFloat(trip.miscellaneous_amount) + parseFloat(trip.accommodation_amount),                        })
+          }
           dispatch({ currentTrip: {...trip}})
           push(`/dashboard/trips`);
+        }
+        else {
+          if (typeof user !== 'undefined') {
+            Mixpanel.identify(user.id);
+            Mixpanel.track('trip-joined-failed',{
+              trip_id: trip.id,
+              trip_title: trip.title,
+              trip_destination: trip.destination,
+              trip_total_amount: parseFloat(trip.travel_amount) + parseFloat(trip.miscellaneous_amount) + parseFloat(trip.accommodation_amount),                        })
+          }
         }
       },
       customizations: {
@@ -594,7 +613,17 @@ const JoinTrip = ({ trip, notFound }) => {
                     btnText="Continue to Payment"
                     btnType="fill"
                     type="submit"
-                    onClick={makePayment}
+                    onClick={() => {
+                      if (typeof user !== 'undefined') {
+                        Mixpanel.identify(user.id);
+                        Mixpanel.track('continue-to-payment',{
+                          trip_id: trip.id,
+                          trip_title: trip.title,
+                          trip_destination: trip.destination,
+                          trip_total_amount: parseFloat(trip.travel_amount) + parseFloat(trip.miscellaneous_amount) + parseFloat(trip.accommodation_amount),                        })
+                      }
+                      makePayment();
+                    }}
                   />
                 }
                 {loading && 

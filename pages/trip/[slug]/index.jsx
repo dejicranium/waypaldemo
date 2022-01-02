@@ -8,15 +8,11 @@ import Footer from "../../../components/common/Footer";
 import { getRequest } from "../../../actions/connection";
 import ShowLuggage from "../../../components/common/ShowLuggage";
 import useData from '../../../components/hooks/useData';
+import { Mixpanel } from '../../../assets/js/mixpanel';
 
 const TripPage = ({ trip, isPrivate, notFound }) => {
   const { push } = useRouter();
   const [user_is_buddy, setUserAsBuddy] = useState(true);
-
-  /*
-  if (notFound) {
-    push("/404");
-  }*/
   const {
     data: {
       user,
@@ -26,8 +22,7 @@ const TripPage = ({ trip, isPrivate, notFound }) => {
   
   
   useEffect(async() => {
-    //if (user.id === trip.user_id) {
-      //user_is_owner = true;
+
       if (notFound) {
         push('/trip-private')
       }
@@ -41,6 +36,14 @@ const TripPage = ({ trip, isPrivate, notFound }) => {
             if (exists) setUserAsBuddy(true)
             else setUserAsBuddy(false)
           }
+
+          if (user && user.id) Mixpanel.identify(user.id);
+          Mixpanel.track("trip-details-loaded", { 
+            trip_id: trip.id,
+            trip_title: trip.title,
+            trip_destination: trip.destination,
+            trip_total_amount: parseFloat(trip.travel_amount) + parseFloat(trip.miscellaneous_amount) + parseFloat(trip.accommodation_amount);
+          })
       }
        
   

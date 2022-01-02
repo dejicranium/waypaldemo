@@ -8,6 +8,7 @@ import { useState } from "react";
 import useData from "./hooks/useData";
 import { useForm } from "react-hook-form";
 import { postRequest } from "../actions/connection";
+import { Mixpanel } from '../assets/js/mixpanel';
 
 const Register = ({ setActive, close }) => {
   const {
@@ -22,13 +23,31 @@ const Register = ({ setActive, close }) => {
 
   const submit = async (values) => {
     setLoading(true);
+    Mixpanel.track('signup-clicked');
     const user = await postRequest("/user/register", values);
     if (user.status) {
       dispatch({ user: user.data, token: user.token, isLoggedIn: true });
+      Mixpanel.identify(user.data.id);
+      Mixpanel.track('signup-successful', {
+        user_firstname: user.data.firstname,
+        user_lastname: user.data.lastname,
+        user_email: user.data.email
+      });
+      Mixpanel.people.set({
+        $firstname: user.data.firstname, $lastname: user.data.lastname, $id: user.data.id
+      })
       close();
     }
-    setError(user.message);
-    setLoading(false);
+    else {
+      Mixpanel.identify(user.data.id);
+      Mixpanel.track('signup-failed', {
+        user_firstname: user.data.firstname,
+        user_lastname: user.data.lastname,
+        user_email: user.data.email
+      });
+      setError(user.message);
+      setLoading(false);
+    }
   };
 
   const [checkTerms, setCheckTerms] = useState(false);

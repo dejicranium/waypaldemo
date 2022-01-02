@@ -17,6 +17,7 @@ import TextAreaField from "../../components/TextAreaField";
 import { postRequest } from "../../actions/connection";
 import Toast from '../../components/Toast';
 import Autocomplete from "react-google-autocomplete";
+import {Mixpanel} from '../../assets/js/mixpanel';
 
 const CreateTrip = () => {
   const {
@@ -382,7 +383,13 @@ const CreateTrip = () => {
           type="button"
           btnType="fill"
           btnText="Continue to itinerary"
-          onClick={handleSubmit(submit)}
+          onClick={() => {
+            if (typeof user !== 'undefined') {
+              Mixpanel.identify(user.id);
+              Mixpanel.track('continue-to-itinerary')
+            }
+            handleSubmit(submit)
+          }}
         />
       </div>
 

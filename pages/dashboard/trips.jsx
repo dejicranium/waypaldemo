@@ -10,6 +10,8 @@ import UpcomingTrips from "../../components/UpcomingTrips";
 import DashboardSidebar from "../../components/DashboardSidebar";
 import { isoToDate } from "../../assets/js/utils";
 import moment from 'moment';
+import { Mixpanel } from '../../assets/js/mixpanel';
+
 
 const Trips = () => {
 
@@ -21,6 +23,8 @@ const Trips = () => {
   const [intent, setIntent] = useState(new URLSearchParams(window.location.search) ? new URLSearchParams(window.location.search).get("intent"): "")
 
   useEffect(async() => {
+    Mixpanel.track('dashboard-trips-page-loaded');
+    
     let hosted= await getRequest(`/user/trips/`);
 
     hosted = hosted.data;

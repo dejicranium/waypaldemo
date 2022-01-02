@@ -17,7 +17,7 @@ import ForgotPassword from '../components/ForgotPassword';
 import { format } from "date-fns";
 import moment from "moment";
 import { postRequest } from "../actions/connection";
-
+import { Mixpanel } from "../assets/js/mixpanel";
 
 const About = ({ trip,  }) => {
   const { push } = useRouter();
@@ -38,8 +38,7 @@ const About = ({ trip,  }) => {
 
     
   useEffect(async() => {
-    //if (user.id === trip.user_id) {
-      //user_is_owner = true;
+
       let buddies  = await getRequest(`/trip/${trip.id}/buddies`);
       buddies = buddies.data;
 
@@ -105,9 +104,17 @@ const About = ({ trip,  }) => {
                       <Button
                         onClick={() => {
                           setAutMode("register")
-                          //makePayment();
                           push(`/trip/${trip.slug}/join`)
+                          
+                          if (user && user.id) Mixpanel.identify(user.id);
+                          Mixpanel.track("join-trip-clicked", { 
+                            trip_id: trip.id,
+                            trip_title: trip.title,
+                            trip_destination: trip.destination,
+                            trip_total_amount: parseFloat(trip.travel_amount) + parseFloat(trip.miscellaneous_amount) + parseFloat(trip.accommodation_amount),
+                          })
                         }}
+
                         btnStyle="bg-orange font-circular-bold text-white px-4 py-2 mt-3 md:mt-0 rounded"
                         btnText="Join this trip"
                       />

@@ -5,11 +5,16 @@ import DashboardSidebar from "../../components/DashboardSidebar";
 import Button from "../../components/common/Button";
 import { useRouter } from "next/router";
 import moment from "moment";
+import {useEffect} from 'react';
+import {Mixpanel} from '../../assets/js/mixpanel';
 
 let transactions = require("../../assets/data/transactions.json");
 
 const Payments = ({ payments }) => {
   const { push } = useRouter();
+  useEffect(() => {
+    Mixpanel.track('dashboard-payments-page-loaded');
+  }, [])
   return (
     <>
       <div className="container md:grid grid-cols-7 mt-14">

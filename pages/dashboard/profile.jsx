@@ -18,7 +18,7 @@ import { Controller, useForm } from "react-hook-form";
 import { putRequest, postRequest, getRequest } from "../../actions/connection";
 import Toast from "../../components/Toast";
 import dynamic from 'next/dynamic';
-
+import {Mixpanel} from '../../assets/js/mixpanel';
 
 
 const Profile = () => {
@@ -66,15 +66,40 @@ const Profile = () => {
   }
 
   const openVeriffModal = async (url) => {
+
+    if (typeof user !== 'undefined') {
+      Mixpanel.identify(user.id);
+      Mixpanel.track('verification-initiated',{
+        user_firstname: user.firstname,
+        user_lastname: user.lastname,
+        user_email: user.email
+      })
+    }
     createVeriffFrame({
         url: url || verification_url,
         onEvent: async ( msg) => {
             switch(msg) {
             case MESSAGES.CANCELED:
               //setWaypalVerificationStatus("ABANDONED")
+              if (typeof user !== 'undefined') {
+                Mixpanel.identify(user.id);
+                Mixpanel.track('verification-cancelled',{
+                  user_firstname: user.firstname,
+                  user_lastname: user.lastname,
+                  user_email: user.email
+                })
+              }
               break;
             case MESSAGES.FINISHED:
               setWaypalVerificationStatus("ATTEMPTED")
+              if (typeof user !== 'undefined') {
+                Mixpanel.identify(user.id);
+                Mixpanel.track('verification-completed',{
+                  user_firstname: user.firstname,
+                  user_lastname: user.lastname,
+                  user_email: user.email
+                })
+              }
               await getRequest('/user/info').then(resp=> {
                 dispatch({user: resp.data})
               })
@@ -87,6 +112,7 @@ const Profile = () => {
 
 
   useEffect(() => {
+    Mixpanel.track('dashboard-profile-page-loaded');
     if (!['APPROVED', 'ATTEMPTED'].includes(user.verified)) {
       createVeriffSession();
     }
@@ -150,10 +176,12 @@ const Profile = () => {
     });
     if (updateProfile.data) {
       // was successful
+      Mixpanel.track("profile-updated-successful")
       setSuccess(updateProfile.message);
       dispatch({ user: { ...updateProfile.data } });
       
     } else {
+      Mixpanel.track("profile-updated-failed");
       setError(updateProfile.message);
     }
   };

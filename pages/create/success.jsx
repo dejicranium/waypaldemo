@@ -5,11 +5,24 @@ import ShareTrip from "../../components/ShareTrip";
 import Button from "../../components/common/Button";
 import Footer from "../../components/common/Footer";
 import SuccessAnimation from "../../components/SuccessAnimation";
-
+import Mixpanel from "../../assets/js/mixpanel";
+import { useEffect } from 'react';
 const CreateSuccess = () => {
   const {
-    data: { currentTrip },
+    data: { currentTrip, user },
   } = useData();
+
+  useEffect(() => {
+    if (typeof user !== 'undefined') {
+      Mixpanel.identify(user.id);
+      Mixpanel.track('trip-created-successfully',{
+        trip_id: currentTrip.id,
+        trip_title: currentTrip.title,
+        trip_destination: currentTrip.destination,
+        trip_total_amount: parseFloat(currentTrip.travel_amount) + parseFloat(currentTrip.miscellaneous_amount) + parseFloat(currentTrip.accommodation_amount),                        
+      })
+    }
+  })
 
   return (
     <>
