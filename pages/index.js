@@ -177,9 +177,7 @@ export default function Home() {
         <div className="divider w-5 h-2 md:w-10 md:h-4 mx-auto relative bottom-9"></div>
         <div className="more-destination-text">
           <p className="md:max-w-4xxl max-w-xxs mx-auto md:text-26 text-center">
-            Your peace of mind doesn’t have to be tied to where everyone else
-            is. We have a good number of travel and relocation destinations.
-            Take your time and find the perfect one for you.
+            Your peace of mind doesn’t have to be tied to where everyone else is. We have some amazing and popular trips in the following cities. Take your time and find the perfect one for you.
           </p>
         </div>
         {/* More destination Card */}
@@ -207,7 +205,27 @@ export default function Home() {
                 <Icon icon="reasons" />
                 <div className="steps-text pl-5">
                   <p className="text-gray-light max-w-xs">
-                  Everyone’s safety is guaranteed because everyone is biometrically verified.
+                  Up to 100% Refundable fees when
+ trip buddy quota is not met.                  </p>
+                </div>
+              </div> 
+            </div>
+            <div className="step-outline pt-9">
+              <div className="step-1 flex mb-1">
+                <Icon icon="reasons" />
+                <div className="steps-text pl-5">
+                  <p className="text-gray-light max-w-xs">
+                  Everyone’s safety is guaranteed because we know everyone as everyone is biometrically verified.
+                  </p>
+                </div>
+              </div> 
+            </div>
+            <div className="step-outline pt-9">
+              <div className="step-1 flex mb-1">
+                <Icon icon="reasons" />
+                <div className="steps-text pl-5">
+                  <p className="text-gray-light max-w-xs">
+                  You have the opportunity to split accommodation and miscellaneous costs with your travel buddies.
                   </p>
                 </div>
               </div> 
@@ -217,16 +235,7 @@ export default function Home() {
                 <Icon icon="reasons" />
                 <div className="steps-text pl-5">
                   <p className="text-gray-light max-w-xxs">
-                  Detailed Day-to-Day Itenary:  You know exactly what you are paying for and you get a chat system to talk your buddies and trip planner to clarify anything at anytime.                  </p>
-                </div>
-              </div> 
-            </div>
-            <div className="step-outline pt-9">
-              <div className="step-1 flex mb-1">
-                <Icon icon="reasons" />
-                <div className="steps-text pl-5">
-                  <p className="text-gray-light max-w-xxs">
-                  Everyone’s safety is guaranteed because everyone is biometrically verified.
+                  Detailed Day-to-Day Itenary:  You know exactly what you are paying for and you get a chat system to talk to your buddies and the trip creator to clarify anything at anytime
                   </p>
                 </div>
               </div> 
@@ -236,7 +245,16 @@ export default function Home() {
                 <Icon icon="reasons" />
                 <div className="steps-text pl-5">
                   <p className="text-gray-light max-w-xxs">
-                  Everyone’s safety is guaranteed because everyone is biometrically verified.
+                  Meet new like-minded people or create trips for friends.                  </p>
+                </div>
+              </div> 
+            </div>
+            <div className="step-outline pt-9">
+              <div className="step-1 flex mb-1">
+                <Icon icon="reasons" />
+                <div className="steps-text pl-5">
+                  <p className="text-gray-light max-w-xxs">
+                    Amazing travel deals: because of the power of sharing resources
                   </p>
                 </div>
               </div> 
@@ -246,23 +264,10 @@ export default function Home() {
                 <Icon icon="reasons" />
                 <div className="steps-text pl-5">
                   <p className="text-gray-light max-w-xxs">
-                  Everyone’s safety is guaranteed because everyone is biometrically verified.
-                  </p>
+                  You want to go on a trip with only known family, friends and colleagues? No problem. Just make your trip as private and we won't show anyone except people you share the trip link with(We promise 😉                  </p>
                 </div>
               </div> 
             </div>
-            <div className="step-outline pt-9">
-              <div className="step-1 flex mb-1">
-                <Icon icon="reasons" />
-                <div className="steps-text pl-5">
-                  <p className="text-gray-light max-w-xxs">
-                  Everyone’s safety is guaranteed because everyone is biometrically verified.
-                  </p>
-                </div>
-              </div> 
-            </div>
-
-              
           </div>
           <div className="trip-card -mt-56 -mr-28 hidden md:flex">
             <Image

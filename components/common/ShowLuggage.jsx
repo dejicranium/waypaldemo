@@ -50,9 +50,9 @@ export default function ShowLuggage() {
       </div>
       <div className="plan-trip flex">
         <div className="plan-trip-text ml-20 flex flex-col justify-center">
-          <h3 className="font-circular-black text-xl">Dont fancy this trip?</h3>
+          <h3 className="font-circular-black text-xl">Dont fancy any of these trips?</h3>
           <p className="mr-52 text-sm">
-            Plan your own trip. Build, organize, and map out your next best
+            Plan your own trip. Create, organize, and map out your next best
             trip.
           </p>
         </div>
