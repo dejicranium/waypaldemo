@@ -1,4 +1,5 @@
 import Icon from "./common/Icon";
+import moment from "moment";
 
 const ChatSideBar = ({trip}) => {
   return (
@@ -9,9 +10,9 @@ const ChatSideBar = ({trip}) => {
           <p className="pt-2 text-orange font-bold">Travel itinerary</p>
         </div>
         <div className="trip-info pt-6">
-          <div className="date flex">
+          <div className="date flex items-center">
             <Icon icon="calendar"></Icon>
-            <p className="pl-4 text-black">October 21st, 2021</p>
+            <p className="pl-4 text-black">{moment(trip.start_date).format("dddd MMMM DD, YYYY")}</p>
           </div>
           <div className="meeting-point pt-6">
             <h3 className="text-black font-bold">Meeting point</h3>
