@@ -54,6 +54,9 @@ const InputField = (props) => {
           }}
           
         />
+        {helptext && (
+            <small className={`${helptextstyle} block`}>{helptext}</small>
+          )}
       </div>
     }
     </>

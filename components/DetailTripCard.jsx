@@ -23,14 +23,19 @@ const DetailTripCard = ({
   const dropRef = useRef(null);
   const [showOptions, setShowOption] = useState(false);
 
-  const toggleOptions = () => {
+  const toggleOptions = (e) => {
+    e.stopPropagation();
     return setShowOption((prev) => !prev);
   };
+  const goToTrip = (e) => {
+    e.stopPropagation();
+    //window.location.href = `/trip/${slug}/detail`;
+  }
 
   useClickOutside(() => setShowOption(false), dropRef);
 
   return (
-    <div className="relative">
+    <div className="relative cursor-pointer" onClick={goToTrip}>
       <div className="trip-card p-4 my-6 border rounded border-gray-light3 flex items-start justify-between">
         {/* Image and trip details */}
         <div className="trip-info flex flex-col w-full md:flex-row">

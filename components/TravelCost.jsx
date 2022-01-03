@@ -17,19 +17,19 @@ const TravelCost = ({ register, watch }) => {
     {
       title: "travel",
       name: "travel_amount",
-      helptext: "This covers flight to-and-fro",
+      helptext: "This covers travel plans per individual",
       icon: "travel",
     },
     {
       title: "accommodation",
       name: "accommodation_amount",
-      helptext: "The total cost of accommodation",
+      helptext: "The total cost of accommodation per individual. Leave empty if it's not in the plan",
       icon: "accommodation",
     },
     {
       title: "miscellaneous",
       name: "miscellaneous_amount",
-      helptext: "This covers feeding, transportation etc.",
+      helptext: "This covers feeding and other miscellaneous services per individual. Explain these services in the description and itinerary details. Leave empty if it's not in the plan",
       icon: "misc",
     },
   ];
@@ -37,7 +37,7 @@ const TravelCost = ({ register, watch }) => {
   return (
     <div>
       <div className="travel-cost-header flex items-center justify-between mb-3">
-        <h1 className="text-black font-circular-bold">Travel cost</h1>
+        <h1 className="text-black font-circular-bold">Travel cost per individual</h1>
         <select
           id="currency"
           // onChange={(e) => setCurrency(e.target.value)}

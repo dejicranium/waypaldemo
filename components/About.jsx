@@ -29,7 +29,7 @@ const About = ({ trip,  }) => {
 
   const [authMode, setAutMode]  = useState('login');
   const [showModal, setShowModal]  = useState(false);
-  const [shareModal, showShareModal]  = useState(false);
+  const [share_modal, showShareModal]  = useState(false);
   const [user_is_buddy, setUserAsBuddy] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -80,6 +80,10 @@ const About = ({ trip,  }) => {
 
   return (
     <>
+
+      <Modal showModal={share_modal} close={() => showShareModal(false)}>
+        <ShareTrip trip={trip}/>
+      </Modal>
       <Modal showModal={showModal} close={() => setShowModal(false)}>
         {authMode === 'login' && (
           <Login setActive={authMode === 'login'} close={() => setShowModal(false)} />
@@ -101,7 +105,7 @@ const About = ({ trip,  }) => {
           </h1>
           
             <div className="">
-                    {trip.user_id !== user.id && !user_is_buddy && !loading &&
+                    {trip.user_id !== user.id && !user_is_buddy && moment().isBefore(trip.start_date) && !loading &&
                       <Button
                         onClick={() => {
                           setAutMode("register")
@@ -146,7 +150,7 @@ const About = ({ trip,  }) => {
             </p>
           </div>
           <div className="profile flex items-center justify-end">
-            <Icon icon="share" cname="cursor-pointer" />
+            <Icon icon="share" handleClick={() => showShareModal(true)} cname="cursor-pointer" />
           </div>
         </div>
 
@@ -171,7 +175,6 @@ const About = ({ trip,  }) => {
           <p className="">{trip.meeting_point}</p>
         </div>
 
-        <ShareTrip trip={trip} />
       </section>
 
       <section className="final-travel-info mt-10 xl:max-w-lg">

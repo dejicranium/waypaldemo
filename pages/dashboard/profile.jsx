@@ -449,19 +449,19 @@ const Profile = () => {
                       />
                       <InputField
                         type="text"
-                        placeholder="Twitter handle"
+                        placeholder="Twitter handle (e.g johndoe)"
                         className="mb-3"
                         innerref={register("twitter")}
                       />
                       <InputField
                         type="text"
-                        placeholder="Facebook username"
+                        placeholder="Facebook username (e.g johndoe)"
                         className="mb-3"
                         innerref={register("facebook")}
                       />
                       <InputField
                         type="text"
-                        placeholder="Instagram handle"
+                        placeholder="Instagram handle (e.g johndoe)"
                         innerref={register("instagram")}
                       />
                     </div>

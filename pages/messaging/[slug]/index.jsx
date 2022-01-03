@@ -17,7 +17,8 @@ const Messaging = ({ trip, messages, notFound }) => {
   } = useData();
 
   const { push } = useRouter();
-  if (trip.user.id !== user.id && trip.buddieslist.filter(b => b.user_d === user.id).length < 1) {
+  if (trip.user_id !== user.id && trip.buddieslist.filter(b => b.user_d === user.id).length < 1) {
+    console.log("USER HAS NO BUSINESS")
     push("/404");
 
   }
@@ -29,7 +30,9 @@ const Messaging = ({ trip, messages, notFound }) => {
   const [messageList, setMessageList] = useState(messages);
 
   useEffect(() => {
-    if (notFound) return;
+    if (notFound) {
+      return;
+    }
     setMessageList(messages);
     socket.emit("join_room", trip.id)
     socket.on("trip", async (tripData) => {

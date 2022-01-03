@@ -249,16 +249,7 @@ export default function Home() {
                 </div>
               </div> 
             </div>
-            <div className="step-outline pt-9">
-              <div className="step-1 flex mb-1">
-                <Icon icon="reasons" />
-                <div className="steps-text pl-5">
-                  <p className="text-gray-light max-w-xxs">
-                    Amazing travel deals: because of the power of sharing resources
-                  </p>
-                </div>
-              </div> 
-            </div>
+            
             <div className="step-outline pt-9">
               <div className="step-1 flex mb-1">
                 <Icon icon="reasons" />

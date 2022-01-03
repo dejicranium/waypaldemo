@@ -118,9 +118,7 @@ const CreateTrip = () => {
               Create a trip
             </h1>
             <p className="pt-4">
-              Enter the required information for each traveler and be sure that
-              it exactly matches the government-issued ID presented at the
-              airport.
+              Enter the required information for trip.
             </p>
           </div>
 
@@ -313,7 +311,7 @@ const CreateTrip = () => {
                 </h2>
                 <InputField
                   type="text"
-                  placeholder="Press enter to add a checklist"
+                  placeholder="cool, smart, patient"
                   onKeyUp={addBuddyTag}
                   cname="max-w-sm"
                   enterKeyHint="done"
@@ -383,13 +381,7 @@ const CreateTrip = () => {
           type="button"
           btnType="fill"
           btnText="Continue to itinerary"
-          onClick={() => {
-            if (typeof user !== 'undefined') {
-              Mixpanel.identify(user.id);
-              Mixpanel.track('continue-to-itinerary')
-            }
-            handleSubmit(submit)
-          }}
+          onClick={handleSubmit(submit)}
         />
       </div>
 
