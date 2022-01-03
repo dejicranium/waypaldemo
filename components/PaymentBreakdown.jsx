@@ -12,19 +12,19 @@ const PaymentBreakdown = ({
     {
       title: "Travel",
       icon: "travel",
-      helptext: "This covers flight to-and-fro",
+      helptext: "This covers flight to-and-fro per individual",
       amount: travel_amount,
     },
     {
       title: "Accommodation",
       icon: "accommodation",
-      helptext: "The total cost of accommodation",
+      helptext: "The total cost of accommodation per individual",
       amount: accommodation_amount,
     },
     {
       title: "Miscellaneous",
       icon: "misc",
-      helptext: "This covers feeding, transportation etc.",
+      helptext: "This covers feeding and other miscellaneous acitivies as stated by the trip creator.",
       amount: miscellaneous_amount,
     },
   ];

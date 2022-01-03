@@ -27,7 +27,7 @@ const MoreResults = (prop) => {
         </div>
         <div>
         <div className="buddies-checklist mt-10">
-          <div className="buddies-list grid md:grid-cols-3 md:gap-8 grid-cols-2">
+          <div className="buddies-list flex-row justify-between ">
             {prop.trip.checklists && prop.trip.checklists.map((item, index) => (
               <div className="flex items-center" key={index}>
                 <Icon icon="checkmark" cname="flex-none" />

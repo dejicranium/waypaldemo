@@ -23,10 +23,10 @@ export const init = {
     itineraries: [],
     description: "",
     phone_number: "",
-    travel_amount: 0,
+    travel_amount: '',
     meeting_point: "",
-    accommodation_amount: 0,
-    miscellaneous_amount: 0,
+    accommodation_amount: '',
+    miscellaneous_amount: '',
   },
   currentTrip: {
     trip_id: 0,

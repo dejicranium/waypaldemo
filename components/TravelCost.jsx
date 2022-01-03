@@ -53,6 +53,7 @@ const TravelCost = ({ register, watch }) => {
           <option value="GBP">&#163; GBP</option>
         </select>
       </div>
+      
       <div className="travel-cost-container border-2 rounded-2xl border-outline divide-y-2 divide-outline">
         {travelDetails.map(({ title, name, helptext, icon }) => (
           <div
