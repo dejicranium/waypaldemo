@@ -214,7 +214,7 @@ const JoinTrip = ({ trip, notFound }) => {
       },
       callback: async function (data) {
         const payment = await getRequest(
-          `/payment/verify/${data.transaction_id}`
+          `/payment/verify/${data.transaction_id}?trip_id=${trip.id}`
         );
         if (payment.status) {
           if (typeof user !== 'undefined') {
