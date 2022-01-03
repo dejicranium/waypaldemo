@@ -404,7 +404,7 @@ const JoinTrip = ({ trip, notFound }) => {
                                 placeholder="Phone number"
                                 preferredCountries={["ng"]}
                                 inputClassName="input-element w-full"
-                                defaultValue={user.phone_number}
+                                defaultValue={user.phone_number || ""}
                                 containerClassName="intl-tel-input w-full"
                                 onPhoneNumberChange={(_e, v, c) => {onChange(v); setPhoneNumber(v)}}
                               />
@@ -561,7 +561,7 @@ const JoinTrip = ({ trip, notFound }) => {
                               <IntlTelInput
                                 format
                                 defaultCountry="ng"
-                                defaultValue={user.emergency_phone_number}
+                                defaultValue={user.emergency_phone_number || ""}
                                 placeholder="Phone number"
                                 preferredCountries={["ng"]}
                                 inputClassName="input-element w-full"

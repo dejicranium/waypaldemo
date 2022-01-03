@@ -91,11 +91,11 @@ const Messaging = ({ trip, messages, notFound }) => {
                         <div className="pl-2">
                           <UserAvatar
                             size="48"
-                            name={`${user.firstname}`}
+                            name={`${data.user.firstname} ${data.user.lastname}`}
                             color="#5CD6C0"
                             src={
-                              user.profile_image_url
-                                ? user.profile_image_url
+                              data.user.profile_image_url
+                                ? data.user.profile_image_url
                                 : ""
                             }
                           />
