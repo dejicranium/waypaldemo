@@ -311,7 +311,7 @@ const CreateTrip = () => {
                 </h2>
                 <InputField
                   type="text"
-                  placeholder="cool, smart, patient"
+                  placeholder="Enter a criterion and press enter"
                   onKeyUp={addBuddyTag}
                   cname="max-w-sm"
                   enterKeyHint="done"
