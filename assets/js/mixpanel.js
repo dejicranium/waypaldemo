@@ -1,7 +1,7 @@
 import mixpanel from 'mixpanel-browser';
 mixpanel.init('cd98e5664b027ce2dc67f734c5cdfea6', {debug: true});
 
-let env_check = process.env.NODE_ENV === 'development';
+let env_check = process.env.NODE_ENV === 'production';
 
 let actions = {
   identify: (id) => {
