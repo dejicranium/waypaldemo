@@ -91,11 +91,11 @@ const Messaging = ({ trip, messages, notFound }) => {
                         <div className="pl-2">
                           <UserAvatar
                             size="48"
-                            name={`${data.user.firstname} ${data.user.lastname}`}
+                            name={`${user.firstname} ${user.lastname}`}
                             color="#5CD6C0"
                             src={
-                              data.user.profile_image_url
-                                ? data.user.profile_image_url
+                              user.profile_image_url
+                                ? user.profile_image_url
                                 : ""
                             }
                           />
@@ -107,11 +107,11 @@ const Messaging = ({ trip, messages, notFound }) => {
                         <div className="pr-2">
                           <UserAvatar
                             size="48"
-                            name={`${user.firstname}`}
+                            name={`${data.User.firstname} ${data.User.firstname}`}
                             color="#5CD6C0"
                             src={
-                              user.profile_image_url
-                                ? user.profile_image_url
+                              data.User.profile_image_url
+                                ? data.User.profile_image_url
                                 : ""
                             }
                           />
@@ -158,6 +158,7 @@ export async function getServerSideProps(context) {
 
   if (tripData.status) {
     const tripMessages = await getRequest(`/trip/${tripData.data.id}/chats`);
+
     return {
       props: {
         trip: tripData.data,

@@ -1,5 +1,6 @@
 import Icon from "./common/Icon";
 import moment from "moment";
+import Link from "next/link";
 
 const ChatSideBar = ({trip}) => {
   return (
@@ -7,7 +8,7 @@ const ChatSideBar = ({trip}) => {
       <section className="trip-details p-8 rounded-2xl bg-orange-white">
         <div className="trip-title pb-6 border-b border-gray-light6">
           <h1 className="text-lg text-black font-bold">{trip.title}</h1>
-          <p className="pt-2 text-orange font-bold">Travel itinerary</p>
+          <a href={`/trip/${trip.slug}`} className="pt-2 text-orange font-bold cursor-pointer">Travel itinerary</a>
         </div>
         <div className="trip-info pt-6">
           <div className="date flex items-center">
@@ -30,6 +31,17 @@ const ChatSideBar = ({trip}) => {
         </div>
         
         <div className="buddies-list flex flex-col pt-6">
+              <div className="flex flex-row items-center">
+                <div className="chat-image-container">
+                  {trip.user && trip.user.profile_image_url &&
+                    <img src={trip.user.profile_image_url} alt=""/>
+                  }
+                  {!trip.user || !trip.user.profile_image_url && 
+                    <img className="chat-image-default" alt=""/>
+                  }
+                </div>
+                <p className="chat-image-container-label">{trip.user.firstname + ' ' + trip.user.lastname}</p>
+              </div>
           {trip.buddieslist && trip.buddieslist.map((item, index) => {
             return (
               <div className="flex flex-row items-center" key={index}>
