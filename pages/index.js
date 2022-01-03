@@ -118,30 +118,26 @@ export default function Home() {
                 <div className="steps-text pl-5">
                   <p className="font-circular-bold">Choose destination</p>
                   <p className="text-gray-light max-w-xxs">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Urna, tortor tempus.
-                  </p>
+                  Search for group trips going to interesting locations around the world.                  </p>
                 </div>
               </div>
               <div className="step-2 flex mb-12">
                 <Icon icon="travel-buddies-icon" />
                 <div className="steps-text pl-5">
                   <p className="font-circular-bold">
-                    Choose your preferred travel buddies
+                    Choose a trip
                   </p>
                   <p className="text-gray-light max-w-xxs">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Urna, tortor tempus.
+                    Seen an interesting trip with the right location, budget and itinerary for you? Proceed to join.
                   </p>
                 </div>
               </div>
               <div className="step-3 flex mb-12">
                 <Icon icon="payment-icon" />
                 <div className="steps-text pl-5">
-                  <p className="font-circular-bold">Make payment</p>
+                  <p className="font-circular-bold">Get verified and make payment</p>
                   <p className="text-gray-light max-w-xxs">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Urna, tortor tempus.
+                    Get verified biometrically and easily make payment to join your travel buddies.
                   </p>
                 </div>
               </div>
@@ -150,8 +146,7 @@ export default function Home() {
                 <div className="steps-text pl-5">
                   <p className="font-circular-bold">Get ready to move</p>
                   <p className="text-gray-light max-w-xxs">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Urna, tortor tempus.
+                    Chat with your buddies and the trip creator on preparations in-app and get ready to meet amazing people while exploring our beautiful world.
                   </p>
                 </div>
               </div>
@@ -173,7 +168,7 @@ export default function Home() {
       <section className="more-destinations text-center mt-16">
         <div className="more-destination-header">
           <h2 className="font-smith text-orange-light md:text-200 text-64 relative">
-            Top
+            top
           </h2>
           <h2 className="text-black-light font-circular-black md:text-80 text-2xl relative bottom-9">
             destinations
