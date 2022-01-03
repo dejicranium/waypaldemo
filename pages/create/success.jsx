@@ -5,7 +5,7 @@ import ShareTrip from "../../components/ShareTrip";
 import Button from "../../components/common/Button";
 import Footer from "../../components/common/Footer";
 import SuccessAnimation from "../../components/SuccessAnimation";
-import Mixpanel from "../../assets/js/mixpanel";
+import {Mixpanel} from "../../assets/js/mixpanel";
 import { useEffect } from 'react';
 const CreateSuccess = () => {
   const {
