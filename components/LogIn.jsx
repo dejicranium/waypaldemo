@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import { useForm } from "react-hook-form";
 
 import Toast from "./Toast";
@@ -18,6 +18,12 @@ const Login = ({ setActive, close }) => {
   const { dispatch } = useData();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setTimeout(() => {
+      console.log('hi')
+    }, 1000)
+  },[])
 
   const submit = async (values) => {
     setLoading(true);

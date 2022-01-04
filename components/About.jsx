@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import UserAvatar from "react-user-avatar";
 
 import Icon from "./common/Icon";
 import ShareTrip from "../components/ShareTrip"
@@ -132,7 +133,18 @@ const About = ({ trip,  }) => {
 
         <div className="trip-info grid md:grid-cols-4 md:gap-8 grid-cols-2 mt-8">
           <div className="profile flex items-center">
-            <Icon icon="profile" cname="pr-3 flex-none" />
+            {!trip.user.profile_image_url && (
+              <Icon icon="profile" cname="pr-3 flex-none" />
+            )}
+            {trip.user.profile_image_url && (
+            <UserAvatar
+                className="pr-3"
+                  size="30"
+                  name={`${trip.user.firstname.toUpperCase()} ${trip.user.lastname.toUpperCase()}`}
+                  color="#5CD6C0"
+                  src={trip.user.profile_image_url || ''}
+                />
+            )}
             <a className="xl:whitespace-nowrap cursor-pointer" onClick={() => push(`/user/${trip.user_id}`)}>{trip.user.firstname + ' ' + trip.user.lastname}</a>
           </div>
           <div className="buddies flex items-center">

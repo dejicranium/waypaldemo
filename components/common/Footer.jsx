@@ -7,13 +7,13 @@ const Footer = ({ planTrip, children }) => (
     {children}
     <div className="footer-background">
       <img
-        src="/footer-background-top.png"
+        src="/footer-background-top2.png"
         alt="beach background"
         className="w-full"
-      />
+      />c
     </div>
     <div className="foot-links grid grid-cols-2 md:grid-cols-4 text-black-content pt-7 mb-16 gap-3 container">
-      <div className="legal">
+      {/*<div className="legal">
         <h3 className="font-circular-black text-black pb-5">Legal</h3>
         <ul className="">
           <li>MSA Self Managed</li>
@@ -23,7 +23,9 @@ const Footer = ({ planTrip, children }) => (
           <li>Terms of Service</li>
           <li>Manage Cookies</li>
         </ul>
-      </div>
+        </div>*/}
+      {/*
+      
       <div className="product">
         <h3 className="font-circular-black text-black pb-5">Product</h3>
         <ul>
@@ -35,8 +37,10 @@ const Footer = ({ planTrip, children }) => (
           <li>Marketplace</li>
         </ul>
       </div>
+      */}
       <div className="company mt-10 md:mt-0">
-        <h3 className="font-circular-black text-black pb-5">Company</h3>
+        <h3 className="font-circular-black text-black pb-5">COMPANY</h3>
+
         <ul>
           <li>Team</li>
           <li>About</li>
@@ -48,18 +52,22 @@ const Footer = ({ planTrip, children }) => (
         </ul>
       </div>
       <div className="social mt-10 md:mt-0">
+        <h3 className="font-circular-black text-black pb-5">CONTACT US</h3>
+        <ul className="pb-5   border-dotted border-black-100 border-b-2" style={{marginBottom: '20px'}}>
+          <li>hello@waypal.com</li>
+        </ul>
         <ul className="pt-5">
           <li>
-            <Icon icon="facebook" />
+            Facebook
           </li>
           <li>
-            <Icon icon="twitter" />
+            Twitter
           </li>
           <li>
-            <Icon icon="linkedin" />
+            Linkedin
           </li>
           <li>
-            <Icon icon="instagram" />
+            Instagram
           </li>
         </ul>
       </div>

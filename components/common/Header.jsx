@@ -23,7 +23,7 @@ import useClickOutside from "../hooks/useClickOutside";
 const Header = ({ open, setOpen }) => {
   const {
     data: {
-      user: { firstname, lastname, id },
+      user: { firstname, lastname, id, profile_image_url },
       isLoggedIn = false,
     },
   } = useData();
@@ -172,7 +172,7 @@ const Header = ({ open, setOpen }) => {
                         size="48"
                         name={`${firstname.toUpperCase()} ${lastname.toUpperCase()}`}
                         color="#5CD6C0"
-                        // src="/david.jpg"
+                        src={profile_image_url || ''}
                       />
                       <div className="" onClick={toggleProfileMenu}>
                         <Icon icon="down-arrow" cname="ml-2 cursor-pointer" />
