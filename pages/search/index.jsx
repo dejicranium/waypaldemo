@@ -52,7 +52,8 @@ const Search = () => {
     if (querystring) {
       setLoadingResults(true);  
       await getRequest('/search?' + querystring).then(async response => {
-        await dispatch({topSearchResults: response.data.items})
+        console.log(response.data.data);
+        await dispatch({topSearchResults: response.data})
         setLoadingResults(false)
       }).catch(e=> {
         console.log(e.message)
@@ -81,7 +82,7 @@ const Search = () => {
         <section className={loadingResults ? "mt-20 mb-14 max-w-3xl": "hidden"}>
           <Spinner size={1.7} color={"#EA4524"} />
         </section>
-        <section className={!loadingResults && topSearchResults.length < 1 ? "no-results mt-20 mb-14 max-w-3xl" : "hidden"}>
+        <section className={!loadingResults && topSearchResults && topSearchResults.length < 1 ? "no-results mt-20 mb-14 max-w-3xl" : "hidden"}>
           <h2 className="text-4xl">
             We couldn’t find a trip that fits your search criteria.
           </h2>
@@ -92,7 +93,7 @@ const Search = () => {
         
         
         <section className="top-results mt-0 md:mt-14 flex items-center justify-between">
-          {topSearchResults.length > 0 && 
+          { topSearchResults && topSearchResults.length > 0 && 
             <h2 className="hidden text-gray-light2 text-2xl font-circular-bold">
               Top <span className="text-orange">results</span>
             </h2>
@@ -115,14 +116,14 @@ const Search = () => {
           
         
         <section className="hidden search-results flex space-x-8 overflow-x-scroll xl:overflow-x-visible mt-7">
-          { topSearchResults.length > 0 &&
+          {topSearchResults &&topSearchResults.length > 0 &&
             topSearchResults.map((trip) => {
               return <SimpleTripCard key={trip.id} trip={trip} />
             })
           }
 
         </section>
-        {topSearchResults.length > 0 &&
+        {topSearchResults && topSearchResults.length > 0 &&
           <div className="flex justify-between">
             <section className="other-results mt-10 w-full md:w-3/5 lg:w-70per flex flex-wrap">
               <div className="flex flex-col w-full">
@@ -131,7 +132,7 @@ const Search = () => {
                   
                 </h2>
                 <div className="md:grid-cols-1 lg:grid-cols-1 gap-4 w-full grid">  
-                {topSearchResults.length > 0 ? topSearchResults.map((trip) => {
+                { topSearchResults && topSearchResults.length > 0 ? topSearchResults.map((trip) => {
                   
                   return <MoreResults key={trip.id} trip={trip} />
                   

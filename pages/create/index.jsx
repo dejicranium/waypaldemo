@@ -54,6 +54,7 @@ const CreateTrip = () => {
   }
   const sD = watch("start_date");
 
+
   const [tags, setTags] = useState(createTrip?.checklists || []);
   const [title, setTitle] = useState("");
   const [destination, setDestination] = useState(createTrip.destination)
@@ -87,13 +88,20 @@ const CreateTrip = () => {
   };
 
   const submit = async  (data) => {
-    await postRequest('/trip/verify-name', {
+   if (!data.travel_amount && !data.miscellaneous_amount && !data.accommodation_amount) {
+      setError("Travel costs cannot be 0")
+    }
+    else {
+      push("/create/itinerary");
+    }
+
+    
+    /*await postRequest('/trip/verify-name', {
       title: title
     }).then(resp =>{
       if (resp.status) {
 
         dispatch({ createTrip: { ...createTrip, ...data, is_public, destination, meeting_point, checklists: tags } });
-        push("/create/itinerary");
       }
       else {
         setError(resp.message)     
@@ -103,7 +111,7 @@ const CreateTrip = () => {
       alert(err.message)
       setError(err.message)
       return
-    })
+    })*/
   };
 
   return (

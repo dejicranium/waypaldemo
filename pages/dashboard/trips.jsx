@@ -21,6 +21,7 @@ const Trips = () => {
   const [loading, setLoading] = useState(true)
   const [error, setErrir] = useState("")
   const [intent, setIntent] = useState(new URLSearchParams(window.location.search) ? new URLSearchParams(window.location.search).get("intent"): "")
+  const [intent_obj, setIntentObj] = useState(new URLSearchParams(window.location.search) ? new URLSearchParams(window.location.search).get("intent-obj"): "")
 
   useEffect(async() => {
     Mixpanel.track('dashboard-trips-page-loaded');
@@ -61,6 +62,7 @@ const Trips = () => {
   return (
     <>
       <div className="container md:grid grid-cols-7 mt-14 mb-20">
+
         <aside className="hidden md:block col-span-1">
           <DashboardSidebar />
         </aside>

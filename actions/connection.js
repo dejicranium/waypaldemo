@@ -8,7 +8,7 @@ const api = axios.create({
 export default function conn(tok = "") {
   const cookies = parseCookies();
   let token = cookies.token || tok || "";
-  //api.defaults.headers.common["Bypass-Tunnel-Reminder"] = 1
+  api.defaults.headers.common["Bypass-Tunnel-Reminder"] = 1
   if (token) {
     api.defaults.headers.common.Authorization = `Bearer ${token}`;
   }

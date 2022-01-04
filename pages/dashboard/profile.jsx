@@ -148,6 +148,9 @@ const Profile = () => {
     }
     const result = await postRequest('/user/password/change', data)
     if (result.status) {
+      setOldPassword('');
+      setNewPassword('');
+      setNewPasswordConfirmation('');
       setSuccess(result.message);
       
     }

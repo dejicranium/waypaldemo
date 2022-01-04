@@ -74,7 +74,7 @@ const SearchFilter = (props) => {
     })
     
     await getRequest('/search' + query_string).then(response => {
-      dispatch({topSearchResults: response.data.items})
+      dispatch({topSearchResults: response.data})
     }).catch(e=> {
     })
   }
@@ -124,7 +124,10 @@ const SearchFilter = (props) => {
             />
             <Button btnType="fill" onClick={() => {
               filter()
-              props.close()
+              if (props.close){
+
+                props.close()
+              }
             }} btnText="Apply filter" />
           </div>
         </div>

@@ -271,7 +271,7 @@ const JoinTrip = ({ trip, notFound }) => {
                   <div className="mt-8">
                     
                     <p className="pt-2 text-black-content md:max-w-2xl">
-                      You can"t join a trip until you"re verified
+                      You can't join a trip until you're verified
                     </p>
                     <div className="mt-16 flex items-center">
                       <Button
@@ -421,7 +421,7 @@ const JoinTrip = ({ trip, notFound }) => {
                       <div className="personal-info md:grid grid-cols-2 gap-x-2 mt-3">
                         <select
                           className="mb-3 input-element"
-                          
+                          defaultValue={user.gender || ""}
                           onChange={(e) => {
                               if (e.target.value) {
                                 setGender(e.target.value);                        
@@ -431,7 +431,7 @@ const JoinTrip = ({ trip, notFound }) => {
                               }
                           }}
                           >
-                          <option disabled>Gender</option>
+                          <option disabled value="">Gender</option>
                           <option value="male">Male</option>
                           <option value="female">Female</option>
                         </select>

@@ -27,11 +27,11 @@ const MoreResults = (prop) => {
         </div>
         <div>
         <div className="buddies-checklist mt-10">
-          <div className="buddies-list flex-row justify-between ">
-            {prop.trip.checklists && prop.trip.checklists.map((item, index) => (
+          <div className="buddies-list flex flex-row justify-between ">
+            {prop.trip.checklists && prop.trip.checklists.split(';').map((item, index) => (
               <div className="flex items-center" key={index}>
-                <Icon icon="checkmark" cname="flex-none" />
-                <p className="pl-1 whitespace-nowrap text-gray">{item}</p>
+                <Icon icon="checkmark-grey" cname="flex-none" />
+                <p className="pl-1 whitespace-nowrap text-gray">{item.trim()}</p>
               </div>
             ))}
           </div>

@@ -11,7 +11,7 @@ import {
 } from "react-share";
 
 const ShareTrip = ({ trip, cname}) => {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://waypal-eight.vercel.app';
   let shareUrl = `${baseUrl}/trip/${trip.slug}`;
   if (!trip.is_public) {
     shareUrl += `?pcd=${trip.passcode}`
@@ -39,7 +39,7 @@ const ShareTrip = ({ trip, cname}) => {
         />
       )}
       <div className={"border-2 border-dashed border-gray-light3 rounded-md py-6 px-20 max-w-md mx-auto " +cname}>
-        <h4 className="text-black-content text-lg font-circular-bold">
+        <h4 className="text-black-content text-center text-lg font-circular-bold">
           Share trip:
         </h4>
         <div className="share-links flex items-center justify-between pt-6">

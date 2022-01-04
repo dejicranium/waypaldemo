@@ -82,7 +82,7 @@ const SearchBar = (props) => {
           })
           
           await getRequest('/search' + query_string).then(response => {
-            dispatch({topSearchResults: response.data.items})
+            dispatch({topSearchResults: response.data})
             props.setLoading(false)
 
           }).catch(e=> {

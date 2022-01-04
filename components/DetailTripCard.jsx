@@ -95,8 +95,11 @@ const DetailTripCard = ({
                   <li className="py-3 rounded px-10">
                     <Link href={`/messaging/${slug}`}>Group Chat</Link>
                   </li>
-                  <li className="py-3 rounded px-10 text-center">
-                    <Link href={`/trip/${slug}/detail`}>Trip Details</Link>
+                  <li className="py-3 rounded px-10">
+                    <Link href={`/trip/${slug}`}>Public View</Link>
+                  </li>
+                  <li className="py-3 rounded px-10">
+                    <Link href={`/trip/${slug}/detail`}>Dashboard View</Link>
                   </li>
                 </ul>
               </div>
