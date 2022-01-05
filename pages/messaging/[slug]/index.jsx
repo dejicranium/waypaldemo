@@ -1,4 +1,4 @@
-import {io} from "socket.io-client";
+\import {io} from "socket.io-client";
 import UserAvatar from "react-user-avatar";
 
 import { useRouter } from "next/router";
@@ -11,7 +11,6 @@ import { getRequest, postRequest } from "../../../actions/connection";
 
 const Messaging = ({ trip, messages, notFound }) => {
   const socket = io();
-
   const {
     data: { user },
   } = useData();
