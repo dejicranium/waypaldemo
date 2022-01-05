@@ -1,4 +1,4 @@
-\import {io} from "socket.io-client";
+import io from "socket.io-client";
 import UserAvatar from "react-user-avatar";
 
 import { useRouter } from "next/router";
