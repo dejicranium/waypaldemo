@@ -153,7 +153,7 @@ const JoinTrip = ({ trip, notFound }) => {
               //setWaypalVerificationStatus("ABANDONED")
               break;
             case MESSAGES.FINISHED:
-              //setWaypalVerificationStatus("ATTEMPTED")
+              setWaypalVerificationStatus("ATTEMPTED")
               break;
               }
           },  
@@ -303,7 +303,7 @@ const JoinTrip = ({ trip, notFound }) => {
                   <div className="mt-8">
                     
                     <p className="pt-2 text-black-content md:max-w-2xl">
-                      We"ve received your verification details and we"ll shoot you an email to join this trip when verified.
+                      We've received your verification details and we"ll shoot you an email to join this trip when verified.
                     </p>
                   </div>
                 </section>
