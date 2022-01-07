@@ -55,6 +55,7 @@ const Hero = () => {
               <InputWithLabel
                 placeholder="Where would you like to go?"
                 type="text"
+                id={'explore-destination'}
                 isdestination_input={true}
                 label="Destination"
                 cname="destination-input"

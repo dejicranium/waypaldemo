@@ -17,23 +17,34 @@ const SearchBar = (props) => {
     dispatch,
   } = useData();
  
+  useEffect(() => {
+    window.addEventListener('load', function() {
+      let input = document.getElementById('search-bar-destination');
+      if (input instanceof HTMLInputElement) {
+        let complete = new google.maps.places.Autocomplete(input);
+        google.maps.event.addListener(complete, 'place_changed', function () {
+          let place = complete.getPlace();
+
+          let address = place.formatted_address;
+          input.value = address;
+          setDestination(address);
+        })
+      }
+
+    })
+  })
   return (
     <div className="flex">
       <div className="flex flight-search bg-white rounded max-w-3xl border border-gray-light6 divide-x">
         <div className="destination flex items-center pl-3">
           <Icon icon="departure" cname="pt-1" />
-
-          <Autocomplete
-            apiKey="AIzaSyDLZ4NFeub25kppPsgPItK0RWKdZ-Ecy8c"
+          <input 
+            type="text"
+            id="search-bar-destination"
             style={{ width: "100%" }}
-            onPlaceSelected={(place) => {
-              let d = place.formatted_address;
-
-              setDestination(d)
-            }}
-            value={destination}
             placeholder="Destination"
             className="destination-input outline-none box-border text-black-content w-full pl-3"
+            
           />
         
         </div>

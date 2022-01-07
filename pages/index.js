@@ -65,7 +65,8 @@ export default function Home() {
           label="Destination"
           value={destination}
           cname="destination-input"
-          onChange={(e) => {setDestination(e.target.value)}}
+          id={`mobile-explore-destination`}
+          onChange={setDestination}
         />
 
 

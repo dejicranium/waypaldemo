@@ -141,6 +141,7 @@ const CreateTrip = () => {
                   cname="mb-3"
                   isdestination_input={true}
                   onChange={setDestination}
+                  id={"create-destination"}
                   /*
                   innerref={register("destination", {
                     required: {
@@ -306,6 +307,7 @@ const CreateTrip = () => {
                   cname="max-w-sm destination-input"
                   onChange={setMeetingPlace}
                   isdestination_input={true}
+                  id={'meeting-point-destination'}
                   helptext={
                     errors.meeting_point && errors.meeting_point.message
                   }
