@@ -1,8 +1,11 @@
 import Icon from "./common/Icon";
 import Autocomplete from "react-google-autocomplete";
+import {useEffect} from 'react';
 
 const InputField = (props) => {
   const {
+    id, 
+    type,
     cname,
     className,
     innerref,
@@ -11,8 +14,34 @@ const InputField = (props) => {
     trailingicon,
     helptextstyle,
     onChange,
+    placeholder,
     isdestination_input
   } = props;
+
+
+  useEffect(()=> {
+    initializeAutoComplete();
+  }, []);
+
+
+  const initializeAutoComplete = () => {
+    window.addEventListener('load', function() {
+        let input = document.getElementById(id);
+        if (input instanceof HTMLInputElement) {
+
+          let complete = new google.maps.places.Autocomplete(input);
+          google.maps.event.addListener(complete, 'place_changed', function () {
+            let place = complete.getPlace();
+
+            let address = place.formatted_address;
+            input.value = address;
+            onChange(address);
+          })
+        }
+
+    })
+  }
+
 
   return (
     <>
@@ -40,20 +69,15 @@ const InputField = (props) => {
     }
     {isdestination_input &&
       <div className={`input-field ${className} relative`}>
+        <input
+          type={type}
+          id={id}
+          placeholder={placeholder}
+          //onChange={(e) => onChange(e)}
+          className={`input-element w-full ${cname}`}
+          {...innerref}/>
 
-        <Autocomplete
-          apiKey="AIzaSyDLZ4NFeub25kppPsgPItK0RWKdZ-Ecy8c"
-          style={{ width: "100%" }}
-          className={`input-element w-full ${cname} ${
-            leadingicon ? "leading-icon" : ""
-          }`}
-          {...innerref}
-          onPlaceSelected={(place) => {
-            let destination = place.formatted_address;
-            props.onChange(destination);
-          }}
-          
-        />
+
         {helptext && (
             <small className={`${helptextstyle} block`}>{helptext}</small>
           )}

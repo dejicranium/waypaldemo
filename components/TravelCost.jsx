@@ -2,6 +2,7 @@ import { useState } from "react";
 import Icon from "./common/Icon";
 import { formatAmount } from "../assets/js/utils";
 import { formatCurrency } from "../assets/js/utils";
+import useData from '../components/hooks/useData';
 
 const TravelCost = ({ register, watch }) => {
   const t =
@@ -12,6 +13,13 @@ const TravelCost = ({ register, watch }) => {
   const currency = watch("currency", "USD");
 
   // const [currency, setCurrency] = useState("NGN");
+  const {
+    dispatch,
+    data: {
+      createTrip: {travel_amount, accommodation_amount, miscellaneous_amount},
+    },
+  } = useData();
+
 
   const travelDetails = [
     {
@@ -67,16 +75,42 @@ const TravelCost = ({ register, watch }) => {
                 <small>{helptext}</small>
               </div>
             </div>
-            <input
-              placeholder={formatCurrency(currency)}
-              defaultValue={0}
-              className="border px-3 py-1 w-20 outline-none"
-              {...register(name, {
-                required: true,
-                valueAsNumber: true,
-                min: 0,
-              })}
-            />
+            {name === 'travel_amount' && (
+              <input
+                placeholder={formatCurrency(currency)}
+                defaultValue={travel_amount}
+                className="border px-3 py-1 w-20 outline-none"
+                {...register("travel_amount", {
+                  required: true,
+                  valueAsNumber: true,
+                  min: 0,
+                })}
+              />
+            )}
+            {name === 'accommodation_amount' && (
+              <input
+                placeholder={formatCurrency(currency)}
+                defaultValue={accommodation_amount}
+                className="border px-3 py-1 w-20 outline-none"
+                {...register("accommodation_amount", {
+                  required: true,
+                  valueAsNumber: true,
+                  min: 0,
+                })}
+              />
+            )}
+            {name === 'miscellaneous_amount' && (
+              <input
+                placeholder={formatCurrency(currency)}
+                defaultValue={miscellaneous_amount}
+                className="border px-3 py-1 w-20 outline-none"
+                {...register("miscellaneous_amount", {
+                  required: true,
+                  valueAsNumber: true,
+                  min: 0,
+                })}
+              />
+            )}
           </div>
         ))}
       </div>

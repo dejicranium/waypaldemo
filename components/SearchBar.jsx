@@ -43,6 +43,8 @@ const SearchBar = (props) => {
             id="search-bar-destination"
             style={{ width: "100%" }}
             placeholder="Destination"
+            value={destination}
+            onChange={(e) => setDestination(e.target.value)}
             className="destination-input outline-none box-border text-black-content w-full pl-3"
             
           />

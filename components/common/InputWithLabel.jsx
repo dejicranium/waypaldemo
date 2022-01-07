@@ -8,15 +8,11 @@ const InputWithLabel = ({ id, isdestination_input, label, value, type, placehold
       window.addEventListener('load', function() {
           let input = document.getElementById(id);
           if (input instanceof HTMLInputElement) {
-            console.log('input with label')
-            console.log('input with label')
-            console.log('input with label')
-            console.log(input)
+
             let complete = new google.maps.places.Autocomplete(input);
             google.maps.event.addListener(complete, 'place_changed', function () {
               let place = complete.getPlace();
-              console.log('place')
-              console.log(place)
+
               let address = place.formatted_address;
               input.value = address;
               onChange(address);
