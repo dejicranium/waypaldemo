@@ -35,7 +35,7 @@ const InputField = (props) => {
             let place = complete.getPlace();
 
             let address = place.formatted_address;
-            input.value = address;
+            //input.value = address;
             onChange(address);
           })
         }
@@ -51,7 +51,7 @@ const InputField = (props) => {
           let place = complete.getPlace();
 
           let address = place.formatted_address;
-          input.value = address;
+          //input.value = address;
           onChange(address);
         })
     }
