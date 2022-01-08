@@ -27,8 +27,10 @@ const SearchBar = (props) => {
             id="search-bar-destination"
             style={{ width: "100%" }}
             placeholder="Destination"
-            value={destination}
-            onClick={() => {
+            defaultValue={destination}
+            onClick={(e) => {
+              //e.preventDefault();
+              e.stopPropagation();
               let input = document.getElementById('search-bar-destination');
               if (input instanceof HTMLInputElement) {
                 let complete = new google.maps.places.Autocomplete(input);
