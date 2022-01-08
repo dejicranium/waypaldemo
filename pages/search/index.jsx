@@ -87,7 +87,6 @@ const Search = () => {
             We couldn’t find a trip that fits your search criteria.
           </h2>
           <p className="text-2xl pt-4">
-            But we’ve suggested a few trips that you may like
           </p>
         </section>
         
