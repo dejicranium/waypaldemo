@@ -107,7 +107,7 @@ const JoinTrip = ({ trip, notFound }) => {
       setShowModal(true)
     } 
     else {
-      await getRequest('/user/info').then(resp=> {
+      await getRequest('/user/info').then(async resp=> {
         dispatch({user: resp.data})
       
         if (user && user.verified !== "APPROVED" && user.verified !== "ATTEMPTED" && isLoggedIn && !notFound) {
