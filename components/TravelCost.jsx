@@ -2,7 +2,6 @@ import { useState } from "react";
 import Icon from "./common/Icon";
 import { formatAmount } from "../assets/js/utils";
 import { formatCurrency } from "../assets/js/utils";
-import useData from '../components/hooks/useData';
 
 const TravelCost = ({ register, watch }) => {
   const t =
@@ -13,31 +12,24 @@ const TravelCost = ({ register, watch }) => {
   const currency = watch("currency", "USD");
 
   // const [currency, setCurrency] = useState("NGN");
-  const {
-    dispatch,
-    data: {
-      createTrip: {travel_amount, accommodation_amount, miscellaneous_amount},
-    },
-  } = useData();
-
 
   const travelDetails = [
     {
       title: "travel",
       name: "travel_amount",
-      helptext: "This covers travel plans per individual",
+      helptext: "This covers flight to-and-fro",
       icon: "travel",
     },
     {
       title: "accommodation",
       name: "accommodation_amount",
-      helptext: "The total cost of accommodation per individual. Leave empty if it's not in the plan",
+      helptext: "The total cost of accommodation",
       icon: "accommodation",
     },
     {
       title: "miscellaneous",
       name: "miscellaneous_amount",
-      helptext: "This covers feeding and other miscellaneous services per individual. Explain these services in the description and itinerary details. Leave empty if it's not in the plan",
+      helptext: "This covers feeding, transportation etc.",
       icon: "misc",
     },
   ];
@@ -45,7 +37,7 @@ const TravelCost = ({ register, watch }) => {
   return (
     <div>
       <div className="travel-cost-header flex items-center justify-between mb-3">
-        <h1 className="text-black font-circular-bold">Travel cost per individual</h1>
+        <h1 className="text-black font-circular-bold">Travel cost</h1>
         <select
           id="currency"
           // onChange={(e) => setCurrency(e.target.value)}
@@ -61,7 +53,6 @@ const TravelCost = ({ register, watch }) => {
           <option value="GBP">&#163; GBP</option>
         </select>
       </div>
-      
       <div className="travel-cost-container border-2 rounded-2xl border-outline divide-y-2 divide-outline">
         {travelDetails.map(({ title, name, helptext, icon }) => (
           <div
@@ -75,42 +66,16 @@ const TravelCost = ({ register, watch }) => {
                 <small>{helptext}</small>
               </div>
             </div>
-            {name === 'travel_amount' && (
-              <input
-                placeholder={formatCurrency(currency)}
-                defaultValue={travel_amount}
-                className="border px-3 py-1 w-20 outline-none"
-                {...register("travel_amount", {
-                  required: true,
-                  valueAsNumber: true,
-                  min: 0,
-                })}
-              />
-            )}
-            {name === 'accommodation_amount' && (
-              <input
-                placeholder={formatCurrency(currency)}
-                defaultValue={accommodation_amount}
-                className="border px-3 py-1 w-20 outline-none"
-                {...register("accommodation_amount", {
-                  required: true,
-                  valueAsNumber: true,
-                  min: 0,
-                })}
-              />
-            )}
-            {name === 'miscellaneous_amount' && (
-              <input
-                placeholder={formatCurrency(currency)}
-                defaultValue={miscellaneous_amount}
-                className="border px-3 py-1 w-20 outline-none"
-                {...register("miscellaneous_amount", {
-                  required: true,
-                  valueAsNumber: true,
-                  min: 0,
-                })}
-              />
-            )}
+            <input
+              placeholder={formatCurrency(currency)}
+              defaultValue={0}
+              className="border px-3 py-1 w-20 outline-none"
+              {...register(name, {
+                required: true,
+                valueAsNumber: true,
+                min: 0,
+              })}
+            />
           </div>
         ))}
       </div>

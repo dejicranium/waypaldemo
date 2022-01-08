@@ -4,22 +4,44 @@ import {useEffect} from 'react';
 import Autocomplete from "react-google-autocomplete";
 
 const InputWithLabel = ({ id, isdestination_input, label, value, type, placeholder, onChange, cname }) => {
-    const initializeAutoComplete = () => {
-      window.addEventListener('load', function() {
-          let input = document.getElementById(id);
-          if (input instanceof HTMLInputElement) {
+    
+  const reloadAutoComplete =() => {
+      let input = document.getElementById(id);
+      if (input instanceof HTMLInputElement) {
+        let complete = new google.maps.places.Autocomplete(input);
+          google.maps.event.addListener(complete, 'place_changed', function () {
+            let place = complete.getPlace();
 
-            let complete = new google.maps.places.Autocomplete(input);
-            google.maps.event.addListener(complete, 'place_changed', function () {
-              let place = complete.getPlace();
-
-              let address = place.formatted_address;
-              input.value = address;
-              onChange(address);
-            })
-          }
-
+            let address = place.formatted_address;
+            input.value = address;
+            onChange(address);
+          })
+      }
+      
+  }
+  
+  const initializeAutoComplete = () => {
+      const events = ['load'];
+      
+      
+      events.forEach(event=> {
+        window.addEventListener(event, function() {
+            let input = document.getElementById(id);
+            if (input instanceof HTMLInputElement) {
+  
+              let complete = new google.maps.places.Autocomplete(input);
+              google.maps.event.addListener(complete, 'place_changed', function () {
+                let place = complete.getPlace();
+  
+                let address = place.formatted_address;
+                input.value = address;
+                onChange(address);
+              })
+            }
+  
+        })
       })
+      
     }
   
   
@@ -46,6 +68,7 @@ const InputWithLabel = ({ id, isdestination_input, label, value, type, placehold
           type={type}
           id={id}
           placeholder={placeholder}
+          onClick={reloadAutoComplete}
           //onChange={(e) => onChange(e)}
           className={`outline-none  box-border text-black-content w-full ${cname}`}/>
       }

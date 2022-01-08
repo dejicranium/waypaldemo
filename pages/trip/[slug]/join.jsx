@@ -107,17 +107,23 @@ const JoinTrip = ({ trip, notFound }) => {
       setShowModal(true)
     } 
     else {
-      if (user && user.verified !== "APPROVED" && user.verified !== "ATTEMPTED" && isLoggedIn && !notFound) {
-        await createVeriffSession();
-      }
-      if (user && user.verified !== "APPROVED") {
-        // add interest
-        await postRequest("/trip/interests", {
-          reason: "compliance required",
-          trip_id: trip.id,
-          user_id: user.id,
-        })
-      }
+      await getRequest('/user/info').then(resp=> {
+        dispatch({user: resp.data})
+      
+        if (user && user.verified !== "APPROVED" && user.verified !== "ATTEMPTED" && isLoggedIn && !notFound) {
+          await createVeriffSession();
+        }
+        if (user && user.verified !== "APPROVED") {
+          // add interest
+          await postRequest("/trip/interests", {
+            reason: "compliance required",
+            trip_id: trip.id,
+            user_id: user.id,
+          })
+        }
+
+      })
+
     }
   }, []);
 

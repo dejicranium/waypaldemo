@@ -44,7 +44,7 @@ const Profile = () => {
   });
 
 
-   const createVeriffSession = async() => {
+  const createVeriffSession = async() => {
     await postRequest('/veriff/sessions', {})
       .then(resp => {
         setVerificationUrl(resp.data.verification.url);
@@ -111,11 +111,15 @@ const Profile = () => {
   }
 
 
-  useEffect(() => {
+  useEffect(async() => {
+    await getRequest('/user/info').then(resp=> {
+      dispatch({user: resp.data});
+      if (!['APPROVED', 'ATTEMPTED'].includes(resp.data.verified)) {
+        createVeriffSession();
+      }
+    });
     Mixpanel.track('dashboard-profile-page-loaded');
-    if (!['APPROVED', 'ATTEMPTED'].includes(user.verified)) {
-      createVeriffSession();
-    }
+    
   }, []);
 
 

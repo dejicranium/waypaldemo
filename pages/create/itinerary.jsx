@@ -35,6 +35,7 @@ const CreateItinerary = () => {
   });
   const { push } = useRouter();
   const uploadRef = useRef(null);
+  const [go_to_next_page, setGoToNextPage] = useState(false);
   const [items, setItems] = useState([]);
   const [required, setRequired] = useState("");
   const [imgs, setImgs] = useState(createTrip.images || []);
@@ -80,6 +81,8 @@ const CreateItinerary = () => {
         images: [...imgs],
       },
     });
+
+    setGoToNextPage(true);
     push("/create/review");
   };
 

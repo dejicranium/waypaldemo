@@ -108,7 +108,7 @@ const UserProfile = ({user, trips, notFound}) => {
                       style={{
                         backgroundSize: "cover",
                         backgroundImage: `url(${
-                          profileImage || user.profile_image_url
+                         user.profile_image_url
                         })`,
                         backgroundPosition: "top center",
                       }}
@@ -136,7 +136,7 @@ const UserProfile = ({user, trips, notFound}) => {
             </div>
             <div className="socials py-9 border-b border-gray-light6 grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="reviews flex flex-col items-center">
-                <Rating name="read-only" value={parseFloat(user.rating / user.no_of_ratings).toFixed(1) || 0 } readOnly />
+                <Rating name="read-only" value={Number(user.rating / user.no_of_ratings) || 0 } readOnly />
                 <div className="flex flex-row justify-between mt-2">
                   <span className="text-gray-light pl-2">{parseFloat((user.rating / user.no_of_ratings) || 0).toFixed(1) } stars</span>
                   <span onClick={() => {

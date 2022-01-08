@@ -131,7 +131,7 @@ const CreateTripReview = () => {
       images: [...uploadedImages],
     });
 
-    if (saveData.status) {
+    if (saveData.status && saveData.data) {
       dispatch({ currentTrip: { ...saveData.data } });
       dispatch({ createTrip: init.createTrip });
       push("/create/success");

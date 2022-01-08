@@ -39,7 +39,8 @@ const CreateTrip = () => {
 
   useEffect(() => {
     getUserVerificationStatus();
-  })
+    
+  }, [])
 
 
   const getUserVerificationStatus = () => {
@@ -56,6 +57,7 @@ const CreateTrip = () => {
 
 
   const [tags, setTags] = useState(createTrip?.checklists || []);
+  const [go_to_next_page, setGoToNextPage] = useState(false);
   const [title, setTitle] = useState("");
   const [destination, setDestination] = useState(createTrip.destination)
   const [meeting_point, setMeetingPlace] = useState(createTrip.meeting_point)
@@ -92,7 +94,10 @@ const CreateTrip = () => {
       setError("Travel costs cannot be 0")
     }
     else {
+      setGoToNextPage(true);
+      dispatch({ createTrip: { ...createTrip, ...data, is_public} });
       push("/create/itinerary");
+
     }
 
     
@@ -376,7 +381,7 @@ const CreateTrip = () => {
         </section>
 
         <section className="travel-cost md:max-w-lg md:pl-4 lg:w-1/2 lg:mt-24">
-          <TravelCost register={register} watch={watch} />
+          <TravelCost register={register} watch={watch}  />
         </section>
       </div>
 

@@ -20,6 +20,7 @@ const InputField = (props) => {
 
 
   useEffect(()=> {
+
     initializeAutoComplete();
   }, []);
 
@@ -40,6 +41,21 @@ const InputField = (props) => {
         }
 
     })
+  }
+
+  const reloadAutoComplete =() => {
+    let input = document.getElementById(id);
+    if (input instanceof HTMLInputElement) {
+      let complete = new google.maps.places.Autocomplete(input);
+        google.maps.event.addListener(complete, 'place_changed', function () {
+          let place = complete.getPlace();
+
+          let address = place.formatted_address;
+          input.value = address;
+          onChange(address);
+        })
+    }
+    
   }
 
 
@@ -73,6 +89,7 @@ const InputField = (props) => {
           type={type}
           id={id}
           placeholder={placeholder}
+          onClick={reloadAutoComplete}
           //onChange={(e) => onChange(e)}
           className={`input-element w-full ${cname}`}
           {...innerref}/>

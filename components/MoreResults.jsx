@@ -12,7 +12,7 @@ const MoreResults = (prop) => {
       <div className="md:mr-5 md:w-1/4 flex-none">
         <div
           className="pt-2/3 bg-no-repeat bg-cover rounded"
-          style={{ backgroundImage:  `url(${prop.trip.images && prop.trip.images[0] ? prop.trip.images[0]: "./landscape.png"})` }}
+          style={{ backgroundImage:  `url(${prop.trip.images && prop.trip.images.split(",")[0] ? prop.trip.images.split(",")[0]: "./landscape.png"})` }}
         ></div>
       </div>
       <div className="trip-card__details w-8/12">

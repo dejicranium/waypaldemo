@@ -20,10 +20,16 @@ const Login = ({ setActive, close }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setTimeout(() => {
-      console.log('hi')
-    }, 1000)
+    
   },[])
+  
+
+  const pollProfile = async () => {
+    await getRequest('/user/info').then(resp=> {
+      dispatch({user: resp.data})
+    })
+  }
+
 
   const submit = async (values) => {
     setLoading(true);
@@ -33,8 +39,16 @@ const Login = ({ setActive, close }) => {
       Mixpanel.identify(user.data.id);
       Mixpanel.track("login-successful");
       Mixpanel.people.set({$firstname: user.data.firstname, $lastname: user.data.lastname, $id: user.data.id});
-      
+    
       dispatch({ user: user.data, token: user.token, isLoggedIn: true });
+
+      if (user.data.verified  !== 'APPROVED') {
+        // poll for status when user is not verified
+        setInterval(() => {
+          pollProfile();
+        }, 30000)
+      }
+
       close();
     }
     else {
