@@ -7,7 +7,7 @@ const Footer = ({ planTrip, children }) => (
     {children}
     <div className="footer-background">
       <img
-        src="/footer-background-top2.png"
+        src="/footer-background-top.png"
         alt="beach background"
         className="w-full"
       />c
