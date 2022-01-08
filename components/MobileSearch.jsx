@@ -31,19 +31,28 @@ const MobileSearch = ({ show, close, setLoading }) => {
             <div className="destination input-with-label bg-white rounded flex items-center p-2 mt-4">
               <Icon icon="departure" />
 
-              <Autocomplete
-                apiKey="AIzaSyDLZ4NFeub25kppPsgPItK0RWKdZ-Ecy8c"
-                style={{ width: "100%" }}
-                onPlaceSelected={(place) => {
-                  let d = place.formatted_address;
-                  setDestination(d)
-                }}
-                onChange={(e) => setDestination(e.target.value)}
-                value={destination}
-                placeholder="Destination"
-                className="destination-input outline-none box-border text-black-content w-full pl-3"
+                <input 
+                  type="text"
+                  id="mobile-search-bar-destination"
+                  placeholder="Destination"
+                  value={destination}
+                  onClick={() => {
+                    let input = document.getElementById('mobile-search-bar-destination');
+                    if (input instanceof HTMLInputElement) {
+                      let complete = new google.maps.places.Autocomplete(input);
+                      google.maps.event.addListener(complete, 'place_changed', function () {
+                        let place = complete.getPlace();
+
+                        let address = place.formatted_address;
+                        //input.value = address;
+                        setDestination(address);
+                      })
+                    }
+                  }}
+                  //onChange={(e) => setDestination(e.target.value)}
+                  className="destination-input outline-none box-border text-black-content w-full pl-3"
+                  
               />
-        
              
             </div>
             <div className="travel-date input-with-label bg-white rounded flex items-center p-2 mt-4">

@@ -26,7 +26,7 @@ const SearchBar = (props) => {
           let place = complete.getPlace();
 
           let address = place.formatted_address;
-          input.value = address;
+          //input.value = address;
           setDestination(address);
         })
       }
@@ -44,6 +44,19 @@ const SearchBar = (props) => {
             style={{ width: "100%" }}
             placeholder="Destination"
             value={destination}
+            onClick={() => {
+              let input = document.getElementById('search-bar-destination');
+              if (input instanceof HTMLInputElement) {
+                let complete = new google.maps.places.Autocomplete(input);
+                google.maps.event.addListener(complete, 'place_changed', function () {
+                  let place = complete.getPlace();
+
+                  let address = place.formatted_address;
+                  //input.value = address;
+                  setDestination(address);
+                })
+              }
+            }}
             onChange={(e) => setDestination(e.target.value)}
             className="destination-input outline-none box-border text-black-content w-full pl-3"
             
