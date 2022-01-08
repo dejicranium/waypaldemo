@@ -95,7 +95,7 @@ const CreateTrip = () => {
     }
     else {
       setGoToNextPage(true);
-      dispatch({ createTrip: { ...createTrip, ...data, is_public} });
+      dispatch({ createTrip: { ...createTrip, ...data, is_public, destination, meeting_point, checklists: tags} });
       push("/create/itinerary");
 
     }
