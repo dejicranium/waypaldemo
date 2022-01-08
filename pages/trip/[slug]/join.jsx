@@ -108,7 +108,7 @@ const JoinTrip = ({ trip, notFound }) => {
     } 
     else {
       await getRequest('/user/info').then(async resp=> {
-        dispatch({user: resp.data})
+        dispatch({user: resp.data || {}})
       
         if (user && user.verified !== "APPROVED" && user.verified !== "ATTEMPTED" && isLoggedIn && !notFound) {
           await createVeriffSession();
@@ -143,7 +143,7 @@ const JoinTrip = ({ trip, notFound }) => {
       status,
     })
     .then(resp => {
-      dispatch({user: resp.data})
+      dispatch({user: resp.data || {}})
     })
     .catch(err => {
       alert("Could not set verification status")

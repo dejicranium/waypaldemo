@@ -82,8 +82,7 @@ const SearchBar = (props) => {
          // dispatch({topSearchResults: []})
           props.setLoading(true)
           let query = {destination, travel_date: travelDate, buddies}; 
-          let query_string = ""
-          
+          let query_string = "";
 
           Object.keys(query).forEach((key, i)=> {
             if (query[key]){
@@ -91,6 +90,9 @@ const SearchBar = (props) => {
               else query_string += `${key}=${query[key]}`
             }
           })
+
+          const new_url = window.location.origin + window.location.pathname + query_string;
+          window.history.pushState({}, null, new_url)
           
           await getRequest('/search' + query_string).then(response => {
             dispatch({topSearchResults: response.data})

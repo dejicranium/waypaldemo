@@ -58,7 +58,7 @@ const Profile = () => {
       status,
     })
     .then(resp => {
-      dispatch({user: resp.data})
+      dispatch({user: resp.data || {}})
     })
     .catch(err => {
       alert("Could not set verification status")
@@ -101,7 +101,7 @@ const Profile = () => {
                 })
               }
               await getRequest('/user/info').then(resp=> {
-                dispatch({user: resp.data})
+                dispatch({user: resp.data || {}})
               })
               break;
               }
@@ -113,7 +113,7 @@ const Profile = () => {
 
   useEffect(async() => {
     await getRequest('/user/info').then(resp=> {
-      dispatch({user: resp.data});
+      dispatch({user: resp.data || {}});
       if (!['APPROVED', 'ATTEMPTED'].includes(resp.data.verified)) {
         createVeriffSession();
       }

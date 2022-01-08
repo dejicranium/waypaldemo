@@ -40,6 +40,7 @@ const SearchFilter = (props) => {
   const [showBuddiesFilter, setShowBuddiesFilter] = useState(true);
   const [min_price_filter, setMinPrice] = useState("");
   const [max_price_filter, setMaxPrice] = useState("");
+  const [error, setError] = useState("");
 
 
   const getMaxPrice = () => {
@@ -56,14 +57,12 @@ const SearchFilter = (props) => {
     return setShowPriceRange((prev) => !prev);
   };
 
-  const toggleBuddiesFilter = () => {
-    return setShowBuddiesFilter((prev) => !prev);
-  };
 
   const filter = async () => {
     let params = new URLSearchParams(window.location.search) || '';
     let query = {destination: params.get('destination'), travel_date: params.get('travel_date'), buddies: params.get('buddies'), max_price: max_price_filter, min_price: min_price_filter}; 
     let query_string = "";
+
 
 
     Object.keys(query).forEach((key, i)=> {
@@ -72,6 +71,12 @@ const SearchFilter = (props) => {
         else query_string += `${key}=${query[key]}`
       }
     })
+
+    if (query.max_price && query.min_price) {
+      if (parseFloat(query.min_price).toFixed(2) > parseFloat(query.max_price).toFixed(2)) {
+        setError("Min price cannot be greater than max price")
+      }
+    }
     
     await getRequest('/search' + query_string).then(response => {
       dispatch({topSearchResults: response.data})
@@ -80,7 +85,17 @@ const SearchFilter = (props) => {
   }
 
   return (
-    <div className="mb-10">
+    <>
+    {error && (
+      <Toast
+          message={error}
+          type="error"
+          close={() => setError(null)}
+        />
+    )}
+
+      
+     <div className="mb-10">
       <h3 className="text-lg md:text-2xl font-circular-bold text-gray-light2 mb-10">
         Filter
       </h3>
@@ -133,6 +148,7 @@ const SearchFilter = (props) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

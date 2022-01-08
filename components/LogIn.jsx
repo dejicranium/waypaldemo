@@ -26,7 +26,7 @@ const Login = ({ setActive, close }) => {
 
   const pollProfile = async () => {
     await getRequest('/user/info').then(resp=> {
-      dispatch({user: resp.data})
+      dispatch({user: resp.data || {}})
     })
   }
 
