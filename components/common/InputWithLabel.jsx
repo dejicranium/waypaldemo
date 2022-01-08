@@ -46,7 +46,7 @@ const InputWithLabel = ({ id, isdestination_input, label, value, type, placehold
           type={type}
           id={id}
           placeholder={placeholder}
-          onChange={(e) => onChange(e)}
+          //onChange={(e) => onChange(e)}
           className={`outline-none  box-border text-black-content w-full ${cname}`}/>
       }
     </div>
