@@ -53,7 +53,7 @@ const UserProfile = ({user, trips, notFound}) => {
             <>
             {reviews && reviews.length > 0 && reviews.map((review, index) => {
               return (
-                <div style={{padding: "15px 2px", borderBottom: "0.5px dotted lightgrey"}}>
+                <div style={{padding: "15px 2px", borderBottom: "0.5px dotted lightgrey"}} key={index}>
             
                   <div className="flex flex-row items-center mb-2">
                     {!review.reviewer.profile_image_url && (
