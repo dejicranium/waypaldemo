@@ -18,6 +18,15 @@ const UserProfile = ({user, trips, notFound}) => {
   const [reviews, setReviews] = useState([]);
   const [no_reviews, setNoReviews] = useState(false);
 
+  const goTo = async (where) => {
+    if (where === 'facebook') {
+      window.open(`https://facebook.com/${user.facebook}`)
+    }
+    else if (where === 'twitter') {
+      window.open(`https://twitter.com/${user.twitter}`)
+    }
+
+  }
   const getReviews = async () => {
       setLoadingReviews(true);
       const reviews = await getRequest(`/user/${user.id}/reviews`);
@@ -145,15 +154,15 @@ const UserProfile = ({user, trips, notFound}) => {
                 {user.facebook && 
                 <div className="facebook flex items-center">
                   <Icon icon="facebook-icon" cname="flex-none"></Icon>
-                  <span className="text-gray-light pl-2 overflow-ellipsis overflow-hidden">
-                    facebook.com/{user.facebook}
+                  <span onClick={() =>goTo('facebook')} className="text-gray-light cursor-pointer pl-2 overflow-ellipsis overflow-hidden">
+                    {user.facebook}
                   </span>
                 </div>}
             
               {user.twitter && 
                 <div className="twitter flex items-center">
                   <Icon icon="twitter-icon"></Icon>
-                  <span className="text-gray-light pl-2">@{user.twitter}</span>
+                  <span  onClick={() =>goTo('twitter')}  className="text-gray-light cursor-pointer pl-2">@{user.twitter}</span>
                 </div>
               }
             </div>
