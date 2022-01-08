@@ -57,7 +57,6 @@ const SearchBar = (props) => {
                 })
               }
             }}
-            onChange={(e) => setDestination(e.target.value)}
             className="destination-input outline-none box-border text-black-content w-full pl-3"
             
           />
