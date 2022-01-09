@@ -5,6 +5,7 @@ import Icon from "./common/Icon";
 import { format } from "date-fns";
 import useClickOutside from "./hooks/useClickOutside";
 import { isoToDate, formatAmount, totalAmount } from "../assets/js/utils";
+import moment from 'moment'
 
 const DetailTripCard = ({
   title,
@@ -22,7 +23,7 @@ const DetailTripCard = ({
   no_public_view,
   no_dashboard_view
 }) => {
-  let tripDate = format(new Date(isoToDate(date)), "EEEE, MMMM do, y");
+  let tripDate = date ? moment(new Date(date)).format('dddd, MMMM DD, YYYY') : "";
   const total = totalAmount(price);
   const dropRef = useRef(null);
   const [showOptions, setShowOption] = useState(false);
