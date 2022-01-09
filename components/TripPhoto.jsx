@@ -22,7 +22,7 @@ export default function TripPhoto({ images }) {
                                                                                           
                   return (
                     
-                    <div className="w-full">
+                    <div className="w-full" key={index}>
                       <div className="w-full relative pt-8">
                         <div className="h-40 md:h-60 lg:h-40 xl:lg-60 w-full mb-1 md:mb-2">
                           <Image
