@@ -8,12 +8,14 @@ const InputWithLabel = ({ id, isdestination_input, label, value, type, placehold
   const reloadAutoComplete =() => {
       let input = document.getElementById(id);
       if (input instanceof HTMLInputElement) {
-        let complete = new google.maps.places.Autocomplete(input);
+        let complete = new google.maps.places.Autocomplete(input, {
+          fields: ['name']
+        });
           google.maps.event.addListener(complete, 'place_changed', function () {
             let place = complete.getPlace();
 
-            let address = place.formatted_address;
-            input.value = address;
+            let address = place.name;
+            //input.value = address;
             onChange(address);
           })
       }
@@ -29,12 +31,13 @@ const InputWithLabel = ({ id, isdestination_input, label, value, type, placehold
             let input = document.getElementById(id);
             if (input instanceof HTMLInputElement) {
   
-              let complete = new google.maps.places.Autocomplete(input);
+              let complete = new google.maps.places.Autocomplete(input, {
+                fields: ['name']
+              });
               google.maps.event.addListener(complete, 'place_changed', function () {
                 let place = complete.getPlace();
   
-                let address = place.formatted_address;
-                input.value = address;
+                let address = place.name;
                 onChange(address);
               })
             }

@@ -30,11 +30,13 @@ const InputField = (props) => {
         let input = document.getElementById(id);
         if (input instanceof HTMLInputElement) {
 
-          let complete = new google.maps.places.Autocomplete(input);
+          let complete = new google.maps.places.Autocomplete(input, {
+            fields: ['name']
+          });
           google.maps.event.addListener(complete, 'place_changed', function () {
             let place = complete.getPlace();
 
-            let address = place.formatted_address;
+            let address = place.name;
             //input.value = address;
             onChange(address);
           })
@@ -46,11 +48,13 @@ const InputField = (props) => {
   const reloadAutoComplete =() => {
     let input = document.getElementById(id);
     if (input instanceof HTMLInputElement) {
-      let complete = new google.maps.places.Autocomplete(input);
+      let complete = new google.maps.places.Autocomplete(input, {
+        fields: ['name']
+      });
         google.maps.event.addListener(complete, 'place_changed', function () {
           let place = complete.getPlace();
 
-          let address = place.formatted_address;
+          let address = place.name;
           //input.value = address;
           onChange(address);
         })

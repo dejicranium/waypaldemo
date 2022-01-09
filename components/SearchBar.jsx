@@ -10,6 +10,7 @@ import useData from "../components/hooks/useData";
 import { useForm, Controller } from "react-hook-form";
 
 const SearchBar = (props) => {
+  const [meeting_point, setMeetingPoint] = useState(new URLSearchParams(window.location.search) ? new URLSearchParams(window.location.search).get('meeting_point') || "" : "");
   const [destination, setDestination] = useState(new URLSearchParams(window.location.search) ? new URLSearchParams(window.location.search).get('destination') || "" : "");
   const [travelDate, setTravelDate] = useState(new URLSearchParams(window.location.search) ? new URLSearchParams(window.location.search).get('travel_date') || "" : "")
   const [buddies, setBuddies] = useState(new URLSearchParams(window.location.search) ? new URLSearchParams(window.location.search).get('buddies') || "": "");
@@ -17,6 +18,30 @@ const SearchBar = (props) => {
     dispatch,
   } = useData();
  
+
+  const search = async () => {
+    props.setLoading(true)
+    let query = {destination, travel_date: travelDate, buddies, meeting_point}; 
+    let query_string = "";
+
+    Object.keys(query).forEach((key, i)=> {
+      if (query[key]){
+        if (!query_string) query_string += `?${key}=${query[key]}&`
+        else query_string += `${key}=${query[key]}&`
+      }
+    })
+
+    const new_url = window.location.origin + window.location.pathname + query_string;
+    window.history.pushState({}, null, new_url)
+    
+    await getRequest('/search' + query_string).then(response => {
+      dispatch({topSearchResults: response.data})
+      props.setLoading(false)
+
+    }).catch(e=> {
+      props.setLoading(false)
+    })
+  }
   return (
     <div className="flex">
       <div className="flex flight-search bg-white rounded max-w-3xl border border-gray-light6 divide-x">
@@ -33,11 +58,13 @@ const SearchBar = (props) => {
               e.stopPropagation();
               let input = document.getElementById('search-bar-destination');
               if (input instanceof HTMLInputElement) {
-                let complete = new google.maps.places.Autocomplete(input);
+                let complete = new google.maps.places.Autocomplete(input, {
+                  fields: ['name'] 
+                });
                 google.maps.event.addListener(complete, 'place_changed', function () {
                   let place = complete.getPlace();
 
-                  let address = place.formatted_address;
+                  let address = place.name;
                   //input.value = address;
                   setDestination(address);
                 })
@@ -45,6 +72,35 @@ const SearchBar = (props) => {
             }}
             className="destination-input outline-none box-border text-black-content w-full pl-3"
             
+          />
+        
+        </div>
+        <div className="destination flex items-center pl-3">
+          <Icon icon="departure" cname="pt-1" />
+          <input 
+            type="text"
+            id="meetingpoint-searchbar"
+            style={{ width: "100%" }}
+            placeholder="Meeting Point"
+            defaultValue={meeting_point}
+            onClick={(e) => {
+              //e.preventDefault();
+              e.stopPropagation();
+              let input = document.getElementById('meetingpoint-searchbar');
+              if (input instanceof HTMLInputElement) {
+                let complete = new google.maps.places.Autocomplete(input, {
+                  fields: ['name'] 
+                });
+                google.maps.event.addListener(complete, 'place_changed', function () {
+                  let place = complete.getPlace();
+
+                  let address = place.name;
+                  //input.value = address;
+                  setMeetingPoint(address);
+                })
+              }
+            }}
+            className="destination-input outline-none box-border text-black-content w-full pl-3"
           />
         
         </div>
@@ -78,31 +134,7 @@ const SearchBar = (props) => {
         </div>
       </div>
       <div className="search-button">
-        <Button btnText="Search" onClick={async() => {
-         // dispatch({topSearchResults: []})
-          props.setLoading(true)
-          let query = {destination, travel_date: travelDate, buddies}; 
-          let query_string = "";
-
-          Object.keys(query).forEach((key, i)=> {
-            if (query[key]){
-              if (!query_string) query_string += `?${key}=${query[key]}&`
-              else query_string += `${key}=${query[key]}`
-            }
-          })
-
-          const new_url = window.location.origin + window.location.pathname + query_string;
-          window.history.pushState({}, null, new_url)
-          
-          await getRequest('/search' + query_string).then(response => {
-            dispatch({topSearchResults: response.data})
-            props.setLoading(false)
-
-          }).catch(e=> {
-            props.setLoading(false)
-          })
-
-        }} btnType="fill" />
+        <Button btnText="Search" onClick={search} btnType="fill" />
       </div>
     </div>
   );

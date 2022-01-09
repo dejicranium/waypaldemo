@@ -6,6 +6,7 @@ import qs from "qs";
 import { useState, useEffect } from "react";
 import { useSearchParams } from 'react-router-dom';
 import useData from "../components/hooks/useData";
+import Toast from './Toast';
 
 const SearchFilter = (props) => {
   const [checked, setChecked] = useState(false);
@@ -39,6 +40,8 @@ const SearchFilter = (props) => {
   const [showPriceRange, setShowPriceRange] = useState(true);
   const [showBuddiesFilter, setShowBuddiesFilter] = useState(true);
   const [min_price_filter, setMinPrice] = useState("");
+  const [currency, setCurrency] = useState("");
+  const [currencies, setCurrencies] = useState(["NGN", "USD", "GBP"])
   const [max_price_filter, setMaxPrice] = useState("");
   const [error, setError] = useState("");
 
@@ -60,7 +63,14 @@ const SearchFilter = (props) => {
 
   const filter = async () => {
     let params = new URLSearchParams(window.location.search) || '';
-    let query = {destination: params.get('destination'), travel_date: params.get('travel_date'), buddies: params.get('buddies'), max_price: max_price_filter, min_price: min_price_filter}; 
+    let query = {
+      destination: params.get('destination'),  
+      travel_date: params.get('travel_date'), 
+      buddies: params.get('buddies'), 
+      currency: currency, 
+      max_price: max_price_filter, 
+      min_price: min_price_filter
+    }; 
     let query_string = "";
 
 
@@ -68,7 +78,7 @@ const SearchFilter = (props) => {
     Object.keys(query).forEach((key, i)=> {
       if (query[key]){
         if (!query_string) query_string += `?${key}=${query[key]}&`
-        else query_string += `${key}=${query[key]}`
+        else query_string += `${key}=${query[key]}&`
       }
     })
 
@@ -109,10 +119,25 @@ const SearchFilter = (props) => {
         <div
           className={
             showPriceRange
-              ? `price-range-body h-full block overflow-hidden`
+              ? `price-range-body pt-5 h-full block overflow-hidden`
               : `h-0 hidden`
           }
         >
+           <select
+              id="currency"
+              // onChange={(e) => setCurrency(e.target.value)}
+              value={currency}
+              onChange={(e) => {
+                setCurrency(e.target.value);
+              }}
+              name="currency"
+              className="mb-5 block currency-selector p-2 rounded cursor-pointer bg-orange text-white text-sm float-right clear-both"
+              
+            >
+              <option value="NGN">&#x20A6; NGN</option>
+              <option value="USD">&#x24; USD</option>
+              <option value="GBP">&#163; GBP</option>
+            </select>
           <div className="min-price input-with-label bg-white rounded p-3 mt-4">
             <p className="text-xs font-bold">Min price</p>
             <input

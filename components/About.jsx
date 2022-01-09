@@ -147,7 +147,7 @@ const About = ({ trip,  }) => {
             )}
             <a className="xl:whitespace-nowrap cursor-pointer" onClick={() => push(`/user/${trip.user_id}`)}>{trip.user.firstname + ' ' + trip.user.lastname}</a>
           </div>
-          <div className="buddies flex items-center">
+          <div className="buddies flex items-center mr-10">
             <Icon icon="buddies" cname="pr-3 flex-none" />
             <p className="xl:whitespace-nowrap">
               {trip.buddies}{" "}

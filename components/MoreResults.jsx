@@ -17,17 +17,22 @@ const MoreResults = (prop) => {
       </div>
       <div className="trip-card__details w-8/12">
         <h2 className="text-black-content font-circular-black text-base md:text-2xl flex justify-between">
-          <span className="">{prop.trip.destination}</span> 
+          <span className="">{prop.trip.title}</span> 
           <span className="">${prop.trip.travel_amount + prop.trip.miscellaneous_amount + prop.trip.accommodation_amount }</span>
 
         </h2>
-        <div className="flex justify-between">
-          <span className=" text-gray">{moment(prop.trip.start_date).format("dddd, MMMM DD, YYYY")}</span>
-          <span className=" text-gray">{prop.trip.buddies - prop.trip.joined_buddies} buddies left</span>
+        <div className="flex  items-center">
+          <Icon icon="location" cname="pr-2"></Icon>
+          <span className=""> {prop.trip.destination}</span>
         </div>
+        <div className="flex justify-between">
+          <span className=" text">{moment(prop.trip.start_date).format("dddd, DD MMMM, YYYY")}</span>
+          <span className=" text">{prop.trip.buddies - prop.trip.joined_buddies} buddies left</span>
+        </div>
+        
         <div>
-        <div className="buddies-checklist mt-10">
-          <div className="buddies-list flex flex-row justify-between ">
+        <div className="buddies-checklist mt-5">
+          <div className="buddies-list grid md:grid-cols-3 md:gap-2 grid-cols-2 ">
             {prop.trip.checklists && prop.trip.checklists.split(';').map((item, index) => (
               <div className="flex items-center" key={index}>
                 <Icon icon="checkmark-grey" cname="flex-none" />

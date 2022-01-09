@@ -493,6 +493,13 @@ input {
     background: grey;
 }
 
+.destination-icon {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 20px;
+    height: 20px;
+}
+
 .input-with-label > input {
     appearance:auto;
 background-color:rgb(255, 255, 255);

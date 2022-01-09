@@ -65,6 +65,7 @@ export default function Home() {
           label="Destination"
           value={destination}
           cname="destination-input"
+          isdestination_input={true}
           id={`mobile-explore-destination`}
           onChange={setDestination}
         />
