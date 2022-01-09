@@ -26,8 +26,8 @@ const MoreResults = (prop) => {
           <span className=""> {prop.trip.destination}</span>
         </div>
         <div className="flex justify-between">
-          <span className="sm:text-sm text">{moment(prop.trip.start_date).format("dddd, DD MMMM, YYYY")}</span>
-          <span className="sm:text-sm md:text-sm" style={{textAlign: 'right'}}>{prop.trip.buddies - prop.trip.joined_buddies} buddies left</span>
+          <span className="">{moment(prop.trip.start_date).format("dddd, DD MMMM, YYYY")}</span>
+          <span className="" style={{textAlign: 'right'}}>{prop.trip.buddies - prop.trip.joined_buddies} buddies left</span>
         </div>
         
         <div>
@@ -36,7 +36,7 @@ const MoreResults = (prop) => {
             {prop.trip.checklists && prop.trip.checklists.split(';').map((item, index) => (
               <div className="flex items-center" key={index}>
                 <Icon icon="checkmark-grey" cname="flex-none" />
-                <p className="pl-1 whitespace-nowrap text-gray sm:text-sm md:text-sm">{item.trim()}</p>
+                <p className="pl-1 whitespace-nowrap text-gray">{item.trim()}</p>
               </div>
             ))}
           </div>
