@@ -1,4 +1,6 @@
 import moment from "moment";
+import axios from "axios";
+
 import Datetime from "react-datetime";
 // import { blobToURL } from "../assets/js/utils";
 import Icon from "../../components/common/Icon";
@@ -19,6 +21,7 @@ import { putRequest, postRequest, getRequest } from "../../actions/connection";
 import Toast from "../../components/Toast";
 import dynamic from 'next/dynamic';
 import {Mixpanel} from '../../assets/js/mixpanel';
+import { sub } from "date-fns";
 
 
 const Profile = () => {
@@ -139,7 +142,35 @@ const Profile = () => {
   const selectImage = async (e) => {
     if (e.target.files[0].size < 2097152) {
       const url = await blobToURL(e.target.files[0]);
-      setProfileImage(url);
+      await fetch(url).then(async r=> {
+        const blob = await r.blob();
+        const data = new FormData();
+        data.append("file", blob);
+        data.append("upload_preset", "waypal_app");
+        data.append("cloud_name", process.env.CLOUD_NAME);
+
+        await axios
+          .post("https://api.cloudinary.com/v1_1/waypal/image/upload", data)
+          .then(async (d) => {
+            const image_url = d.data.url;
+            if (image_url) {
+              await putRequest("/user/saveProfileInfo", {
+                profile_image_url: image_url
+              }).then(resp=> {
+                dispatch({user: {...resp.data, profile_image_url: image_url}})
+                setProfileImage(image_url);
+              
+              })           
+              //window.location.reload();
+            }
+          })
+          .catch(err=> {
+            setError("Could not upload image. Ref: 2")
+          })
+
+      }).catch(e => {
+        setError("Could not upload image. Ref: 1")
+      })
     }
   };
 
@@ -179,7 +210,7 @@ const Profile = () => {
       emergency_phone_number,
       instagram,
       phone_number,
-      profile_image_url: profileImage,
+      //profile_image_url: profileImage,
       date_of_birth,
       gender
     });
