@@ -105,12 +105,6 @@ export async function getServerSideProps({ req: { cookies } }) {
     upcomingTrips = followedTrips?.data?.items.filter((trip) => {
       return isAfter(new Date(trip.Trip.start_date), new Date());
     }) || [];
-
-    hostedTrips.forEach(trip => {
-      if (isAfter(new Date(trip.start_date), new Date()) && !upcomingTrips.find(a=> a.Trip.id === trip.id))  {
-        upcomingTrips.push({Trip: trip});
-      }
-    })
   }
 
 
