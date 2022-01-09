@@ -188,7 +188,7 @@ const About = ({ trip,  }) => {
           <p className="">{trip.meeting_point}</p>
         </div>
 
-        {user_is_buddy || trip.user_id == user.id && (
+        {(user_is_buddy || trip.user_id == user.id )&& !loading && (
           <JoinChat trip={trip}></JoinChat>
         )}
             
