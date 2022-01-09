@@ -21,7 +21,7 @@ const HostedTrips = ({loading, trips, error }) => {
               <div className="trip-cards max-w-3xl">
                 {trips.items.map((trip) => (
                   <DetailTripCard
-                    privatelink={true}
+                    privatelink={false}
                     key={trip.id}
                     title={trip.title}
                     destination={trip.destination}

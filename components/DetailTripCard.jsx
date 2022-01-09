@@ -32,7 +32,7 @@ const DetailTripCard = ({
   };
   const goToTrip = (e) => {
     e.stopPropagation();
-    if (privatelink) {
+    if (typeof (privatelink) === 'boolean' && privatelink==true) {
       window.location.href = `/trip/${slug}/detail`;
     }
     else {
