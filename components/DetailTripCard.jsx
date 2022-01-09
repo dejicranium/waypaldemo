@@ -17,6 +17,9 @@ const DetailTripCard = ({
   slug,
   currency,
   requestfunds,
+  privatelink,
+  no_public_view,
+  no_dashboard_view
 }) => {
   let tripDate = format(new Date(isoToDate(date)), "EEEE, MMMM do, y");
   const total = totalAmount(price);
@@ -29,7 +32,12 @@ const DetailTripCard = ({
   };
   const goToTrip = (e) => {
     e.stopPropagation();
-    //window.location.href = `/trip/${slug}/detail`;
+    if (privatelink) {
+      window.location.href = `/trip/${slug}/detail`;
+    }
+    else {
+      window.location.href = `/trip/${slug}`;
+    }
   }
 
   useClickOutside(() => setShowOption(false), dropRef);
@@ -95,12 +103,17 @@ const DetailTripCard = ({
                   <li className="py-3 rounded px-10">
                     <Link href={`/messaging/${slug}`}>Group Chat</Link>
                   </li>
-                  <li className="py-3 rounded px-10">
-                    <Link href={`/trip/${slug}`}>Public View</Link>
-                  </li>
-                  <li className="py-3 rounded px-10">
-                    <Link href={`/trip/${slug}/detail`}>Dashboard View</Link>
-                  </li>
+                  {no_public_view !== '1' && (
+                    <li className="py-3 rounded px-10">
+                      <Link href={`/trip/${slug}`}>Public View</Link>
+                    </li>
+                  )}
+
+                  {no_dashboard_view !== '1' && (
+                    <li className="py-3 rounded px-10">
+                      <Link href={`/trip/${slug}/detail`}>Dashboard View</Link>
+                    </li>
+                  )}
                 </ul>
               </div>
             </div>

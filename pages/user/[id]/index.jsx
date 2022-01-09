@@ -173,6 +173,9 @@ const UserProfile = ({user, trips, notFound}) => {
 
                   <div className="trip-card" key={index}>
                     <DetailTripCard
+                        privatelink={false}
+                        no_dashboard_view="1"
+                        no_public_view="1"
                         key={trip.id}
                         title={trip.title}
                         destination={trip.destination}

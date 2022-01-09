@@ -25,6 +25,7 @@ const UpcomingTrips = ({ loading, trips, error }) => {
               <div className="trip-cards max-w-3xl">
                 {trips.map((trip) => (
                   <DetailTripCard
+                    privatelink={true}
                     key={trip.Trip.id}
                     title={trip.Trip.title}
                     price={[
