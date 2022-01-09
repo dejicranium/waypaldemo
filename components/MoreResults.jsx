@@ -15,7 +15,7 @@ const MoreResults = (prop) => {
           style={{ backgroundImage:  `url(${prop.trip.images && prop.trip.images.split(",")[0] ? prop.trip.images.split(",")[0]: "./landscape.png"})` }}
         ></div>
       </div>
-      <div className="trip-card__details w-8/12">
+      <div className="trip-card__details lg:w-8/12 sm:w-full md:w-full">
         <h2 className="text-black-content font-circular-black text-base md:text-2xl flex justify-between">
           <span className="">{prop.trip.title}</span> 
           <span className="">${prop.trip.travel_amount + prop.trip.miscellaneous_amount + prop.trip.accommodation_amount }</span>
@@ -26,8 +26,8 @@ const MoreResults = (prop) => {
           <span className=""> {prop.trip.destination}</span>
         </div>
         <div className="flex justify-between">
-          <span className=" text">{moment(prop.trip.start_date).format("dddd, DD MMMM, YYYY")}</span>
-          <span className=" text">{prop.trip.buddies - prop.trip.joined_buddies} buddies left</span>
+          <span className="sm:text-sm text">{moment(prop.trip.start_date).format("dddd, DD MMMM, YYYY")}</span>
+          <span className="sm:text-sm md:text-sm" style={{textAlign: 'right'}}>{prop.trip.buddies - prop.trip.joined_buddies} buddies left</span>
         </div>
         
         <div>
@@ -36,7 +36,7 @@ const MoreResults = (prop) => {
             {prop.trip.checklists && prop.trip.checklists.split(';').map((item, index) => (
               <div className="flex items-center" key={index}>
                 <Icon icon="checkmark-grey" cname="flex-none" />
-                <p className="pl-1 whitespace-nowrap text-gray">{item.trim()}</p>
+                <p className="pl-1 whitespace-nowrap text-gray sm:text-sm md:text-sm">{item.trim()}</p>
               </div>
             ))}
           </div>
