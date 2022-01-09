@@ -19,6 +19,7 @@ import { format } from "date-fns";
 import moment from "moment";
 import { postRequest } from "../actions/connection";
 import { Mixpanel } from "../assets/js/mixpanel";
+import JoinChat from "./JoinChat";
 
 const About = ({ trip,  }) => {
   const { push } = useRouter();
@@ -182,11 +183,15 @@ const About = ({ trip,  }) => {
           </div>
         </div>
 
-        <div className="meeting-point mt-10">
+        <div className="meeting-point mt-10 mb-10">
           <h2 className="font-circular-bold ">Meeting point</h2>
           <p className="">{trip.meeting_point}</p>
         </div>
 
+        {user_is_buddy || trip.user_id == user.id && (
+          <JoinChat trip={trip}></JoinChat>
+        )}
+            
       </section>
 
       <section className="final-travel-info mt-10 xl:max-w-lg">

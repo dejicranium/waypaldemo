@@ -18,6 +18,7 @@ const DetailTripCard = ({
   currency,
   requestfunds,
   privatelink,
+  no_groupchat_view,
   no_public_view,
   no_dashboard_view
 }) => {
@@ -100,9 +101,11 @@ const DetailTripCard = ({
                 }
               >
                 <ul className="py-4 px-2 options-list">
-                  <li className="py-3 rounded px-10">
-                    <Link href={`/messaging/${slug}`}>Group Chat</Link>
-                  </li>
+                  {no_groupchat_view !== '1' && (
+                    <li className="py-3 rounded px-10">
+                      <Link href={`/messaging/${slug}`}>Group Chat</Link>
+                    </li>
+                  )}
                   {no_public_view !== '1' && (
                     <li className="py-3 rounded px-10">
                       <Link href={`/trip/${slug}`}>Public View</Link>

@@ -134,17 +134,18 @@ const UserProfile = ({user, trips, notFound}) => {
                 </p>
               </div>
             </div>
-            <div className="socials py-9 border-b border-gray-light6 grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div className="reviews flex flex-col items-center">
+            <div className="socials py-9 border-b border-gray-light6 grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="reviews flex flex-col">
                 <Rating name="read-only" value={Number(user.rating / user.no_of_ratings) || 0 } readOnly />
-                <div className="flex flex-row justify-between mt-2">
+                <div className="flex flex-row mt-2">
                   <span className="text-gray-light pl-2">{parseFloat((user.rating / user.no_of_ratings) || 0).toFixed(1) } stars</span>
                   <span onClick={() => {
                     if ((!reviews || reviews.length < 1) && !no_reviews) {
                       getReviews();
                     }
+                    
                     setShowReviews(true)
-                  }} style={{cursor: user.no_of_ratings > 0 ? 'pointer' : ''}} className="text-gray-light pl-2 underline">({user.no_of_ratings} {user.no_of_ratings && user.no_of_ratings > 1 ? 'reviews' : 'review'})</span>
+                  }} style={{cursor: user.no_of_ratings > 0 ? 'pointer' : '', textDecoration: user.no_of_ratings ? 'underline': 'none' }} className="text-gray-light pl-2">({user.no_of_ratings} {user.no_of_ratings && user.no_of_ratings > 1 ? 'reviews' : 'review'})</span>
                 </div>
               </div>
               {/*<div className="links flex items-center">
@@ -174,6 +175,7 @@ const UserProfile = ({user, trips, notFound}) => {
                   <div className="trip-card" key={index}>
                     <DetailTripCard
                         privatelink={false}
+                        no_groupchat_view="1"
                         no_dashboard_view="1"
                         no_public_view="1"
                         key={trip.id}
@@ -188,7 +190,6 @@ const UserProfile = ({user, trips, notFound}) => {
                           trip.miscellaneous_amount,
                         ]}
                         slug={trip.slug}
-                        options
                       />
                       
                   </div>
