@@ -117,9 +117,11 @@ const Profile = () => {
       if (!['APPROVED', 'ATTEMPTED'].includes(resp.data.verified)) {
         createVeriffSession();
       }
+      else if (resp.data.verified === 'APPROVED') {
+        setVerificationStatus("APPROVED")
+      }
     });
     Mixpanel.track('dashboard-profile-page-loaded');
-    
   }, []);
 
 
