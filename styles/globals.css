@@ -449,6 +449,17 @@ input {
      width: 70%;
      
  }
+@media screen and (max-width: 767px) {
+    .traveler-info-form {
+        width: 100% !important;
+    }
+
+    .traveler-info {
+        width: 100% !important;
+    }
+}
+    
+ 
 
  .tripdetail-notification-icon {
      width: 20%;

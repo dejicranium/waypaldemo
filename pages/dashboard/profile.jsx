@@ -118,7 +118,7 @@ const Profile = () => {
         createVeriffSession();
       }
       else if (resp.data.verified === 'APPROVED') {
-        setVerificationStatus("APPROVED")
+        setVerificationStatus('APPROVED')
       }
     });
     Mixpanel.track('dashboard-profile-page-loaded');
