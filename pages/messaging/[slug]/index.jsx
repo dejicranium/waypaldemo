@@ -12,6 +12,7 @@ import { getRequest, postRequest } from "../../../actions/connection";
 const Messaging = ({ trip, messages, notFound }) => {
   const socket = io('/', {
     withCredentials: true,
+    rejectUnauthorized: false
   });
 
   const {
