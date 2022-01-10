@@ -83,7 +83,7 @@ const TripPage = ({ trip, isPrivate, notFound }) => {
               <div className="absolute grid top-0 left-0 text-center w-full h-full">
                 <div className="m-auto">
                   <p className="font-circular-black text-white z-30 text-7xl md:text-130">
-                    {trip.destination}
+                    {trip.destination.split(',')[0]}
                   </p>
                   <p className="font-circular-bold text-white uppercase">
                     {/* Rio De Janeiro */}

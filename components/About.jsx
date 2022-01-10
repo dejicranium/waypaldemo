@@ -150,7 +150,7 @@ const About = ({ trip,  }) => {
           </div>
           <div className="buddies flex items-center mr-10">
             <Icon icon="buddies" cname="pr-3 flex-none" />
-            <p className="xl:whitespace-nowrap">
+            <p className="xl:whitespace-nowrap mr-10">
               {trip.buddies}{" "}
               {`${trip.buddies.length === 1 ? " Buddy" : " Buddies"}`}{" "}
               {`(${trip.joined_buddies} paid)`}

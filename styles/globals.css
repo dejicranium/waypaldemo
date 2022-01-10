@@ -570,3 +570,15 @@ width:288px;
 word-spacing:0px;
 
 }
+
+
+@media screen and (max-width: 490px) {
+    .traveler-info-form {
+        width: 100% !important;
+    }
+
+    .traveler-info {
+        width: 100% !important;
+    }
+}
+    
