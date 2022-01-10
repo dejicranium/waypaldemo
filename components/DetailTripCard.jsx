@@ -21,10 +21,11 @@ const DetailTripCard = ({
   privatelink,
   no_groupchat_view,
   no_public_view,
-  no_dashboard_view
+  no_dashboard_view,
+  tax
 }) => {
   let tripDate = date ? moment(new Date(date)).format('dddd, MMMM DD, YYYY') : "";
-  const total = totalAmount(price);
+  const total = totalAmount(price, tax);
   const dropRef = useRef(null);
   const [showOptions, setShowOption] = useState(false);
 

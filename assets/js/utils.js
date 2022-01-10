@@ -45,9 +45,9 @@ export const formatAmount = (x) => {
   return fNum;
 };
 
-export const totalAmount = (amount) => {
+export const totalAmount = (amount, tax) => {
   const subTotal = amount.reduce((acc, obj) => acc + obj, 0);
-  const total = subTotal + (subTotal / 100) * 7.5;
+  const total = subTotal + (subTotal / 100) * (tax || 1);
   return total;
 };
 

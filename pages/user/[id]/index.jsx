@@ -174,6 +174,7 @@ const UserProfile = ({user, trips, notFound}) => {
 
                   <div className="trip-card" key={index}>
                     <DetailTripCard
+                        tax={trip.tax_percent}
                         privatelink={false}
                         no_groupchat_view="1"
                         no_dashboard_view="1"

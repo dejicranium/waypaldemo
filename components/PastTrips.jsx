@@ -23,6 +23,7 @@ const PastTrips = ({loading, trips, error }) => {
               <div className="trip-cards max-w-3xl">
                 {trips.map((trip) => (
                   <DetailTripCard
+                    tax={trip.tax_percent}
                     privatelink={false}
                     key={trip.Trip.id}
                     title={trip.Trip.title}

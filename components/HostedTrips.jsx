@@ -28,6 +28,7 @@ const HostedTrips = ({loading, trips, error }) => {
                     date={trip.start_date}
                     image={trip.images && trip.images[0] ? trip.images[0]: ""}
                     buddies={trip.joined_buddies}
+                    tax={trip.tax_percent}
                     price={[
                       trip.travel_amount,
                       trip.accommodation_amount,
