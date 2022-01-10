@@ -1,6 +1,8 @@
 import Icon from "./common/Icon";
 import useData from "./hooks/useData";
 import { formatCurrency, formatAmount } from "../assets/js/utils";
+import { useState, useEffect} from 'react';
+import { getRequst } from '../actions/connection';
 
 const PaymentBreakdown = ({
   travel_amount,
@@ -29,6 +31,13 @@ const PaymentBreakdown = ({
     },
   ];
 
+  const {
+    dispatch,
+    data: {tax},
+  } = useData();
+
+
+
   const fixDivision = (num) => {
     num = num.toString();
     if (num.indexOf('.') > -1) {
@@ -42,9 +51,12 @@ const PaymentBreakdown = ({
   }
 
   const subTotal = travelDetails.reduce((acc, obj) => acc + obj.amount, 0);
-  const taxes = fixDivision((subTotal / 100) * 7.5);
+  const taxes = fixDivision((subTotal / 100) * tax);
 
   const total = parseFloat(subTotal) + parseFloat(taxes);
+
+  useEffect(async() => {
+  }, [])
 
   return (
     <div>

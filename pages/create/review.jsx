@@ -22,6 +22,7 @@ const CreateTripReview = () => {
     data: {
       user,
       createTrip,
+      tax,
       createTrip: { images, itineraries },
       currentTrip
     },
@@ -127,6 +128,7 @@ const CreateTripReview = () => {
     // Create trip
     const saveData = await postRequest("/trip/create", {
       ...createTrip,
+      tax,
       itineraries: [...itineraryList],
       images: [...uploadedImages],
     });

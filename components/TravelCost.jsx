@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Icon from "./common/Icon";
 import { formatAmount } from "../assets/js/utils";
 import { formatCurrency } from "../assets/js/utils";
+import { getRequest } from "../actions/connection";
+import useData from '../components/hooks/useData';
 
 const TravelCost = ({ register, watch, refresh }) => {
   const t =
@@ -9,11 +11,18 @@ const TravelCost = ({ register, watch, refresh }) => {
     watch("accommodation_amount") +
     watch("miscellaneous_amount");
 
+    const {
+      dispatch,
+      data: { tax, user, isLoggedIn },
+    } = useData();
+    
   const currency = watch("currency", "USD");
   const [error, setError] = useState("")
-  const [m_refresh, setRefresh] = useState(refresh)
+  const [m_refresh, setRefresh] = useState(refresh);
   // const [currency, setCurrency] = useState("NGN");
-  useEffect(() => {
+  useEffect(async() => {
+   
+
     if (m_refresh !== refresh) {
       if (!t) {
         setError("Total cost cannot be 0");
@@ -85,7 +94,7 @@ const TravelCost = ({ register, watch, refresh }) => {
               defaultValue={0}
               className="border px-3 py-1 w-20 outline-none"
               {...register(name, {
-                required: true,
+                //required: true,
                 valueAsNumber: true,
                 min: 0,
               })}
@@ -93,26 +102,13 @@ const TravelCost = ({ register, watch, refresh }) => {
           </div>
         ))}
       </div>
+      
       <div className="total-fees mt-4">
-        <div className="subtotal flex justify-end">
-          <p className="pr-4">Subtotal</p>
-          <p className="">
-            {formatCurrency(currency)}
-            {formatAmount(t ? t : 0)}
-          </p>
-        </div>
-        <div className="taxes flex justify-end">
-          <p className="pr-4">Taxes and Fees</p>
-          <p className="">
-            {formatCurrency(currency)}
-            {formatAmount(t ? ((t / 100) * 7.5).toFixed(2) : 0)}
-          </p>
-        </div>
         <div className="total flex justify-end font-circular-bold">
           <p className="pr-4">Total</p>
           <p>
             {formatCurrency(currency)}
-            {formatAmount(t ? t + (t / 100) * 7.5 : 0)}
+            {formatAmount(t ? t + ((t / 100) * tax) : 0)}
           </p>
         </div>
       </div>

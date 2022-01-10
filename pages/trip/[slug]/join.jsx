@@ -100,12 +100,24 @@ const JoinTrip = ({ trip, notFound }) => {
   const [emergency_email, setEmergencyEmail] = useState(user.emergency_email);
   const [emergency_phone_number, setEmergencyPhoneNumber] = useState(user.emergency_phone_number);
   const [phone_number, setPhoneNumber] = useState(user.phone_number);
+  const [tax, setTax] = useState(1)
 
+
+  const getTax = async () => {
+    await getRequest('/taxes')
+      .then(resp=> {
+        setTax(resp.data)
+      })
+      .catch(e => {
+        
+      })
+  }
 
   useEffect(async() => {
     if (!isLoggedIn) {
       setShowModal(true)
     } 
+
     else {
       await getRequest('/user/info').then(async resp=> {
         dispatch({user: resp.data || {}})
@@ -121,6 +133,9 @@ const JoinTrip = ({ trip, notFound }) => {
             user_id: user.id,
           })
         }
+
+        await getTax();
+
 
       })
 
@@ -200,7 +215,7 @@ const JoinTrip = ({ trip, notFound }) => {
     
     let totalAmount = parseFloat(trip.travel_amount + trip.miscellaneous_amount + trip.accommodation_amount) ;
 
-    const taxes = parseFloat((totalAmount / 100) * 7.5);
+    const taxes = parseFloat((totalAmount / 100) * (trip.tax_percent || 1));
 
     totalAmount = parseFloat(parseFloat(totalAmount) + parseFloat(taxes)).toFixed(2);
 

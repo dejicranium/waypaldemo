@@ -14,7 +14,7 @@ import TravelCost from "../../components/TravelCost";
 import InputField from "../../components/InputField";
 import useData from "../../components/hooks/useData";
 import TextAreaField from "../../components/TextAreaField";
-import { postRequest } from "../../actions/connection";
+import { getRequest } from "../../actions/connection";
 import Toast from '../../components/Toast';
 import Autocomplete from "react-google-autocomplete";
 import {Mixpanel} from '../../assets/js/mixpanel';
@@ -22,8 +22,19 @@ import {Mixpanel} from '../../assets/js/mixpanel';
 const CreateTrip = () => {
   const {
     dispatch,
-    data: { createTrip, user, isLoggedIn },
+    data: { createTrip, tax, user, isLoggedIn },
   } = useData();
+
+  const getTax = async () => {
+    await getRequest('/taxes')
+      .then(resp=> {
+        dispatch({tax: resp.data})
+      })
+      .catch(e => {
+      })
+  }
+
+
   const { push } = useRouter();
   const {
     watch,
@@ -38,6 +49,7 @@ const CreateTrip = () => {
   });
 
   useEffect(() => {
+    getTax();
     getUserVerificationStatus();
     
   }, [])
@@ -46,10 +58,8 @@ const CreateTrip = () => {
   const getUserVerificationStatus = () => {
     if (user.verified !== 'APPROVED') {
       if (isLoggedIn) {
-
         push("/dashboard/profile")
       }
-
       push('/')
     }
   }
@@ -396,7 +406,9 @@ const CreateTrip = () => {
           type="button"
           btnType="fill"
           btnText="Continue to itinerary"
-          onClick={handleSubmit(submit)}
+          onClick={
+            handleSubmit(submit)
+          }
         />
       </div>
 
