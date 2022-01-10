@@ -38,7 +38,8 @@ export function isoToDate(date, dash = false) {
 
 export const formatAmount = (x) => {
   x = x * 1;
-  const num = x.toFixed(2);
+  let num = x.toFixed(2);
+  num = num.toString();
   const fNum = num.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
   return fNum;

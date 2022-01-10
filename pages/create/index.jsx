@@ -90,6 +90,7 @@ const CreateTrip = () => {
   };
 
   const submit = async  (data) => {
+    console.log(data)
    if (!data.travel_amount && !data.miscellaneous_amount && !data.accommodation_amount) {
       setError("Travel costs cannot be 0")
     }

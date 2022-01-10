@@ -26,6 +26,7 @@ const InputField = (props) => {
 
 
   const initializeAutoComplete = () => {
+    
     window.addEventListener('load', function() {
         let input = document.getElementById(id);
         if (input instanceof HTMLInputElement) {
@@ -94,7 +95,7 @@ const InputField = (props) => {
           id={id}
           placeholder={placeholder}
           onClick={reloadAutoComplete}
-          //onChange={(e) => onChange(e)}
+          onChange={(e) => onChange(e)}
           className={`input-element w-full ${cname}`}
           {...innerref}/>
 

@@ -1,6 +1,7 @@
 import Icon from "./common/Icon";
 import moment from "moment";
 import Link from "next/link";
+import UserAvatar from "react-user-avatar";
 
 const ChatSideBar = ({trip}) => {
   return (
@@ -25,20 +26,21 @@ const ChatSideBar = ({trip}) => {
       <section className="chat-buddies p-8 rounded-2xl bg-orange-white overflow-hidden mt-6">
         <div className="chat-buddies-title pb-4 border-b border-gray-light6">
           <h2>
-            {trip.buddies} travel
-            {`${trip.buddies === 1 ? " buddy" : " buddies"}`}{" "}
+            {trip.joined_buddies} travel
+            {`${trip.joined_buddies === 1 ? " buddy" : " buddies"}`}{" "}
           </h2>
         </div>
         
         <div className="buddies-list flex flex-col pt-6">
               <div className="flex flex-row items-center">
                 <div className="chat-image-container">
-                  {trip.user && trip.user.profile_image_url &&
-                    <img src={trip.user.profile_image_url} alt=""/>
-                  }
-                  {!trip.user || !trip.user.profile_image_url && 
-                    <img className="chat-image-default" alt=""/>
-                  }
+                <UserAvatar
+                  className="pr-3"
+                  size="28"
+                  name={`${trip.user.firstname.toUpperCase()} ${trip.user.lastname.toUpperCase()}`}
+                  color="#5CD6C0"
+                  src={trip.user.profile_image_url || ''}
+                />
                 </div>
                 <p className="chat-image-container-label">{trip.user.firstname + ' ' + trip.user.lastname}</p>
               </div>
@@ -46,12 +48,13 @@ const ChatSideBar = ({trip}) => {
             return (
               <div className="flex flex-row items-center" key={index}>
                 <div className="chat-image-container">
-                  {item.User && item.User.profile_image_url &&
-                    <img src={item.User.profile_image_url} alt=""/>
-                  }
-                  {!item.User || !item.User.profile_image_url && 
-                    <img className="chat-image-default" alt=""/>
-                  }
+                  <UserAvatar
+                  className="pr-3"
+                    size="28"
+                    name={`${trip.User.firstname.toUpperCase()} ${trip.User.lastname.toUpperCase()}`}
+                    color="#5CD6C0"
+                    src={trip.User.profile_image_url || ''}
+                  />
                 </div>
                 <p className="chat-image-container-label">{item.User.firstname + ' ' + item.User.lastname}</p>
               </div>

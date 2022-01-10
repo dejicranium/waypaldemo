@@ -45,6 +45,7 @@ const MobileSearch = ({ show, close, setLoading }) => {
                   id="mobile-search-bar-destination"
                   placeholder="Destination"
                   value={destination}
+                  onChange={(e) => setDestination(e.target.value)}
                   onClick={() => {
                     let input = document.getElementById('mobile-search-bar-destination');
                     if (input instanceof HTMLInputElement) {
@@ -75,6 +76,7 @@ const MobileSearch = ({ show, close, setLoading }) => {
                     id="meetingpoint-search-bar"
                     placeholder="Meeting Point"
                     value={meeting_point}
+                    onChange={(e) => setMeetingPoint(e.target.value)}
                     onClick={() => {
                       let input = document.getElementById('meetingpoint-search-bar');
                       if (input instanceof HTMLInputElement) {

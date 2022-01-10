@@ -3,7 +3,7 @@ import React from 'react';
 import {useEffect} from 'react';
 import Autocomplete from "react-google-autocomplete";
 
-const InputWithLabel = ({ id, isdestination_input, label, value, type, placeholder, onChange, cname }) => {
+const InputWithLabel = ({ id, isdestination_input, label, value, type, placeholder, setInput, onChange, cname }) => {
     
   const reloadAutoComplete =() => {
       let input = document.getElementById(id);
@@ -18,7 +18,12 @@ const InputWithLabel = ({ id, isdestination_input, label, value, type, placehold
             //input.value = address;
             onChange(address);
           })
+
+          input.addEventListener('input', function(e) {
+            onChange(e.target.value)
+          })
       }
+      
       
   }
   

@@ -53,6 +53,9 @@ const SearchBar = (props) => {
             style={{ width: "100%" }}
             placeholder="Destination"
             defaultValue={destination}
+            onChange={(e) => {
+              setDestination(e.target.value);
+            }}
             onClick={(e) => {
               //e.preventDefault();
               e.stopPropagation();
@@ -82,6 +85,7 @@ const SearchBar = (props) => {
             id="meetingpoint-searchbar"
             style={{ width: "100%" }}
             placeholder="Meeting Point"
+            onChange={(e) => setMeetingPoint(e.target.value)}
             defaultValue={meeting_point}
             onClick={(e) => {
               //e.preventDefault();

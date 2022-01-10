@@ -45,13 +45,14 @@ const DetailTripCard = ({
   useClickOutside(() => setShowOption(false), dropRef);
 
   return (
-    <div className="relative cursor-pointer" onClick={goToTrip}>
+    <div className="relative cursor-pointer" >
       <div className="trip-card p-4 my-6 border rounded border-gray-light3 flex items-start justify-between">
         {/* Image and trip details */}
         <div className="trip-info flex flex-col w-full md:flex-row">
           {/* image */}
           <div className="md:mr-5 md:w-1/4 flex-none">
             <div
+              onClick={goToTrip}
               className="pt-2/3 bg-no-repeat bg-cover rounded"
               style={{
                 backgroundImage: `url(${image || "/landscape.jpg"})`,
@@ -60,7 +61,7 @@ const DetailTripCard = ({
             ></div>
           </div>
           {/* trip details */}
-          <div className="trip-card__details pt-4 md:pt-2 flex items-start justify-between">
+          <div onClick={goToTrip} className="trip-card__details pt-4 md:pt-2 flex items-start justify-between">
             <div className="trip">
               <h2 className="text-black-content font-circular-black text-base md:text-2xl">
                 <span className="">{title}</span> -{" "}

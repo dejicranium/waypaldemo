@@ -269,7 +269,7 @@ const Profile = () => {
                   Awaiting Verification 
                 </h1>
                 <p className="text-black-content text-lg hidden md:block">
-                 Your verification process is still ongoing. This should take at most 2 business days from the submission time
+                 Your verification process is still ongoing. This should take at most 24 hours from the submission time.
                 </p>
               </>
             }
@@ -596,7 +596,7 @@ const Profile = () => {
                 </>
               }
             </form>
-            {user.verified !== 'APPROVED' &&
+            {user.verified !== 'APPROVED' && user.verified !== 'ATTEMPTED' &&
               <div className="mt-16 flex items-center">
                 <Button
                   btnText="Verify Me!"

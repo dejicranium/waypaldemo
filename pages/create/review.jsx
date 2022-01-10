@@ -236,6 +236,7 @@ const CreateTripReview = () => {
           </div>
           <div className="travel-cost xl:flex justify-end">
             <PaymentBreakdown
+              currency={createTrip.currency}
               travel_amount={createTrip.travel_amount}
               accommodation_amount={createTrip.accommodation_amount}
               miscellaneous_amount={createTrip.miscellaneous_amount}
