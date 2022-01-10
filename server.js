@@ -5,7 +5,8 @@ const server = require("http").Server(app);
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: '*'
+    origin: process.env.NODE_ENV === 'development' ? '/' : 'https://waypal-eight.vercel.app',
+    methods: ["GET", "POST"]
   }
 });
 
