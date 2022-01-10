@@ -10,7 +10,11 @@ import ChatSideBar from "../../../components/ChatSidebar";
 import { getRequest, postRequest } from "../../../actions/connection";
 
 const Messaging = ({ trip, messages, notFound }) => {
-  const socket = io('/');
+  const socket = io({
+    autoConnect: false,
+  });
+
+  socket.connect();
   const {
     data: { user },
   } = useData();

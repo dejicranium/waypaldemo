@@ -2,10 +2,7 @@ const { log } = require("console");
 const next = require("next");
 const app = require("express")();
 const server = require("http").Server(app);
-console.log("*******")
-console.log("*******")
-console.log("*******")
-console.log(server)
+
 const io = require("socket.io")(server, {
   cors: {
     origin: '*'
