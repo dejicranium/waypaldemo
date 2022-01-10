@@ -10,8 +10,7 @@ import ChatSideBar from "../../../components/ChatSidebar";
 import { getRequest, postRequest } from "../../../actions/connection";
 
 const Messaging = ({ trip, messages, notFound }) => {
-  const socket = io("/");
-
+  
   const {
     data: { user },
   } = useData();
@@ -33,6 +32,7 @@ const Messaging = ({ trip, messages, notFound }) => {
     if (notFound) {
       return;
     }
+    const socket = io("/");
     setMessageList(messages);
     socket.emit("join_room", trip.id)
     socket.on("trip", async (tripData) => {
