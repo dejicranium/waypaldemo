@@ -6,6 +6,8 @@ import { format } from "date-fns";
 import useClickOutside from "./hooks/useClickOutside";
 import { isoToDate, formatAmount, totalAmount } from "../assets/js/utils";
 import moment from 'moment'
+import useData from "../components/hooks/useData";
+
 
 const DetailTripCard = ({
   title,
@@ -22,8 +24,16 @@ const DetailTripCard = ({
   no_groupchat_view,
   no_public_view,
   no_dashboard_view,
-  tax
 }) => {
+
+  const {
+    dispatch,
+    data: {
+      topSearchResults,
+      tax
+    },
+  } = useData();
+  
   let tripDate = date ? moment(new Date(date)).format('dddd, MMMM DD, YYYY') : "";
   const total = totalAmount(price, tax);
   const dropRef = useRef(null);

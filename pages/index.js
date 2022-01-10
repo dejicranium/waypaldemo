@@ -31,19 +31,19 @@ export default function Home() {
     dispatch,
     data: {
       topSearchResults,
+      tax
     },
   } = useData();
-/*
-  useEffect(async () => {
-    await getRequest('/trip/top-destinations')
-      .then(resp=> {
-        setTopDestinations(resp)
-        alert(JSON.stringify(resp))
-      })
-      .catch(err=> {
 
+  useEffect(async () => {
+    await getRequest('/taxes')
+      .then(resp=> {
+        dispatch({tax: resp.data})
       })
-  }, [])*/
+      .catch(e => {
+      })
+  }, [])
+  
   const searchTrips = async() => {
     dispatch({topSearchResults: []})
 
