@@ -5,9 +5,7 @@ const server = require("http").Server(app);
 const expsession = require('express-session');
 const io = require("socket.io")(server, {
   cors: {
-    origin: process.env.NODE_ENV === 'development' ? '/' : "https://waypal-eight.vercel.app",
-    methods: ["GET", "POST"],
-    credentials: true  
+    origin: '*'
   }
 });
 
@@ -16,23 +14,15 @@ const nextApp = next({ dev });
 const nextHandler = nextApp.getRequestHandler();
 
 const sessionMiddleware = expsession({
-  secret: 'ra23432#@#fewrwo',
+  secret: 'random secret',
   saveUninitialized: true,
   resave: true
 });
-
-app.use(sessionMiddleware);
-
-io.use(function(socket, next) {
-  sessionMiddleware(socket.request, socket.request.res, next);
-})
 
 
 let port = 3000;
 
 io.on("connection", (socket) => {
-  socket.request.session.socketio = socket.id;
-  socket.request.session.save();  
   socket.on("join_room", async (room) => {
     socket.join(room);
   });
@@ -42,13 +32,6 @@ io.on("connection", (socket) => {
     }
   });
 });
-
-app.use(function(req, res, next) {
-  const session = req.session;
-  if (!session.cntr) session.cntr = 0;
-  ++session.cntr;
-  next();
-})
 
 nextApp.prepare().then(() => {
   app.get("*", (req, res) => {
