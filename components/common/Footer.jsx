@@ -63,7 +63,7 @@ const Footer = ({ planTrip, children }) => (
             </a>
           </li>
           <li>
-            <a href="instagram.com/waypal.co">
+            <a href="https://instagram.com/waypal.co">
               Instagram
             </a>
           </li>
