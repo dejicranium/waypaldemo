@@ -34,7 +34,10 @@ const Messaging = ({ trip, messages, notFound }) => {
       return;
     }
     setMessageList(messages);
-    socket.emit("join_room", trip.id)
+    socket.emit("join_room", trip.id);
+    socket.on("connect_error", (err) => {
+      consoe.log(`connect error due to ${err.message}`)
+    })
     socket.on("trip", async (tripData) => {
       const newMessages = [...messageList, tripData.message];
       setMessageList(newMessages);
