@@ -1,18 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Icon from "./common/Icon";
 import { formatAmount } from "../assets/js/utils";
 import { formatCurrency } from "../assets/js/utils";
 
-const TravelCost = ({ register, watch }) => {
+const TravelCost = ({ register, watch, refresh }) => {
   const t =
     watch("travel_amount") +
     watch("accommodation_amount") +
     watch("miscellaneous_amount");
 
   const currency = watch("currency", "USD");
-
+  const [error, setError] = useState("")
+  const [m_refresh, setRefresh] = useState(refresh)
   // const [currency, setCurrency] = useState("NGN");
-
+  useEffect(() => {
+    if (m_refresh !== refresh) {
+      if (!t) {
+        setError("Total cost cannot be 0");
+      }
+      else {
+        setError("")
+      }
+    }
+  },[refresh])
   const travelDetails = [
     {
       title: "travel",
@@ -53,6 +63,10 @@ const TravelCost = ({ register, watch }) => {
           <option value="GBP">&#163; GBP</option>
         </select>
       </div>
+      {error && (
+        <small className={`text-red-500 block`}>{error}</small>
+      )}
+
       <div className="travel-cost-container border-2 rounded-2xl border-outline divide-y-2 divide-outline">
         {travelDetails.map(({ title, name, helptext, icon }) => (
           <div

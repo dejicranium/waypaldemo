@@ -7,7 +7,6 @@ const DestinationCard = ({ name, location, image, key
   const { push } = useRouter();
 
   function goToDestination(name, e){ 
-    alert(e)
     Mixpanel.track('destination-image-clicked', {destination: name});
     push('/search?destination=' + name)
   }

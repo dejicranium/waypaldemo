@@ -90,12 +90,11 @@ const CreateTrip = () => {
   };
 
   const submit = async  (data) => {
-    console.log(data)
-   if (!data.travel_amount && !data.miscellaneous_amount && !data.accommodation_amount) {
-      setError("Travel costs cannot be 0")
+    setGoToNextPage(true);
+    if (!data.travel_amount && !data.miscellaneous_amount && !data.accommodation_amount) {
+      setError("Trip costs cannot be 0")
     }
     else {
-      setGoToNextPage(true);
       dispatch({ createTrip: { ...createTrip, ...data, is_public, destination, meeting_point, checklists: tags} });
       push("/create/itinerary");
 
@@ -382,7 +381,7 @@ const CreateTrip = () => {
         </section>
 
         <section className="travel-cost md:max-w-lg md:pl-4 lg:w-1/2 lg:mt-24">
-          <TravelCost register={register} watch={watch}  />
+          <TravelCost register={register} watch={watch} refresh={go_to_next_page}  />
         </section>
       </div>
 
