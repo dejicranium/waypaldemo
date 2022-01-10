@@ -10,7 +10,7 @@ import ChatSideBar from "../../../components/ChatSidebar";
 import { getRequest, postRequest } from "../../../actions/connection";
 
 const Messaging = ({ trip, messages, notFound }) => {
-  const host = process.env.NODE_ENV === 'development' ? '/' : 'http://waypal-eight.vercel.app/'
+  const host = process.env.NODE_ENV === 'development' ? '/' : 'https://waypal-eight.vercel.app/'
   const socket = io(host);
 
   const {
