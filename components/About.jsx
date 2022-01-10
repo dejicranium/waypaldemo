@@ -26,7 +26,7 @@ const About = ({ trip,  }) => {
 
    const {
     dispatch,
-     data: { currentTrip, user },
+     data: { currentTrip, user, tax },
    } = useData();
 
   const [authMode, setAutMode]  = useState('login');
@@ -78,7 +78,7 @@ const About = ({ trip,  }) => {
   }
   const subTotal = parseFloat(amount.reduce((acc, obj) => acc + obj, 0));
 
-  const total = parseFloat(subTotal) + parseFloat(fixDivision((subTotal / 100) * (trip.tax_percent || 1)));
+  const total = parseFloat(subTotal) + parseFloat(fixDivision((subTotal / 100) * (tax || 1)));
 
   return (
     <>

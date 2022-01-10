@@ -2,6 +2,7 @@ import Icon from "./common/Icon";
 import ItineraryCard from "./ItineraryCard";
 import TripPhoto from "./TripPhoto";
 import TravelCostBreakdown from "./TravelCostBreakdown";
+import useData from "../components/hooks/useData";
 
 import { format } from "date-fns";
 
@@ -12,9 +13,17 @@ const Itinerary = ({ trip }) => {
     trip.miscellaneous_amount,
   ];
 
+  const {
+    dispatch,
+    data: {
+      topSearchResults,
+      tax
+    },
+  } = useData();
+
   const subTotal = amount.reduce((acc, obj) => acc + obj, 0);
 
-  const total = subTotal + (subTotal / 100) * (trip.tax_percent || 1);
+  const total = subTotal + (subTotal / 100) * (tax || 1);
 
   return (
     <div className="trip-itinerary lg:flex justify-between lg:space-x-8">
