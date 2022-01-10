@@ -54,20 +54,18 @@ const Footer = ({ planTrip, children }) => (
       <div className="social mt-10 md:mt-0">
         <h3 className="font-circular-black text-black pb-5">CONTACT US</h3>
         <ul className="pb-5   border-dotted border-black-100 border-b-2" style={{marginBottom: '20px'}}>
-          <li>hello@waypal.com</li>
+          <li><a href="mailto:hello@waypal.com">hello@waypal.com</a></li>
         </ul>
         <ul className="pt-5">
           <li>
-            Facebook
+            <a href="https://twitter.com/waypalHQ">
+              Twitter
+            </a>
           </li>
           <li>
-            Twitter
-          </li>
-          <li>
-            Linkedin
-          </li>
-          <li>
-            Instagram
+            <a href="instagram.com/waypal.co">
+              Instagram
+            </a>
           </li>
         </ul>
       </div>
