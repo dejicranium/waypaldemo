@@ -78,7 +78,7 @@ const About = ({ trip,  }) => {
   }
   const subTotal = parseFloat(amount.reduce((acc, obj) => acc + obj, 0));
 
-  const total = parseFloat(subTotal) + parseFloat(fixDivision((subTotal / 100) * 7.5));
+  const total = parseFloat(subTotal) + parseFloat(fixDivision((subTotal / 100) * (trip.tax_percent || 1)));
 
   return (
     <>
