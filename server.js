@@ -2,7 +2,6 @@ const { log } = require("console");
 const next = require("next");
 const app = require("express")();
 const server = require("http").Server(app);
-const expsession = require('express-session');
 const io = require("socket.io")(server, {
   cors: {
     origin: '*'
@@ -13,14 +12,9 @@ const dev = process.env.NODE_ENV !== "production";
 const nextApp = next({ dev });
 const nextHandler = nextApp.getRequestHandler();
 
-const sessionMiddleware = expsession({
-  secret: 'random secret',
-  saveUninitialized: true,
-  resave: true
-});
 
 
-let port = 3000;
+let port = 8080;
 
 io.on("connection", (socket) => {
   socket.on("join_room", async (room) => {
