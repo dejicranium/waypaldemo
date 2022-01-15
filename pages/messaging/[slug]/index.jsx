@@ -11,13 +11,6 @@ import { getRequest, postRequest } from "../../../actions/connection";
 
 const Messaging = ({ trip, messages, notFound }) => {
   const socket = io('/', {
-    withCredentials: true,
-    transports: ['websocket'],
-    reconnectionDelay: 1000,
-    reconnection:true,
-    reconnectionAttempts: 10,
-    agent: false, // [2] Please don't set this to true
-    upgrade: false,
     rejectUnauthorized: false
   });
 
