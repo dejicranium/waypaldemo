@@ -8,6 +8,8 @@ const io = require("socket.io")(server, {
   }
 });
 
+global.io = io;
+
 const dev = process.env.NODE_ENV !== "production";
 const nextApp = next({ dev });
 const nextHandler = nextApp.getRequestHandler();
