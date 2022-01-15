@@ -1,12 +1,25 @@
 import Icon from "./common/Icon";
 import {useRouter} from 'next/router';
 import moment from 'moment';
+import useData from './hooks/useData';
+import {formatCurrency} from '../assets/js/utils'
 
 const MoreResults = (prop) => {
   const {push} = useRouter();
+
+  const {
+    dispatch,
+     data: { currentTrip, user, tax },
+   } = useData();
+
+
   function goToTrip() {
     push(`/trip/${prop.trip.slug}`)
   }
+
+  const total = prop.trip.travel_amount + prop.trip.miscellaneous_amount + prop.trip.accommodation_amount;
+  const totalWithTaxes = total + (total *((tax || 1) / 100));
+
   return (
     <div onClick={goToTrip} className="trip-card cursor-pointer p-4 my-2 flex flex-col md:flex-row border rounded border-gray-light3">
       <div className="md:mr-5 md:w-1/4 flex-none">
@@ -18,7 +31,7 @@ const MoreResults = (prop) => {
       <div className="trip-card__details lg:w-8/12 sm:w-full md:w-full">
         <h2 className="text-black-content font-circular-black text-base md:text-2xl flex justify-between">
           <span className="">{prop.trip.title}</span> 
-          <span className="">${prop.trip.travel_amount + prop.trip.miscellaneous_amount + prop.trip.accommodation_amount + (prop.trip.tax_amount || 0)}</span>
+          <span className="">{formatCurrency(prop.trip.currency)} {parseFloat(totalWithTaxes).toFixed(2)}</span>
 
         </h2>
         <div className="flex  items-center">

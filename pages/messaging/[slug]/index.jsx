@@ -23,12 +23,13 @@ const Messaging = ({ trip, messages, notFound }) => {
   } = useData();
 
   const { push } = useRouter();
-  if ( trip && trip.user_id !== user.id && trip.buddieslist.filter(b => b.user_d === user.id).length < 1) {
+  if ( trip && trip.user_id !== user.id && trip.buddieslist.filter(b => b.user_id === user.id).length < 1) {
     console.log("USER HAS NO BUSINESS")
     push("/404");
 
   }
   if (notFound) {
+    console.log("not found")
     push("/404");
   }
   const [channel, ably] = useChannel(`${trip.id}-messages`, (message) => {

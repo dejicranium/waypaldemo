@@ -38,6 +38,7 @@ const Search = () => {
     dispatch,
     data: {
       topSearchResults,
+      tax
     },
   } = useData();
   const [showMobileFilter, setShowMobileFilter] = useState(false);
@@ -47,7 +48,17 @@ const Search = () => {
   useEffect(async() => {
     // get query string
     dispatch({topSearchResults: []})
-
+    if (!tax) {
+      await getRequest('/taxes')
+          .then(resp=> {
+            //setTax(resp.data)
+            dispatch({tax: resp.data})
+          })
+          .catch(e => {
+            
+          })
+      }
+    
     const querystring = new URLSearchParams(window.location.search);
     if (querystring) {
       setLoadingResults(true);  

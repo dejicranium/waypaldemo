@@ -51,9 +51,9 @@ const ChatSideBar = ({trip}) => {
                   <UserAvatar
                   className="pr-3"
                     size="28"
-                    name={`${trip.User.firstname.toUpperCase()} ${trip.User.lastname.toUpperCase()}`}
+                    name={`${item.User.firstname.toUpperCase()} ${item.User.lastname.toUpperCase()}`}
                     color="#5CD6C0"
-                    src={trip.User.profile_image_url || ''}
+                    src={item.User.profile_image_url || ''}
                   />
                 </div>
                 <p className="chat-image-container-label">{item.User.firstname + ' ' + item.User.lastname}</p>
