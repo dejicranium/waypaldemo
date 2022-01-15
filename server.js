@@ -52,7 +52,7 @@ nextApp.prepare().then(() => {
 
 
 
-  server.listen(port, (err) => {
+  server.listen(process.env.PORT, (err) => {
     if (err) throw err;
     console.log(`> Ready on http://localhost:${port}`);
   });
