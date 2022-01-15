@@ -14,7 +14,7 @@ const nextHandler = nextApp.getRequestHandler();
 
 
 
-let port = 8080;
+let port = 3000;
 
 io.on("connection", (socket) => {
   socket.on("join_room", async (room) => {
@@ -28,9 +28,27 @@ io.on("connection", (socket) => {
 });
 
 nextApp.prepare().then(() => {
+  io.on("connection", (socket) => {
+    socket.on("join_room", async (room) => {
+      socket.join(room);
+    });
+    socket.on("trip_route", async (tripData) => {
+      if (tripData.id) {
+        socket.to(tripData.id).emit("trip", tripData);
+      }
+    });
+
+    socket.on("disconnect", () => {
+      console.log('client disconnected');
+    })
+  });
+
+
   app.get("*", (req, res) => {
     return nextHandler(req, res);
   });
+
+
 
   server.listen(port, (err) => {
     if (err) throw err;
