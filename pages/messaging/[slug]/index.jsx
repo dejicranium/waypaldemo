@@ -3,23 +3,27 @@ import UserAvatar from "react-user-avatar";
 
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-
+import { useChannel } from '../../../components/hooks/AblyEffect';
 import useData from "../../../components/hooks/useData";
 import Button from "../../../components/common/Button";
 import ChatSideBar from "../../../components/ChatSidebar";
 import { getRequest, postRequest } from "../../../actions/connection";
 
+import dynamic from 'next/dynamic'
+
+
+
 const Messaging = ({ trip, messages, notFound }) => {
-  const socket = io('/', {
+  /*const socket = io('/', {
     rejectUnauthorized: false
-  });
+  });*/
 
   const {
     data: { user },
   } = useData();
 
   const { push } = useRouter();
-  if (trip.user_id !== user.id && trip.buddieslist.filter(b => b.user_d === user.id).length < 1) {
+  if ( trip && trip.user_id !== user.id && trip.buddieslist.filter(b => b.user_d === user.id).length < 1) {
     console.log("USER HAS NO BUSINESS")
     push("/404");
 
@@ -27,6 +31,9 @@ const Messaging = ({ trip, messages, notFound }) => {
   if (notFound) {
     push("/404");
   }
+  const [channel, ably] = useChannel(`${trip.id}-messages`, (message) => {
+    setMessageList([...messageList,message]);
+  })
 
   const [chatMessage, setChatMessage] = useState("");
   const [messageList, setMessageList] = useState(messages);
@@ -36,14 +43,14 @@ const Messaging = ({ trip, messages, notFound }) => {
       return;
     }
     setMessageList(messages);
-    socket.emit("join_room", trip.id);
+    /*socket.emit("join_room", trip.id);
     socket.on("connect_error", (err) => {
       console.log(`connect error due to ${err.message}`)
     })
     socket.on("trip", async (tripData) => {
       const newMessages = [...messageList, tripData.message];
       setMessageList(newMessages);
-    });
+    });*/
   }, []);
 
   const sendMessage = async () => {
@@ -67,7 +74,8 @@ const Messaging = ({ trip, messages, notFound }) => {
                 "profile_image_url": user.profile_image_url,
             }
       }
-      socket.emit("trip_route", { message: userMessage, id: trip.id, user });
+      //socket.emit("trip_route", { message: userMessage, id: trip.id, user });
+      channel.publish({name: `${trip.id}-${process.env.NODE_ENV}-messages`, data: userMessage})
       setChatMessage("");
     } else {
       console.log("an error occured");
@@ -84,6 +92,8 @@ const Messaging = ({ trip, messages, notFound }) => {
             </aside>
 
             <section className="chat w-full md:w-3/4 mb-5">
+
+
               <div className="chat-area overflow-y-scroll h-60v md:h-70v">
                 {messageList.map((data, index) => (
                   <div key={index}>
