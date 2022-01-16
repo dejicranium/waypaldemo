@@ -34,6 +34,8 @@ const Messaging = ({ trip, messages, notFound }) => {
   }
   const [channel, ably] = useChannel(`${trip.id}-messages`, (message) => {
     setMessageList([...messageList,message]);
+    var element = document.getElementById('chatarea');
+    element.scrollTop = element.scrollHeight - element.clientHeight;
   })
 
   const [chatMessage, setChatMessage] = useState("");
@@ -95,13 +97,12 @@ const Messaging = ({ trip, messages, notFound }) => {
             <section className="chat w-full md:w-3/4 mb-5">
 
 
-              <div className="chat-area overflow-y-scroll h-60v md:h-70v">
+              <div id="chatarea" className="chat-area overflow-y-scroll h-60v md:h-70v">
                 {messageList.map((data, index) => (
                   <div key={index}>
                     {/* User message */}
-                    {data.user_id === user.id ? (
-                      <div className="flex items-start justify-end px-2">
-                        <div className="bg-orange text-white p-3 mb-5 rounded-2xl rounded-tr-md">
+                      <div className={data.user_id === user.id ? 'flex items-start justify-end px-2' : 'flex items-start justify-start px-2'}>
+                        <div className={data.user_id === user.id ? 'bg-orange text-white p-3 mb-5 rounded-2xl rounded-tr-md' : 'bg-blue text-white p-3 mb-5 rounded-2xl rounded-tr-md'}>
                           <p>{data.message}</p>
                         </div>
                         <div className="pl-2">
@@ -117,26 +118,7 @@ const Messaging = ({ trip, messages, notFound }) => {
                           />
                         </div>
                       </div>
-                    ) : (
-                      // Group messages
-                      <div className="flex items-start justify-start px-2">
-                        <div className="pr-2">
-                          <UserAvatar
-                            size="48"
-                            name={`${data.User.firstname} ${data.User.firstname}`}
-                            color="#5CD6C0"
-                            src={
-                              data.User.profile_image_url
-                                ? data.User.profile_image_url
-                                : ""
-                            }
-                          />
-                        </div>
-                        <div className="bg-blue text-white p-3 mb-5 rounded-2xl rounded-tr-md">
-                          <p>{data.message}</p>
-                        </div>
-                      </div>
-                    )}
+                    )
                   </div>
                 ))}
               </div>
