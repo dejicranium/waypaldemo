@@ -108,9 +108,9 @@ const Messaging = ({ trip, messages, notFound }) => {
                         <div className="pl-2">
                           <UserAvatar
                             size="48"
-                            name={data.user_id === user.id ? `${user.firstname} ${user.lastname}` : `${data.user.firstname} ${data.user.lastname}`}
+                            name={data.user_id === user.id ? `${user.firstname} ${user.lastname}` : `${data.User.firstname} ${data.User.lastname}`}
                             color="#5CD6C0"
-                            src={data.user_id === user.id ? user.profile_image_url || "" : data.user.profile_image_url || ""}
+                            src={data.user_id === user.id ? user.profile_image_url || "" : data.User.profile_image_url || ""}
                               
                           />
                         </div>
