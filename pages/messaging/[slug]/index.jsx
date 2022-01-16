@@ -102,10 +102,25 @@ const Messaging = ({ trip, messages, notFound }) => {
                   <div key={index}>
                     {/* User message */}
                       <div className={data.user_id === user.id ? 'flex items-start justify-end px-2' : 'flex items-start justify-start px-2'}>
+                        {data.user_id !== user.id && (
+                          <div className="pr-2">
+                            <UserAvatar
+                              size="48"
+                              name={`${data.User.firstname} ${data.User.lastname}`}
+                              color="#5CD6C0"
+                              src={
+                                user.profile_image_url
+                                  ? user.profile_image_url
+                                  : ""
+                              }
+                          />
+                          </div>
+                        )}
                         <div className={data.user_id === user.id ? 'bg-orange text-white p-3 mb-5 rounded-2xl rounded-tr-md' : 'bg-blue text-white p-3 mb-5 rounded-2xl rounded-tr-md'}>
                           <p>{data.message}</p>
                         </div>
-                        <div className="pl-2">
+                        {data.user_id === user.id && (
+                          <div className="pl-2">
                           <UserAvatar
                             size="48"
                             name={data.user_id === user.id ? `${user.firstname} ${user.lastname}` : `${data.User.firstname} ${data.User.lastname}`}
@@ -113,9 +128,12 @@ const Messaging = ({ trip, messages, notFound }) => {
                             src={data.user_id === user.id ? user.profile_image_url || "" : data.User.profile_image_url || ""}
                               
                           />
-                        </div>
+                         </div>
+
+                        )}
+                        
                       </div>
-                    )
+                    
                   </div>
                 ))}
               </div>
