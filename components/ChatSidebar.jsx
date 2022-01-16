@@ -32,7 +32,7 @@ const ChatSideBar = ({trip}) => {
         </div>
         
         <div className="buddies-list flex flex-col pt-6">
-              <div className="flex flex-row items-center">
+              <div className="flex flex-row items-center mb-1">
                 <div className="chat-image-container">
                 <UserAvatar
                   className="pr-3"
@@ -46,7 +46,7 @@ const ChatSideBar = ({trip}) => {
               </div>
           {trip.buddieslist && trip.buddieslist.map((item, index) => {
             return (
-              <div className="flex flex-row items-center mb-10" key={index}>
+              <div className="flex flex-row items-center mb-1" key={index}>
                 <div className="chat-image-container">
                   <UserAvatar
                   className="pr-3"
