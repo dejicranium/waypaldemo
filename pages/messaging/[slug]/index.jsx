@@ -45,7 +45,10 @@ const Messaging = ({ trip, messages, notFound }) => {
     if (notFound) {
       return;
     }
+    
     setMessageList(messages);
+    var element = document.getElementById('chatarea');
+    element.scrollTop = element.scrollHeight - element.clientHeight;
     /*socket.emit("join_room", trip.id);
     socket.on("connect_error", (err) => {
       console.log(`connect error due to ${err.message}`)
