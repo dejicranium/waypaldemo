@@ -112,8 +112,8 @@ const Messaging = ({ trip, messages, notFound }) => {
                               name={`${data.User.firstname} ${data.User.lastname}`}
                               color="#5CD6C0"
                               src={
-                                data.user.profile_image_url
-                                  ? data.user.profile_image_url
+                                data.User.profile_image_url
+                                  ? data.User.profile_image_url
                                   : ""
                               }
                           />
