@@ -1,0 +1,55 @@
+
+
+Skip to content
+Using Gmail with screen readers
+Meet
+New meeting
+Join a meeting
+Hangouts
+
+Conversations
+7.17 GB of 15 GB used
+Terms · Privacy · Program Policies
+Last account activity: 0 minutes ago
+Open in 2 other locations · Details
+# This is an example Starter pipeline configuration
+# Use a skeleton to build, test and deploy using manual and parallel steps
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+
+image: atlassian/default-image:3
+
+pipelines:
+  branches:
+    staging:
+      - step:
+          name: 'Deploy Step'
+          deployment: staging
+          services:
+            - docker
+          script:
+            - apt-get update && apt-get install -y python3-pip
+            - pip3 install -U awscli
+            - aws configure --profile deployment set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
+            - aws configure --profile deployment set aws_access_key_id ${AWS_ACCESS_KEY_ID}
+            - aws configure --profile deployment set region ${AWS_DEFAULT_REGION}
+            - export AWS_SDK_LOAD_CONFIG=1
+            - export AWS_DEFAULT_PROFILE=deploy
+            - export AWS_CONFIG_FILE=.aws/config
+            - npm install && npm run deploy:staging
+    master:
+      - step:
+          name: 'Deploy Step'
+          deployment: production
+          services:
+            - docker
+          script:
+            - apt-get update && apt-get install -y python3-pip
+            - pip3 install -U awscli
+            - aws configure --profile deployment set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
+            - aws configure --profile deployment set aws_access_key_id ${AWS_ACCESS_KEY_ID}
+            - aws configure --profile deployment set region ${AWS_DEFAULT_REGION}
+            - export AWS_SDK_LOAD_CONFIG=1
+            - export AWS_DEFAULT_PROFILE=deploy
+            - export AWS_CONFIG_FILE=.aws/config
+            - npm install --production && npm run deploy:full
