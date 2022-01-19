@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "docker:login:staging": "aws ecr --profile deploy get-login-password --region us-east-1 | docker login --username AWS --password-stdin 717560046312.dkr.ecr.us-east-1.amazonaws.com",
+    "docker:login:staging": "aws ecr get-login-password  --profile deploy --region us-east-1 | docker login --username AWS --password-stdin 717560046312.dkr.ecr.us-east-1.amazonaws.com",
     "docker:build:staging": "docker build -t waypal-frontend-staging .",
     "docker:tag:staging": "docker tag waypal-frontend-staging:latest 717560046312.dkr.ecr.us-east-1.amazonaws.com/waypal-frontend-staging:latest",
     "docker:push:staging": "docker push 717560046312.dkr.ecr.us-east-1.amazonaws.com/waypal-frontend-staging:latest",

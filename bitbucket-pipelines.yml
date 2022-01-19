@@ -32,5 +32,5 @@ pipelines:
             - aws configure --profile deployment set region ${AWS_DEFAULT_REGION}
             - export AWS_SDK_LOAD_CONFIG=1
             - export AWS_DEFAULT_PROFILE=deploy
-            - export AWS_CONFIG_FILE=.aws/config
-            - npm install --production && npm run deploy:full
+            - export AWS_CONFIG_FILE=aws/config
+            - npm install && npm run deploy:full
