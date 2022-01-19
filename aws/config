@@ -1,0 +1,4 @@
+[profile deploy]
+region = us-east-1
+output = json
+source_profile = deployment
