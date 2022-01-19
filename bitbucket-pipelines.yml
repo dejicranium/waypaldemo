@@ -16,7 +16,7 @@ pipelines:
             - aws configure --profile deployment set region ${AWS_REGION}
             - export AWS_SDK_LOAD_CONFIG=1
             - export AWS_DEFAULT_PROFILE=deploy
-            - export AWS_CONFIG_FILE=.aws/config
+            - export AWS_CONFIG_FILE=aws/config
             - npm install && npm run deploy:staging
     master:
       - step:
