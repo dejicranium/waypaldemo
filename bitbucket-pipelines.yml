@@ -1,5 +1,10 @@
 image: atlassian/default-image:3
 
+definitions:
+  services:
+    docker:
+      memory: 3000  
+
 pipelines:
   branches:
     staging:
