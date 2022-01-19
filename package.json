@@ -11,7 +11,7 @@
     "docker:build:staging": "docker build -t waypal-frontend-staging .",
     "docker:tag:staging": "docker tag waypal-frontend-staging:latest 717560046312.dkr.ecr.us-east-1.amazonaws.com/waypal-frontend-staging:latest",
     "docker:push:staging": "docker push 717560046312.dkr.ecr.us-east-1.amazonaws.com/waypal-frontend-staging:latest",
-    "deploy:staging": "docker:login:staging && docker:build:staging && docker:tag:staging && docker:push:staging && npm run build && npm run start"
+    "deploy:staging": "npm run docker:login:staging && npm run docker:build:staging && npm run docker:tag:staging && npm run docker:push:staging && npm run build && npm run start"
   },
   "dependencies": {
     "@charlietango/use-script": "^2.2.0",
