@@ -28,6 +28,7 @@ const About = ({ trip,  }) => {
     dispatch,
      data: { currentTrip, user, tax },
    } = useData();
+   
 
   const [authMode, setAutMode]  = useState('login');
   const [showModal, setShowModal]  = useState(false);
