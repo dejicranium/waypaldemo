@@ -1,5 +1,5 @@
 #Creates a layer from node:alpine image.
-FROM node:alpine
+FROM node:12
 
 #Creates directories
 RUN mkdir -p /usr/src/app
