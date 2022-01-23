@@ -41,10 +41,11 @@ const Messaging = ({ trip, messages, notFound }) => {
   const [messageList, setMessageList] = useState(messages);
 
   useEffect(() => {
+    
     if (notFound) {
       return;
     }
-    
+
     
     setMessageList(messages);
     var element = document.getElementById('chatarea');
