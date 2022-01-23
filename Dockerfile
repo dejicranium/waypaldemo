@@ -24,7 +24,7 @@ COPY . /usr/src/app
 RUN npm run build
 
 #Informs container runtime that the container listens on the specified network ports at runtime
-EXPOSE 3000
+EXPOSE 80
 
 #Allows you to configure a container that will run as an executable
 ENTRYPOINT ["npm", "start"]
