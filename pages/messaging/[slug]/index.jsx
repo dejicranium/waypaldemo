@@ -41,6 +41,7 @@ const Messaging = ({ trip, messages, notFound }) => {
   const [chatMessage, setChatMessage] = useState("");
   const [messageList, setMessageList] = useState(messages);
 
+  
   useEffect(() => {
 
     if (notFound) {
