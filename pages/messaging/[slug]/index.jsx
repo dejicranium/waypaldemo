@@ -37,11 +37,10 @@ const Messaging = ({ trip, messages, notFound }) => {
     var element = document.getElementById('chatarea');
     element.scrollTop = element.scrollHeight - element.clientHeight;
   })
-
   const [chatMessage, setChatMessage] = useState("");
   const [messageList, setMessageList] = useState(messages);
 
-  
+
   useEffect(() => {
 
     if (notFound) {
