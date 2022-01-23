@@ -42,7 +42,6 @@ const Messaging = ({ trip, messages, notFound }) => {
 
 
   useEffect(() => {
-
     if (notFound) {
       return;
     }
