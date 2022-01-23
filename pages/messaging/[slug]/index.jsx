@@ -38,7 +38,6 @@ const Messaging = ({ trip, messages, notFound }) => {
     element.scrollTop = element.scrollHeight - element.clientHeight;
   })
 
-  
   const [chatMessage, setChatMessage] = useState("");
   const [messageList, setMessageList] = useState(messages);
 
