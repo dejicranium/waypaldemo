@@ -45,6 +45,7 @@ const Messaging = ({ trip, messages, notFound }) => {
       return;
     }
     
+    
     setMessageList(messages);
     var element = document.getElementById('chatarea');
     element.scrollTop = element.scrollHeight - element.clientHeight;
