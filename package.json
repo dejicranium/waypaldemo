@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "node server.js",
 
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "docker:login:staging": "aws ecr get-login-password  --profile deployment --region us-east-1 | docker login --username AWS --password-stdin 717560046312.dkr.ecr.us-east-1.amazonaws.com",
