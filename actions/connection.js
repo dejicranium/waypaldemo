@@ -11,7 +11,6 @@ export default function conn(tok = "") {
   if (token) {
     api.defaults.headers.common.Authorization = `Bearer ${token}`;
   }
-  api.defaults.headers.common["Content-Type"] = 'application/json'
   return api;
 }
 
