@@ -49,7 +49,7 @@ const Search = () => {
     // get query string
     dispatch({topSearchResults: []})
     if (!tax) {
-      await getRequest('/taxes')
+      getRequest('/taxes')
           .then(resp=> {
             //setTax(resp.data)
             dispatch({tax: resp.data})
