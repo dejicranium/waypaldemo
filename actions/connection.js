@@ -20,6 +20,7 @@ const errorHandler = (e) => {
       data: null,
       status: false,
       message: e.response.data.message || e.response.data.data,
+      
     };
   }
   
