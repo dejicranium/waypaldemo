@@ -14,7 +14,7 @@
     "deploy:staging": "npm run docker:login:staging && npm run docker:build:staging && npm run docker:tag:staging && npm run docker:push:staging && npm run build"
   },
   "engines": {
-    "node": "12.x",
+    "node": "12.x"
   },
   "dependencies": {
     "@charlietango/use-script": "^2.2.0",
