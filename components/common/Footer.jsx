@@ -57,6 +57,8 @@ const Footer = ({ planTrip, children }) => (
             <a href="https://twitter.com/waypalHQ">
               Twitter
             </a>
+          </li>
+          <li>
             <a href="https://www.linkedin.com/company/waypal-travels">
               LinkedIn
             </a>
