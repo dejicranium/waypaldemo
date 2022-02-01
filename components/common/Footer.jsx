@@ -1,6 +1,7 @@
 import Button from "./Button";
 import Icon from "./Icon";
 import Image from "next/image";
+import Link from "next/link";
 
 const Footer = ({ planTrip, children }) => (
   <div className="footer-wrapper pt-52 text-white">
@@ -43,7 +44,7 @@ const Footer = ({ planTrip, children }) => (
 
         <ul>
           <li>Privacy Policy</li>
-          <li><a href="/terms-and-conditions">Terms and Conditions</a></li>
+          <li><Link href="/terms-and-conditions">Terms and Conditions</Link></li>
           
         </ul>
       </div>
