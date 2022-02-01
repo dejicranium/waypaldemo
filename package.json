@@ -13,6 +13,9 @@
     "docker:push:staging": "docker push 717560046312.dkr.ecr.us-east-1.amazonaws.com/waypal-frontend-staging:latest",
     "deploy:staging": "npm run docker:login:staging && npm run docker:build:staging && npm run docker:tag:staging && npm run docker:push:staging && npm run build"
   },
+  "engines": {
+    "node": "12.x"
+  },
   "dependencies": {
     "@charlietango/use-script": "^2.2.0",
     "@emotion/react": "^11.7.1",
