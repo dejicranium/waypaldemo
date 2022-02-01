@@ -46,6 +46,7 @@ const Search = () => {
 
 
   useEffect(async() => {
+    setLoadingResults(true)
     // get query string
     dispatch({topSearchResults: []})
     if (!tax) {
@@ -61,7 +62,6 @@ const Search = () => {
     
     const querystring = new URLSearchParams(window.location.search);
     if (querystring) {
-      setLoadingResults(true);  
       await getRequest('/search?' + querystring).then(async response => {
         console.log(response.data.data);
         await dispatch({topSearchResults: response.data})

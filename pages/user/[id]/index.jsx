@@ -139,12 +139,16 @@ const UserProfile = ({user, trips, notFound}) => {
                 <Rating name="read-only" value={Number(user.rating / user.no_of_ratings) || 0 } readOnly />
                 <div className="flex flex-row mt-2">
                   <span className="text-gray-light pl-2">{parseFloat((user.rating / user.no_of_ratings) || 0).toFixed(1) } stars</span>
-                  <span onClick={() => {
+                  <span onClick={async() => {
                     if ((!reviews || reviews.length < 1) && !no_reviews) {
-                      getReviews();
+                      await getReviews();
+                      if (reviews.length > 0) {
+                        setShowReviews(true)
+                      }
                     }
-                    
-                    setShowReviews(true)
+                    else {
+                      setShowReviews(true)
+                    }                    
                   }} style={{cursor: user.no_of_ratings > 0 ? 'pointer' : '', textDecoration: user.no_of_ratings ? 'underline': 'none' }} className="text-gray-light pl-2">({user.no_of_ratings} {user.no_of_ratings && user.no_of_ratings > 1 ? 'reviews' : 'review'})</span>
                 </div>
               </div>
@@ -166,9 +170,18 @@ const UserProfile = ({user, trips, notFound}) => {
                   <span  onClick={() =>goTo('twitter')}  className="text-gray-light cursor-pointer pl-2">@{user.twitter}</span>
                 </div>
               }
+              {user.instagram && 
+                <div className="twitter flex items-center">
+                  <Icon icon="instagram"></Icon>
+                  <span  onClick={() =>goTo('instagram')}  className="text-gray-light cursor-pointer pl-2">@{user.instagram}</span>
+                </div>
+              }
             </div>
             <div className="user-trips py-6">
               <h3 className="text-2xl font-circular-bold">{user.firstname}'s Trips</h3>
+              {!trips || (trips && trips.length === 0) && (
+                <p className="text-xl mt-10">User has not hosted any trips</p>
+              )}
               {trips && trips.length > 0 && trips.map((trip, index) => {
                 return (
 
@@ -183,6 +196,7 @@ const UserProfile = ({user, trips, notFound}) => {
                         title={trip.title}
                         destination={trip.destination}
                         date={trip.start_date}
+                        currency={trip.currency}
                         image={trip.images && trip.images[0] ? trip.images[0]: ""}
                         buddies={trip.joined_buddies}
                         price={[

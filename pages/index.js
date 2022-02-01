@@ -88,15 +88,15 @@ export default function Home() {
         />
 
         <InputWithLabel
-          placeholder="How many travel buddies?"
+          placeholder="How many travel pals?"
           type="text"
-          label="Travel Buddies"
+          label="Travel pals"
           onChange={(e) => {setBuddies(e.target.value)}}
           value={buddies}
         />
         <div className="search">
           <button className="bg-orange w-full rounded text-white text-lg flex items-center justify-center py-4 font-black" onClick={searchTrips}>
-            Find travel buddies
+            Find travel pals
           </button>
         </div>
       </section>
@@ -107,7 +107,7 @@ export default function Home() {
         <div className="flex md:justify-between items-center justify-center">
           <div className="booktrip-steps home-special-container">
             <div className="md:text-5xl text-32 md:max-w-lg max-w-xxs font-circular-bold text-black-bold relative">
-              Find your travel buddies in{" "}
+              Find an exciting travel group in{" "}
               <pre style={{ display: "inline-block" }}> </pre>{" "}
               <span className="font-smith text-orange-light md:text-200 text-130 absolute md:-bottom-9 md:left-12 lg:-bottom-9 lg:left-60 -bottom-14 left-40">
                 4
@@ -139,7 +139,7 @@ export default function Home() {
                 <div className="steps-text pl-5">
                   <p className="font-circular-bold">Get verified and make payment</p>
                   <p className="text-gray-light max-w-xxs">
-                    Get verified biometrically and easily make payment to join your travel buddies.
+                    Get verified biometrically and easily make payment to join your travel pals.
                   </p>
                 </div>
               </div>
@@ -179,7 +179,7 @@ export default function Home() {
         <div className="divider w-5 h-2 md:w-10 md:h-4 mx-auto relative bottom-9"></div>
         <div className="more-destination-text">
           <p className="md:max-w-4xxl max-w-xxs mx-auto md:text-26 text-center">
-            Your peace of mind doesn’t have to be tied to where everyone else is. We have some amazing and popular trips in the following cities. Take your time and find the perfect one for you.
+            We have some amazing and popular tours in the following cities. Take your time and find the perfect trip for you!
           </p>
         </div>
         {/* More destination Card */}
@@ -217,7 +217,7 @@ export default function Home() {
                 <Icon icon="reasons" />
                 <div className="steps-text pl-5">
                   <p className="text-gray-light max-w-xs">
-                  Everyone’s safety is guaranteed because we know everyone as everyone is biometrically verified.
+                  Everyone’s safety is guaranteed  as everyone is biometrically verified.
                   </p>
                 </div>
               </div> 
@@ -227,7 +227,7 @@ export default function Home() {
                 <Icon icon="reasons" />
                 <div className="steps-text pl-5">
                   <p className="text-gray-light max-w-xs">
-                  You have the opportunity to split accommodation and miscellaneous costs with your travel buddies.
+                  You have the opportunity to split accommodation and miscellaneous costs with your travel pals.
                   </p>
                 </div>
               </div> 
@@ -237,7 +237,7 @@ export default function Home() {
                 <Icon icon="reasons" />
                 <div className="steps-text pl-5">
                   <p className="text-gray-light max-w-xxs">
-                  Detailed Day-to-Day Itenary:  You know exactly what you are paying for and you get a chat system to talk to your buddies and the trip creator to clarify anything at anytime
+                  Detailed Day-to-Day Itenary:  You know exactly what you are paying for and you get a chat system to talk to your pals and the trip creator to clarify anything at anytime
                   </p>
                 </div>
               </div> 
@@ -257,7 +257,7 @@ export default function Home() {
                 <Icon icon="reasons" />
                 <div className="steps-text pl-5">
                   <p className="text-gray-light max-w-xxs">
-                  You want to go on a trip with only known family, friends and colleagues? No problem. Just make your trip as private and we won't show anyone except people you share the trip link with(We promise 😉                  </p>
+                  You want to go on a trip with only known family, friends and colleagues? No problem. Just make your trip as private and we won't show anyone except people you share the trip link with (we promise 😉)                  </p>
                 </div>
               </div> 
             </div>

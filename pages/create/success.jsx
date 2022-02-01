@@ -36,7 +36,7 @@ const CreateSuccess = () => {
           </h1>
           <p className="mt-6 md:max-w-md mx-auto text-xl text-black-content">
             Your trip has been created successfully. We’ve sent an email with
-            your trip details and will notify you when your travel buddies are
+            your trip details and will notify you when your travel pals are
             complete.
           </p>
         </div>

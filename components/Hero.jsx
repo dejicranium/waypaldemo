@@ -48,7 +48,7 @@ const Hero = () => {
                 className="xl:text-sub-hero md:text-sub-hero-md text-9xl font-smith text-orange absolute 
                               top-11 left-10 lg:top-48 lg:left-16 xl:top-52 xl:left-24 md:top-24 md:left-16"
               >
-                buddy
+                pals
               </span>
             </div>
             <div className="quick-explore hidden lg:block mt-8 w-80">
@@ -80,14 +80,14 @@ const Hero = () => {
               />
 
               <InputWithLabel
-                placeholder="How many travel buddies?"
+                placeholder="How many travel pals?"
                 type="text"
-                label="Travel Buddies"
+                label="Travel Pals"
                 onChange={(e) => {setBuddies(e.target.value)}}
               />
               <div className="search">
                 <button className="bg-orange w-full rounded text-white text-lg flex items-center justify-center py-4 font-black" onClick={searchTrips}>
-                  Find travel buddies
+                  Search for Group Trips
                 </button>
               </div>
             </div>

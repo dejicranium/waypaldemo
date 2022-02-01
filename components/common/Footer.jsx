@@ -7,10 +7,10 @@ const Footer = ({ planTrip, children }) => (
     {children}
     <div className="footer-background">
       <img
-        src="/footer-background-top.png"
+        src="/footer-background-compressed.png"
         alt="beach background"
         className="w-full"
-      />c
+      />
     </div>
     <div className="foot-links grid grid-cols-2 md:grid-cols-4 text-black-content pt-7 mb-16 gap-3 container">
       {/*<div className="legal">
@@ -42,24 +42,23 @@ const Footer = ({ planTrip, children }) => (
         <h3 className="font-circular-black text-black pb-5">COMPANY</h3>
 
         <ul>
-          <li>Team</li>
-          <li>About</li>
-          <li>Jobs</li>
-          <li>Partners</li>
-          <li>Press</li>
-          <li>Blog</li>
-          <li>Newsletter</li>
+          <li>Privacy Policy</li>
+          <li><a href="/terms-and-conditions">Terms and Conditions</a></li>
+          
         </ul>
       </div>
       <div className="social mt-10 md:mt-0">
         <h3 className="font-circular-black text-black pb-5">CONTACT US</h3>
         <ul className="pb-5   border-dotted border-black-100 border-b-2" style={{marginBottom: '20px'}}>
-          <li><a href="mailto:hello@waypal.com">hello@waypal.com</a></li>
+          <li><a href="mailto:hello@waypal.co">hello@waypal.co</a></li>
         </ul>
         <ul className="pt-5">
           <li>
             <a href="https://twitter.com/waypalHQ">
               Twitter
+            </a>
+            <a href="https://www.linkedin.com/company/waypal-travels">
+              LinkedIn
             </a>
           </li>
           <li>

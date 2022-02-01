@@ -8,7 +8,7 @@ const JoinChat = ({trip}) => {
       <Icon icon="group-chat" cname="hidden md:block pr-8"></Icon>
       <div className="join-chat">
         <p className="max-w-md">
-          Join the conversation with the other travel buddies for this trip to
+          Join the conversation with the other travel pals for this trip to
           be up-to-date on the progress of this trip.
         </p>
         <div className="mt-4">

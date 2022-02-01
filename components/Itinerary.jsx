@@ -73,9 +73,6 @@ const Itinerary = ({ trip }) => {
             total={total}
           />
         </div>
-        <div className="hidden lg:flex mt-16 justify-end">
-          <Icon icon="suitcase" />
-        </div>
       </section>
     </div>
   );

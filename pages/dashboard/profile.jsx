@@ -118,7 +118,7 @@ const Profile = () => {
     await getRequest('/user/info').then(resp=> {
       dispatch({user: resp.data || {}});
       if (!['APPROVED', 'ATTEMPTED'].includes(resp.data.verified)) {
-        createVeriffSession();
+        //createVeriffSession();
       }
       else if (resp.data.verified === 'APPROVED') {
         setVerificationStatus('APPROVED')
