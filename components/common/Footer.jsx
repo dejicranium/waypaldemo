@@ -43,7 +43,7 @@ const Footer = ({ planTrip, children }) => (
         <h3 className="font-circular-black text-black pb-5">COMPANY</h3>
 
         <ul>
-          <li>Privacy Policy</li>
+        <li><Link href="/privacy-policy">Privacy Policy</Link></li>
           <li><Link href="/terms-and-conditions">Terms and Conditions</Link></li>
           
         </ul>
