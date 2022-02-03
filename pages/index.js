@@ -96,7 +96,7 @@ export default function Home() {
         />
         <div className="search">
           <button className="bg-orange w-full rounded text-white text-lg flex items-center justify-center py-4 font-black" onClick={searchTrips}>
-            Find travel pals
+            Search group trips
           </button>
         </div>
       </section>
