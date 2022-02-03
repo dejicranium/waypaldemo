@@ -9,7 +9,7 @@ import PasswordInputField from "./PasswordInputField";
 import { getRequest, postRequest } from "../actions/connection";
 import {Mixpanel} from '../assets/js/mixpanel';
 
-const Login = ({ setActive, close }) => {
+const Login = ({ setActive, close, intent }) => {
   const {
     register,
     handleSubmit,
@@ -48,7 +48,9 @@ const Login = ({ setActive, close }) => {
           pollProfile();
         }, 30000)
       }
-
+      if (intent === 'create-trip') {
+        window.location.href = '/create';
+      }
       close();
     }
     else {
@@ -84,6 +86,7 @@ const Login = ({ setActive, close }) => {
         <form
           id="login-form"
           className="pt-8 pb-6"
+          autoComplete="off"
           onSubmit={handleSubmit(submit)}
         >
           <InputField
@@ -91,18 +94,22 @@ const Login = ({ setActive, close }) => {
             type="email"
             className="mb-3"
             placeholder="Email"
+            name="email"
             innerref={register("email", {
               required: {
                 value: true,
                 message: "Please enter valid email address",
               },
             })}
+            autoComplete="off"
             helptext={errors.email && errors.email.message}
             helptextstyle={errors.email && "text-red-500"}
           />
           <div className="password mb-3">
             <PasswordInputField
               id="password"
+              name="password"
+
               type="password"
               placeholder="Password"
               innerref={register("password", {

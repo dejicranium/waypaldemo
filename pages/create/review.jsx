@@ -39,6 +39,11 @@ const CreateTripReview = () => {
     push("/create/itinerary");
   };
 
+  const goToPreview = async() => {
+    const win = window.open('/trip-preview', "_blank");
+    win.focus();
+  }
+
   // create yout trip
   const submitTrip = async () => {
     setStep("Creating your awesome trip");
@@ -263,6 +268,13 @@ const CreateTripReview = () => {
         >
           {"<"} Back to edit
         </p>
+        <p
+          className="font-circular-bold text-orange cursor-pointer"
+          onClick={goToPreview}
+        >
+          See Preview
+        </p>
+        
         <Button
           btnText="Create Trip"
           btnType="fill"

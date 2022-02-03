@@ -73,7 +73,6 @@ export default function ShowLuggage() {
                 />
               </a>
           </div>
-          <p className="text-sm">Learn More</p>
         </div>
       </div>
     </div>

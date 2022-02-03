@@ -75,12 +75,12 @@ const DetailTripCard = ({
           <div onClick={goToTrip} className="trip-card__details pt-4 md:pt-2 flex items-start justify-between">
             <div className="trip">
               <h2 className="text-black-content font-circular-black text-base md:text-2xl">
-                <span className="">{title}</span> -{" "}
-                <span> {formatCurrency(currency)} {formatAmount(total)}</span>
+                <span className="">{title}</span> -{""}
+                <span>{formatCurrency(currency)}{formatAmount(total)}</span>
               </h2>
               <p className="text-gray-light">
                 {buddies} {`${buddies === 1 ? " buddy" : " buddies"}`} joined
-              </p>
+            </p>
               <p className="text-gray-light">{tripDate}</p>
               <div className="flex items-center">
                 <Icon icon="location" cname="pr-2"></Icon>

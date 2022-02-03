@@ -36,19 +36,19 @@ const TravelCost = ({ register, watch, refresh }) => {
     {
       title: "travel",
       name: "travel_amount",
-      helptext: "This covers travel plans per individual. Leave empty if it's not in the plan.",
+      helptext: "This covers travel plans per individual. Leave as 0 if it's not in the plan.",
       icon: "travel",
     },
     {
       title: "accommodation",
       name: "accommodation_amount",
-      helptext: "The total cost of accommodation per individual. Leave empty if it's not in the plan",
+      helptext: "The total cost of accommodation per individual. Leave as 0 if it's not in the plan",
       icon: "accommodation",
     },
     {
       title: "miscellaneous",
       name: "miscellaneous_amount",
-      helptext: "This covers feeding and other miscellaneous services per individual. Explain these services in the description and itinerary details. Leave empty if it's not in the plan.",
+      helptext: "This covers feeding and other miscellaneous services per individual. Explain these services in the description and itinerary details. Leave as 0 if it's not in the plan.",
       icon: "misc",
     },
   ];
@@ -108,7 +108,7 @@ const TravelCost = ({ register, watch, refresh }) => {
           <p className="pr-4">Total</p>
           <p>
             {formatCurrency(currency)}
-            {formatAmount(t ? t + ((t / 100) * tax) : 0)}
+            {formatAmount(t ? t: 0)}
           </p>
         </div>
       </div>

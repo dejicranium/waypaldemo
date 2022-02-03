@@ -31,7 +31,7 @@ const MoreResults = (prop) => {
       <div className="trip-card__details lg:w-8/12 sm:w-full md:w-full">
         <h2 className="text-black-content font-circular-black text-base md:text-2xl flex justify-between">
           <span className="">{prop.trip.title}</span> 
-          <span className="">{formatCurrency(prop.trip.currency)} {parseFloat(totalWithTaxes).toFixed(2)}</span>
+          <span className="">{formatCurrency(prop.trip.currency)}{parseFloat(totalWithTaxes).toFixed(2)}</span>
 
         </h2>
         <div className="flex  items-center">

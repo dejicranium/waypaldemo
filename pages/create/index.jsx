@@ -171,6 +171,7 @@ const CreateTrip = () => {
                   type="text"
                   className="mb-3"
                   placeholder="Buddies"
+                  autoComplete="off"
                   onChange={(e) => {
                     e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
                   }}

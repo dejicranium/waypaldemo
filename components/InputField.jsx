@@ -75,6 +75,7 @@ const InputField = (props) => {
             leadingicon ? "leading-icon" : ""
           }`}
           onChange={onChange}
+          autoComplete="new-password"
         />
         {trailingicon && <Icon icon={trailingicon} cname="absolute top-2 right-2" />}
         {leadingicon && (

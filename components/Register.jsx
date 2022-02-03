@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 import { postRequest } from "../actions/connection";
 import { Mixpanel } from '../assets/js/mixpanel';
 
-const Register = ({ setActive, close }) => {
+const Register = ({ setActive, close, intent }) => {
   const {
     register,
     handleSubmit,
@@ -36,6 +36,9 @@ const Register = ({ setActive, close }) => {
       Mixpanel.people.set({
         $firstname: user.data.firstname, $lastname: user.data.lastname, $id: user.data.id
       })
+      if (intent === 'create-trip') {
+        window.location.href = '/create';
+      }
       close();
     }
     else {

@@ -234,6 +234,11 @@ const JoinTrip = ({ trip, notFound }) => {
       tx_ref: tripRef.data.reference,
       currency: trip.currency,
       country: "NG",
+      customizations: {
+        title: "Waypal",
+        description: trip.title,
+        logo:"/waypal-favicon.png"
+      },
       customer: {
         email: user.email,
         phone_number: user.phone_number,

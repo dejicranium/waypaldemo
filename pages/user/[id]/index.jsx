@@ -25,6 +25,9 @@ const UserProfile = ({user, trips, notFound}) => {
     else if (where === 'twitter') {
       window.open(`https://twitter.com/${user.twitter}`)
     }
+    else if (where === 'instagram') {
+      window.open(`https://instagram.com/${user.instagram}`)
+    }
 
   }
   const getReviews = async () => {
@@ -135,9 +138,19 @@ const UserProfile = ({user, trips, notFound}) => {
               </div>
             </div>
             <div className="socials py-9 border-b border-gray-light6 grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="reviews flex flex-col">
+              <div className="reviews flex flex-col" onClick={async() => {
+                    if ((!reviews || reviews.length < 1) && !no_reviews) {
+                      await getReviews();
+                      if (reviews.length > 0 && !no_reviews) {
+                        setShowReviews(true)
+                      }
+                    }
+                    else {
+                      setShowReviews(true)
+                    }                    
+                  }}>
                 <Rating name="read-only" value={Number(user.rating / user.no_of_ratings) || 0 } readOnly />
-                <div className="flex flex-row mt-2">
+                <div className="flex flex-row mt-2" >
                   <span className="text-gray-light pl-2">{parseFloat((user.rating / user.no_of_ratings) || 0).toFixed(1) } stars</span>
                   <span onClick={async() => {
                     if ((!reviews || reviews.length < 1) && !no_reviews) {

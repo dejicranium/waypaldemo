@@ -1,6 +1,7 @@
 import NProgress from "nprogress";
 import Router from "next/router";
 import Script from "next/script";
+import Head from 'next/head'
 
 
 import Layout from "../components/Layout";
@@ -17,6 +18,9 @@ Router.events.on("routeChangeComplete", () => NProgress.done());
 function MyApp({ Component, pageProps }) {
   return (
     <>
+      <Head>
+        <title>WayPal - Join and create exciting group tours and trips</title>
+      </Head>
       <Script src="https://checkout.flutterwave.com/v3.js" />
       <Script src="/crispchat-integration.js" type="text/javascript" />
       <Script id='places-api' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLZ4NFeub25kppPsgPItK0RWKdZ-Ecy8c&libraries=places" type="text/javascript" />

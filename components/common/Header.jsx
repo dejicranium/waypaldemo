@@ -36,6 +36,7 @@ const Header = ({ open, setOpen }) => {
   const { dispatch } = useData();
   const [active, setActive] = useState("login");
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showAuthModalIntent, setShowAuthModalIntent] = useState('');
 
   useClickOutside(() => setShowProfileMenu(false), dropRef);
 
@@ -87,7 +88,7 @@ const Header = ({ open, setOpen }) => {
     <>
       <Head>
         <meta charSet="utf-8" />
-        <link rel="icon" href="/waypal-logo.png" />
+        <link rel="icon" href="/waypal-favicon.png" />
         <meta name="robots" content="index, follow" />
         <meta name="theme-color" content="#ffffff" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -100,16 +101,21 @@ const Header = ({ open, setOpen }) => {
       </Head>
       <Modal showModal={showAuthModal} close={setShowAuthModal}>
         {active === "login" && (
-          <Login setActive={setActive} close={() => setShowAuthModal(false)} />
+          <Login 
+          intent='create-trip'
+          setActive={setActive} 
+          close={() => setShowAuthModal(false)} />
         )}
         {active === "register" && (
           <Register
+            intent='create-trip'
             setActive={setActive}
             close={() => setShowAuthModal(false)}
           />
         )}
         {active === "forgot" && (
           <ForgotPassword
+            intent='create-trip'
             setActive={setActive}
             close={() => setShowAuthModal(false)}
           />
@@ -158,6 +164,11 @@ const Header = ({ open, setOpen }) => {
                   key={2}
                   onClick={() => {
                     if (typeof user !== 'undefined') Mixpanel.identify(user.id);
+                    else {
+                      // set intent
+                      setShowAuthModalIntent('create-trip')
+                      
+                    }
                     Mixpanel.track("attempt-create-trip-clicked")
                     createTrip()
                   }}

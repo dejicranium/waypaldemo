@@ -8,19 +8,23 @@ import UserAvatar from "react-user-avatar";
 import { format } from "date-fns";
 
 const Itinerary = ({ trip }) => {
+
+    const {
+        dispatch,
+        data: {
+            topSearchResults,
+            tax,
+            user,
+            createTrip
+        },
+    } = useData();
   const amount = [
-    trip.travel_amount,
-    trip.accommodation_amount,
-    trip.miscellaneous_amount,
+    createTrip.travel_amount,
+    createTrip.accommodation_amount,
+    createTrip.miscellaneous_amount,
   ];
 
-  const {
-    dispatch,
-    data: {
-      topSearchResults,
-      tax
-    },
-  } = useData();
+
 
   const subTotal = amount.reduce((acc, obj) => acc + obj, 0);
 
@@ -33,32 +37,32 @@ const Itinerary = ({ trip }) => {
 
         <div className="trip-info grid md:grid-cols-4 md:gap-8 grid-cols-2 mt-8">
           <div className="profile flex items-center">
-          {!trip.user.profile_image_url && (
+          {!user.profile_image_url && (
               <Icon icon="profile" cname="pr-3 flex-none" />
             )}
-            {trip.user.profile_image_url && (
+            {user.profile_image_url && (
             <UserAvatar
                 className="pr-3"
                   size="28"
-                  name={`${trip.user.firstname.toUpperCase()} ${trip.user.lastname.toUpperCase()}`}
+                  name={`${user.firstname.toUpperCase()} ${user.lastname.toUpperCase()}`}
                   color="#5CD6C0"
-                  src={trip.user.profile_image_url || ''}
+                  src={user.profile_image_url || ''}
                 />
             )}
-            <p className="xl:whitespace-nowrap">{trip.user.firstname + ' ' + trip.user.lastname}</p>
+            <p className="xl:whitespace-nowrap">{user.firstname + ' ' + user.lastname}</p>
           </div>
-          <div className="buddies flex items-center">
+          <div  className="buddies flex items-center mr-5">
             <Icon icon="buddies" cname="pr-3 flex-none" />
-            <p className="xl:whitespace-nowrap">
-              {trip.buddies}
-              {`${trip.buddies.length === 1 ? " Buddy" : " Buddies"}`}{" "}
-              {`(${trip.joined_buddies} paid)`}
+            <p className="xl:whitespace-nowrap mr-10">
+              {createTrip.buddies}{" "}
+              {`${createTrip.buddies === 1 ? " Buddy" : " Buddies"}`}{" "}
+              {`(0 paid)`}
             </p>
           </div>
           <div className="date flex items-center md:pl-8">
             <Icon icon="calendar" cname="pr-3 flex-none" />
             <p className="xl:whitespace-nowrap">
-              {format(new Date(trip.start_date), "MMMM do, y")}
+              {format(new Date(createTrip.start_date), "MMMM do, y")}
             </p>
           </div>
           {/*
@@ -69,19 +73,19 @@ const Itinerary = ({ trip }) => {
         </div>
 
         <div className="itinerary-card">
-          {trip.itineraries.map((e, i) => (
+          {createTrip.itineraries.map((e, i) => (
             <ItineraryCard {...e} key={i} id={i} />
           ))}
         </div>
       </section>
 
       <section className="final-travel-info mt-10 xl:max-w-lg">
-        <TripPhoto images={trip.images} />
+        <TripPhoto images={createTrip.images} />
         <div className="travel-cost-breakdown mt-10">
           <TravelCostBreakdown
-            travel={trip.travel_amount}
-            accommodation={trip.accommodation_amount}
-            misc={trip.miscellaneous_amount}
+            travel={createTrip.travel_amount}
+            accommodation={createTrip.accommodation_amount}
+            misc={createTrip.miscellaneous_amount}
             total={total}
           />
         </div>
