@@ -1,4 +1,4 @@
-import { formatCurrency } from "../assets/js/utils";
+import { formatCurrency, formatAmount } from "../assets/js/utils";
 
 const TravelCostBreakdown = ({ currency, accommodation, misc, travel, total }) => {
   return (
@@ -9,7 +9,7 @@ const TravelCostBreakdown = ({ currency, accommodation, misc, travel, total }) =
           <p className="font-circular-black text-gray uppercase">Travel</p>
           <p className="text-2xl text black">
             <span className="text-2xl">{formatCurrency(currency)}</span>
-            {travel}
+            {formatAmount(travel)}
           </p>
           <p className="text-xxs pt-4">This covers logistics to-and-fro per individual</p>
         </div>
@@ -20,7 +20,7 @@ const TravelCostBreakdown = ({ currency, accommodation, misc, travel, total }) =
           </p>
           <p className="text-2xl text black">
             <span className="text-2xl">{formatCurrency(currency)}</span>
-            {accommodation}
+            {formatAmount(accommodation)}
           </p>
           <p className="text-xxs pt-4">The total cost of accommodation per individual</p>
         </div>
@@ -31,7 +31,7 @@ const TravelCostBreakdown = ({ currency, accommodation, misc, travel, total }) =
           </p>
           <p className="text-2xl text black">
             <span className="text-2xl">{formatCurrency(currency)}</span>
-            {misc}
+            {formatAmount(misc)}
           </p>
           <p className="text-xxs pt-4">
           This covers feeding and other miscellaneous acitivies as stated by the trip creator in the description          </p>
@@ -41,7 +41,7 @@ const TravelCostBreakdown = ({ currency, accommodation, misc, travel, total }) =
           <p className="font-circular-black text-gray uppercase">Total</p>
           <p className="text-2xl text black">
             <span className="text-2xl ">{formatCurrency(currency)}</span>
-            {total}
+            {formatAmount(total)}
           </p>
           <p className="text-xxs pt-4">
             This is the total cost to travel with James

@@ -22,6 +22,8 @@ import Toast from "../../components/Toast";
 import dynamic from 'next/dynamic';
 import {Mixpanel} from '../../assets/js/mixpanel';
 import { sub } from "date-fns";
+import Spinner from '../../components/Spinner';
+
 
 
 const Profile = () => {
@@ -138,10 +140,12 @@ const Profile = () => {
   const [error, setError] = useState(null);
   const [verificationDone, setVerificationStatus] = useState(user.verified === "APPROVED") ;
   const [success, setSuccess] = useState(null);
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   const selectImage = async (e) => {
     if (e.target.files[0].size < 2097152) {
       const url = await blobToURL(e.target.files[0]);
+      setUploadingImage(true)
       await fetch(url).then(async r=> {
         const blob = await r.blob();
         const data = new FormData();
@@ -157,6 +161,7 @@ const Profile = () => {
               await putRequest("/user/saveProfileInfo", {
                 profile_image_url: image_url
               }).then(resp=> {
+                setUploadingImage(false)
                 dispatch({user: {...resp.data, profile_image_url: image_url}})
                 setProfileImage(image_url);
               
@@ -164,12 +169,14 @@ const Profile = () => {
               //window.location.reload();
             }
           })
+          setUploadingImage(false)
           .catch(err=> {
+            setUploadingImage(false)
             setError("Could not upload image. Ref: 2")
           })
 
       }).catch(e => {
-        setError("Could not upload image. Ref: 1")
+        setError("Could not upload image. Ref: 1 " + e)
       })
     }
   };
@@ -301,6 +308,9 @@ const Profile = () => {
                       className="text-5xl"
                     />
                   )}
+                    {uploadingImage && (
+                        <Spinner size={1.7} color={"#EA4524"} />
+                    )}
                     <div
                       className="upload-image flex items-center justify-center mt-3 cursor-pointer max-w-max md:max-w-full"
                       // onChange={selectImage}

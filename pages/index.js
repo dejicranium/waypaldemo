@@ -23,6 +23,7 @@ import useData from "../components/hooks/useData";
 export default function Home() {
   const { push } = useRouter();
   const [destination, setDestination] = useState("");
+  const [meeting_point, setMeetingPoint] = useState("");
   const [travelDate, setTravelDate] = useState("");
   const [buddies, setBuddies] = useState("");
   const [topDestinations, setTopDestinations] = useState([]);
@@ -47,10 +48,11 @@ export default function Home() {
   const searchTrips = async() => {
     dispatch({topSearchResults: []})
 
-    let query = ''; 
-    if (destination) query +=  `?destination=${destination}&`;
+    let query = '?'; 
+    if (destination) query +=  `destination=${destination}&`;
     if (travelDate) query +=  `travel_date=${travelDate}&`;
     if (buddies) query +=  `buddies=${buddies}&`;
+    if (meeting_point) query +=  `meeting_point=${meeting_point}&`;
     push("/search" + query)
     
   }
@@ -71,6 +73,17 @@ export default function Home() {
         />
 
 
+        <InputWithLabel
+          placeholder="Where would you like to go from?"
+          type="text"
+          label="Meeting Point"
+          value={meeting_point}
+          cname="destination-input"
+          isdestination_input={true}
+          id={`mobile-meeting-point`}
+          onChange={setMeetingPoint}
+        />
+
         <DateTimeWithLabel
             placeholder="When would you like to go?"
             closeOnSelect
@@ -87,13 +100,6 @@ export default function Home() {
             
         />
 
-        <InputWithLabel
-          placeholder="How many travel pals?"
-          type="text"
-          label="Travel pals"
-          onChange={(e) => {setBuddies(e.target.value)}}
-          value={buddies}
-        />
         <div className="search">
           <button className="bg-orange w-full rounded text-white text-lg flex items-center justify-center py-4 font-black" onClick={searchTrips}>
             Search group trips

@@ -15,6 +15,7 @@ const Hero = () => {
     const { push } = useRouter();
 
     const [destination, setDestination] = useState("");
+    const [meeting_point, setMeetingPoint] = useState("");
     const [travelDate, setTravelDate] = useState("");
     const [buddies, setBuddies] = useState("");
 
@@ -22,12 +23,13 @@ const Hero = () => {
       Mixpanel.track("find-travel-buddies-clicked", {
         destination: destination,
         travel_date: travelDate,
-        buddies: buddies,
+        meeting_point: meeting_point,
       });
       let query = ''; 
       if (destination) query +=  `?destination=${destination}&`;
       if (travelDate) query +=  `?travel_date=${travelDate}&`;
       if (buddies) query +=  `?buddies=${buddies}&`;
+      if (meeting_point) query +=  `?meeting_point=${meeting_point}&`;
 
       push("/search" + query)
       
@@ -62,6 +64,18 @@ const Hero = () => {
                 onChange={setDestination}
               />
 
+              
+              <InputWithLabel
+                placeholder="Where are you going from?"
+                type="text"
+                id={'meeting-point'}
+                isdestination_input={true}
+                label="Meeting Point"
+                cname="destination-input"
+                onChange={setMeetingPoint}
+              />
+
+
 
               <DateTimeWithLabel
                   placeholder="When would you like to go?"
@@ -79,12 +93,6 @@ const Hero = () => {
                   
               />
 
-              <InputWithLabel
-                placeholder="How many travel pals?"
-                type="text"
-                label="Travel Pals"
-                onChange={(e) => {setBuddies(e.target.value)}}
-              />
               <div className="search">
                 <button className="bg-orange w-full rounded text-white text-lg flex items-center justify-center py-4 font-black" onClick={searchTrips}>
                   Search group trips

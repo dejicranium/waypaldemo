@@ -170,7 +170,7 @@ const CreateTrip = () => {
                 <InputField
                   type="text"
                   className="mb-3"
-                  placeholder="Buddies"
+                  placeholder="Number of Buddies"
                   autoComplete="off"
                   onChange={(e) => {
                     e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');

@@ -45,7 +45,7 @@ const UserProfile = ({user, trips, notFound}) => {
       setLoadingReviews(false);
   }
   useEffect(() => {
-    
+    getReviews()
   }, [])
   if(notFound) {
     push("/404");
@@ -139,29 +139,22 @@ const UserProfile = ({user, trips, notFound}) => {
             </div>
             <div className="socials py-9 border-b border-gray-light6 grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="reviews flex flex-col" onClick={async() => {
-                    if ((!reviews || reviews.length < 1) && !no_reviews) {
-                      await getReviews();
-                      if (reviews.length > 0 && !no_reviews) {
+                    if (reviews && reviews.length > 0) {
+                      
                         setShowReviews(true)
-                      }
+                      
                     }
-                    else {
-                      setShowReviews(true)
-                    }                    
+                                     
                   }}>
                 <Rating name="read-only" value={Number(user.rating / user.no_of_ratings) || 0 } readOnly />
                 <div className="flex flex-row mt-2" >
                   <span className="text-gray-light pl-2">{parseFloat((user.rating / user.no_of_ratings) || 0).toFixed(1) } stars</span>
                   <span onClick={async() => {
-                    if ((!reviews || reviews.length < 1) && !no_reviews) {
-                      await getReviews();
-                      if (reviews.length > 0) {
-                        setShowReviews(true)
-                      }
-                    }
-                    else {
+                    if (reviews && reviews.length > 0) {
+                      
                       setShowReviews(true)
-                    }                    
+                    
+                  }                   
                   }} style={{cursor: user.no_of_ratings > 0 ? 'pointer' : '', textDecoration: user.no_of_ratings ? 'underline': 'none' }} className="text-gray-light pl-2">({user.no_of_ratings} {user.no_of_ratings && user.no_of_ratings > 1 ? 'reviews' : 'review'})</span>
                 </div>
               </div>
