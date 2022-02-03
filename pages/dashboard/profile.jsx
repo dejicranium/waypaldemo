@@ -283,7 +283,7 @@ const Profile = () => {
                   {profileImage || user.profile_image_url ? (
                     <>
                       <div
-                        className="border border-gray-light7 rounded p-8 h-36 md:h-24 mb-6 relative max-w-1/2"
+                        className="border border-gray-light7 round-img p-8 mb-6 relative"
                         style={{
                           backgroundSize: "cover",
                           backgroundImage: `url(${

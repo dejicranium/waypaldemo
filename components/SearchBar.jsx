@@ -79,7 +79,7 @@ const SearchBar = (props) => {
         
         </div>
         <div className="destination flex items-center pl-3">
-          <Icon icon="departure" cname="pt-1" />
+          <Icon icon="meeting-point" cname="pt-1" />
           <input 
             type="text"
             id="meetingpoint-searchbar"
@@ -125,17 +125,7 @@ const SearchBar = (props) => {
               isValidDate={(current) => current.isAfter(moment())}
             />
         </div>
-        <div className="destination flex items-center pl-3">
-          <Icon icon="person" cname="pt-1" />
-          <input
-            placeholder="Buddies"
-            value={buddies}
-            onChange={(e) =>{
-              setBuddies(e.target.value);
-            }}
-            className="outline-none box-border text-black-content w-full pl-3"
-          />
-        </div>
+        
       </div>
       <div className="search-button">
         <Button btnText="Search" onClick={search} btnType="fill" />

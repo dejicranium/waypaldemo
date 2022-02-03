@@ -72,7 +72,7 @@ const TripPage = ({ trip, isPrivate, notFound }) => {
 
           <section className="destination-header">
             <div
-              className="w-full h-40 md:h-40v bg-cover bg-center bg-no-repeat relative"
+              className="w-full h-40 md:h-40v bg-cover bg-center bg-no-repeat relative overflow-hidden"
               style={
                 {
                   height: "500px !important",

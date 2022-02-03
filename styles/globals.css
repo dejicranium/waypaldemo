@@ -590,3 +590,13 @@ word-spacing:0px;
     padding: 5px 0px;
 }
     
+.round-img {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+
+.travelicons {
+    width: 90px !important;
+    height: 60px !important;
+}

@@ -69,7 +69,7 @@ const MobileSearch = ({ show, close, setLoading }) => {
              
             </div>
             <div className="destination input-with-label bg-white rounded flex items-center p-2 mt-4">
-              <Icon icon="departure" />
+              <Icon icon="meeting-point" />
 
               <input 
                     type="text"
@@ -121,17 +121,7 @@ const MobileSearch = ({ show, close, setLoading }) => {
               />
 
             </div>
-            <div className="destination input-with-label bg-white rounded flex items-center p-2 mt-4">
-              <Icon icon="person" />
-              <input
-                onChange={(e) => {
-                  setBuddies(e.target.value)
-                }}
-                placeholder="Buddies"
-                className="outline-none box-border text-black-content w-full pl-3"
-              />
-            </div>
-
+            
             <div className="search mt-4">
               <Button btnText="Search" btnType="fill" btnStyle="w-full" onClick={async()=> {
                 

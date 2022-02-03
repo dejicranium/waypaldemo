@@ -8,7 +8,7 @@ const TravelCostBreakdown = ({ currency, accommodation, misc, travel, total }) =
         <div className="travel border-r md:border-0">
           <p className="font-circular-black text-gray uppercase">Travel</p>
           <p className="text-2xl text black">
-            <span className="text-sm relative bottom-2">{formatCurrency(currency)}</span>
+            <span className="text-2xl">{formatCurrency(currency)}</span>
             {travel}
           </p>
           <p className="text-xxs pt-4">This covers logistics to-and-fro per individual</p>
@@ -19,18 +19,18 @@ const TravelCostBreakdown = ({ currency, accommodation, misc, travel, total }) =
             Accommodation
           </p>
           <p className="text-2xl text black">
-            <span className="text-sm relative bottom-2">{formatCurrency(currency)}</span>
+            <span className="text-2xl">{formatCurrency(currency)}</span>
             {accommodation}
           </p>
           <p className="text-xxs pt-4">The total cost of accommodation per individual</p>
         </div>
 
-        <div className="miscellaneous md:px-4 px-0 border-r md:border-0 mt-4 md:mt-0">
+        <div className="travel mt-4 border-r md:border-0">
           <p className="font-circular-black text-gray uppercase overflow-hidden overflow-ellipsis">
             Miscellaneous
           </p>
           <p className="text-2xl text black">
-            <span className="text-sm relative bottom-2">{formatCurrency(currency)}</span>
+            <span className="text-2xl">{formatCurrency(currency)}</span>
             {misc}
           </p>
           <p className="text-xxs pt-4">
@@ -40,7 +40,7 @@ const TravelCostBreakdown = ({ currency, accommodation, misc, travel, total }) =
         <div className="total px-4 mt-4 md:mt-0">
           <p className="font-circular-black text-gray uppercase">Total</p>
           <p className="text-2xl text black">
-            <span className="text-sm relative bottom-2">{formatCurrency(currency)}</span>
+            <span className="text-2xl ">{formatCurrency(currency)}</span>
             {total}
           </p>
           <p className="text-xxs pt-4">

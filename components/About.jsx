@@ -133,10 +133,10 @@ const About = ({ trip,  }) => {
           
         </div>
 
-        <div className="trip-info flex mt-8 justify-between">
-          <div  className="profile flex items-center mr-5">
+        <div className="trip-info flex mt-8 justify-between" >
+          <div  className="profile flex items-center mr-5" onClick={() => push(`/user/${trip.user_id}`)}>
             {!trip.user.profile_image_url && (
-              <Icon icon="profile" cname="pr-3 flex-none" />
+              <Icon onClick={() => push(`/user/${trip.user_id}`)} icon="profile" cname="pr-3 flex-none" />
             )}
             {trip.user.profile_image_url && (
             <UserAvatar

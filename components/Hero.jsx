@@ -87,7 +87,7 @@ const Hero = () => {
               />
               <div className="search">
                 <button className="bg-orange w-full rounded text-white text-lg flex items-center justify-center py-4 font-black" onClick={searchTrips}>
-                  Search for Group Trips
+                  Search for group trips
                 </button>
               </div>
             </div>

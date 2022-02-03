@@ -107,7 +107,7 @@ const UserProfile = ({user, trips, notFound}) => {
                 {user.profile_image_url ? (
                   <>
                     <div
-                      className="border border-gray-light7 rounded p-8 h-36 md:h-24 mb-6 relative max-w-1/2"
+                      className="border border-gray-light7 round-img p-8  mb-6 relative"
                       style={{
                         backgroundSize: "cover",
                         backgroundImage: `url(${
@@ -185,7 +185,7 @@ const UserProfile = ({user, trips, notFound}) => {
               }
               {user.instagram && 
                 <div className="twitter flex items-center">
-                  <Icon icon="instagram"></Icon>
+                  <Icon icon="instagram-logo"></Icon>
                   <span  onClick={() =>goTo('instagram')}  className="text-gray-light cursor-pointer pl-2">@{user.instagram}</span>
                 </div>
               }

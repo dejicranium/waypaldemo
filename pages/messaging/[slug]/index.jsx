@@ -46,6 +46,12 @@ const Messaging = ({ trip, messages, notFound }) => {
       return;
     }
     
+    setInterval(function(){
+      let client = document.getElementsByClassName('crisp-client') ?document.getElementsByClassName('crisp-client')[0] : null;
+      if (client) {
+        client.style.display = 'none';
+      }
+    },2000)
 
     
     setMessageList(messages);
@@ -94,7 +100,7 @@ const Messaging = ({ trip, messages, notFound }) => {
     <>
       {!notFound && (
         <>
-          <div className="container mt-14 md:flex md:space-x-8">
+          <div className="container  md:flex md:space-x-8">
             <aside className="max-w-xs hidden md:block">
               <ChatSideBar trip={trip} />
             </aside>
@@ -102,7 +108,7 @@ const Messaging = ({ trip, messages, notFound }) => {
             <section className="chat w-full md:w-3/4 mb-5">
 
 
-              <div id="chatarea" className="chat-area overflow-y-scroll h-60v md:h-70v">
+              <div id="chatarea" className="chat-area pt-10 overflow-y-scroll h-60v md:h-70v">
                 {messageList.map((data, index) => (
                   <div key={index}>
                     {/* User message */}

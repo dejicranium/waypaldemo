@@ -144,7 +144,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="step-4 flex">
-                <Icon icon="move-icon" />
+                <Icon icon="bus" />
                 <div className="steps-text pl-5">
                   <p className="font-circular-bold">Get ready to move</p>
                   <p className="text-gray-light max-w-xxs">

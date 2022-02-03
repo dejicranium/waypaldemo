@@ -67,9 +67,16 @@ const PaymentBreakdown = ({
         {travelDetails.map(({ title, helptext, icon, amount }) => (
           <div className="flex justify-between py-5 px-2" key={title}>
             <div className="flex">
-              <Icon icon={icon} cname="pr-3" />
+              {title && title === "Miscellaneous" && (
+                <Icon icon={icon} cname="pr-3 travelicons" />
+
+              )} 
+              {title && title !== "Miscellaneous" && (
+                <Icon icon={icon} cname="pr-3" />
+
+              )} 
               <div className="travel-text">
-                <p className="">{title}</p>
+                <p className="capitalize">{title}</p>
                 <small>{helptext}</small>
               </div>
             </div>
