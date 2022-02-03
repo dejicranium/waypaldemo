@@ -25,7 +25,7 @@ const TravelCostBreakdown = ({ currency, accommodation, misc, travel, total }) =
           <p className="text-xxs pt-4">The total cost of accommodation per individual</p>
         </div>
 
-        <div className="travel mt-4 border-r md:border-0">
+        <div className="travel mt-4 border-r md:border-0" style="border-left: 0;">
           <p className="font-circular-black text-gray uppercase overflow-hidden overflow-ellipsis">
             Miscellaneous
           </p>

@@ -16,7 +16,7 @@ const TravelCost = ({ register, watch, refresh }) => {
       data: { tax, user, isLoggedIn },
     } = useData();
     
-  const currency = watch("currency", "USD");
+  const currency = watch("currency", "NGN");
   const [error, setError] = useState("")
   const [m_refresh, setRefresh] = useState(refresh);
   // const [currency, setCurrency] = useState("NGN");
@@ -67,7 +67,7 @@ const TravelCost = ({ register, watch, refresh }) => {
           className="currency-selector p-2 rounded cursor-pointer bg-orange text-white"
           {...register("currency")}
         >
-          <option value="NGN">&#x20A6; NGN</option>
+          <option value="NGN" selected>&#x20A6; NGN</option>
           <option value="USD">&#x24; USD</option>
           <option value="GBP">&#163; GBP</option>
         </select>

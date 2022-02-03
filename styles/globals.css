@@ -110,7 +110,7 @@ option {
 }
 
 .footer-background {
-    background-image: url('../assets/img/footer-background.png');
+    background-image: url('../assets/img/footer-background-compressed.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -599,4 +599,37 @@ word-spacing:0px;
 .travelicons {
     width: 90px !important;
     height: 60px !important;
+}
+
+.miscell {
+
+}
+
+@media screen and (min-width: 1104px) {
+    .four {
+        left: 200px !important;
+    }
+    
+}
+
+@media screen and (min-width: 1024px) {
+    .four {
+        top: -30px !important;
+        left: 340px !important;
+    }
+    
+}
+@media screen and (min-width: 768px) {
+    .four {
+        bottom: 10px !important;
+        left: 200px !important;
+    }
+    
+}
+@media screen and (max-width: 767px) {
+    .four {
+        top: -40px !important;
+        left: 230px !important;
+    }
+    
 }

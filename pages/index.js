@@ -109,7 +109,7 @@ export default function Home() {
             <div className="md:text-5xl text-32 md:max-w-lg max-w-xxs font-circular-bold text-black-bold relative">
               Find an exciting travel group in{" "}
               <pre style={{ display: "inline-block" }}> </pre>{" "}
-              <span className="font-smith text-orange-light md:text-200 text-130 absolute md:-bottom-9 md:left-12 lg:-bottom-9 lg:left-60 -bottom-14 left-40">
+              <span className="font-smith four text-orange-light md:text-200 text-130 absolute md:-bottom-9 md:left-12 lg:-bottom-9 lg:left-60 -bottom-14 left-40">
                 4
               </span>{" "}
               steps

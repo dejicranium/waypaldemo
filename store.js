@@ -16,7 +16,7 @@ export const init = {
     images: [],
     is_public: true,
     end_date: "",
-    currency: "USD",
+    currency: "NGN",
     start_date: "",
     checklists: [],
     destination: "",
