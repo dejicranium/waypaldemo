@@ -271,11 +271,6 @@ const JoinTrip = ({ trip, notFound }) => {
           }
         }
       },
-      customizations: {
-        title: "Waypal",
-        description: "Pay for this trip",
-        logo: "https://cdn.filestackcontent.com/UkEsCousS42K1prOl7pZ",
-      },
     });
   };
 
