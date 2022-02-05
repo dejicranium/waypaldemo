@@ -1,4 +1,5 @@
 import Rating from '@mui/material/Rating';
+import UserAvatar from "react-user-avatar";
 
 function TripReviews({reviews}) {
     return(
@@ -28,7 +29,7 @@ function TripReviews({reviews}) {
                 <Rating className="sizeSmall" name="read-only" value={review.trip_rating} readOnly />
                 </div>
                 <div>
-                    <p classname="text-sm" style={{fontStyle: 'bold'}}><strong>{review.Trip.title}</strong></p>
+                    <p className="text-sm" style={{fontStyle: 'bold'}}><strong>{review.Trip.title}</strong></p>
                     <p className="text-sm">{review.trip_rating_narration}</p>
                 </div>
             </div>
