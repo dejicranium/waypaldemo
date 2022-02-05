@@ -165,11 +165,12 @@ const Profile = () => {
                 dispatch({user: {...resp.data, profile_image_url: image_url}})
                 setProfileImage(image_url);
               
+              }).catch(err=> {
+                setUploadingImage(false);
               })           
               //window.location.reload();
             }
           })
-          setUploadingImage(false)
           .catch(err=> {
             setUploadingImage(false)
             setError("Could not upload image. Ref: 2")
