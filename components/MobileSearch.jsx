@@ -62,7 +62,7 @@ const MobileSearch = ({ show, close, setLoading }) => {
                     }
                   }}
                   //onChange={(e) => setDestination(e.target.value)}
-                  className="destination-input outline-none box-border text-black-content w-full pl-3"
+                  className="destination-input input-with-label-search outline-none box-border text-black-content w-full pl-3"
                   
               />
                 
@@ -93,7 +93,7 @@ const MobileSearch = ({ show, close, setLoading }) => {
                       }
                     }}
                     //onChange={(e) => setDestination(e.target.value)}
-                    className="destination-input outline-none box-border text-black-content w-full pl-3"
+                    className="destination-input input-with-label-search outline-none box-border text-black-content w-full pl-3 "
                     
                 />
             </div>

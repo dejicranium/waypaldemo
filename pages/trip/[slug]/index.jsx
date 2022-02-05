@@ -49,6 +49,15 @@ const TripPage = ({ trip, isPrivate, notFound }) => {
   
   }, []);
 
+  let tripShortName = () => {
+    let commaDelimited = trip.destination.split(',')[0];
+    if (commaDelimited && commaDelimited.length  === trip.destination.length) {
+      return trip.destination.split('-')[0]
+    }
+    else {
+      return commaDelimited;
+    }
+  }
   const tabs = [
     {
       name: "ABOUT",
@@ -83,7 +92,7 @@ const TripPage = ({ trip, isPrivate, notFound }) => {
               <div className="absolute grid top-0 left-0 text-center w-full h-full">
                 <div className="m-auto">
                   <p className="font-circular-black text-white z-30 text-7xl md:text-130">
-                    {trip.destination.split(',')[0]}
+                    {tripShortName()}
                   </p>
                   <p className="font-circular-bold text-white uppercase">
                     {/* Rio De Janeiro */}

@@ -27,7 +27,7 @@ const Itinerary = ({ trip }) => {
 
   const subTotal = amount.reduce((acc, obj) => acc + obj, 0);
 
-  const total = subTotal + (subTotal / 100) * (tax || 1);
+  const total = subTotal;
 
   return (
     <div className="trip-itinerary lg:flex justify-between lg:space-x-8">

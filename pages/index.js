@@ -95,7 +95,13 @@ export default function Home() {
               className: "input-element w-full mb-3 md:mb-0",
             }}
             onChange={(v) => {
-              setTravelDate(v.format("YYYY-MM-DD"));
+              try {
+
+                setTravelDate(v.format("YYYY-MM-DD"));
+              }
+              catch(e) {
+                
+              }
             }}
             
         />
@@ -206,7 +212,7 @@ export default function Home() {
           <div className="booktrip-steps">
             
             <div className="md:text-5xl text-32 md:max-w-lg max-w-xxs font-circular-bold text-black-bold relative">
-              <Icon icon="six" /> more reasons to plan with WayPal
+              <Icon icon="six" /> more reasons to plan with Waypal
             </div>
             <div className="step-outline pt-9">
               <div className="step-1 flex mb-1">

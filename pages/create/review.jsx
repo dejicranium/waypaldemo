@@ -243,6 +243,7 @@ const CreateTripReview = () => {
           </div>
           <div className="travel-cost xl:flex justify-end">
             <PaymentBreakdown
+              show_taxes={false}
               currency={createTrip.currency}
               travel_amount={createTrip.travel_amount}
               accommodation_amount={createTrip.accommodation_amount}

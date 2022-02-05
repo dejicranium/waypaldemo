@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>WayPal - Join and create exciting group tours and trips</title>
+        <title>Waypal - Join and create exciting group tours and trips</title>
         
       </Head>
       <Script src="https://checkout.flutterwave.com/v3.js" />

@@ -210,8 +210,14 @@ const CreateTrip = () => {
                           className: "input-element w-full mb-3 md:mb-0",
                         }}
                         onChange={(v) => {
-                          onChange(v.format("YYYY-MM-DD"));
-                          setStartDate(v)
+                          try {
+
+                            onChange(v.format("YYYY-MM-DD"));
+                            setStartDate(v)
+                          }
+                          catch(e) {
+
+                          }
                         }}
                         initialValue={moment(
                           createTrip?.start_date,
@@ -247,7 +253,13 @@ const CreateTrip = () => {
                           className: "input-element w-full mb-3 md:mb-0",
                         }}
                         onChange={(v) => {
-                          onChange(v.format("YYYY-MM-DD"));
+                          try {
+
+                            onChange(v.format("YYYY-MM-DD"));
+                          }
+                          catch(e) {
+                            
+                          }
                         }}
                         initialValue={moment(
                           createTrip?.end_date,

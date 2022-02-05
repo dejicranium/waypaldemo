@@ -2,7 +2,7 @@ const TextAreaField = (props) => {
   const { cname, className, innerref, helptext, helptextstyle } = props;
 
   return (
-    <div className={`input-field ${className}`}>
+    <div className={`input-field ${className}`} style={{whiteSpace: 'pre-wrap'}}>
       <textarea
         {...props}
         {...innerref}

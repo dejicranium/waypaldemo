@@ -35,7 +35,7 @@ const DetailTripCard = ({
   } = useData();
   
   let tripDate = date ? moment(new Date(date)).format('dddd, MMMM DD, YYYY') : "";
-  const total = totalAmount(price, tax);
+  const total = totalAmount(price);
   const dropRef = useRef(null);
   const [showOptions, setShowOption] = useState(false);
 

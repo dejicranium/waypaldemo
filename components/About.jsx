@@ -79,7 +79,7 @@ const About = ({ trip,  }) => {
   }
   const subTotal = parseFloat(amount.reduce((acc, obj) => acc + obj, 0));
 
-  const total = parseFloat(subTotal) + parseFloat(fixDivision((subTotal / 100) * (tax || 1)));
+  const total = parseFloat(subTotal);
 
   return (
     <>
@@ -169,7 +169,7 @@ const About = ({ trip,  }) => {
         </div>
 
         <div className="trip-description mt-8">
-          <p className="max-w-full md:max-w-4xl">{trip.description}</p>
+          <p className="max-w-full md:max-w-4xl whitespace-pre-line">{trip.description}</p>
         </div>
 
         <div className="buddies-checklist mt-10">

@@ -8,15 +8,15 @@ const TermsAndConditions = () => {
 
 
 
-    <p className="text-2xl my-10">Welcome to WayPal!</p>
+    <p className="text-2xl my-10">Welcome to Waypal!</p>
 
 
 
-    <p className="text my-5">These terms and conditions outline the rules and regulations for the use of WayPal Technologies Ltd.'s Website, located at waypal.co.</p>
+    <p className="text my-5">These terms and conditions outline the rules and regulations for the use of Waypal Technologies Ltd.'s Website, located at waypal.co.</p>
 
 
 
-    <p  className="text my-5">By accessing this website we assume you accept these terms and conditions. Do not continue to use WayPal if you do not agree to take all of the terms and conditions stated on this page.</p>
+    <p  className="text my-5">By accessing this website we assume you accept these terms and conditions. Do not continue to use Waypal if you do not agree to take all of the terms and conditions stated on this page.</p>
 
 
 
@@ -28,7 +28,7 @@ const TermsAndConditions = () => {
 
 
 
-    <p className="text my-5">We employ the use of cookies. By accessing WayPal, you agreed to use cookies in agreement with the WayPal Technologies Ltd.'s Privacy Policy. </p>
+    <p className="text my-5">We employ the use of cookies. By accessing Waypal, you agreed to use cookies in agreement with the Waypal Technologies Ltd.'s Privacy Policy. </p>
 
 
 
@@ -40,7 +40,7 @@ const TermsAndConditions = () => {
 
 
 
-    <p className="text my-5">Unless otherwise stated, WayPal Technologies Ltd. and/or its licensors own the intellectual property rights for all material on WayPal. All intellectual property rights are reserved. You may access this from WayPal for your own personal use subjected to restrictions set in these terms and conditions.</p>
+    <p className="text my-5">Unless otherwise stated, Waypal Technologies Ltd. and/or its licensors own the intellectual property rights for all material on Waypal. All intellectual property rights are reserved. You may access this from Waypal for your own personal use subjected to restrictions set in these terms and conditions.</p>
 
 
 
@@ -48,13 +48,13 @@ const TermsAndConditions = () => {
 
     <ul>
 
-        <li className="text my-5">Republish material from WayPal</li>
+        <li className="text my-5">Republish material from Waypal</li>
 
-        <li className="text my-5">Sell, rent or sub-license material from WayPal</li>
+        <li className="text my-5">Sell, rent or sub-license material from Waypal</li>
 
-        <li className="text my-5">Reproduce, duplicate or copy material from WayPal</li>
+        <li className="text my-5">Reproduce, duplicate or copy material from Waypal</li>
 
-        <li className="text my-5">Redistribute content from WayPal</li>
+        <li className="text my-5">Redistribute content from Waypal</li>
 
     </ul>
 
@@ -64,11 +64,11 @@ const TermsAndConditions = () => {
 
 
 
-    <p className="text my-5">Parts of this website offer an opportunity for users to post and exchange opinions and information in certain areas of the website. WayPal Technologies Ltd. does not filter, edit, publish or review Comments prior to their presence on the website. Comments do not reflect the views and opinions of WayPal Technologies Ltd.,its agents and/or affiliates. Comments reflect the views and opinions of the person who post their views and opinions. To the extent permitted by applicable laws, WayPal Technologies Ltd. shall not be liable for the Comments or for any liability, damages or expenses caused and/or suffered as a result of any use of and/or posting of and/or appearance of the Comments on this website.</p>
+    <p className="text my-5">Parts of this website offer an opportunity for users to post and exchange opinions and information in certain areas of the website. Waypal Technologies Ltd. does not filter, edit, publish or review Comments prior to their presence on the website. Comments do not reflect the views and opinions of Waypal Technologies Ltd.,its agents and/or affiliates. Comments reflect the views and opinions of the person who post their views and opinions. To the extent permitted by applicable laws, Waypal Technologies Ltd. shall not be liable for the Comments or for any liability, damages or expenses caused and/or suffered as a result of any use of and/or posting of and/or appearance of the Comments on this website.</p>
 
 
 
-    <p className="text my-5">WayPal Technologies Ltd. reserves the right to monitor all Comments and to remove any Comments which can be considered inappropriate, offensive or causes breach of these Terms and Conditions.</p>
+    <p className="text my-5">Waypal Technologies Ltd. reserves the right to monitor all Comments and to remove any Comments which can be considered inappropriate, offensive or causes breach of these Terms and Conditions.</p>
 
 
 
@@ -90,7 +90,7 @@ const TermsAndConditions = () => {
 
 
 
-    <p  className="text my-5">You hereby grant WayPal Technologies Ltd. a non-exclusive license to use, reproduce, edit and authorize others to use, reproduce and edit any of your Comments in any and all forms, formats or media.</p>
+    <p  className="text my-5">You hereby grant Waypal Technologies Ltd. a non-exclusive license to use, reproduce, edit and authorize others to use, reproduce and edit any of your Comments in any and all forms, formats or media.</p>
 
 
 
@@ -146,7 +146,7 @@ const TermsAndConditions = () => {
 
 
 
-    <p  className="text my-5">We will approve link requests from these organizations if we decide that: (a) the link would not make us look unfavorably to ourselves or to our accredited businesses; (b) the organization does not have any negative records with us; (c) the benefit to us from the visibility of the hyperlink compensates the absence of WayPal Technologies Ltd.; and (d) the link is in the context of general resource information.</p>
+    <p  className="text my-5">We will approve link requests from these organizations if we decide that: (a) the link would not make us look unfavorably to ourselves or to our accredited businesses; (b) the organization does not have any negative records with us; (c) the benefit to us from the visibility of the hyperlink compensates the absence of Waypal Technologies Ltd.; and (d) the link is in the context of general resource information.</p>
 
 
 
@@ -154,7 +154,7 @@ const TermsAndConditions = () => {
 
 
 
-    <p  className="text my-5">If you are one of the organizations listed in paragraph 2 above and are interested in linking to our website, you must inform us by sending an e-mail to WayPal Technologies Ltd.. Please include your name, your organization name, contact information as well as the URL of your site, a list of any URLs from which you intend to link to our Website, and a list of the URLs on our site to which you would like to link. Wait 2-3 weeks for a response.</p>
+    <p  className="text my-5">If you are one of the organizations listed in paragraph 2 above and are interested in linking to our website, you must inform us by sending an e-mail to Waypal Technologies Ltd.. Please include your name, your organization name, contact information as well as the URL of your site, a list of any URLs from which you intend to link to our Website, and a list of the URLs on our site to which you would like to link. Wait 2-3 weeks for a response.</p>
 
 
 
@@ -174,7 +174,7 @@ const TermsAndConditions = () => {
 
 
 
-    <p  className="text my-5">No use of WayPal Technologies Ltd.'s logo or other artwork will be allowed for linking absent a trademark license agreement.</p>
+    <p  className="text my-5">No use of Waypal Technologies Ltd.'s logo or other artwork will be allowed for linking absent a trademark license agreement.</p>
 
 
 

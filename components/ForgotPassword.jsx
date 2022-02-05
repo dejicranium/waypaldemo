@@ -7,7 +7,7 @@ import { useState } from "react";
 import { postRequest } from "../actions/connection";
 import { Mixpanel } from '../assets/js/mixpanel';
 
-const ForgotPassword = ({ setActive }) => {
+const ForgotPassword = ({ setActive, intent }) => {
   const {
     register,
     handleSubmit,

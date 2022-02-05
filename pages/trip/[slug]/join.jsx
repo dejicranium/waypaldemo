@@ -19,6 +19,7 @@ import { createVeriffFrame, MESSAGES } from "@veriff/incontext-sdk";
 import Toast from '../../../components/Toast'
 import Spinner from '../../../components/Spinner';
 import { Mixpanel } from '../../../assets/js/mixpanel';
+import ForgotPassword from "../../../components/ForgotPassword";
 
 const JoinTrip = ({ trip, notFound }) => {
   const [success, setSuccess] = useState(null);
@@ -283,10 +284,13 @@ const JoinTrip = ({ trip, notFound }) => {
           }
           <Modal  cancellable={false} showModal={showModal} close={() => setShowModal(false)}>
             {authMode === "login" && (
-              <Login setActive={authMode === "login"} close={() => setShowModal(false)} />
+              <Login setActive={setAuthMode} close={() => setShowModal(false)} />
             )}
             {authMode === "register" && (
-              <Register setActive={authMode === "register"} close={() => setShowModal(false)} />
+              <Register setActive={setAuthMode} close={() => setShowModal(false)} />
+            )}
+            {authMode === "forgot" && (
+              <ForgotPassword setActive={setAuthMode} close={() => setShowModal(false)} />
             )}
            
           </Modal>
@@ -617,6 +621,7 @@ const JoinTrip = ({ trip, notFound }) => {
 
                 <section className="payment-breakdown md:max-w-2xl lg:w-1/3 lg:mt-24 mt-10">
                   <PaymentBreakdown
+                    show_taxes={true}
                     travel_amount={trip.travel_amount}
                     accommodation_amount={trip.accommodation_amount}
                     miscellaneous_amount={trip.miscellaneous_amount}

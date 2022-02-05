@@ -88,7 +88,13 @@ const Hero = () => {
                     className: "input-element w-full mb-3 md:mb-0",
                   }}
                   onChange={(v) => {
-                    setTravelDate(v.format("YYYY-MM-DD"));
+                    try {
+
+                      setTravelDate(v.format("YYYY-MM-DD"));
+                    }
+                    catch(e) {
+                      
+                    }
                   }}
                   
               />

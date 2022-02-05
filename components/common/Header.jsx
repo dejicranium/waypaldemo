@@ -36,7 +36,7 @@ const Header = ({ open, setOpen }) => {
   const { dispatch } = useData();
   const [active, setActive] = useState("login");
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const [showAuthModalIntent, setShowAuthModalIntent] = useState('');
+  const [authModalIntent, setAuthModalIntent] = useState('');
 
   useClickOutside(() => setShowProfileMenu(false), dropRef);
 
@@ -102,20 +102,20 @@ const Header = ({ open, setOpen }) => {
       <Modal showModal={showAuthModal} close={setShowAuthModal}>
         {active === "login" && (
           <Login 
-          intent='create-trip'
+          intent={authModalIntent}
           setActive={setActive} 
           close={() => setShowAuthModal(false)} />
         )}
         {active === "register" && (
           <Register
-            intent='create-trip'
+            intent={authModalIntent}
             setActive={setActive}
             close={() => setShowAuthModal(false)}
           />
         )}
         {active === "forgot" && (
           <ForgotPassword
-            intent='create-trip'
+            intent={authModalIntent}
             setActive={setActive}
             close={() => setShowAuthModal(false)}
           />
@@ -166,9 +166,10 @@ const Header = ({ open, setOpen }) => {
                     if (typeof user !== 'undefined') Mixpanel.identify(user.id);
                     else {
                       // set intent
-                      setShowAuthModalIntent('create-trip')
+                      setAuthModalIntent('create-trip')
                       
                     }
+                    setAuthModalIntent('create-trip')
                     Mixpanel.track("attempt-create-trip-clicked")
                     createTrip()
                   }}
@@ -247,6 +248,7 @@ const Header = ({ open, setOpen }) => {
                       if (typeof user !== 'undefined') Mixpanel.identify(user.id);
                       Mixpanel.track("attempt-create-trip-clicked")
                       createTrip()
+                      setAuthModalIntent('create-trip')
                     }}
                     btnText="Create a trip"
                     btnStyle="mr-6 bg-orange text-white px-4 py-2 rounded"

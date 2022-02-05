@@ -1,4 +1,4 @@
-import { formatCurrency } from "../assets/js/utils";
+import { formatCurrency, formatAmount } from "../assets/js/utils";
 
 const PriceBreakdown = ({ trip }) => {
   const amount = [
@@ -19,42 +19,36 @@ const PriceBreakdown = ({ trip }) => {
           <div className="pb-3">Travel</div>
           <div className="pl-28">
             {formatCurrency(trip.currency)}
-            {trip.travel_amount}
+            {formatAmount(trip.travel_amount)}
           </div>
         </div>
         <div className="flex justify-between">
           <div className="pb-3">Accommodation</div>
           <div className="pl-28">
             {formatCurrency(trip.currency)}
-            {trip.accommodation_amount}
+            {formatAmount(trip.accommodation_amount)}
           </div>
         </div>
         <div className="flex justify-between">
           <div className="pb-3">Miscellaneous</div>
           <div className="pl-28">
             {formatCurrency(trip.currency)}
-            {trip.miscellaneous_amount}
+            {formatAmount(trip.miscellaneous_amount)}
           </div>
         </div>
         <div className="flex justify-between">
           <div className="pb-3">Subtotal</div>
           <div className="pl-28">
             {formatCurrency(trip.currency)}
-            {subTotal}
+            {formatAmount(subTotal)}
           </div>
         </div>
-        <div className="flex justify-between border-b">
-          <div className="pb-3">Taxes and Fees</div>
-          <div className="pl-28">
-            {formatCurrency(trip.currency)}
-            {taxes}
-          </div>
-        </div>
+        
         <div className="flex justify-between pt-3 border-b">
           <p className="pb-3">Total Amount</p>
           <p className="pl-28 font-bold">
             {formatCurrency(trip.currency)}
-            {parseFloat(trip.accommodation_amount) + parseFloat(trip.miscellaneous_amount) + parseFloat(trip.travel_amount) + parseFloat(taxes)}
+            {parseFloat(trip.accommodation_amount) + parseFloat(trip.miscellaneous_amount) + parseFloat(trip.travel_amount)}
           </p>
         </div>
       </div>

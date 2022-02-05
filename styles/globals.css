@@ -572,6 +572,10 @@ word-spacing:0px;
 }
 
 
+.input-with-label-search {
+    padding-left: 12px !important;
+}
+
 @media screen and (max-width: 490px) {
     .traveler-info-form {
         width: 100% !important;

@@ -8,7 +8,8 @@ const PaymentBreakdown = ({
   travel_amount,
   accommodation_amount,
   miscellaneous_amount,
-  currency
+  currency,
+  show_taxes
 }) => {
   const travelDetails = [
     {
@@ -53,7 +54,10 @@ const PaymentBreakdown = ({
   const subTotal = travelDetails.reduce((acc, obj) => acc + obj.amount, 0);
   const taxes = fixDivision((subTotal / 100) * tax);
 
-  const total = parseFloat(subTotal) + parseFloat(taxes);
+  let total = parseFloat(subTotal);
+  if (show_taxes) {
+    total += parseFloat(taxes);
+  }
 
   useEffect(async() => {
   }, [])
@@ -95,13 +99,15 @@ const PaymentBreakdown = ({
             {formatAmount(subTotal)}
           </p>
         </div>
-        <div className="taxes flex justify-end">
-          <p className="pr-4">Taxes and Fees</p>
-          <p className="">
-            {formatCurrency(currency)}
-            {formatAmount(taxes)}
-          </p>
-        </div>
+        {show_taxes && 
+          <div className="taxes flex justify-end">
+            <p className="pr-4">Taxes and Fees</p>
+            <p className="">
+              {formatCurrency(currency)}
+              {formatAmount(taxes)}
+            </p>
+          </div>
+        }
         <div className="total flex justify-end font-circular-bold">
           <p className="pr-4">Total</p>
           <p>

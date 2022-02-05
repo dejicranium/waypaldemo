@@ -18,7 +18,7 @@ const MoreResults = (prop) => {
   }
 
   const total = prop.trip.travel_amount + prop.trip.miscellaneous_amount + prop.trip.accommodation_amount;
-  const totalWithTaxes = total + (total *((tax || 1) / 100));
+  const totalWithTaxes = total;
 
   return (
     <div onClick={goToTrip} className="trip-card cursor-pointer p-4 my-2 flex flex-col md:flex-row border rounded border-gray-light3">

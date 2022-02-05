@@ -119,7 +119,12 @@ const SearchBar = (props) => {
                 className: "outline-none box-border text-black-content w-full pl-3",
               }}
               onChange={(v) => {
-                setTravelDate(v.format("YYYY-MM-DD"));
+                try {
+
+                  setTravelDate(v.format("YYYY-MM-DD"));
+                }catch(e) {
+                  
+                }
               }}
               initialValue={travelDate ? moment(travelDate).format('YYYY-MM-DD'): ""}
               isValidDate={(current) => current.isAfter(moment())}

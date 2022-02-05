@@ -64,7 +64,7 @@ const AboutPreview = ({ trip,  }) => {
   }
   const subTotal = parseFloat(amount.reduce((acc, obj) => acc + obj, 0));
 
-  const total = parseFloat(subTotal) + parseFloat(fixDivision((subTotal / 100) * (tax || 1)));
+  const total = parseFloat(subTotal);
 
   return (
     <>
